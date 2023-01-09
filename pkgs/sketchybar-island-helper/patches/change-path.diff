@@ -1,0 +1,828 @@
+diff --git a/config.sh b/config.sh
+index b1e0374..0e66f8a 100755
+--- a/config.sh
++++ b/config.sh
+@@ -1,36 +1,36 @@
+-#!/usr/bin/env sh
++#!/usr/bin/env bash
+ 
+-USER_CONFIG="$HOME/.config/sketchybar/userconfig.sh"
++USER_CONFIG="$SKETCHYBAR_DIR/userconfig.sh"
+ test -f $USER_CONFIG && source $USER_CONFIG
+ 
+ PADDINGS=3
+ 
+ # Setting up the general bar appearance and default values
+-sketchybar --bar     height=32                                         \
+-                     color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT         \
+-                     shadow=off                                        \
+-                     position=top                                      \
+-                     sticky=on                                         \
+-                     padding_right=$((10 - $PADDINGS))                 \
+-					 topmost=${P_DYNAMIC_ISLAND_TOPMOST:=off}		   \
+-                     padding_left=18                                   \
+-                     corner_radius=9                                   \
+-                     y_offset=0                                        \
+-                     margin=10                                         \
+-                     blur_radius=30                                    \
+-                     notch_width=0                                     \
+-           --default updates=when_shown                                \
+-                     icon.font="$P_DYNAMIC_ISLAND_FONT:Bold:14.0"      \
+-                     icon.color=$P_DYNAMIC_ISLAND_COLOR_WHITE          \
+-                     icon.padding_left=$PADDINGS                       \
+-                     icon.padding_right=$PADDINGS                      \
+-                     label.font="$P_DYNAMIC_ISLAND_FONT:Semibold:13.0" \
+-                     label.color=$P_DYNAMIC_ISLAND_COLOR_WHITE         \
+-                     label.padding_left=$PADDINGS                      \
+-                     label.padding_right=$PADDINGS                     \
+-                     background.padding_right=$PADDINGS                \
+-                     background.padding_left=$PADDINGS                 \
+-                     popup.background.corner_radius=11                 \
+-                     popup.background.shadow.drawing=off	       	   \
+-                     popup.background.border_width=2                   \
+-					 popup.horizontal=on
++sketchybar --bar height=32 \
++	color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT \
++	shadow=off \
++	position=top \
++	sticky=on \
++	padding_right=$((10 - $PADDINGS)) \
++	topmost=${P_DYNAMIC_ISLAND_TOPMOST:=off} \
++	padding_left=18 \
++	corner_radius=9 \
++	y_offset=0 \
++	margin=10 \
++	blur_radius=30 \
++	notch_width=0 \
++	--default updates=when_shown \
++	icon.font="$P_DYNAMIC_ISLAND_FONT:Bold:14.0" \
++	icon.color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
++	icon.padding_left=$PADDINGS \
++	icon.padding_right=$PADDINGS \
++	label.font="$P_DYNAMIC_ISLAND_FONT:Semibold:13.0" \
++	label.color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
++	label.padding_left=$PADDINGS \
++	label.padding_right=$PADDINGS \
++	background.padding_right=$PADDINGS \
++	background.padding_left=$PADDINGS \
++	popup.background.corner_radius=11 \
++	popup.background.shadow.drawing=off \
++	popup.background.border_width=2 \
++	popup.horizontal=on
+diff --git a/item.sh b/item.sh
+index d0652bd..2e4675d 100755
+--- a/item.sh
++++ b/item.sh
+@@ -1,31 +1,31 @@
+-#!/usr/bin/env sh
++#!/usr/bin/env bash
+ 
+-sketchybar --add event    dynamic_island_queue \
+-		   --add event	  dynamic_island_request \
+-		   --add item     island center               \
+-           --set island   width=$P_DYNAMIC_ISLAND_DEFAULT_WIDTH         \
+-                          background.height=50         \
+-						  background.y_offset=9         \
+-						  background.color=$P_DYNAMIC_ISLAND_COLOR_BLACK \
+-						  background.corner_radius=$P_DYNAMIC_ISLAND_DEFAULT_CORNER_RADIUS \
+-						  background.drawing=true	\
+-						  background.padding_left=0 \
+-						  background.padding_right=0 \
+-						  update_freq=2					\
+-						  mach_helper=git.crissnb.islandhelper \
+-						  drawing=on				\
+-						  popup.background.height=30 \
+-						  popup.height=$P_DYNAMIC_ISLAND_DEFAULT_HEIGHT \
+-						  popup.align=center \
+-						  popup.y_offset=-69 \
+-						  popup.horizontal=on \
+-						  popup.background.border_color=$P_DYNAMIC_ISLAND_COLOR_BLACK \
+-						  popup.background.color=$P_DYNAMIC_ISLAND_COLOR_BLACK \
+-						  popup.background.corner_radius=$P_DYNAMIC_ISLAND_DEFAULT_CORNER_RADIUS \
+-						  popup.background.padding_left=0 \
+-						  popup.background.padding_right=0 \
+-						  popup.background.shadow.drawing=off \
+-						  popup.drawing=false
++sketchybar --add event dynamic_island_queue \
++	--add event dynamic_island_request \
++	--add item island center \
++	--set island width=$P_DYNAMIC_ISLAND_DEFAULT_WIDTH \
++	background.height=50 \
++	background.y_offset=9 \
++	background.color=$P_DYNAMIC_ISLAND_COLOR_BLACK \
++	background.corner_radius=$P_DYNAMIC_ISLAND_DEFAULT_CORNER_RADIUS \
++	background.drawing=true \
++	background.padding_left=0 \
++	background.padding_right=0 \
++	update_freq=2 \
++	mach_helper=git.crissnb.islandhelper \
++	drawing=on \
++	popup.background.height=30 \
++	popup.height=$P_DYNAMIC_ISLAND_DEFAULT_HEIGHT \
++	popup.align=center \
++	popup.y_offset=-69 \
++	popup.horizontal=on \
++	popup.background.border_color=$P_DYNAMIC_ISLAND_COLOR_BLACK \
++	popup.background.color=$P_DYNAMIC_ISLAND_COLOR_BLACK \
++	popup.background.corner_radius=$P_DYNAMIC_ISLAND_DEFAULT_CORNER_RADIUS \
++	popup.background.padding_left=0 \
++	popup.background.padding_right=0 \
++	popup.background.shadow.drawing=off \
++	popup.drawing=false
+ 
+ if [[ $P_DYNAMIC_ISLAND_DISPLAY == "Primary" ]]; then
+ 	sketchybar --set island associated_display=1
+@@ -35,7 +35,7 @@ fi
+ 
+ # subscribe to events to communicate with helper
+ sketchybar --subscribe island dynamic_island_queue \
+-		   --subscribe island dynamic_island_request
++	--subscribe island dynamic_island_request
+ 
+ # module initalization
+ if [[ $P_DYNAMIC_ISLAND_MUSIC_ENABLED == 1 ]]; then
+@@ -49,31 +49,31 @@ if [[ $P_DYNAMIC_ISLAND_MUSIC_ENABLED == 1 ]]; then
+ 
+ 	source "$DYNAMIC_ISLAND_DIR/scripts/islands/music/creator.sh"
+ 
+-	sketchybar --add event	  music_change $MUSIC_EVENT \
+-			   --add item	  musicListener \
+-			   --set musicListener	script="$DYNAMIC_ISLAND_DIR/scripts/islands/music/handler.sh $P_DYNAMIC_ISLAND_MUSIC_SOURCE" \
+-			   --subscribe musicListener music_change
++	sketchybar --add event music_change $MUSIC_EVENT \
++		--add item musicListener \
++		--set musicListener script="$DYNAMIC_ISLAND_DIR/scripts/islands/music/handler.sh $P_DYNAMIC_ISLAND_MUSIC_SOURCE" \
++		--subscribe musicListener music_change
+ fi
+ 
+ if [[ $P_DYNAMIC_ISLAND_APPSWITCH_ENABLED == 1 ]]; then
+ 	source "$DYNAMIC_ISLAND_DIR/scripts/islands/appswitch/creator.sh"
+-	sketchybar --add item	  frontAppSwitchListener \
+-			   --set frontAppSwitchListener script="$DYNAMIC_ISLAND_DIR/scripts/islands/appswitch/handler.sh" \
+-			   --subscribe frontAppSwitchListener front_app_switched
++	sketchybar --add item frontAppSwitchListener \
++		--set frontAppSwitchListener script="$DYNAMIC_ISLAND_DIR/scripts/islands/appswitch/handler.sh" \
++		--subscribe frontAppSwitchListener front_app_switched
+ fi
+ 
+ if [[ $P_DYNAMIC_ISLAND_VOLUME_ENABLED == 1 ]]; then
+ 	source "$DYNAMIC_ISLAND_DIR/scripts/islands/volume/creator.sh"
+ 	sketchybar --add item volumeChangeListener \
+-			   --set volumeChangeListener script="$DYNAMIC_ISLAND_DIR/scripts/islands/volume/handler.sh" \
+-			   --subscribe volumeChangeListener volume_change
++		--set volumeChangeListener script="$DYNAMIC_ISLAND_DIR/scripts/islands/volume/handler.sh" \
++		--subscribe volumeChangeListener volume_change
+ fi
+ 
+ if [[ $P_DYNAMIC_ISLAND_BRIGHTNESS_ENABLED == 1 ]]; then
+ 	source "$DYNAMIC_ISLAND_DIR/scripts/islands/brightness/creator.sh"
+ 	sketchybar --add item brightnessChangeListener \
+-			   --set brightnessChangeListener script="$DYNAMIC_ISLAND_DIR/scripts/islands/brightness/handler.sh" \
+-			   --subscribe brightnessChangeListener brightness_change
++		--set brightnessChangeListener script="$DYNAMIC_ISLAND_DIR/scripts/islands/brightness/handler.sh" \
++		--subscribe brightnessChangeListener brightness_change
+ fi
+ 
+ if [[ $P_DYNAMIC_ISLAND_NOTIFICATION_ENABLED == 1 ]]; then
+diff --git a/listener.sh b/listener.sh
+index 696124e..357ecc7 100755
+--- a/listener.sh
++++ b/listener.sh
+@@ -1,6 +1,6 @@
+-#!/usr/bin/env sh
++#!/usr/bin/env bash
+ 
+ sketchybar --add item di_helper_listener \
+-		   --add event di_helper_listener_event \
+-		   --subscribe di_helper_listener di_helper_listener_event \
+-		   --set di_helper_listener script="$HOME/.config/sketchybar/plugins/Dynamic-Island-Sketchybar/process.sh"
++	--add event di_helper_listener_event \
++	--subscribe di_helper_listener di_helper_listener_event \
++	--set di_helper_listener script="$DYNAMIC_ISLAND_DIR/process.sh"
+diff --git a/scripts/islands/appswitch/appswitch_island.sh b/scripts/islands/appswitch/appswitch_island.sh
+index c050148..3586147 100755
+--- a/scripts/islands/appswitch/appswitch_island.sh
++++ b/scripts/islands/appswitch/appswitch_island.sh
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env sh
+-source "$HOME/.config/sketchybar/userconfig.sh"
++source "$SKETCHYBAR_DIR/userconfig.sh"
+ 
+ SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_APPSWITCH_EXPAND_WIDTH-$P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
+ MAX_EXPAND_HEIGHT=$(($P_DYNAMIC_ISLAND_APPSWITCH_EXPAND_HEIGHT+$P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
+@@ -61,4 +61,4 @@ sketchybar --animate tanh 20 --set island popup.height=$P_DYNAMIC_ISLAND_DEFAULT
+ 
+ sleep 0.4
+ 
+-source "$HOME/.config/sketchybar/plugins/Dynamic-Island-Sketchybar/scripts/islands/appswitch/reset.sh"
++source "$DYNAMIC_ISLAND_DIR/scripts/islands/appswitch/reset.sh"
+diff --git a/scripts/islands/brightness/brightness_island.sh b/scripts/islands/brightness/brightness_island.sh
+index 8c6b511..2e39036 100755
+--- a/scripts/islands/brightness/brightness_island.sh
++++ b/scripts/islands/brightness/brightness_island.sh
+@@ -1,13 +1,13 @@
+-#!/usr/bin/env sh
+-source "$HOME/.config/sketchybar/userconfig.sh"
++#!/usr/bin/env bash
++source "$SKETCHYBAR_DIR/userconfig.sh"
+ 
+-SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_BRIGHTNESS_EXPAND_WIDTH-$P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
+-MAX_EXPAND_SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_BRIGHTNESS_MAX_EXPAND_WIDTH+$P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
+-MAX_EXPAND_HEIGHT=$(($P_DYNAMIC_ISLAND_BRIGHTNESS_EXPAND_HEIGHT+($P_DYNAMIC_ISLAND_SQUISH_AMOUNT/2)))
++SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_BRIGHTNESS_EXPAND_WIDTH - $P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
++MAX_EXPAND_SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_BRIGHTNESS_MAX_EXPAND_WIDTH + $P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
++MAX_EXPAND_HEIGHT=$(($P_DYNAMIC_ISLAND_BRIGHTNESS_EXPAND_HEIGHT + ($P_DYNAMIC_ISLAND_SQUISH_AMOUNT / 2)))
+ 
+ args=$*
+ IFS='|'
+-read -ra strarr <<< "$args"
++read -ra strarr <<<"$args"
+ unset IFS
+ 
+ # $1 - override
+@@ -17,64 +17,64 @@ brightness="${strarr[1]}"
+ 
+ # calculate brightness logo
+ case $brightness in
+-	100) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_HIGH;;
+-	9[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_HIGH;;
+-	8[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_HIGH;;
+-	7[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_HIGH;;
+-	6[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_HIGH;;
+-	5[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_HIGH;;
+-	4[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_HIGH;;
+-	3[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_LOW;;
+-	2[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_LOW;;
+-	1[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_LOW;;
+-	[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_LOW;;
+-	*) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_LOW
++100) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_HIGH ;;
++9[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_HIGH ;;
++8[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_HIGH ;;
++7[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_HIGH ;;
++6[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_HIGH ;;
++5[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_HIGH ;;
++4[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_HIGH ;;
++3[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_LOW ;;
++2[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_LOW ;;
++1[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_LOW ;;
++[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_LOW ;;
++*) ICON=$P_DYNAMIC_ISLAND_ICON_BRIGHTNESS_LOW ;;
+ esac
+ 
+ if [[ $override == "0" ]]; then
+ 	sketchybar --set island.brightness_placeholder1 drawing=on \
+-			   --set island.brightness_placeholder2 drawing=on \
+-			   --set island.brightness_placeholder3 drawing=on \
+-			   --set island.brightness_icon drawing=on \
+-			   							icon="$ICON" \
+-			   --set island.brightness_bar drawing=on \
+-			   --set island	popup.drawing=true \
+-			   				background.drawing=false \
+-							popup.horizontal=off \
+-							popup.height=$P_DYNAMIC_ISLAND_BRIGHTNESS_DEFAULT_HEIGHT
++		--set island.brightness_placeholder2 drawing=on \
++		--set island.brightness_placeholder3 drawing=on \
++		--set island.brightness_icon drawing=on \
++		icon="$ICON" \
++		--set island.brightness_bar drawing=on \
++		--set island popup.drawing=true \
++		background.drawing=false \
++		popup.horizontal=off \
++		popup.height=$P_DYNAMIC_ISLAND_BRIGHTNESS_DEFAULT_HEIGHT
+ fi
+ 
+ if [[ $override == "0" ]]; then
+ 	sketchybar --animate sin 15 --set island.brightness_placeholder1 width=$SQUISH_WIDTH width=$MAX_EXPAND_SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_BRIGHTNESS_MAX_EXPAND_WIDTH \
+-			   --animate sin 20 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_BRIGHTNESS_CORNER_RAD \
+-			   --animate sin 20 --set island popup.height=$MAX_EXPAND_HEIGHT popup.height=$P_DYNAMIC_ISLAND_BRIGHTNESS_EXPAND_HEIGHT
++		--animate sin 20 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_BRIGHTNESS_CORNER_RAD \
++		--animate sin 20 --set island popup.height=$MAX_EXPAND_HEIGHT popup.height=$P_DYNAMIC_ISLAND_BRIGHTNESS_EXPAND_HEIGHT
+ else
+ 	sketchybar --animate sin 15 --set island.brightness_placeholder1 width=$MAX_EXPAND_SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_BRIGHTNESS_MAX_EXPAND_WIDTH \
+-			   --animate sin 20 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_BRIGHTNESS_CORNER_RAD \
+-			   --animate sin 20 --set island popup.height=$MAX_EXPAND_HEIGHT popup.height=$P_DYNAMIC_ISLAND_BRIGHTNESS_EXPAND_HEIGHT
++		--animate sin 20 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_BRIGHTNESS_CORNER_RAD \
++		--animate sin 20 --set island popup.height=$MAX_EXPAND_HEIGHT popup.height=$P_DYNAMIC_ISLAND_BRIGHTNESS_EXPAND_HEIGHT
+ fi
+ 
+-barWidth=$(bc -l <<< "$brightness/100*240")
+-barWidth=$( printf "%.0f" $barWidth )
++barWidth=$(bc -l <<<"$brightness/100*240")
++barWidth=$(printf "%.0f" $barWidth)
+ sketchybar --animate tanh 15 --set island.brightness_bar width=$barWidth
+ 
+ sketchybar --animate sin 10 --set island.brightness_bar background.color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
+-		   --animate sin 10 --set island.brightness_bar background.border_color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
+-		   --animate sin 10 --set island.brightness_icon icon.color=$P_DYNAMIC_ISLAND_COLOR_WHITE
++	--animate sin 10 --set island.brightness_bar background.border_color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
++	--animate sin 10 --set island.brightness_icon icon.color=$P_DYNAMIC_ISLAND_COLOR_WHITE
+ 
+ sleep 0.8
+ 
+ sketchybar --animate tanh 20 --set island.brightness_icon icon.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT \
+-		   --animate tanh 20 --set island.brightness_bar background.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT
++	--animate tanh 20 --set island.brightness_bar background.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT
+ 
+ sleep 0.2
+ 
+ sketchybar --set island.brightness_bar width=10
+ 
+ sketchybar --animate tanh 20 --set island popup.height=$P_DYNAMIC_ISLAND_BRIGHTNESS_DEFAULT_HEIGHT \
+-		   --animate tanh 20 --set island.brightness_placeholder1 width=$SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_BRIGHTNESS_EXPAND_WIDTH \
+-		   --animate sin 25 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_DEFAULT_CORNER_RADIUS
++	--animate tanh 20 --set island.brightness_placeholder1 width=$SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_BRIGHTNESS_EXPAND_WIDTH \
++	--animate sin 25 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_DEFAULT_CORNER_RADIUS
+ 
+ sleep 0.5
+ 
+-source "$HOME/.config/sketchybar/plugins/Dynamic-Island-Sketchybar/scripts/islands/brightness/reset.sh"
++source "$DYNAMIC_ISLAND_DIR/scripts/islands/brightness/reset.sh"
+diff --git a/scripts/islands/brightness/handler.sh b/scripts/islands/brightness/handler.sh
+index 4507465..d93ede2 100755
+--- a/scripts/islands/brightness/handler.sh
++++ b/scripts/islands/brightness/handler.sh
+@@ -1,2 +1,2 @@
+-#!/usr/bin/env sh
++#!/usr/bin/env bash
+ sketchybar --trigger dynamic_island_queue INFO="brightness" ISLAND_ARGS="$INFO"
+diff --git a/scripts/islands/brightness/reset.sh b/scripts/islands/brightness/reset.sh
+index e8e1f6e..2400c88 100755
+--- a/scripts/islands/brightness/reset.sh
++++ b/scripts/islands/brightness/reset.sh
+@@ -3,12 +3,12 @@
+ sketchybar --trigger dynamic_island_request
+ 
+ sketchybar --set island.brightness_placeholder1 drawing=off \
+-		   --set island.brightness_placeholder2 drawing=off \
+-		   --set island.brightness_placeholder3 drawing=off \
+-		   --set island.brightness_icon drawing=off \
+-		   --set island.brightness_bar drawing=off \
+-		   --set island		background.drawing=true \
+-		   					popup.horizontal=on
++	--set island.brightness_placeholder2 drawing=off \
++	--set island.brightness_placeholder3 drawing=off \
++	--set island.brightness_icon drawing=off \
++	--set island.brightness_bar drawing=off \
++	--set island background.drawing=true \
++	popup.horizontal=on
+ 
+ sleep 0.1
+ 
+diff --git a/scripts/islands/music/handler.sh b/scripts/islands/music/handler.sh
+index 540a99b..0359dce 100755
+--- a/scripts/islands/music/handler.sh
++++ b/scripts/islands/music/handler.sh
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env sh
++#!/usr/bin/env bash
+ 
+ # $1: MUSIC_SOURCE
+ 
+@@ -12,19 +12,19 @@ if [ "$(echo "$INFO" | jq -r '.["Player State"]')" = "Stopped" ]; then
+ 	exit 0
+ fi
+ 
+-cache="$HOME/.config/sketchybar/plugins/Dynamic-Island-Sketchybar/scripts/islands/music/data/cache"
++cache="$DYNAMIC_ISLAND_DIR/scripts/islands/music/data/cache"
+ PLAYER_STATE=$(osascript -e "tell application \"$1\" to return (get player state)")
+ 
+ if [[ $(cat $cache) == 0 ]]; then
+ 	# resume
+-	printf 1 > "$cache"
++	printf 1 >"$cache"
+ 	sketchybar --trigger dynamic_island_queue INFO="pause" ISLAND_ARGS="1"
+ 	exit 0
+ fi
+ 
+ if [[ $PLAYER_STATE == "paused" ]]; then
+ 	# paused
+-	printf 0 > "$cache"
++	printf 0 >"$cache"
+ 	sketchybar --trigger dynamic_island_queue INFO="pause" ISLAND_ARGS="0"
+ 	exit 0
+ fi
+diff --git a/scripts/islands/music/music_island.sh b/scripts/islands/music/music_island.sh
+index 2cc8fd9..86bedea 100755
+--- a/scripts/islands/music/music_island.sh
++++ b/scripts/islands/music/music_island.sh
+@@ -1,10 +1,11 @@
+-#!/usr/bin/env sh
+-source "$HOME/.config/sketchybar/userconfig.sh"
+-ARTWORK_LOCATION="$HOME/.config/sketchybar/plugins/Dynamic-Island-Sketchybar/scripts/islands/music/artwork.jpg"
++#!/usr/bin/env bash
++source "$SKETCHYBAR_DIR/userconfig.sh"
+ 
+-INFO_SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_MUSIC_INFO_EXPAND_WIDTH-$P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
+-INFO_MAX_EXPAND_SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_MUSIC_INFO_MAX_EXPAND_WIDTH+$P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
+-INFO_MAX_EXPAND_HEIGHT=$(($P_DYNAMIC_ISLAND_MUSIC_INFO_EXPAND_HEIGHT+$P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
++ARTWORK_LOCATION="$DYNAMIC_ISLAND_DIR/scripts/islands/music/artwork.jpg"
++
++INFO_SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_MUSIC_INFO_EXPAND_WIDTH - $P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
++INFO_MAX_EXPAND_SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_MUSIC_INFO_MAX_EXPAND_WIDTH + $P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
++INFO_MAX_EXPAND_HEIGHT=$(($P_DYNAMIC_ISLAND_MUSIC_INFO_EXPAND_HEIGHT + $P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
+ 
+ # $1 - override
+ override=$1
+@@ -14,7 +15,7 @@ TITLE=$(osascript -e "tell application \"$P_DYNAMIC_ISLAND_MUSIC_SOURCE\" to get
+ ARTIST=$(osascript -e "tell application \"$P_DYNAMIC_ISLAND_MUSIC_SOURCE\" to get artist of current track")
+ 
+ if [[ $P_DYNAMIC_ISLAND_MUSIC_SOURCE == "Music" ]]; then
+-	osascript "$HOME/.config/sketchybar/plugins/Dynamic-Island-Sketchybar/scripts/islands/music/get_artwork.scpt"
++	osascript "$DYNAMIC_ISLAND_DIR/scripts/islands/music/get_artwork.scpt"
+ elif [[ $P_DYNAMIC_ISLAND_MUSIC_SOURCE == "Spotify" ]]; then
+ 	COVER=$(osascript -e 'tell application "Spotify" to get artwork url of current track')
+ 	curl -s --max-time 25 "$COVER" -o "$ARTWORK_LOCATION"
+@@ -23,54 +24,54 @@ else
+ fi
+ 
+ if [[ ${#TITLE} -gt 25 ]]; then
+-  TITLE=$(printf "$(echo $TITLE | cut -c 1-25)…")
++	TITLE=$(printf "$(echo $TITLE | cut -c 1-25)…")
+ fi
+ 
+ if [[ ${#ARTIST} -gt 25 ]]; then
+-  ARTIST=$(printf "$(echo $ARTIST | cut -c 1-25)…")
++	ARTIST=$(printf "$(echo $ARTIST | cut -c 1-25)…")
+ fi
+ 
+ if [[ $override == "0" ]]; then
+ 	sketchybar --set island.music_artwork drawing=on \
+-			   --set island.music_title drawing=on \
+-			   --set island.music_artist drawing=on \
+-			   --set island.music_placeholder drawing=on \
+-			   --set island popup.drawing=true \
+-			                background.drawing=false \
+-							popup.horizontal=on \
+-							popup.height=$P_DYNAMIC_ISLAND_MUSIC_INFO_DEFAULT_HEIGHT
++		--set island.music_title drawing=on \
++		--set island.music_artist drawing=on \
++		--set island.music_placeholder drawing=on \
++		--set island popup.drawing=true \
++		background.drawing=false \
++		popup.horizontal=on \
++		popup.height=$P_DYNAMIC_ISLAND_MUSIC_INFO_DEFAULT_HEIGHT
+ fi
+ 
+ sketchybar --set island.music_artist label="$ARTIST" \
+-	       --set island.music_title label="$TITLE" \
+-		   --set island.music_artwork background.image="$ARTWORK_LOCATION"
++	--set island.music_title label="$TITLE" \
++	--set island.music_artwork background.image="$ARTWORK_LOCATION"
+ 
+ if [[ $override == "0" ]]; then
+ 	sketchybar --animate sin 15 --set island.music_placeholder width=$INFO_SQUISH_WIDTH width=$INFO_MAX_EXPAND_SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_MUSIC_INFO_MAX_EXPAND_WIDTH \
+-			   --animate sin 25 --set island popup.height=$INFO_MAX_EXPAND_HEIGHT popup.height=$P_DYNAMIC_ISLAND_MUSIC_INFO_EXPAND_HEIGHT \
+-			   --animate sin 20 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_MUSIC_INFO_CORNER_RAD
++		--animate sin 25 --set island popup.height=$INFO_MAX_EXPAND_HEIGHT popup.height=$P_DYNAMIC_ISLAND_MUSIC_INFO_EXPAND_HEIGHT \
++		--animate sin 20 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_MUSIC_INFO_CORNER_RAD
+ else
+ 	sketchybar --animate sin 15 --set island.music_placeholder width=$INFO_MAX_EXPAND_SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_MUSIC_INFO_MAX_EXPAND_WIDTH \
+-			   --animate sin 25 --set island popup.height=$INFO_MAX_EXPAND_HEIGHT popup.height=$P_DYNAMIC_ISLAND_MUSIC_INFO_EXPAND_HEIGHT \
+-			   --animate sin 20 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_MUSIC_INFO_CORNER_RAD
++		--animate sin 25 --set island popup.height=$INFO_MAX_EXPAND_HEIGHT popup.height=$P_DYNAMIC_ISLAND_MUSIC_INFO_EXPAND_HEIGHT \
++		--animate sin 20 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_MUSIC_INFO_CORNER_RAD
+ fi
+ 
+ sleep 0.15
+ sketchybar --animate tanh 25 --set island.music_title label.color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
+-		   --animate tanh 25 --set island.music_artist label.color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
+-		   --animate tanh 25 --set island.music_artwork background.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT
++	--animate tanh 25 --set island.music_artist label.color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
++	--animate tanh 25 --set island.music_artwork background.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT
+ 
+ sleep 1.5
+ 
+ sketchybar --animate tanh 25 --set island.music_title label.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT \
+-		   --animate tanh 25 --set island.music_artist label.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT \
+-		   --animate tanh 25 --set island.music_artwork background.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT
++	--animate tanh 25 --set island.music_artist label.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT \
++	--animate tanh 25 --set island.music_artwork background.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT
+ 
+ sleep 0.4
+ sketchybar --animate tanh 25 --set island popup.height=$P_DYNAMIC_ISLAND_MUSIC_INFO_DEFAULT_HEIGHT \
+-		   --animate  sin 30 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_DEFAULT_CORNER_RADIUS \
+-		   --animate tanh 20 --set island.music_placeholder width=$INFO_SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_MUSIC_INFO_EXPAND_WIDTH
++	--animate sin 30 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_DEFAULT_CORNER_RADIUS \
++	--animate tanh 20 --set island.music_placeholder width=$INFO_SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_MUSIC_INFO_EXPAND_WIDTH
+ 
+ sleep 0.7
+ 
+-source "$HOME/.config/sketchybar/plugins/Dynamic-Island-Sketchybar/scripts/islands/music/reset.sh"
++source "$DYNAMIC_ISLAND_DIR/scripts/islands/music/reset.sh"
+diff --git a/scripts/islands/music/pause_island.sh b/scripts/islands/music/pause_island.sh
+index c7c54ae..9493256 100755
+--- a/scripts/islands/music/pause_island.sh
++++ b/scripts/islands/music/pause_island.sh
+@@ -1,13 +1,13 @@
+-#!/usr/bin/env sh
+-source "$HOME/.config/sketchybar/userconfig.sh"
++#!/usr/bin/env bash
++source "$SKETCHYBAR_DIR/userconfig.sh"
+ 
+-RESUME_SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_MUSIC_RESUME_EXPAND_WIDTH-$P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
+-RESUME_MAX_EXPAND_SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_MUSIC_RESUME_MAX_EXPAND_WIDTH+$P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
+-RESUME_MAX_EXPAND_HEIGHT=$(($P_DYNAMIC_ISLAND_MUSIC_RESUME_EXPAND_HEIGHT+$P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
++RESUME_SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_MUSIC_RESUME_EXPAND_WIDTH - $P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
++RESUME_MAX_EXPAND_SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_MUSIC_RESUME_MAX_EXPAND_WIDTH + $P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
++RESUME_MAX_EXPAND_HEIGHT=$(($P_DYNAMIC_ISLAND_MUSIC_RESUME_EXPAND_HEIGHT + $P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
+ 
+ args=$*
+ IFS='|'
+-read -ra strarr <<< "$args"
++read -ra strarr <<<"$args"
+ unset IFS
+ 
+ override="${strarr[0]}"
+@@ -15,26 +15,26 @@ pauseStatus="${strarr[1]}"
+ 
+ # enable
+ sketchybar --set island.resume_text drawing=on \
+-		   --set island.resume_bar drawing=on \
+-		   --set island		popup.drawing=true \
+-							background.drawing=false \
+-							popup.horizontal=on \
+-							popup.height=$P_DYNAMIC_ISLAND_DEFAULT_HEIGHT
++	--set island.resume_bar drawing=on \
++	--set island popup.drawing=true \
++	background.drawing=false \
++	popup.horizontal=on \
++	popup.height=$P_DYNAMIC_ISLAND_DEFAULT_HEIGHT
+ 
+ if [[ $pauseStatus == "0" ]]; then
+ 	# paused
+ 	sketchybar --set island.resume_text label="Paused" \
+-					 					label.padding_left=0
++		label.padding_left=0
+ else
+ 	# resume
+ 	sketchybar --set island.resume_text label="Resumed" \
+-					 					label.padding_left=258
++		label.padding_left=258
+ fi
+ 
+ # animate
+ sketchybar --animate sin 20 --set island.resume_bar width=$RESUME_SQUISH_WIDTH width=$RESUME_MAX_EXPAND_SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_MUSIC_RESUME_MAX_EXPAND_WIDTH \
+-		   --animate sin 35 --set island popup.height=$RESUME_MAX_EXPAND_HEIGHT popup.height=$P_DYNAMIC_ISLAND_MUSIC_RESUME_EXPAND_HEIGHT \
+-		   --animate sin 35 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_MUSIC_RESUME_CORNER_RAD
++	--animate sin 35 --set island popup.height=$RESUME_MAX_EXPAND_HEIGHT popup.height=$P_DYNAMIC_ISLAND_MUSIC_RESUME_EXPAND_HEIGHT \
++	--animate sin 35 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_MUSIC_RESUME_CORNER_RAD
+ 
+ sleep 0.45
+ sketchybar --animate sin 25 --set island.resume_text label.color=$P_DYNAMIC_ISLAND_COLOR_WHITE
+@@ -46,9 +46,9 @@ sketchybar --animate tanh 25 --set island.resume_text label.color=$P_DYNAMIC_ISL
+ sleep 0.4
+ 
+ sketchybar --animate tanh 20 --set island popup.height=$P_DYNAMIC_ISLAND_DEFAULT_HEIGHT \
+-		   --animate tanh 30 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_DEFAULT_CORNER_RADIUS \
+-		   --animate tanh 20 --set island.resume_bar width=$RESUME_SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_MUSIC_RESUME_EXPAND_WIDTH
++	--animate tanh 30 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_DEFAULT_CORNER_RADIUS \
++	--animate tanh 20 --set island.resume_bar width=$RESUME_SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_MUSIC_RESUME_EXPAND_WIDTH
+ 
+ sleep 0.7
+ 
+-source "$HOME/.config/sketchybar/plugins/Dynamic-Island-Sketchybar/scripts/islands/music/reset-resume.sh"
++source "$DYNAMIC_ISLAND_DIR/scripts/islands/music/reset-resume.sh"
+diff --git a/scripts/islands/notification/notification_island.sh b/scripts/islands/notification/notification_island.sh
+index 0946b63..db10296 100755
+--- a/scripts/islands/notification/notification_island.sh
++++ b/scripts/islands/notification/notification_island.sh
+@@ -1,13 +1,13 @@
+-#!/usr/bin/env sh
+-source "$HOME/.config/sketchybar/userconfig.sh"
++#!/usr/bin/env bash
++source "$SKETCHYBAR_DIR/userconfig.sh"
+ 
+-SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_NOTIFICATION_EXPAND_WIDTH-$P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
+-MAX_EXPAND_SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_NOTIFICATION_MAX_EXPAND_WIDTH+$P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
+-MAX_EXPAND_HEIGHT=$(($P_DYNAMIC_ISLAND_NOTIFICATION_EXPAND_HEIGHT+$P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
++SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_NOTIFICATION_EXPAND_WIDTH - $P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
++MAX_EXPAND_SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_NOTIFICATION_MAX_EXPAND_WIDTH + $P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
++MAX_EXPAND_HEIGHT=$(($P_DYNAMIC_ISLAND_NOTIFICATION_EXPAND_HEIGHT + $P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
+ 
+ args=$*
+ IFS='|'
+-read -ra strarr <<< "$args"
++read -ra strarr <<<"$args"
+ unset IFS
+ 
+ # 1 - override
+@@ -23,42 +23,42 @@ appId="${strarr[4]%% *}"
+ 
+ # Enable
+ sketchybar --set island.notification_title drawing=on \
+-										   label="$title" \
+-		   --set island.notification_subtitle drawing=on \
+-								    	   label="$subtitle" \
+-		   --set island.notification_body drawing=on \
+-								  		   label="$message" \
+-		   --set island.notification_logo drawing=on \
+-							              background.image="app.$appId" \
+-		   --set island.notification_expanding drawing=on \
+-		   --set island      popup.drawing=true \
+-							 background.drawing=false \
+-							 popup.horizontal=on \
+-							 popup.height=$P_DYNAMIC_ISLAND_DEFAULT_HEIGHT
++	label="$title" \
++	--set island.notification_subtitle drawing=on \
++	label="$subtitle" \
++	--set island.notification_body drawing=on \
++	label="$message" \
++	--set island.notification_logo drawing=on \
++	background.image="app.$appId" \
++	--set island.notification_expanding drawing=on \
++	--set island popup.drawing=true \
++	background.drawing=false \
++	popup.horizontal=on \
++	popup.height=$P_DYNAMIC_ISLAND_DEFAULT_HEIGHT
+ 
+ sketchybar --animate sin 20 --set island.notification_expanding width=$SQUISH_WIDTH width=$MAX_EXPAND_SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_NOTIFICATION_MAX_EXPAND_WIDTH \
+-		   --animate sin 30 --set island popup.height=$MAX_EXPAND_HEIGHT popup.height=$P_DYNAMIC_ISLAND_NOTIFICATION_EXPAND_HEIGHT \
+-		   --animate sin 35 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_NOTIFICATION_CORNER_RAD
++	--animate sin 30 --set island popup.height=$MAX_EXPAND_HEIGHT popup.height=$P_DYNAMIC_ISLAND_NOTIFICATION_EXPAND_HEIGHT \
++	--animate sin 35 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_NOTIFICATION_CORNER_RAD
+ 
+ sleep 0.45
+ sketchybar --animate sin 25 --set island.notification_title label.color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
+-		   --animate sin 25 --set island.notification_subtitle label.color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
+-		   --animate sin 25 --set island.notification_body label.color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
+-		   --animate sin 25 --set island.notification_logo background.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT
++	--animate sin 25 --set island.notification_subtitle label.color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
++	--animate sin 25 --set island.notification_body label.color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
++	--animate sin 25 --set island.notification_logo background.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT
+ 
+ sleep 2.25
+ 
+ sketchybar --animate tanh 25 --set island.notification_title label.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT \
+-		   --animate tanh 25 --set island.notification_subtitle label.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT \
+-		   --animate tanh 25 --set island.notification_body label.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT \
+-		   --animate tanh 25 --set island.notification_logo background.color=$P_DYNAMIC_ISLAND_COLOR_ICON_HIDDEN
++	--animate tanh 25 --set island.notification_subtitle label.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT \
++	--animate tanh 25 --set island.notification_body label.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT \
++	--animate tanh 25 --set island.notification_logo background.color=$P_DYNAMIC_ISLAND_COLOR_ICON_HIDDEN
+ 
+ sleep 0.15
+ 
+ sketchybar --animate tanh 25 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_DEFAULT_CORNER_RADIUS \
+-		   --animate tanh 15 --set island.notification_expanding width=$SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_NOTIFICATION_EXPAND_WIDTH \
+-		   --animate sin 50 --set island popup.height=$P_DYNAMIC_ISLAND_DEFAULT_HEIGHT
++	--animate tanh 15 --set island.notification_expanding width=$SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_NOTIFICATION_EXPAND_WIDTH \
++	--animate sin 50 --set island popup.height=$P_DYNAMIC_ISLAND_DEFAULT_HEIGHT
+ 
+ sleep 0.7
+ 
+-source "$HOME/.config/sketchybar/plugins/Dynamic-Island-Sketchybar/scripts/islands/notification/reset.sh"
++source "$DYNAMIC_ISLAND_DIR/scripts/islands/notification/reset.sh"
+diff --git a/scripts/islands/notification/reset.sh b/scripts/islands/notification/reset.sh
+index a08cefa..12727a1 100755
+--- a/scripts/islands/notification/reset.sh
++++ b/scripts/islands/notification/reset.sh
+@@ -1,10 +1,10 @@
+-#!/usr/bin/env sh 
++#!/usr/bin/env bash
+ sketchybar --set island.notification_title drawing=off \
+-	       --set island.notification_subtitle drawing=off \
+-		   --set island.notification_body drawing=off \
+-		   --set island.notification_logo drawing=off \
+-		   --set island.notification_expanding drawing=off \
+-		   --set island	background.drawing=true
++	--set island.notification_subtitle drawing=off \
++	--set island.notification_body drawing=off \
++	--set island.notification_logo drawing=off \
++	--set island.notification_expanding drawing=off \
++	--set island background.drawing=true
+ 
+ sleep 0.1
+ 
+diff --git a/scripts/islands/volume/volume_island.sh b/scripts/islands/volume/volume_island.sh
+index a071b26..ae83ce9 100755
+--- a/scripts/islands/volume/volume_island.sh
++++ b/scripts/islands/volume/volume_island.sh
+@@ -1,13 +1,13 @@
+-#!/usr/bin/env sh
+-source "$HOME/.config/sketchybar/userconfig.sh"
++#!/usr/bin/env bash
++source "$SKETCHYBAR_DIR/userconfig.sh"
+ 
+-SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_VOLUME_EXPAND_WIDTH-$P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
+-MAX_EXPAND_SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_VOLUME_MAX_EXPAND_WIDTH+$P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
+-MAX_EXPAND_HEIGHT=$(($P_DYNAMIC_ISLAND_VOLUME_EXPAND_HEIGHT+($P_DYNAMIC_ISLAND_SQUISH_AMOUNT/2)))
++SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_VOLUME_EXPAND_WIDTH - $P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
++MAX_EXPAND_SQUISH_WIDTH=$(($P_DYNAMIC_ISLAND_VOLUME_MAX_EXPAND_WIDTH + $P_DYNAMIC_ISLAND_SQUISH_AMOUNT))
++MAX_EXPAND_HEIGHT=$(($P_DYNAMIC_ISLAND_VOLUME_EXPAND_HEIGHT + ($P_DYNAMIC_ISLAND_SQUISH_AMOUNT / 2)))
+ 
+ args=$*
+ IFS='|'
+-read -ra strarr <<< "$args"
++read -ra strarr <<<"$args"
+ unset IFS
+ 
+ # $1 - override
+@@ -17,64 +17,64 @@ volume="${strarr[1]}"
+ 
+ # calculate volume logo
+ case $volume in
+-	100) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MAX;;
+-	9[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MAX;;
+-	8[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MAX;;
+-	7[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MAX;;
+-	6[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MED;;
+-	5[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MED;;
+-	4[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MED;;
+-	3[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_LOW;;
+-	2[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_LOW;;
+-	1[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_LOW;;
+-	[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MUTED;;
+-	*) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MUTED
++100) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MAX ;;
++9[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MAX ;;
++8[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MAX ;;
++7[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MAX ;;
++6[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MED ;;
++5[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MED ;;
++4[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MED ;;
++3[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_LOW ;;
++2[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_LOW ;;
++1[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_LOW ;;
++[0-9]) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MUTED ;;
++*) ICON=$P_DYNAMIC_ISLAND_ICON_VOLUME_MUTED ;;
+ esac
+ 
+ if [[ $override == "0" ]]; then
+ 	# enable
+ 	sketchybar --set island.volume_placeholder1 drawing=on \
+-			   --set island.volume_placeholder2 drawing=on \
+-			   --set island.volume_placeholder3 drawing=on \
+-			   --set island.volume_icon drawing=on \
+-			   							icon="$ICON" \
+-			   --set island.volume_bar drawing=on \
+-			   --set island	popup.drawing=true \
+-			   				background.drawing=false \
+-							popup.horizontal=off \
+-							popup.height=$P_DYNAMIC_ISLAND_VOLUME_DEFAULT_HEIGHT
++		--set island.volume_placeholder2 drawing=on \
++		--set island.volume_placeholder3 drawing=on \
++		--set island.volume_icon drawing=on \
++		icon="$ICON" \
++		--set island.volume_bar drawing=on \
++		--set island popup.drawing=true \
++		background.drawing=false \
++		popup.horizontal=off \
++		popup.height=$P_DYNAMIC_ISLAND_VOLUME_DEFAULT_HEIGHT
+ fi
+ 
+ if [[ $override == "0" ]]; then
+ 	sketchybar --animate sin 15 --set island.volume_placeholder1 width=$SQUISH_WIDTH width=$MAX_EXPAND_SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_VOLUME_MAX_EXPAND_WIDTH \
+-			   --animate sin 20 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_VOLUME_CORNER_RAD \
+-			   --animate sin 20 --set island popup.height=$MAX_EXPAND_HEIGHT popup.height=$P_DYNAMIC_ISLAND_VOLUME_EXPAND_HEIGHT
++		--animate sin 20 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_VOLUME_CORNER_RAD \
++		--animate sin 20 --set island popup.height=$MAX_EXPAND_HEIGHT popup.height=$P_DYNAMIC_ISLAND_VOLUME_EXPAND_HEIGHT
+ else
+ 	sketchybar --animate sin 15 --set island.volume_placeholder1 width=$MAX_EXPAND_SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_VOLUME_MAX_EXPAND_WIDTH \
+-			   --animate sin 20 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_VOLUME_CORNER_RAD \
+-			   --animate sin 20 --set island popup.height=$MAX_EXPAND_HEIGHT popup.height=$P_DYNAMIC_ISLAND_VOLUME_EXPAND_HEIGHT
++		--animate sin 20 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_VOLUME_CORNER_RAD \
++		--animate sin 20 --set island popup.height=$MAX_EXPAND_HEIGHT popup.height=$P_DYNAMIC_ISLAND_VOLUME_EXPAND_HEIGHT
+ fi
+ 
+-barWidth=$(bc -l <<< "$volume/100*240")
+-barWidth=$( printf "%.0f" $barWidth )
++barWidth=$(bc -l <<<"$volume/100*240")
++barWidth=$(printf "%.0f" $barWidth)
+ sketchybar --animate tanh 15 --set island.volume_bar width=$barWidth
+ 
+ sketchybar --animate sin 10 --set island.volume_bar background.color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
+-		   --animate sin 10 --set island.volume_bar background.border_color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
+-		   --animate sin 10 --set island.volume_icon icon.color=$P_DYNAMIC_ISLAND_COLOR_WHITE
++	--animate sin 10 --set island.volume_bar background.border_color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
++	--animate sin 10 --set island.volume_icon icon.color=$P_DYNAMIC_ISLAND_COLOR_WHITE
+ 
+ sleep 0.8
+ 
+ sketchybar --animate tanh 20 --set island.volume_icon icon.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT \
+-		   --animate tanh 20 --set island.volume_bar background.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT
++	--animate tanh 20 --set island.volume_bar background.color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT
+ 
+ sleep 0.2
+ 
+ sketchybar --set island.volume_bar width=10
+ 
+ sketchybar --animate tanh 20 --set island popup.height=$P_DYNAMIC_ISLAND_VOLUME_DEFAULT_HEIGHT \
+-		   --animate tanh 20 --set island.volume_placeholder1 width=$SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_VOLUME_EXPAND_WIDTH \
+-		   --animate sin 25 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_DEFAULT_CORNER_RADIUS
++	--animate tanh 20 --set island.volume_placeholder1 width=$SQUISH_WIDTH width=$P_DYNAMIC_ISLAND_VOLUME_EXPAND_WIDTH \
++	--animate sin 25 --set island popup.background.corner_radius=$P_DYNAMIC_ISLAND_DEFAULT_CORNER_RADIUS
+ 
+ sleep 0.5
+-source "$HOME/.config/sketchybar/plugins/Dynamic-Island-Sketchybar/scripts/islands/volume/reset.sh"
++source "$DYNAMIC_ISLAND_DIR/scripts/islands/volume/reset.sh"
+diff --git a/sketchybarrc.example b/sketchybarrc.example
+index bdcf380..b077168 100755
+--- a/sketchybarrc.example
++++ b/sketchybarrc.example
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env sh
++#!/usr/bin/env bash
+ 
+ DYNAMIC_ISLAND_DIR="$HOME/.config/sketchybar/plugins/Dynamic-Island-Sketchybar"
+ 

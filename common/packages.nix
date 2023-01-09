@@ -1,0 +1,46 @@
+{ config, lib, pkgs, ... }:
+
+{
+  home.packages = with pkgs; [
+    age
+    borgbackup
+    bzip2
+    curl
+    diffutils
+    fd
+    file
+    findutils
+    fup-repl
+    gawk
+    gnugrep
+    gnupg
+    gnused
+    gnutar
+    gzip
+    htop
+    imagemagick
+    inetutils
+    ipcalc
+    jq
+    lazygit
+    less
+    lsof
+    man
+    netcat-gnu
+    nix-tree
+    openssh
+    openssl
+    p7zip
+    ripgrep
+    rsync
+    scripts
+    shellcheck
+    tmux
+    tree
+    unar
+    unzip
+    watch
+    xz
+    zstd
+  ];
+}

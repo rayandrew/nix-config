@@ -24,48 +24,55 @@ in
     end
   '';
 
-  homebrew.enable = true;
-  homebrew.onActivation.autoUpdate = true;
-  homebrew.onActivation.cleanup = "zap";
-  homebrew.global.brewfile = true;
+  homebrew = {
+    enable = true;
+    onActivation = {
+      # autoUpdate = true;
+      cleanup = "zap";
+    };
+    global = {
+      brewfile = true;
+    };
 
-  homebrew.taps = [
-    "homebrew/cask"
-    "homebrew/cask-drivers"
-    "homebrew/cask-fonts"
-    "homebrew/cask-versions"
-    "homebrew/core"
-    "homebrew/services"
-    "nrlquaker/createzap"
-  ];
+    taps = [
+      "homebrew/cask"
+      "homebrew/cask-drivers"
+      "homebrew/cask-fonts"
+      "homebrew/cask-versions"
+      "homebrew/core"
+      "homebrew/services"
+      "nrlquaker/createzap"
+    ];
 
-  # Prefer installing application from the Mac App Store
-  homebrew.masApps = {
-    "1Password for Safari" = 1569813296;
-    "Dark Reader for Safari" = 1438243180;
-    Slack = 803453959;
-    # Vimari = 1480933944;
-    # "WiFi Explorer" = 494803304;
-    # Xcode = 497799835;
-    # "Yubico Authenticator" = 1497506650;
+    # Prefer installing application from the Mac App Store
+    masApps = {
+      "1Password for Safari" = 1569813296;
+      "Dark Reader for Safari" = 1438243180;
+      Slack = 803453959;
+    };
+
+    # If an app isn't available in the Mac App Store, or the version in the App Store has
+    # limitiations, e.g., Transmit, install the Homebrew Cask.
+    casks = [
+      "1password"
+      "1password-cli"
+      "google-drive"
+      "gpg-suite"
+      "loopback"
+      "raycast"
+      "skype"
+      "visual-studio-code"
+      "vlc"
+    ];
+
+    # For cli packages that aren't currently available for macOS in `nixpkgs`
+    brews = [
+      "mas"
+    ];
   };
 
-  # If an app isn't available in the Mac App Store, or the version in the App Store has
-  # limitiations, e.g., Transmit, install the Homebrew Cask.
-  homebrew.casks = [
-    "1password"
-    "1password-cli"
-    "google-drive"
-    "gpg-suite"
-    "loopback"
-    "raycast"
-    "skype"
-    "visual-studio-code"
-    "vlc"
-  ];
-
   # Configuration related to casks
-  home-manager.users.${config.users.primaryUser.username}.programs.ssh =
+  home-manager.users.${config.my.username}.programs.ssh =
     mkIf (caskPresent "1password-cli" && config ? home-manager) {
       enable = true;
       extraConfig = ''
@@ -75,11 +82,4 @@ in
           IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
       '';
     };
-
-  # For cli packages that aren't currently available for macOS in `nixpkgs`.Packages should be
-  # installed in `../home/default.nix` whenever possible.
-  homebrew.brews = [
-    # "swift-format"
-    # "swiftlint"
-  ];
 }
