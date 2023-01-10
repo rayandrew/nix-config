@@ -99,10 +99,10 @@ in
   launchd.user.agents.yabai.serviceConfig.EnvironmentVariables.PATH =
     lib.mkForce "${config.services.yabai.package}/bin:${config.my.systemPath}";
 
-  launchd.user.agents.yabai.serviceConfig = {
-    StandardErrorPath = "/tmp/yabai.err.log";
-    StandardOutPath = "/tmp/yabai.out.log";
-  };
+  # launchd.user.agents.yabai.serviceConfig = {
+  #   StandardErrorPath = "/tmp/yabai.err.log";
+  #   StandardOutPath = "/tmp/yabai.out.log";
+  # };
 
   system.activationScripts.postActivation.text = let path = "${pkgs.yabai}/bin/yabai"; in ''
     ${pkgs.sqlite}/bin/sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' \

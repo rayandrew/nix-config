@@ -44,6 +44,9 @@ in
       lalt + shift - 8 : skhd -k "escape"; sh ${scripts}/move-window.sh 8
       lalt + shift - 9 : skhd -k "escape"; sh ${scripts}/move-window.sh 9
       lalt + shift - 0 : skhd -k "escape"; sh ${scripts}/move-window.sh 10
+      lalt + shift - z : skhd -k "escape"; sh ${scripts}/move-window.sh 11
+      lalt + shift - x : skhd -k "escape"; sh ${scripts}/move-window.sh 12
+      lalt + shift - c : skhd -k "escape"; sh ${scripts}/move-window.sh 13
 
       # Window Navigation (through display borders): lalt - {h, j, k, l}
       lalt - h    : ${yabai} -m window --focus west  || ${yabai} -m display --focus west
@@ -88,7 +91,7 @@ in
       lalt - return : open -n -a ${pkgs.kitty}/Applications/kitty.app
       lalt - e : open ~/
       # lalt - return: ~/.config/skhd/CustomScripts/new-alacritty-window.sh
-      lalt + lshift - return : open -n -a ${pkgs.kitty}/Applications/kitty.app "${pkgs.fish}/bin/fish -l -c '${pkgs.tmux}/bin/tmux attach || ${pkgs.tmux}/bin/tmux'"
+      lalt + lshift - return : open -n -a ${pkgs.kitty}/Applications/kitty.app --args ${pkgs.fish}/bin/fish -c '${pkgs.tmux}/bin/tmux attach || ${pkgs.tmux}/bin/tmux'
       # lalt + lshift - return: ~/.config/skhd/CustomScripts/new-alacritty-window.sh -e /bin/zsh -l -c "/opt/homebrew/bin/tmux attach || /opt/homebrew/bin/tmux"
 
       # finder
@@ -121,10 +124,10 @@ in
   launchd.user.agents.skhd.serviceConfig.EnvironmentVariables.PATH =
     lib.mkForce "${config.services.yabai.package}/bin:${config.my.systemPath}";
 
-  launchd.user.agents.skhd.serviceConfig = {
-    StandardErrorPath = "/tmp/skhd.err.log";
-    StandardOutPath = "/tmp/skhd.out.log";
-  };
+  # launchd.user.agents.skhd.serviceConfig = {
+  #   StandardErrorPath = "/tmp/skhd.err.log";
+  #   StandardOutPath = "/tmp/skhd.out.log";
+  # };
 
   system.activationScripts.postActivation.text = let path = "${pkgs.skhd}/bin/skhd"; in ''
     ${pkgs.sqlite}/bin/sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' \

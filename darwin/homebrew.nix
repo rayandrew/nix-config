@@ -63,6 +63,7 @@ in
       "skype"
       "visual-studio-code"
       "vlc"
+      "spotify"
     ];
 
     # For cli packages that aren't currently available for macOS in `nixpkgs`
