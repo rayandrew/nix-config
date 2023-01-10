@@ -35,7 +35,6 @@
     rsync
     scripts
     shellcheck
-    tmux
     tree
     unar
     unzip

@@ -12,8 +12,7 @@ in
 
   services.yabai = {
     enable = true;
-    # enableScriptingAddition = true;
-    # package = pkgs.yabai-git;
+    enableScriptingAddition = true;
     package = pkgs.yabai;
     config = {
       # layout
@@ -101,8 +100,8 @@ in
     lib.mkForce "${config.services.yabai.package}/bin:${config.my.systemPath}";
 
   launchd.user.agents.yabai.serviceConfig = {
-    StandardErrorPath = "/tmp/yabai.log";
-    StandardOutPath = "/tmp/yabai.log";
+    StandardErrorPath = "/tmp/yabai.err.log";
+    StandardOutPath = "/tmp/yabai.out.log";
   };
 
   system.activationScripts.postActivation.text = let path = "${pkgs.yabai}/bin/yabai"; in ''

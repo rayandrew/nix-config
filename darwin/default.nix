@@ -13,6 +13,7 @@
     ./sketchybar
     ./skhd
     ./yabai
+    ./symlinks.nix
     inputs.agenix.darwinModule
     inputs.home-manager.darwinModules.home-manager
   ];
@@ -21,5 +22,6 @@
     ./kitty.nix
     ./packages.nix
     ./skhd
+    ./symlinks.nix
   ];
 }

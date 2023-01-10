@@ -36,6 +36,8 @@
       allowUnfree = true;
     };
 
+    channels.nixpkgs.patches = [ ./patches/sketchybar.patch ];
+
     # Add some additional functions to `lib`.
     lib = inputs.nixpkgs.lib.extend (_: _: {
       mkDarwinSystem = import ./lib/mkDarwinSystem.nix inputs;

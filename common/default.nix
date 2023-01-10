@@ -17,6 +17,7 @@
     ./packages.nix
     ./ssh.nix
     ./fish.nix
+    ./tmux.nix
   ];
 
   home-manager.useGlobalPkgs = true;

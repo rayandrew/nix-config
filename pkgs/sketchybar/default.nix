@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchFromGitHub, memstreamHook, Carbon, Cocoa, SkyLight }:
+{ pkgs, lib, stdenv, fetchFromGitHub, memstreamHook, Carbon, Cocoa, SkyLight, objc4 }:
 
 let
   inherit (stdenv.hostPlatform) system;
@@ -6,20 +6,25 @@ let
     "aarch64-darwin" = "arm64";
     "x86_64-darwin" = "x86";
   }.${system} or (throw "Unsupported system: ${system}");
+  DisplayServices = [
+    "/System/Library/PrivateFrameworks/DisplayServices.framework/Versions/A/DisplayServices"
+    # "/System/Library/PrivateFrameworks/DisplayServices.framework/DisplayServices"
+    # "/System/Library/PrivateFrameworks/DisplayServices.framework"
+  ];
 in
 
 stdenv.mkDerivation rec {
   pname = "sketchybar";
-  version = "2.11.1";
+  version = "2.13.2";
 
   src = fetchFromGitHub {
-    owner = "azuwis";
+    owner = "FelixKratz";
     repo = "SketchyBar";
-    rev = "2b6be292a2592fe5f216f38944aa78751f95d062";
-    sha256 = "sha256-3QSsJLYzFUzW6MgkWFCMEDoK6Mt+4slNE/E7j/+iX3g=";
+    rev = "v2.13.2";
+    sha256 = "10i364400kn3mycvscq4d7mfdp3zcdl84dfbb5q52p491gal7yhh";
   };
 
-  buildInputs = [ Carbon Cocoa SkyLight ]
+  buildInputs = [ Carbon Cocoa SkyLight objc4 DisplayServices ]
     ++ lib.optionals (stdenv.system == "x86_64-darwin") [ memstreamHook ];
 
   makeFlags = [
@@ -35,7 +40,7 @@ stdenv.mkDerivation rec {
     description = "A highly customizable macOS status bar replacement";
     homepage = "https://github.com/FelixKratz/SketchyBar";
     platforms = platforms.darwin;
-    maintainers = [ maintainers.azuwis ];
+    maintainers = [ maintainers.rayandrew ];
     license = licenses.gpl3;
   };
 }
