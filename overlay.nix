@@ -8,6 +8,4 @@ self: super: rec {
   scripts = super.callPackage ./pkgs/scripts { }; # own scripts
 
   sketchybar-shendy = super.callPackage ./pkgs/sketchybar-shendy { };
-
-  # pam-reattach = super.callPackage ./pkgs/pam-reattach { };
 }
