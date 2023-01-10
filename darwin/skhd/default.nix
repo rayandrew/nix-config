@@ -16,23 +16,23 @@ in
     enable = true;
     package = pkgs.skhd;
     skhdConfig = ''
-      lctrl + lshift - left : ${yabai} -m space --focus prev
-      lctrl + lshift - right : ${yabai} -m space --focus next
-      lctrl - z : ${yabai} -m space --focus recent
+      lctrl + lshift - left  : yabai -m space --focus prev
+      lctrl + lshift - right : yabai -m space --focus next
+      lctrl - z              : yabai -m space --focus recent
 
-      lalt - 1: ${yabai} -m space --focus 1
-      lalt - 2: ${yabai} -m space --focus 2
-      lalt - 3: ${yabai} -m space --focus 3
-      lalt - 4: ${yabai} -m space --focus 4
-      lalt - 5: ${yabai} -m space --focus 5
-      lalt - 6: ${yabai} -m space --focus 6
-      lalt - 7: ${yabai} -m space --focus 7
-      lalt - 8: ${yabai} -m space --focus 8
-      lalt - 9: ${yabai} -m space --focus 9
-      lalt - 0: ${yabai} -m space --focus 10
-      lalt - z: ${yabai} -m space --focus 11
-      lalt - x: ${yabai} -m space --focus 12
-      lalt - c: ${yabai} -m space --focus 13
+      lalt - 1 : yabai -m space --focus 1
+      lalt - 2 : yabai -m space --focus 2
+      lalt - 3 : yabai -m space --focus 3
+      lalt - 4 : yabai -m space --focus 4
+      lalt - 5 : yabai -m space --focus 5
+      lalt - 6 : yabai -m space --focus 6
+      lalt - 7 : yabai -m space --focus 7
+      lalt - 8 : yabai -m space --focus 8
+      lalt - 9 : yabai -m space --focus 9
+      lalt - 0 : yabai -m space --focus 10
+      lalt - z : yabai -m space --focus 11
+      lalt - x : yabai -m space --focus 12
+      lalt - c : yabai -m space --focus 13
 
       lalt + shift - 1 : skhd -k "escape"; sh ${scripts}/move-window.sh 1
       lalt + shift - 2 : skhd -k "escape"; sh ${scripts}/move-window.sh 2
@@ -52,7 +52,7 @@ in
       lalt - h    : ${yabai} -m window --focus west  || ${yabai} -m display --focus west
       lalt - j    : ${yabai} -m window --focus south || ${yabai} -m display --focus south
       lalt - k    : ${yabai} -m window --focus north || ${yabai} -m display --focus north
-      lalt - l : ${yabai} -m window --focus east  || ${yabai} -m display --focus east
+      lalt - l    : ${yabai} -m window --focus east  || ${yabai} -m display --focus east
 
       # Make window zoom to fullscreen: lalt - f
       lalt - f : ${yabai} -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
@@ -90,11 +90,7 @@ in
       # Open applications
       lalt - return : open -n -a ${pkgs.kitty}/Applications/kitty.app
       lalt - e : open ~/
-      # lalt - return: ~/.config/skhd/CustomScripts/new-alacritty-window.sh
       lalt + lshift - return : open -n -a ${pkgs.kitty}/Applications/kitty.app --args ${pkgs.fish}/bin/fish -c '${pkgs.tmux}/bin/tmux attach || ${pkgs.tmux}/bin/tmux'
-      # lalt + lshift - return: ~/.config/skhd/CustomScripts/new-alacritty-window.sh -e /bin/zsh -l -c "/opt/homebrew/bin/tmux attach || /opt/homebrew/bin/tmux"
-
-      # finder
 
       # rotate tree
       lalt + shift - r : ${yabai} -m space --rotate 90
@@ -118,7 +114,7 @@ in
 
   launchd.user.agents.skhd.environment = {
     NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
-#   SHELL = "/bin/sh";
+    SHELL = "/bin/sh";
   };
 
   launchd.user.agents.skhd.serviceConfig.EnvironmentVariables.PATH =

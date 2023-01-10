@@ -7,7 +7,7 @@ in
   # csrutil enable --without fs --without debug --without nvram
   # nvram boot-args=-arm64e_preview_abi
   environment.etc."sudoers.d/yabai".text = ''
-    ${config.my.username} ALL = (root) NOPASSWD: ${pkgs.yabai}/bin/yabai --load-sa
+    ${config.my.username} ALL = (root) NOPASSWD: ${config.services.yabai.package}/bin/yabai --load-sa
   '';
 
   services.yabai = {
@@ -52,13 +52,13 @@ in
       yabai -m signal --add event=display_added action="sleep 1 && sh ${scripts}/create-spaces.sh"
       yabai -m signal --add event=display_removed action="sleep 1 && sh ${scripts}/create-spaces.sh"
 
-      yabai -m signal --add event=window_created action="${pkgs.sketchybar}/bin/sketchybar --trigger windows_on_spaces"
-      yabai -m signal --add event=window_destroyed action="${pkgs.sketchybar}/bin/sketchybar --trigger windows_on_spaces"
+      yabai -m signal --add event=window_created action=sketchybar --trigger windows_on_spaces"
+      yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
 
       # focus window after active space changes
-      yabai -m signal --add event=space_changed action="${pkgs.yabai}/bin/yabai  -m window --focus \$(yabai -m query --windows --space | ${pkgs.jq}/bin/jq .[0].id)"
+      yabai -m signal --add event=space_changed action="yabai  -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
       # focus window after active display changes
-      yabai -m signal --add event=display_changed action="${pkgs.yabai}/bin/yabai -m window --focus \$(yabai -m query --windows --space | ${pkgs.jq}/bin/jq .[0].id)"
+      yabai -m signal --add event=display_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
 
       yabai -m rule --add app="^Finder$" sticky=on layer=above manage=off
       ## Do not manage some apps which are not resizable
@@ -97,7 +97,7 @@ in
   };
 
   launchd.user.agents.yabai.serviceConfig.EnvironmentVariables.PATH =
-    lib.mkForce "${config.services.yabai.package}/bin:${config.my.systemPath}";
+    lib.mkForce "${config.services.yabai.package}/bin:${pkgs.jq}/bin:${config.services.sketchybar.package}/bin:${config.my.systemPath}";
 
   launchd.user.agents.yabai.serviceConfig = {
     StandardErrorPath = "/tmp/yabai.err.log";

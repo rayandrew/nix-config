@@ -29,8 +29,6 @@ else
       PLUGIN_TOUCH="${pkgs.sketchybar-shendy}/controller/touch"
       ITEM_DIR="${pkgs.sketchybar-shendy}/view"
 
-      echo ${pkgs.sketchybar-shendy}
-
       PADDING=4
       ICON="SF Symbols"
       LABEL="JetBrainsMono Nerd Font Mono"
@@ -95,6 +93,5 @@ else
   };
 
   services.yabai.config.external_bar = "main:4:4";
-  # system.defaults.NSGlobalDomain._HIHideMenuBar = true; # hide menu bar
   system.defaults.NSGlobalDomain._HIHideMenuBar = false; # show menu bar
 }

@@ -5,7 +5,5 @@
     coreutils-full
     daemon
     hydra-check
-    skhd
-    gdb
   ];
 }
