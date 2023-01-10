@@ -26,6 +26,7 @@
   '';
   launchd.daemons.activate-system.script = lib.mkOrder 0 ''
     wait4path /nix/store
+    # wait4path /run/current-system
   '';
   services.nix-daemon.enable = true;
   services.activate-system.enable = true;

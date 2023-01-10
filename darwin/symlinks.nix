@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 
 if builtins.hasAttr "hm" lib then
+let home = config.home.homeDirectory;
+in
 {
   disabledModules = [ "targets/darwin/linkapps.nix" ];
   home.activation = lib.mkIf pkgs.stdenv.isDarwin {
@@ -22,6 +24,19 @@ if builtins.hasAttr "hm" lib then
           $DRY_RUN_CMD cp ''${VERBOSE_ARG:+-v} -fHRL "$appFile" "$baseDir"
           $DRY_RUN_CMD chmod ''${VERBOSE_ARG:+-v} -R +w "$target"
         done
+      '';
+      rerunWM = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        # long time to mount /nix somehow makes this service failed
+
+        # unload
+        /bin/launchctl unload ${home}/Library/LaunchAgents/org.nixos.yabai.plist
+        /bin/launchctl unload ${home}/Library/LaunchAgents/org.nixos.skhd.plist
+        /bin/launchctl unload ${home}/Library/LaunchAgents/org.nixos.sketchybar.plist
+
+        # reload
+        /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.yabai.plist
+        /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.skhd.plist
+        /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.sketchybar.plist
       '';
   };
 }

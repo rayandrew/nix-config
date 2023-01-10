@@ -96,6 +96,26 @@ in
     '';
   };
 
+  # launchd.user.agents.yabai.serviceConfig.ProgramArguments = [ 
+  #   "wait4path ${config.services.yabai.package}/bin/yabai" 
+  #   "${config.services.yabai.package}/bin/yabai" 
+  #   "-c" 
+  # ];
+
+  # launchd.user.agents.yabai.serviceConfig.ProgramArguments = lib.mkOption {
+  #   apply = old: [ 
+  #          "wait4path ${config.services.yabai.package}/bin/yabai" 
+  #   ] ++ old;
+  # };
+
+  # launchd.user.agents.yabai.serviceConfig.ProgramArguments = lib.mkBefore [ 
+  #   "wait4path /nix" 
+  #   "wait4path ${config.services.yabai.package}/bin/yabai" 
+  # ] ;
+
+  # launchd.user.agents.yabai.serviceConfig.StartInterval = 30;
+  # launchd.user.agents.yabai.serviceConfig.ThrottleInterval = 30;
+
   launchd.user.agents.yabai.serviceConfig.EnvironmentVariables.PATH =
     lib.mkForce "${config.services.yabai.package}/bin:${pkgs.jq}/bin:${config.services.sketchybar.package}/bin:${config.my.systemPath}";
 
@@ -103,6 +123,10 @@ in
     StandardErrorPath = "/tmp/yabai.err.log";
     StandardOutPath = "/tmp/yabai.out.log";
   };
+
+  launchd.daemons.yabai-sa.script = lib.mkOrder 0 ''
+    wait4path ${config.services.yabai.package}/bin/yabai
+  '';
 
   system.activationScripts.postActivation.text = let path = "${pkgs.yabai}/bin/yabai"; in ''
     ${pkgs.sqlite}/bin/sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' \

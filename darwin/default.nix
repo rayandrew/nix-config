@@ -3,6 +3,7 @@
 {
   imports = [
     ../modules/sketchybar
+    ../modules/pam
 
     ./homebrew.nix
     ./hostname.nix

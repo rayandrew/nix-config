@@ -5,4 +5,8 @@
     Defaults timestamp_timeout=300
   '';
   security.pam.enableSudoTouchIdAuth = true;
+  security.pam.sudoTouchIdReattach = {
+    enable = true;
+    package = pkgs.pam-reattach;
+  };
 }

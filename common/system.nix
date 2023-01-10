@@ -39,9 +39,6 @@
 
   # users.defaultUserShell = pkgs.zsh;
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-
 
   # Shells -----------------------------------------------------------------------------------------
 

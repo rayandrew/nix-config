@@ -112,13 +112,23 @@ in
   };
 
 
-  launchd.user.agents.skhd.environment = {
-    NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
-    SHELL = "/bin/sh";
-  };
+  # launchd.user.agents.skhd.environment = {
+  #   NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
+  #   SHELL = "/bin/sh";
+  # };
 
   launchd.user.agents.skhd.serviceConfig.EnvironmentVariables.PATH =
-    lib.mkForce "${config.services.yabai.package}/bin:${config.my.systemPath}";
+    lib.mkForce "${config.services.yabai.package}/bin:${config.services.skhd.package}/bin:${config.my.systemPath}";
+
+  # launchd.user.agents.skhd.serviceConfig.ProgramArguments = lib.mkBefore [ 
+  #   "/bin/sh -c"
+  #   "wait4path /nix" 
+  #   "wait4path ${config.services.skhd.package}/bin/skhd" 
+  # ] ;
+
+
+  # launchd.user.agents.skhd.serviceConfig.StartInterval = 30;
+  # launchd.user.agents.skhd.serviceConfig.ThrottleInterval = 30;
 
   launchd.user.agents.skhd.serviceConfig = {
     StandardErrorPath = "/tmp/skhd.err.log";

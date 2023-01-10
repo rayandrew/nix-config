@@ -8,7 +8,7 @@ if builtins.hasAttr "hm" lib then
 {
   home.activation.sketchybar = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     ${pkgs.skhd}/bin/sketchybar --update || ${pkgs.killall}/bin/killall sketchybar || true
-    touch /tmp/dynamic-island-cache
+    # touch /tmp/dynamic-island-cache
   '';
 }
 else 
@@ -84,6 +84,7 @@ else
     ITEM_DIR = "${pkgs.sketchybar-shendy}/view";
   };
 
+  launchd.user.agents.sketchybar.serviceConfig.ThrottleInterval = 30;
   launchd.user.agents.sketchybar.serviceConfig.EnvironmentVariables.PATH =
     lib.mkForce "${config.services.sketchybar.package}/bin:${config.my.systemPath}";
 

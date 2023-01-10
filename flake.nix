@@ -37,11 +37,11 @@
       allowUnfree = true;
     };
 
-    channels.nixpkgs.patches = [ ./patches/sketchybar.patch ];
+    # channels.nixpkgs.patches = inputs.nixpkgs.lib.mkIf inputs.nixpkgs.lib.stdenv.isDarwin [ ./patches/sketchybar.patch ];
 
-    channels.nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (inputs.nixpkgs.lib.getName pkg) [
-      "spotify"
-    ];
+    # channels.nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (inputs.nixpkgs.lib.getName pkg) [
+    #   "spotify"
+    # ];
 
     # Add some additional functions to `lib`.
     lib = inputs.nixpkgs.lib.extend (_: _: {
