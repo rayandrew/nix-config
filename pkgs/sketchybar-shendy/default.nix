@@ -5,7 +5,7 @@ let
 in
 
 stdenv.mkDerivation rec {
-  pname = "sketchybar-sandy";
+  pname = "sketchybar-shendy";
   version = "1.1.0";
 
   src = fetchFromGitHub {
@@ -15,13 +15,15 @@ stdenv.mkDerivation rec {
     sha256 = "183gjqcs4gzrlcbg3qj481im8pz181cr59hl5in4dilcr16sdpd2";
   }; 
 
+  patches = [ ./patches/001-grep.patch ];
+
   installPhase = ''
     mkdir -p $out
-    cp -r sketchybar/.config/sketchybar $out
+    cp -r sketchybar/.config/sketchybar/* $out
   '';
 
   meta = with lib; {
-    description = "SketchyBar Sandy Prataa";
+    description = "SketchyBar Shendy Prataa";
     homepage = "https://github.com/shendypratamaa/.dotfiles";
     platforms = platforms.darwin;
     maintainers = [ maintainers.rayandrew ];

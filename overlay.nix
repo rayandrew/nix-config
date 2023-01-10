@@ -9,5 +9,5 @@ self: super: rec {
 
   sketchybar-helper = super.callPackage ./pkgs/sketchybar-helper { };
   sketchybar-island-helper = super.callPackage ./pkgs/sketchybar-island-helper { };
-  sketchybar-sandy = super.callPackage ./pkgs/sketchybar-island-helper { };
+  sketchybar-shendy = super.callPackage ./pkgs/sketchybar-shendy { };
 }

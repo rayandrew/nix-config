@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
     sha256 = "1zvnmw7kg0q3ly925zgw80135nj9vz10wqkmmz18747y0zlaqm3c";
   }; 
 
-  patches = [ ./patches/change-path.diff ];
+  patches = [ ./patches/001-change-path.patch ];
 
   buildInputs = [ sqlite ];
   # makeFlags = [

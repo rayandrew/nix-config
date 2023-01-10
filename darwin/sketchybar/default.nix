@@ -1,7 +1,8 @@
 { config, lib, pkgs, ... }:
 
 let
-  scripts = ./scripts;
+  barSize = "32";
+  fontSize = "12";
 in
 if builtins.hasAttr "hm" lib then
 {
@@ -13,76 +14,76 @@ if builtins.hasAttr "hm" lib then
 else 
 {
   environment.systemPackages = with pkgs; [ 
-    sketchybar-helper 
-    sketchybar-island-helper 
-    ifstat-legacy
+    sketchybar-shendy
   ];
 
   services.sketchybar = {
     enable = true;
     package = pkgs.sketchybar;
     config = ''
-      #!/usr/bin/env bash
+      #!/usr/bin/env sh
 
-      source "${scripts}/colors.sh" # Loads all defined colors
-      source "${scripts}/icons.sh"  # Loads all defined icons
+      source "${pkgs.sketchybar-shendy}/color.sh"
 
-      SKETCHYBAR_DIR="${scripts}"
-      SKETCHYBAR_ITEMS_DIR="${scripts}/items"
-      SKETCHYBAR_PLUGINS_DIR="${scripts}/plugins"
-      DYNAMIC_ISLAND_DIR="${pkgs.sketchybar-island-helper}"
+      PLUGIN_DIR="${pkgs.sketchybar-shendy}/controller"
+      PLUGIN_TOUCH="${pkgs.sketchybar-shendy}/controller/touch"
+      ITEM_DIR="${pkgs.sketchybar-shendy}/view"
 
-      # ITEM_DIR="${scripts}/items" # Directory where the items are configured
-      # PLUGIN_DIR="${scripts}/plugins"
-      # DYNAMIC_ISLAND_DIR="${pkgs.sketchybar-island-helper}"
+      echo ${pkgs.sketchybar-shendy}
 
-      SPACE_CLICK_SCRIPT="yabai -m space --focus \$SID 2>/dev/null" # The script that is run for clicking on space components
+      PADDING=4
+      ICON="SF Symbols"
+      LABEL="JetBrainsMono Nerd Font Mono"
 
-      # helper process
-      HELPER=git.felix.helper
-      ${pkgs.killall}/bin/killall sketchybar-helper
-      ${pkgs.sketchybar-helper}/bin/sketchybar-helper $HELPER &
+      sketchybar --bar     height=${barSize}                                            \
+      blur_radius=0                                        \
+      padding_left=4                                       \
+      padding_right=4                                      \
+      color=0xff''${NORD0:1}                                 \
+      position=bottom                                      \
+      sticky=on                                            \
+      font_smoothing=on                                    \
+      \
+      --default updates=when_shown                                   \
+      drawing=on                                           \
+      icon.font="$ICON:SemiBold:${fontSize}.0"                      \
+      label.font="$LABEL:SemiBold:${fontSize}.0"                    \
+      icon.padding_left=$PADDING                           \
+      icon.padding_right=$PADDING                          \
+      label.padding_left=$PADDING                          \
+      label.padding_right=$PADDING                         \
+      label.color=0xff''${NORD6:1}                           \
+      icon.color=0xff''${NORD6:1}                            \
 
-      # Define Dynamic island custom configs here
-      USER_CONFIG="${scripts}/userconfig.sh"
-      test -f $USER_CONFIG && source $USER_CONFIG
 
-      source "${pkgs.sketchybar-island-helper}/config.sh" # Loads Dynamic-Island config
+      # left
+      source "$ITEM_DIR/space.sh"
+      source "$ITEM_DIR/front_app.sh"
 
-      # run helper program
-      ISLANDHELPER=git.crissnb.islandhelper
-      ${pkgs.killall}/bin/killall islandhelper
-      ${pkgs.sketchybar-island-helper}/helper/islandhelper $ISLANDHELPER &
+      # right
+      source "$ITEM_DIR/time.sh"
+      source "$ITEM_DIR/cal.sh"
+      source "$ITEM_DIR/wifi.sh"
+      source "$ITEM_DIR/mic.sh"
+      source "$ITEM_DIR/battery.sh"
+      source "$ITEM_DIR/airpodsbattery.sh"
+      source "$ITEM_DIR/airpodscasebattery.sh"
+      source "$ITEM_DIR/sound.sh"
+      source "$ITEM_DIR/disk.sh"
+      source "$ITEM_DIR/mem.sh"
+      source "$ITEM_DIR/cpu.sh"
 
-      # Set up your own custom sketchybar config here
-      ###############################################
-
-      FONT="SF Pro"
-
-      sketchybar --bar color=$BAR_COLOR \
-	margin=0 \
-	position=top \
-	corner_radius=0
-
-      source "$SKETCHYBAR_ITEMS_DIR/spaces.sh"
-      source "$SKETCHYBAR_ITEMS_DIR/front-app.sh"
-      source "$SKETCHYBAR_ITEMS_DIR/power.sh"
-      source "$SKETCHYBAR_ITEMS_DIR/calendar.sh"
-      source "$SKETCHYBAR_ITEMS_DIR/cpu.sh"
-      source "$SKETCHYBAR_ITEMS_DIR/network.sh"
-
-      source "$DYNAMIC_ISLAND_DIR/item.sh" # Loads Dynamic-Island item
-
+      # initializing
       sketchybar --update
+
+      echo "sketchybar configuration loaded.." 
     '';
   };
 
   launchd.user.agents.sketchybar.environment = {
-    # SHELL = "/bin/sh";
-    SKETCHYBAR_DIR = "${scripts}";
-    SKETCHYBAR_ITEMS_DIR = "${scripts}/items";
-    SKETCHYBAR_PLUGINS_DIR = "${scripts}/plugins";
-    DYNAMIC_ISLAND_DIR = "${pkgs.sketchybar-island-helper}";
+    PLUGIN_DIR = "${pkgs.sketchybar-shendy}/controller";
+    PLUGIN_TOUCH = "${pkgs.sketchybar-shendy}/controller/touch";
+    ITEM_DIR = "${pkgs.sketchybar-shendy}/view";
   };
 
   launchd.user.agents.sketchybar.serviceConfig.EnvironmentVariables.PATH =
@@ -93,6 +94,7 @@ else
   #   StandardOutPath = "/tmp/sketchybar.out.log";
   # };
 
-  services.yabai.config.external_bar = "main:32:0";
-  system.defaults.NSGlobalDomain._HIHideMenuBar = true; # hide menu bar
+  services.yabai.config.external_bar = "main:24:0";
+  # system.defaults.NSGlobalDomain._HIHideMenuBar = true; # hide menu bar
+  system.defaults.NSGlobalDomain._HIHideMenuBar = false; # show menu bar
 }

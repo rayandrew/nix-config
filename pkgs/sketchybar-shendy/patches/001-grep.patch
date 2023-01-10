@@ -1,0 +1,135 @@
+diff --git a/sketchybar/.config/sketchybar/controller/airpodsbattery.sh b/sketchybar/.config/sketchybar/controller/airpodsbattery.sh
+index 11e7273..63322df 100755
+--- a/sketchybar/.config/sketchybar/controller/airpodsbattery.sh
++++ b/sketchybar/.config/sketchybar/controller/airpodsbattery.sh
+@@ -4,7 +4,7 @@ AIRPODSBATTERY=$(system_profiler SPBluetoothDataType | grep 'Left Battery\|Right
+ AIRPODICON=􁄡
+ 
+ if [[ $AIRPODSBATTERY = "" ]]; then
+-	sketchybar --set $NAME icon=$AIRPODICON label="not connected |"
++	sketchybar --set $NAME icon=$AIRPODICON label="unk |"
+ else
+ 	sketchybar --set $NAME icon=$AIRPODICON label="$AIRPODSBATTERY% |"
+ fi
+diff --git a/sketchybar/.config/sketchybar/controller/airpodscasebattery.sh b/sketchybar/.config/sketchybar/controller/airpodscasebattery.sh
+index dc4630c..9311d7b 100755
+--- a/sketchybar/.config/sketchybar/controller/airpodscasebattery.sh
++++ b/sketchybar/.config/sketchybar/controller/airpodscasebattery.sh
+@@ -4,7 +4,7 @@ AIRPODSCASEBATTERY=$(system_profiler SPBluetoothDataType | grep 'Case Battery' |
+ AIRPODCASE=􁅐
+ 
+ if [[ "$AIRPODSCASEBATTERY" = "" ]]; then
+-	sketchybar --set $NAME icon=$AIRPODCASE label="not detected"
++	sketchybar --set $NAME icon=$AIRPODCASE label="unk"
+ else
+ 	sketchybar --set $NAME icon=$AIRPODCASE label="$AIRPODSCASEBATTERY "
+ fi
+diff --git a/sketchybar/.config/sketchybar/controller/battery.sh b/sketchybar/.config/sketchybar/controller/battery.sh
+index 2615f81..a6c1fa1 100755
+--- a/sketchybar/.config/sketchybar/controller/battery.sh
++++ b/sketchybar/.config/sketchybar/controller/battery.sh
+@@ -1,6 +1,6 @@
+ #!/usr/bin/env sh
+ 
+-PERCENTAGE=$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
++PERCENTAGE=$(pmset -g batt | grep -Po "\d+%" | cut -d% -f1)
+ CHARGING=$(pmset -g batt | grep 'AC Power')
+ 
+ if [ $PERCENTAGE = "" ]; then
+diff --git a/sketchybar/.config/sketchybar/controller/mic.sh b/sketchybar/.config/sketchybar/controller/mic.sh
+index ed178cb..0a080eb 100755
+--- a/sketchybar/.config/sketchybar/controller/mic.sh
++++ b/sketchybar/.config/sketchybar/controller/mic.sh
+@@ -5,7 +5,7 @@ MIC_VOLUME=$(osascript -e 'input volume of (get volume settings)')
+ MICONICON=􀊰
+ MICOFICON=􀊲
+ 
+-if [[ $MIC_VOLUME -eq 0 ]]; then
++if [[ $MIC_VOLUME == 'missing value' || $MIC_VOLUME -eq 0 ]]; then
+ 	sketchybar -m --set mic icon=$MICOFICON label="off |"
+ elif [[ $MIC_VOLUME -gt 0 ]]; then
+ 	sketchybar -m --set mic icon=$MICONICON label="on |"
+diff --git a/sketchybar/.config/sketchybar/controller/time.sh b/sketchybar/.config/sketchybar/controller/time.sh
+index 369e024..3e4c020 100755
+--- a/sketchybar/.config/sketchybar/controller/time.sh
++++ b/sketchybar/.config/sketchybar/controller/time.sh
+@@ -1,7 +1,7 @@
+ #!/usr/bin/env sh
+ 
+-TIME=$(date '+%H:%M %p')
++TIME=$(date '+%I:%M %p')
+ 
+ CLOCKICON=􀐫
+ 
+-sketchybar --set $NAME icon=$CLOCKICON label="$TIME |"
++sketchybar --set $NAME icon=$CLOCKICON label="$TIME"
+diff --git a/sketchybar/.config/sketchybar/view/airpodscasebattery.sh b/sketchybar/.config/sketchybar/view/airpodscasebattery.sh
+index 614e386..7c7bffb 100755
+--- a/sketchybar/.config/sketchybar/view/airpodscasebattery.sh
++++ b/sketchybar/.config/sketchybar/view/airpodscasebattery.sh
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env sh
+ 
+ sketchybar --add item airpodscase right                                   \
+-w          --set      airpodscase updatefreq=5                            \
++w          --set      airpodscase update_freq=5                            \
+                       script="$PLUGIN_DIR/airpodscasebattery.sh"          \
+diff --git a/sketchybar/.config/sketchybar/view/cpu.sh b/sketchybar/.config/sketchybar/view/cpu.sh
+index 006cca2..e6818df 100755
+--- a/sketchybar/.config/sketchybar/view/cpu.sh
++++ b/sketchybar/.config/sketchybar/view/cpu.sh
+@@ -2,5 +2,5 @@
+ 
+ sketchybar -m --add item cpu right                         \
+               --set cpu update_freq=1                      \
+-                    cpu script="$PLUGIN_DIR/cpu.sh"        \
++                    script="$PLUGIN_DIR/cpu.sh"        \
+ 
+diff --git a/sketchybar/.config/sketchybar/view/mem.sh b/sketchybar/.config/sketchybar/view/mem.sh
+index b08dea4..5609d78 100755
+--- a/sketchybar/.config/sketchybar/view/mem.sh
++++ b/sketchybar/.config/sketchybar/view/mem.sh
+@@ -2,4 +2,4 @@
+ 
+ sketchybar -m --add item ram right                         \
+               --set ram update_freq=1                      \
+-                    ram script="$PLUGIN_DIR/mem.sh"        \
++                    script="$PLUGIN_DIR/mem.sh"        \
+diff --git a/sketchybar/.config/sketchybar/view/mic.sh b/sketchybar/.config/sketchybar/view/mic.sh
+index 8d6a27e..c7c6165 100755
+--- a/sketchybar/.config/sketchybar/view/mic.sh
++++ b/sketchybar/.config/sketchybar/view/mic.sh
+@@ -2,5 +2,5 @@
+ 
+ sketchybar -m --add item mic right                           \
+               --set mic update_freq=1                        \
+-                    mic script="$PLUGIN_DIR/mic.sh"          \
+-                    mic click_script="$PLUGIN_TOUCH/mic.sh"  \
++                    script="$PLUGIN_DIR/mic.sh"          \
++                    click_script="$PLUGIN_TOUCH/mic.sh"  \
+diff --git a/sketchybar/.config/sketchybar/view/space.sh b/sketchybar/.config/sketchybar/view/space.sh
+index 1d16915..8709d60 100755
+--- a/sketchybar/.config/sketchybar/view/space.sh
++++ b/sketchybar/.config/sketchybar/view/space.sh
+@@ -1,16 +1,16 @@
+ #!/usr/bin/env bash
+ 
+-SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9")
++SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "0" "z" "x" "c" "v" "b" "n" "m" "a" "s" "d" "f" "g")
+ 
+-sid=0
++# sid=0
+ for i in "${!SPACE_ICONS[@]}"; do
+   sid=$(($i+1))
+   sketchybar --add space space.$sid left                                \
+              --set space.$sid associated_space=$sid                     \
+-                              ignore_association=on                     \
++                              ignore_association=off                    \
+                               icon=${SPACE_ICONS[i]}                    \
+-                              icon.padding_left=12                      \
+-                              icon.padding_right=12                     \
++                              icon.padding_left=6                       \
++                              icon.padding_right=6                      \
+                               background.padding_left=4                 \
+                               background.padding_right=4                \
+                               background.corner_radius=0                \
