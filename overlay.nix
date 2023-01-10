@@ -7,12 +7,7 @@ self: super: rec {
 
   scripts = super.callPackage ./pkgs/scripts { }; # own scripts
 
-  # sketchybar = super.callPackage ./pkgs/sketchybar {
-  #   inherit (super.darwin.apple_sdk.frameworks) Carbon Cocoa SkyLight;
-  #   inherit (super.darwin.apple_sdk) objc4;
-  # };
   sketchybar-helper = super.callPackage ./pkgs/sketchybar-helper { };
   sketchybar-island-helper = super.callPackage ./pkgs/sketchybar-island-helper { };
-
-  # yabai = super.callPackage ./pkgs/yabai { };
+  sketchybar-sandy = super.callPackage ./pkgs/sketchybar-island-helper { };
 }

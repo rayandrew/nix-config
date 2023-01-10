@@ -6,5 +6,6 @@
     daemon
     hydra-check
     skhd
+    gdb
   ];
 }

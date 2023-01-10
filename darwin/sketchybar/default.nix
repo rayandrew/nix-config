@@ -6,14 +6,8 @@ in
 if builtins.hasAttr "hm" lib then
 {
   home.activation.sketchybar = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    ${pkgs.killall}/bin/killall sketchybar || true
-  '';
-
-  programs.bash.initExtra = ''
-    export SKETCHYBAR_DIR="${scripts}"
-    export SKETCHYBAR_ITEMS_DIR="${scripts}/items"
-    export SKETCHYBAR_PLUGINS_DIR="${scripts}/plugins"
-    export DYNAMIC_ISLAND_DIR="${pkgs.sketchybar-island-helper}"  
+    ${pkgs.skhd}/bin/sketchybar --update || ${pkgs.killall}/bin/killall sketchybar || true
+    touch /tmp/dynamic-island-cache
   '';
 }
 else 
@@ -24,25 +18,11 @@ else
     ifstat-legacy
   ];
 
-  environment.variables = {
-    SKETCHYBAR_DIR = "${scripts}";
-    SKETCHYBAR_ITEMS_DIR = "${scripts}/items";
-    SKETCHYBAR_PLUGINS_DIR = "${scripts}/plugins";
-    DYNAMIC_ISLAND_DIR = "${pkgs.sketchybar-island-helper}";
-  };
-
-  programs.bash.interactiveShellInit = ''
-    export SKETCHYBAR_DIR="${scripts}"
-    export SKETCHYBAR_ITEMS_DIR="${scripts}/items"
-    export SKETCHYBAR_PLUGINS_DIR="${scripts}/plugins"
-    export DYNAMIC_ISLAND_DIR="${pkgs.sketchybar-island-helper}"
-  '';
-
   services.sketchybar = {
     enable = true;
     package = pkgs.sketchybar;
     config = ''
-      #!/usr/bin/env sh
+      #!/usr/bin/env bash
 
       source "${scripts}/colors.sh" # Loads all defined colors
       source "${scripts}/icons.sh"  # Loads all defined icons
@@ -59,7 +39,7 @@ else
       SPACE_CLICK_SCRIPT="yabai -m space --focus \$SID 2>/dev/null" # The script that is run for clicking on space components
 
       # helper process
-      HELPER=git.rayandrew.helper
+      HELPER=git.felix.helper
       ${pkgs.killall}/bin/killall sketchybar-helper
       ${pkgs.sketchybar-helper}/bin/sketchybar-helper $HELPER &
 
@@ -67,43 +47,12 @@ else
       USER_CONFIG="${scripts}/userconfig.sh"
       test -f $USER_CONFIG && source $USER_CONFIG
 
-      PADDINGS=3
-
-      # Setting up the general bar appearance and default values
-      sketchybar --bar height=32 \
-        color=$P_DYNAMIC_ISLAND_COLOR_TRANSPARENT \
-	shadow=off \
-	position=top \
-	sticky=on \
-	padding_right=$((10 - $PADDINGS)) \
-	topmost=$\{P_DYNAMIC_ISLAND_TOPMOST:=off} \
-	padding_left=18 \
-	corner_radius=9 \
-	y_offset=0 \
-	margin=10 \
-	blur_radius=30 \
-	notch_width=0 \
-	--default updates=when_shown \
-	icon.font="$P_DYNAMIC_ISLAND_FONT:Bold:14.0" \
-	icon.color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
-	icon.padding_left=$PADDINGS \
-	icon.padding_right=$PADDINGS \
-	label.font="$P_DYNAMIC_ISLAND_FONT:Semibold:13.0" \
-	label.color=$P_DYNAMIC_ISLAND_COLOR_WHITE \
-	label.padding_left=$PADDINGS \
-	label.padding_right=$PADDINGS \
-	background.padding_right=$PADDINGS \
-	background.padding_left=$PADDINGS \
-	popup.background.corner_radius=11 \
-	popup.background.shadow.drawing=off \
-	popup.background.border_width=2 \
-	popup.horizontal=on
-      # source "$DYNAMIC_ISLAND_DIR/config.sh" # Loads Dynamic-Island config
+      source "${pkgs.sketchybar-island-helper}/config.sh" # Loads Dynamic-Island config
 
       # run helper program
-      ISLANDHELPER=git.rayandrew.islandhelper
-      ${pkgs.killall}/bin/killall island-helper
-      ${pkgs.sketchybar-island-helper}/bin/island-helper $ISLANDHELPER &
+      ISLANDHELPER=git.crissnb.islandhelper
+      ${pkgs.killall}/bin/killall islandhelper
+      ${pkgs.sketchybar-island-helper}/helper/islandhelper $ISLANDHELPER &
 
       # Set up your own custom sketchybar config here
       ###############################################
@@ -112,9 +61,10 @@ else
 
       sketchybar --bar color=$BAR_COLOR \
 	margin=0 \
+	position=top \
 	corner_radius=0
 
-      source "$SKETCHYBAR_ITEMS_DIR/spaces.sh" $SKETCHYBAR_DIR
+      source "$SKETCHYBAR_ITEMS_DIR/spaces.sh"
       source "$SKETCHYBAR_ITEMS_DIR/front-app.sh"
       source "$SKETCHYBAR_ITEMS_DIR/power.sh"
       source "$SKETCHYBAR_ITEMS_DIR/calendar.sh"
@@ -128,7 +78,7 @@ else
   };
 
   launchd.user.agents.sketchybar.environment = {
-    SHELL = "/bin/bash";
+    # SHELL = "/bin/sh";
     SKETCHYBAR_DIR = "${scripts}";
     SKETCHYBAR_ITEMS_DIR = "${scripts}/items";
     SKETCHYBAR_PLUGINS_DIR = "${scripts}/plugins";
@@ -138,11 +88,11 @@ else
   launchd.user.agents.sketchybar.serviceConfig.EnvironmentVariables.PATH =
     lib.mkForce "${config.services.sketchybar.package}/bin:${config.my.systemPath}";
 
-  launchd.user.agents.sketchybar.serviceConfig = {
-    StandardErrorPath = "/tmp/sketchybar.err.log";
-    StandardOutPath = "/tmp/sketchybar.out.log";
-  };
+  # launchd.user.agents.sketchybar.serviceConfig = {
+  #   StandardErrorPath = "/tmp/sketchybar.err.log";
+  #   StandardOutPath = "/tmp/sketchybar.out.log";
+  # };
 
-  services.yabai.config.external_bar = "main:24:0";
+  services.yabai.config.external_bar = "main:32:0";
   system.defaults.NSGlobalDomain._HIHideMenuBar = true; # hide menu bar
 }

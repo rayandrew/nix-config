@@ -6,13 +6,13 @@ in
 
 stdenv.mkDerivation rec {
   pname = "sketchybar-island-helper";
-  version = "1.0.0";
+  version = "1.1.0";
 
   src = fetchFromGitHub {
     owner = "crissNb";
     repo = "Dynamic-Island-Sketchybar";
-    rev = "1c4cc958ac96e7dcc9aac4fa066eba9616696f26";
-    sha256 = "1w9d0dxzpi08bk50zgn0f0qs8b1wfgk3v79r30v4bb4i1x259g9s";
+    rev = "33ebf4437d4addb7a91a44939fe772b4aeb63ee7";
+    sha256 = "1zvnmw7kg0q3ly925zgw80135nj9vz10wqkmmz18747y0zlaqm3c";
   }; 
 
   patches = [ ./patches/change-path.diff ];
@@ -29,8 +29,7 @@ stdenv.mkDerivation rec {
   installPhase = ''
     mkdir -p $out/bin
     cp -r * $out
-    ls .
-    cp helper/islandhelper $out/bin/island-helper
+    # cp helper/islandhelper $out/bin/island-helper
   '';
 
   meta = with lib; {
