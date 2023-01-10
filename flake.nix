@@ -25,7 +25,7 @@
     agenix.inputs.nixpkgs.follows = "nixpkgs"; 
   };
 
-  outputs = inputs @ { self, flake-utils-plus, nixpkgs, darwin, spicetify-nix, ... }:
+  outputs = inputs @ { self, flake-utils-plus, nixpkgs, darwin, ... }:
   let 
     inherit (flake-utils-plus.lib) mkFlake exportModules exportPackages exportOverlays;
     # inherit (inputs.nixpkgs.lib) attrValues makeOverridable optionalAttrs singleton;

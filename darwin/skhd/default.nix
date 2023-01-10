@@ -124,10 +124,10 @@ in
   launchd.user.agents.skhd.serviceConfig.EnvironmentVariables.PATH =
     lib.mkForce "${config.services.yabai.package}/bin:${config.my.systemPath}";
 
-  # launchd.user.agents.skhd.serviceConfig = {
-  #   StandardErrorPath = "/tmp/skhd.err.log";
-  #   StandardOutPath = "/tmp/skhd.out.log";
-  # };
+  launchd.user.agents.skhd.serviceConfig = {
+    StandardErrorPath = "/tmp/skhd.err.log";
+    StandardOutPath = "/tmp/skhd.out.log";
+  };
 
   system.activationScripts.postActivation.text = let path = "${pkgs.skhd}/bin/skhd"; in ''
     ${pkgs.sqlite}/bin/sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' \

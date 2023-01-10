@@ -89,10 +89,10 @@ else
   launchd.user.agents.sketchybar.serviceConfig.EnvironmentVariables.PATH =
     lib.mkForce "${config.services.sketchybar.package}/bin:${config.my.systemPath}";
 
-  # launchd.user.agents.sketchybar.serviceConfig = {
-  #   StandardErrorPath = "/tmp/sketchybar.err.log";
-  #   StandardOutPath = "/tmp/sketchybar.out.log";
-  # };
+  launchd.user.agents.sketchybar.serviceConfig = {
+    StandardErrorPath = "/tmp/sketchybar.err.log";
+    StandardOutPath = "/tmp/sketchybar.out.log";
+  };
 
   services.yabai.config.external_bar = "main:4:4";
   # system.defaults.NSGlobalDomain._HIHideMenuBar = true; # hide menu bar
