@@ -18,7 +18,8 @@
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
     flake-utils-plus.inputs.flake-utils.follows = "flake-utils";
-    # flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
+
+    flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
 
     agenix.url = "github:ryantm/agenix/pull/107/head";
     agenix.inputs.nixpkgs.follows = "nixpkgs"; 
@@ -75,7 +76,6 @@
       modules = [ self.modules.darwin self.modules.midnight ];
       output = "darwinConfigurations";
       builder = darwin.lib.darwinSystem;
-      specialArgs = { inherit inputs; };
     };
   };
 }

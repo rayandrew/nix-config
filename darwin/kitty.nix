@@ -18,7 +18,8 @@ if builtins.hasAttr "hm" lib then
     disable_ligatures = "cursor"; # disable ligatures when cursor is on them
 
     # Window layout
-    hide_window_decorations = true;
+    # hide_window_decorations = true;
+    hide_window_decorations = "titlebar-only";
     window_padding_width = "10";
 
     # Tab bar

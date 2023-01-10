@@ -77,7 +77,7 @@ in
 
       yabai -m rule --add app="^(Google Chrome|Firefox|Safari)$" space=10
       yabai -m rule --add app="^coreautha$" manage=off sticky=on layer=above # 1Password biometric
-      # yabai -m rule --add app="^Alacritty$" space=2
+      # yabai -m rule --add app="^(Alacritty|Kitty)$" space=2
       yabai -m rule --add app="^Skype$" space=3
 
       yabai -m space 1 --label one

@@ -94,7 +94,7 @@ else
   #   StandardOutPath = "/tmp/sketchybar.out.log";
   # };
 
-  services.yabai.config.external_bar = "main:24:0";
+  services.yabai.config.external_bar = "main:4:4";
   # system.defaults.NSGlobalDomain._HIHideMenuBar = true; # hide menu bar
   system.defaults.NSGlobalDomain._HIHideMenuBar = false; # show menu bar
 }

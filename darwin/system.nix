@@ -67,7 +67,7 @@
       mineffect = "scale";
       minimize-to-application = true;
       mru-spaces = false;
-      orientation = "right";
+      orientation = "bottom";
       show-recents = false;
       wvous-br-corner = 1; # Disabled
     };
