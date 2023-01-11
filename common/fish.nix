@@ -3,9 +3,8 @@
 let
   inherit (lib) elem optionalString;
   inherit (config.my) shellAliases directory;
-in
 
-{
+in {
   # Fish Shell
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.fish.enable
   programs.fish.enable = true;

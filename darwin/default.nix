@@ -19,10 +19,5 @@
     inputs.home-manager.darwinModules.home-manager
   ];
 
-  hm.imports = [
-    ./kitty.nix
-    ./packages.nix
-    ./skhd
-    ./symlinks.nix
-  ];
+  hm.imports = [ ./kitty.nix ./packages.nix ./skhd ./symlinks.nix ];
 }

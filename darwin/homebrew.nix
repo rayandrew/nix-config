@@ -4,9 +4,8 @@ let
   inherit (lib) mkIf;
   caskPresent = cask: lib.any (x: x.name == cask) config.homebrew.casks;
   brewEnabled = config.homebrew.enable;
-in
 
-{
+in {
   environment.shellInit = mkIf brewEnabled ''
     eval "$(${config.homebrew.brewPrefix}/brew shellenv)"
   '';
@@ -30,9 +29,7 @@ in
       # autoUpdate = true;
       cleanup = "zap";
     };
-    global = {
-      brewfile = true;
-    };
+    global = { brewfile = true; };
 
     taps = [
       "homebrew/cask"

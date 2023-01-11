@@ -1,9 +1,5 @@
 { config, lib, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    coreutils-full
-    daemon
-    hydra-check
-  ];
+  home.packages = with pkgs; [ coreutils-full daemon hydra-check fontconfig ];
 }

@@ -13,21 +13,14 @@
       pull.rebase = true;
     };
 
-    ignores = [
-      ".DS_Store"
-    ];
-
+    ignores = [ ".DS_Store" ];
 
     aliases = { };
     signing = {
       key = "E2E8D63137DD489E";
       signByDefault = true;
     };
-    extraConfig = {
-      init = { 
-        defaultBranch = config.my.mainBranch; 
-      };
-    };
+    extraConfig = { init = { defaultBranch = config.my.mainBranch; }; };
 
     # Enhanced diffs
     delta.enable = true;

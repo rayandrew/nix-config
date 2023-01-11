@@ -3,14 +3,13 @@
 with lib;
 
 {
-  options.my = {
-    systemPath = mkOption { type = types.str; };
-  };
+  options.my = { systemPath = mkOption { type = types.str; }; };
   config = {
     my = {
-      systemPath = builtins.replaceStrings
-        [ "$HOME" "$USER" ] [ "/Users/${config.my.username}" config.my.username ]
-        config.environment.systemPath;
+      systemPath = builtins.replaceStrings [ "$HOME" "$USER" ] [
+        "/Users/${config.my.username}"
+        config.my.username
+      ] config.environment.systemPath;
     };
   };
 }

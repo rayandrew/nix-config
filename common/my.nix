@@ -3,7 +3,7 @@
 with lib;
 
 let
-   dirModule = types.submodule {
+  dirModule = types.submodule {
     options = {
       nix = mkOption {
         type = types.str;
@@ -21,23 +21,28 @@ let
   };
   mainBranch = config.my.mainBranch;
   git = "${pkgs.gitAndTools.git}/bin/git";
-in
-{
+in {
   options.my = {
     username = mkOption { type = types.str; };
     name = mkOption { type = types.str; };
     email = mkOption { type = types.str; };
     uid = mkOption { type = types.int; };
     keys = mkOption { type = types.listOf types.singleLineStr; };
-    directory = mkOption { type = with types; nullOr dirModule; default = null; };
-    mainBranch = mkOption { type = types.str; default = "main"; }; 
+    directory = mkOption {
+      type = with types; nullOr dirModule;
+      default = null;
+    };
+    mainBranch = mkOption {
+      type = types.str;
+      default = "main";
+    };
     shellAliases = mkOption {
-      default = {};
+      default = { };
       example = literalExpression ''
-      {
-        ll = "ls -l";
-        ".." = "cd ..";
-      }
+        {
+          ll = "ls -l";
+          ".." = "cd ..";
+        }
       '';
       description = ''
         An attribute set that maps aliases (the top level attribute names in
@@ -79,8 +84,10 @@ in
         gr = "${git} rm";
         ## Git branch alias
         gb = "${git} branch -v";
-        gba = "${git} for-each-ref --sort=committerdate refs/heads/ --format=\"%(authordate:short) %(color:red)%(objectname:short) ''%(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))\"";
-        gbd = "${git} for-each-ref --sort=-committerdate refs/heads/ --format=\"%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))\"";
+        gba =
+          "${git} for-each-ref --sort=committerdate refs/heads/ --format=\"%(authordate:short) %(color:red)%(objectname:short) ''%(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))\"";
+        gbd = ''
+          ${git} for-each-ref --sort=-committerdate refs/heads/ --format="%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))"'';
         ## Git commit aliases
         gc = "${git} commit";
         gca = "${git} commit --amend";
@@ -129,7 +136,8 @@ in
         ## Git diff and log aliases
         gd = "${git} diff --color-words";
         gl = "${git} log --oneline --decorate";
-        gslog = "${git} log --graph --abbrev-commit --decorate --date=relative --format=format:\"%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)\" --all";
+        gslog = ''
+          ${git} log --graph --abbrev-commit --decorate --date=relative --format=format:"%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)" --all'';
 
         # Other
         ".." = "cd ..";

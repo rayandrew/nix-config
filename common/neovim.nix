@@ -4,9 +4,8 @@ let
   inherit (lib) concatStringsSep optional;
   inherit (config.lib.file) mkOutOfStoreSymlink;
   inherit (config.home.user-info) directory;
-in
-# }}}
-{
+  # }}}
+in {
   # Neovim
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.neovim.enable
   programs.neovim.enable = true;
@@ -21,8 +20,8 @@ in
   xdg.configFile."nvim".source = pkgs.fetchFromGitHub {
     owner = "rayandrew";
     repo = "nvim";
-    rev = "main";
-    sha256 = "1iq9i6kvwl78hnxnmbvzi87bc2rf3jjv76bawkgxz293k1vslz0g";
+    rev = "b44fb865fa71f1bd27166e6591fcac197d56bb16";
+    sha256 = "0c41p3g01pz3lnzpnv89xlan16rmh2xd3l5ypvmzj1z8i6l4ccwi";
   };
 
   # xdg.configFile."nvim" = {
@@ -40,7 +39,7 @@ in
   #       rev = "main";
   #       sha256 = "0nkq5fbgd8pq806lankb2br0i313cly8m43wnkvnraq301pc0mn9";
   #    };
-  
+
   # From personal addon module `../modules/home/programs/neovim/extras.nix`
   # programs.neovim.extras.termBufferAutoChangeDir = true;
   # programs.neovim.extras.nvrAliases.enable = true;
@@ -50,8 +49,7 @@ in
 
   # Required packages -------------------------------------------------------------------------- {{{
 
-  programs.neovim.extraPackages = with pkgs; [
-  ];
+  programs.neovim.extraPackages = with pkgs; [ ];
   # }}}
 }
 # vim: foldmethod=marker

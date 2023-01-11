@@ -2,10 +2,7 @@
 
 {
   users.users.${config.my.username}.home = "/Users/${config.my.username}";
-  networking.dns = [
-    "1.1.1.1"
-    "8.8.8.8"
-  ];
+  networking.dns = [ "1.1.1.1" "8.8.8.8" ];
   environment.systemPackages = with pkgs; [ sf-symbols-app ];
   environment.variables = {
     LANG = "en_US.UTF-8";
@@ -13,9 +10,9 @@
   };
   fonts = {
     fontDir.enable = true;
-    fonts = with pkgs; [ 
-      jetbrains-mono-nerdfont 
-      sf-symbols 
+    fonts = with pkgs; [
+      jetbrains-mono-nerdfont
+      sf-symbols
       recursive
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
     ];
@@ -57,7 +54,7 @@
       NSNavPanelExpandedStateForSaveMode = true;
       NSNavPanelExpandedStateForSaveMode2 = true;
       NSTableViewDefaultSizeMode = 2;
-      NSWindowResizeTime = 0.0001;
+      NSWindowResizeTime = 1.0e-4;
       PMPrintingExpandedStateForPrint = true;
       PMPrintingExpandedStateForPrint2 = true;
     };
@@ -93,9 +90,7 @@
       GuestEnabled = false;
       DisableConsoleAccess = true;
     };
-    spaces = {
-      spans-displays = false;
-    };
+    spaces = { spans-displays = false; };
     # Firewall
     alf = {
       globalstate = 1;

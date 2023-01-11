@@ -3,14 +3,12 @@
 {
   nix.package = pkgs.nix;
   time.timeZone = "America/Chicago";
-  
+
   # Nix configuration ------------------------------------------------------------------------------
 
   nix.settings = {
-    substituters = [
-      "https://cache.nixos.org/"
-      "https://rayandrew.cachix.org" 
-    ];
+    substituters =
+      [ "https://cache.nixos.org/" "https://rayandrew.cachix.org" ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "rayandrew.cachix.org-1:BGo613xIGZS1R/anSwSf6ulU8h3Fz9zMDClZfV9n0Ug="
@@ -22,12 +20,12 @@
     # auto-optimise-store = false;
     auto-optimise-store = lib.mkDefault true;
 
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+    experimental-features = [ "nix-command" "flakes" ];
 
-    extra-platforms = lib.mkIf (pkgs.system == "aarch64-darwin") [ "x86_64-darwin" "aarch64-darwin" ];
+    extra-platforms = lib.mkIf (pkgs.system == "aarch64-darwin") [
+      "x86_64-darwin"
+      "aarch64-darwin"
+    ];
     keep-outputs = true;
     tarball-ttl = 43200;
   };
@@ -39,15 +37,10 @@
 
   # users.defaultUserShell = pkgs.zsh;
 
-
   # Shells -----------------------------------------------------------------------------------------
 
   # Add shells installed by nix to /etc/shells file
-  environment.shells = with pkgs; [
-    bashInteractive
-    fish
-    zsh
-  ];
+  environment.shells = with pkgs; [ bashInteractive fish zsh ];
 
   # Make Fish the default shell
   programs.fish.enable = true;

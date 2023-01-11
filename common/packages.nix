@@ -26,6 +26,7 @@
     less
     lsof
     man
+    nixfmt
     nodejs
     netcat-gnu
     nix-tree

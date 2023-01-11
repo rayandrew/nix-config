@@ -1,11 +1,10 @@
 { config, lib, pkgs, ... }:
 
 if builtins.hasAttr "hm" lib then
-let home = config.home.homeDirectory;
-in
-{
-  disabledModules = [ "targets/darwin/linkapps.nix" ];
-  home.activation = lib.mkIf pkgs.stdenv.isDarwin {
+  let home = config.home.homeDirectory;
+  in {
+    disabledModules = [ "targets/darwin/linkapps.nix" ];
+    home.activation = lib.mkIf pkgs.stdenv.isDarwin {
       copyApplications = let
         apps = pkgs.buildEnv {
           name = "home-manager-applications";
@@ -38,20 +37,17 @@ in
         # /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.skhd.plist
         # /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.sketchybar.plist
       '';
-  };
-}
-else 
-{
-  system.activationScripts.applications.text = pkgs.lib.mkForce (
-    ''
-      echo "setting up ~/Applications..." >&2
-      rm -rf ~/Applications/Nix\ Apps
-      mkdir -p ~/Applications/Nix\ Apps
-      IFS=$'\n'  
-      for app in $(find ${config.system.build.applications}/Applications -maxdepth 1 -type l); do
-        src="$(/usr/bin/stat -f%Y "$app")"
-        cp -r "$src" ~/Applications/Nix\ Apps
-      done
-    ''
-  );
+    };
+  }
+else {
+  system.activationScripts.applications.text = pkgs.lib.mkForce (''
+    echo "setting up ~/Applications..." >&2
+    rm -rf ~/Applications/Nix\ Apps
+    mkdir -p ~/Applications/Nix\ Apps
+    IFS=$'\n'  
+    for app in $(find ${config.system.build.applications}/Applications -maxdepth 1 -type l); do
+      src="$(/usr/bin/stat -f%Y "$app")"
+      cp -r "$src" ~/Applications/Nix\ Apps
+    done
+  '');
 }

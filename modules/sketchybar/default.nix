@@ -11,9 +11,8 @@ let
     destination = "/sketchybar/sketchybarrc";
     executable = true;
   };
-in
 
-{
+in {
   options = with types; {
     services.sketchybar.enable = mkOption {
       type = bool;

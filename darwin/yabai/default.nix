@@ -1,9 +1,7 @@
 { config, lib, pkgs, ... }:
 
-let
-  scripts = ./scripts;
-in
-{
+let scripts = ./scripts;
+in {
   # csrutil enable --without fs --without debug --without nvram
   # nvram boot-args=-arm64e_preview_abi
   environment.etc."sudoers.d/yabai".text = ''
@@ -38,8 +36,8 @@ in
       window_border = "off";
       window_border_width = 3;
       window_border_radius = 3;
-      active_window_border_color   = "0xff5c7e81";
-      normal_window_border_color   = "0xff505050";
+      active_window_border_color = "0xff5c7e81";
+      normal_window_border_color = "0xff505050";
       # insert_window_border_color   = "0xffd75f5f";
       # Bar
       external_bar = "all:32:0";
@@ -76,7 +74,8 @@ in
       yabai -m rule --add app="^IntelliJ IDEA$" manage=off
 
       yabai -m rule --add app="^(Google Chrome|Firefox|Safari)$" space=10
-      yabai -m rule --add app="^coreautha$" manage=off sticky=on layer=above # 1Password biometric
+      # yabai -m rule --add app="^coreautha$" manage=off sticky=on layer=above # 1Password biometric
+      yabai -m rule --add app="coreautha" manage=off # 1Password biometric
       # yabai -m rule --add app="^(Alacritty|Kitty)$" space=2
       yabai -m rule --add app="^Skype$" space=3
 
@@ -97,7 +96,8 @@ in
   };
 
   launchd.user.agents.yabai.serviceConfig.EnvironmentVariables.PATH =
-    lib.mkForce "${config.services.yabai.package}/bin:${pkgs.jq}/bin:${config.services.sketchybar.package}/bin:${config.my.systemPath}";
+    lib.mkForce
+    "${config.services.yabai.package}/bin:${pkgs.jq}/bin:${config.services.sketchybar.package}/bin:${config.my.systemPath}";
 
   launchd.user.agents.yabai.serviceConfig = {
     StandardErrorPath = "/tmp/yabai.err.log";
@@ -108,9 +108,11 @@ in
     wait4path ${config.services.yabai.package}/bin/yabai
   '';
 
-  system.activationScripts.postActivation.text = let path = "${pkgs.yabai}/bin/yabai"; in ''
-    ${pkgs.sqlite}/bin/sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' \
-    'INSERT or REPLACE INTO access VALUES("kTCCServiceAccessibility","${path}",1,2,4,1,NULL,NULL,0,NULL,NULL,0,NULL);
-  DELETE from access where client_type = 1 and client != "${path}" and client like "%/bin/yabai";'
+  system.activationScripts.postActivation.text =
+    let path = "${pkgs.yabai}/bin/yabai";
+    in ''
+        ${pkgs.sqlite}/bin/sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' \
+        'INSERT or REPLACE INTO access VALUES("kTCCServiceAccessibility","${path}",1,2,4,1,NULL,NULL,0,NULL,NULL,0,NULL);
+      DELETE from access where client_type = 1 and client != "${path}" and client like "%/bin/yabai";'
     '';
 }

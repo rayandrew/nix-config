@@ -5,8 +5,7 @@ let
   inherit (config.my) shellAliases directory;
   scripts = ./scripts;
   dataDir = "${config.xdg.dataHome}";
-in
-{
+in {
   # Fish Shell
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.fish.enable
   # home.packages = with pkgs; [
@@ -61,10 +60,10 @@ in
       # export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/config.toml"
       znap eval starship "${pkgs.starship}/bin/starship init zsh"
       znap prompt starship
-      
+
       # znap source ohmyzsh/ohmyzsh lib/{git,theme-and-appearance}
       # znap prompt ohmyzsh/ohmyzsh robbyrussell
-  
+
       ZVM_CURSOR_STYLE_ENABLED=false
       znap source jeffreytse/zsh-vi-mode
       zvm_after_init_commands+=("[ -f ${pkgs.fzf}/share/fzf/completion.zsh ] && source ${pkgs.fzf}/share/fzf/completion.zsh")

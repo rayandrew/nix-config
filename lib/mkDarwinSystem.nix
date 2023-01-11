@@ -1,25 +1,21 @@
 inputs:
 
-{ username
-, fullName
-, email
-, directory # directory on the system
+{ username, fullName, email, directory # directory on the system
 , system ? "aarch64-darwin"
 
-# `nix-darwin` modules to include
+  # `nix-darwin` modules to include
 , modules ? [ ]
-# Additional `nix-darwin` modules to include, useful when reusing a configuration with
-# `lib.makeOverridable`.
+  # Additional `nix-darwin` modules to include, useful when reusing a configuration with
+  # `lib.makeOverridable`.
 , extraModules ? [ ]
 
-# Value for `home-manager`'s `home.stateVersion` option.
+  # Value for `home-manager`'s `home.stateVersion` option.
 , homeStateVersion
 # `home-manager` modules to include
 , homeModules ? [ ]
-# Additional `home-manager` modules to include, useful when reusing a configuration with
-# `lib.makeOverridable`.
-, extraHomeModules ? [ ]
-}:
+  # Additional `home-manager` modules to include, useful when reusing a configuration with
+  # `lib.makeOverridable`.
+, extraHomeModules ? [ ] }:
 
 inputs.darwin.lib.darwinSystem {
   inherit system;
