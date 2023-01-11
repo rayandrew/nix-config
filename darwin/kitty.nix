@@ -7,13 +7,13 @@ if builtins.hasAttr "hm" lib then
     enable = true;
     darwinLaunchOptions = [ "--single-instance" "--directory=~" ];
     font = {
-      name = "JetBrainsMono Nerd Font";
-      size = 15;
+      # name = "JetBrainsMono Nerd Font";
+      name = "Pragmata Pro Mono";
+      size = 16;
     };
     settings = {
       # https://fsd.it/shop/fonts/pragmatapro/
-      font_family = "Pragmata Pro Mono";
-      font_size = "14.0";
+      # font_size = "14.0";
       adjust_line_height = "140%";
       disable_ligatures = "cursor"; # disable ligatures when cursor is on them
 
