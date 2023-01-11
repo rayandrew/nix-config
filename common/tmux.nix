@@ -19,7 +19,7 @@ in {
     shell = "${pkgs.zsh}/bin/zsh";
     keyMode = "vi";
     clock24 = false;
-    escapeTime = 100;
+    escapeTime = 500;
     historyLimit = 2000;
 
     baseIndex = 1;
@@ -37,6 +37,8 @@ in {
     ];
 
     extraConfig = ''
+      setw -g aggressive-resize off
+
       # https://github.com/folke/tokyonight.nvim#making-undercurls-work-properly-in-tmux 
       set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
       set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours - needs tmux-3.0

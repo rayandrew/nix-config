@@ -10,6 +10,16 @@
       hostname = "192.5.87.68";
       forwardAgent = true;
       forwardX11 = true;
+      extraOptions = { RequestTTY = "yes"; };
     };
   };
+
+  home.packages = [
+    (pkgs.writeShellScriptBin "cl-data" ''
+      ssh cl-data "tmux attach || tmux"
+    '')
+    (pkgs.writeShellScriptBin "cl-data-p" ''
+      ssh cl-data
+    '')
+  ];
 }
