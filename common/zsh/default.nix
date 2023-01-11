@@ -3,7 +3,7 @@
 let
   inherit (lib) mkAfter elem optionalString;
   inherit (config.my) shellAliases directory;
-  scripts = ./scripts;
+  # scripts = ./scripts;
   dataDir = "${config.xdg.dataHome}";
 in {
   # Fish Shell

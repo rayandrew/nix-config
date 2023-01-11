@@ -36,6 +36,7 @@
     python39
     ripgrep
     rsync
+    ruby
     scripts
     shellcheck
     trash-cli

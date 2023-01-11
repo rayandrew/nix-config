@@ -1,6 +1,15 @@
 { config, lib, pkgs, ... }:
 
-let scripts = ./scripts;
+let
+  scripts = ./scripts;
+  recordWindowId = pkgs.writeShellScriptBin "yabai-record-window-id" ''
+    window_id=$(yabai -m query --windows | jq -er 'map(select(."has-focus" == true))[0].id')
+    ${pkgs.ruby}/bin/ruby ${scripts}/focus.rb write "$window_id"
+  '';
+  focusPrevWindow = pkgs.writeShellScriptBin "yabai-focus-prev-window" ''
+    previous_window_id=$(${pkgs.ruby}/bin/ruby ${scripts}/focus.rb read $YABAI_WINDOW_ID)
+    yabai -m window --focus $previous_window_id
+  '';
 in {
   # csrutil enable --without fs --without debug --without nvram
   # nvram boot-args=-arm64e_preview_abi
@@ -44,24 +53,32 @@ in {
     };
 
     extraConfig = ''
+      #!/usr/bin/env bash
+
       wait4path /etc/sudoers.d/yabai
       sudo yabai --load-sa
 
       yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-      # yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
 
+      # creating workspaces 
       yabai -m signal --add event=display_added action="sleep 1 && sh ${scripts}/create-spaces.sh"
       yabai -m signal --add event=display_removed action="sleep 1 && sh ${scripts}/create-spaces.sh"
 
-      # yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
-      # yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
+      # sketchybar utils
+      yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
+      yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
+      yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
+
+      # destroy utils
+      yabai -m signal --add event=window_focused action="${recordWindowId}/bin/yabai-record-window-id"
+      yabai -m signal --add event=application_front_switched action="${recordWindowId}/bin/yabai-record-window-id"
+      yabai -m signal --add event=window_destroyed action="${focusPrevWindow}/bin/yabai-focus-prev-window"
 
       # focus window after active space changes
       yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
       # focus window after active display changes
       yabai -m signal --add event=display_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
 
-      yabai -m rule --add app="^Finder$" layer=above manage=off
       ## Do not manage some apps which are not resizable
       yabai -m rule --add app="^(LuLu|Vimac|Calculator|VLC|System Settings|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice)$" manage=off
       yabai -m rule --add label="raycast" app="^Raycast$" manage=off
@@ -75,24 +92,24 @@ in {
       yabai -m rule --add label="Software Update" title="Software Update" manage=off
       yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
       yabai -m rule --add app="^IntelliJ IDEA$" manage=off
+      yabai -m rule --add app="^coreautha$" manage=off # 1Password biometric
 
+      yabai -m rule --add app="^Finder$" sticky=on layer=above manage=off
+      yabai -m rule --add app="^Neovide$" manage=on space=3 # for note-taking
+      yabai -m rule --add app="^(Mail|Calendar)$" space=8
+      yabai -m rule --add label="Communication" app="^(Skype|Slack)$" space=9
       yabai -m rule --add app="^(Google Chrome|Firefox|Safari)$" space=10
-      # yabai -m rule --add app="^coreautha$" manage=off sticky=on layer=above # 1Password biometric
-      yabai -m rule --add app="coreautha" manage=off # 1Password biometric
-      # yabai -m rule --add app="^(Alacritty|Kitty)$" space=2
-      yabai -m rule --add app="^Skype$" space=3
-      yabai -m rule --add app="^Neovide$" manage=on space=2
 
-      yabai -m space 1 --label one
-      yabai -m space 2 --label two
-      yabai -m space 3 --label three
-      yabai -m space 4 --label four
-      yabai -m space 5 --label five
-      yabai -m space 6 --label six
-      yabai -m space 7 --label seven
-      yabai -m space 8 --label eight
-      yabai -m space 9 --label nine
-      yabai -m space 10 --label ten
+      yabai -m space 1 --label one                 # main 
+      yabai -m space 2 --label two                 # cloud dev
+      yabai -m space 3 --label three               # neovide
+      yabai -m space 4 --label four                #
+      yabai -m space 5 --label five                #
+      yabai -m space 6 --label six                 #
+      yabai -m space 7 --label seven               #
+      yabai -m space 8 --label mail --layout stack # mail + calendar
+      yabai -m space 9 --label nine                # social + chat
+      yabai -m space 10 --label ten                # browsers
     '';
   };
 

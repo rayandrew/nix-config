@@ -62,6 +62,7 @@ in {
       "vlc"
       "spotify"
       "neovide" # Neovim GUI
+      "alt-tab"
     ];
 
     # For cli packages that aren't currently available for macOS in `nixpkgs`
