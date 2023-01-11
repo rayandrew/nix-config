@@ -26,6 +26,7 @@
     less
     lsof
     man
+    nodejs
     netcat-gnu
     nix-tree
     openssh
@@ -35,6 +36,7 @@
     rsync
     scripts
     shellcheck
+    trash-cli
     tree
     unar
     unzip

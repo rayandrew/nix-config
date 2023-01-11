@@ -29,14 +29,14 @@ in
         # long time to mount /nix somehow makes this service failed
 
         # unload
-        /bin/launchctl unload ${home}/Library/LaunchAgents/org.nixos.yabai.plist
-        /bin/launchctl unload ${home}/Library/LaunchAgents/org.nixos.skhd.plist
-        /bin/launchctl unload ${home}/Library/LaunchAgents/org.nixos.sketchybar.plist
+        # /bin/launchctl unload ${home}/Library/LaunchAgents/org.nixos.yabai.plist
+        # /bin/launchctl unload ${home}/Library/LaunchAgents/org.nixos.skhd.plist
+        # /bin/launchctl unload ${home}/Library/LaunchAgents/org.nixos.sketchybar.plist
 
         # reload
-        /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.yabai.plist
-        /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.skhd.plist
-        /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.sketchybar.plist
+        # /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.yabai.plist
+        # /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.skhd.plist
+        # /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.sketchybar.plist
       '';
   };
 }

@@ -22,7 +22,7 @@ in
     owner = "rayandrew";
     repo = "nvim";
     rev = "main";
-    sha256 = "12k7hchxah0qhk63n6rdax5fiqfq42nfh0l4d2hapvqv686i0jj5";
+    sha256 = "1iq9i6kvwl78hnxnmbvzi87bc2rf3jjv76bawkgxz293k1vslz0g";
   };
 
   # xdg.configFile."nvim" = {

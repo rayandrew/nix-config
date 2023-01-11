@@ -18,6 +18,8 @@
     ./ssh.nix
     ./fish.nix
     ./tmux.nix
+    ./zsh
+    ./starship.nix
   ];
 
   home-manager.useGlobalPkgs = true;

@@ -96,26 +96,6 @@ in
     '';
   };
 
-  # launchd.user.agents.yabai.serviceConfig.ProgramArguments = [ 
-  #   "wait4path ${config.services.yabai.package}/bin/yabai" 
-  #   "${config.services.yabai.package}/bin/yabai" 
-  #   "-c" 
-  # ];
-
-  # launchd.user.agents.yabai.serviceConfig.ProgramArguments = lib.mkOption {
-  #   apply = old: [ 
-  #          "wait4path ${config.services.yabai.package}/bin/yabai" 
-  #   ] ++ old;
-  # };
-
-  # launchd.user.agents.yabai.serviceConfig.ProgramArguments = lib.mkBefore [ 
-  #   "wait4path /nix" 
-  #   "wait4path ${config.services.yabai.package}/bin/yabai" 
-  # ] ;
-
-  # launchd.user.agents.yabai.serviceConfig.StartInterval = 30;
-  # launchd.user.agents.yabai.serviceConfig.ThrottleInterval = 30;
-
   launchd.user.agents.yabai.serviceConfig.EnvironmentVariables.PATH =
     lib.mkForce "${config.services.yabai.package}/bin:${pkgs.jq}/bin:${config.services.sketchybar.package}/bin:${config.my.systemPath}";
 

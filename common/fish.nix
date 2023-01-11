@@ -2,7 +2,7 @@
 
 let
   inherit (lib) elem optionalString;
-  inherit (config.my) directory;
+  inherit (config.my) shellAliases directory;
 in
 
 {
@@ -21,28 +21,7 @@ in
   # Fish configuration ------------------------------------------------------------------------- {{{
 
   # Aliases
-  programs.fish.shellAliases = with pkgs; {
-    # Nix related
-    drb = "darwin-rebuild build --flake ${directory.nix}";
-    drs = "darwin-rebuild switch --flake ${directory.nix}";
-    flakeup = "nix flake update ${directory.nix}";
-    nb = "nix build";
-    nd = "nix develop";
-    nf = "nix flake";
-    nr = "nix run";
-    ns = "nix search";
-
-    # Other
-    ".." = "cd ..";
-    ":q" = "exit";
-    cat = "${bat}/bin/bat";
-    du = "${du-dust}/bin/dust";
-    g = "${gitAndTools.git}/bin/git";
-    la = "ll -a";
-    ll = "ls -l --time-style long-iso --icons";
-    ls = "${exa}/bin/exa";
-    tb = "toggle-background";
-  };
+  programs.fish.shellAliases = shellAliases;
 
   # Configuration that should be above `loginShellInit` and `interactiveShellInit`.
   programs.fish.shellInit = ''

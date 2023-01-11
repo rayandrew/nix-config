@@ -17,7 +17,7 @@ in
     enable = true;
     prefix = "C-a";
 
-    shell = "${pkgs.fish}/bin/fish";
+    shell = "${pkgs.zsh}/bin/zsh";
     keyMode = "vi";
     clock24 = false;
     escapeTime = 100;
@@ -44,9 +44,24 @@ in
     ];
 
     extraConfig = ''
+      setw -g automatic-rename on   # rename window to reflect current program
+      set -g renumber-windows on    # renumber windows when a window is closed
+
+      set -g set-titles on          # set terminal title
+
+      set -g display-panes-time 800 # slightly longer pane indicators display time
+      set -g display-time 1000      # slightly longer status messages display time
+
+      set -g status-interval 10     # redraw status line every 10 seconds
+
+      bind -n C-l send-keys C-l \; run 'sleep 0.1' \; clear-history
+
+      # activity
+      set -g monitor-activity on
+      set -g visual-activity off
+
       # create session
       bind C-c command-prompt -p "New Session:" "new-session -A -s '%%'"
-      # bind C-c new-session
 
       # kill session
       bind C-k confirm kill-session
