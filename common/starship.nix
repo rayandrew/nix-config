@@ -4,7 +4,7 @@ with lib;
 {
   programs.starship = {
     enable = true;
-
+    enableZshIntegration = false;
     settings = {
       # See docs here: https://starship.rs/config/
 

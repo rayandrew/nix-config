@@ -25,7 +25,7 @@
     };
     extraConfig = {
       init = { 
-        defaultBranch = "main"; 
+        defaultBranch = config.my.mainBranch; 
       };
     };
 
