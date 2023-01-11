@@ -53,16 +53,14 @@ in {
     };
 
     extraConfig = ''
-      #!/usr/bin/env bash
-
       wait4path /etc/sudoers.d/yabai
       sudo yabai --load-sa
 
       yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
       # creating workspaces 
-      yabai -m signal --add event=display_added action="sleep 1 && sh ${scripts}/create-spaces.sh"
-      yabai -m signal --add event=display_removed action="sleep 1 && sh ${scripts}/create-spaces.sh"
+      yabai -m signal --add event=display_added action="sleep 1 && bash ${scripts}/create-spaces.sh"
+      yabai -m signal --add event=display_removed action="sleep 1 && bash ${scripts}/create-spaces.sh"
 
       # sketchybar utils
       yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
