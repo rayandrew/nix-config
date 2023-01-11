@@ -16,5 +16,5 @@
     };
   };
 
-  homebrew.enable = self.lib.mkForce false;
+  homebrew.enable = lib.mkForce false;
 }
