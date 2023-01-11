@@ -60,7 +60,12 @@
         packages = exportPackages self.overlays channels;
       };
 
-      modules = exportModules [ ./common ./darwin ./hosts/midnight.nix ];
+      modules = exportModules [
+        ./common
+        ./darwin
+        ./hosts/midnight.nix
+        ./hosts/github-ci.nix
+      ];
 
       hostDefaults = {
         modules = [ self.modules.common ];
@@ -74,16 +79,11 @@
         builder = darwin.lib.darwinSystem;
       };
 
-      githubCI = self.hosts.midnight.override {
+      hosts.githubCI = {
         system = "x86_64-darwin";
-        username = "runner";
-        my = {
-          nix = "/Users/runner/work/nixpkgs/nixpkgs";
-          projects = "/Users/runner/work/Projects";
-          research = "/Users/runner/work/Research";
-        };
-        # nixConfigDirectory = "/Users/runner/work/nixpkgs/nixpkgs";
-        extraModules = singleton { homebrew.enable = self.lib.mkForce false; };
+        modules = [ self.modules.darwin self.modules.github-ci ];
+        output = "darwinConfigurations";
+        builder = darwin.lib.darwinSystem;
       };
     };
 }

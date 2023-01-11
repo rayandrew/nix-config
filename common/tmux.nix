@@ -51,7 +51,7 @@ in {
 
       set -g status-interval 10     # redraw status line every 10 seconds
 
-      # bind -n C-l send-keys C-l \; run 'sleep 0.1' \; clear-history
+      # bind -n C-l send-keys C-l \; run 'sleep 1.1' \; clear-history
 
       # activity
       set -g monitor-activity on
@@ -78,7 +78,7 @@ in {
       # split current window vertically
       bind _ split-window -h -c "#{pane_current_path}"
 
-      # pane navigation
+      # -- pane navigation -----------------------------------------------------------
       bind -r h select-pane -L  # move left
       bind -r j select-pane -D  # move down
       bind -r k select-pane -U  # move up
@@ -86,13 +86,13 @@ in {
       bind > swap-pane -D       # swap current pane with the next one
       bind < swap-pane -U       # swap current pane with the previous one
 
-      # pane resizing
+      # -- pane resizing -------------------------------------------------------------
       bind -r H resize-pane -L 2
       bind -r J resize-pane -D 2
       bind -r K resize-pane -U 2
       bind -r L resize-pane -R 2
 
-      # window navigation
+      # -- window navigation ---------------------------------------------------------
       unbind n
       unbind p
       bind -r C-h previous-window # select previous window
@@ -117,7 +117,7 @@ in {
       run -b 'tmux bind -t vi-copy L end-of-line 2> /dev/null || true'
       run -b 'tmux bind -T copy-mode-vi L send -X end-of-line 2> /dev/null || true'
 
-      # copy to X11 clipboard
+      # -- copy to X11 clipboard ----------------------------------------------------
       if -b 'command -v xsel > /dev/null 2>&1' 'bind y run -b "tmux save-buffer - | xsel -i -b"'
       if -b '! command -v xsel > /dev/null 2>&1 && command -v xclip > /dev/null 2>&1' 'bind y run -b "tmux save-buffer - | xclip -i -selection clipboard >/dev/null 2>&1"'
       # copy to macOS clipboard
@@ -165,4 +165,15 @@ in {
 
     '';
   };
+
+  home.packages = [
+    (pkgs.writeShellScriptBin "tmuxa" ''
+       #
+       # tmuxa 
+       #
+       # Tmux create new session or attach
+       #
+      ${pkgs.tmux}/bin/tmux attach || ${pkgs.tmux}/bin/tmux
+    '')
+  ];
 }
