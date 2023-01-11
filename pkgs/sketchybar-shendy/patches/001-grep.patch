@@ -36,6 +36,20 @@ index 2615f81..a6c1fa1 100755
  CHARGING=$(pmset -g batt | grep 'AC Power')
  
  if [ $PERCENTAGE = "" ]; then
+diff --git a/sketchybar/.config/sketchybar/controller/cal.sh b/sketchybar/.config/sketchybar/controller/cal.sh
+index 0c932fe..96883eb 100755
+--- a/sketchybar/.config/sketchybar/controller/cal.sh
++++ b/sketchybar/.config/sketchybar/controller/cal.sh
+@@ -1,7 +1,7 @@
+ #!/usr/bin/env sh
+ 
+-CAL=$(date '+%A %d %b')
++CAL=$(date '+%a %d %b')
+ 
+ CALICON=􀉉
+ 
+-sketchybar --set $NAME icon=$CALICON label="$CAL |"
++sketchybar --set "$NAME" icon="$CALICON" label="$CAL |"
 diff --git a/sketchybar/.config/sketchybar/controller/mic.sh b/sketchybar/.config/sketchybar/controller/mic.sh
 index ed178cb..0a080eb 100755
 --- a/sketchybar/.config/sketchybar/controller/mic.sh

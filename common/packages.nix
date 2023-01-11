@@ -33,6 +33,7 @@
     openssh
     openssl
     p7zip
+    python39
     ripgrep
     rsync
     scripts

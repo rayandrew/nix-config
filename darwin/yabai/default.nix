@@ -44,17 +44,20 @@ in {
     };
 
     extraConfig = ''
+      wait4path /etc/sudoers.d/yabai
+      sudo yabai --load-sa
+
       yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-      yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
+      # yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
 
       yabai -m signal --add event=display_added action="sleep 1 && sh ${scripts}/create-spaces.sh"
       yabai -m signal --add event=display_removed action="sleep 1 && sh ${scripts}/create-spaces.sh"
 
-      yabai -m signal --add event=window_created action=sketchybar --trigger windows_on_spaces"
-      yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
+      # yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
+      # yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
 
       # focus window after active space changes
-      yabai -m signal --add event=space_changed action="yabai  -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+      yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
       # focus window after active display changes
       yabai -m signal --add event=display_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
 
@@ -78,6 +81,7 @@ in {
       yabai -m rule --add app="coreautha" manage=off # 1Password biometric
       # yabai -m rule --add app="^(Alacritty|Kitty)$" space=2
       yabai -m rule --add app="^Skype$" space=3
+      yabai -m rule --add app="^Neovide$" manage=on space=2
 
       yabai -m space 1 --label one
       yabai -m space 2 --label two
@@ -89,9 +93,6 @@ in {
       yabai -m space 8 --label eight
       yabai -m space 9 --label nine
       yabai -m space 10 --label ten
-
-      wait4path /etc/sudoers.d/yabai
-      sudo yabai --load-sa
     '';
   };
 

@@ -87,6 +87,7 @@ if builtins.hasAttr "hm" lib then {
         # Open applications
         lalt - return : open -n -a ${pkgs.kitty}/Applications/kitty.app
         lalt - e : open ~/
+        lalt - n : open -n -a /Applications/Neovide.app --args --frame none
         lalt + lshift - return : open -n -a ${pkgs.kitty}/Applications/kitty.app --args ${pkgs.zsh}/bin/zsh -c '${pkgs.tmux}/bin/tmux attach || ${pkgs.tmux}/bin/tmux'
 
         # rotate tree

@@ -4,6 +4,11 @@ let
   inherit (lib) concatStringsSep optional;
   inherit (config.lib.file) mkOutOfStoreSymlink;
   inherit (config.home.user-info) directory;
+
+  populateEnvScript = ''
+    mkdir -p ${config.xdg.dataHome}/nvim/site/plugin
+    ${pkgs.python39}/bin/python ${config.xdg.configHome}/nvim/populate-env.py -o ${config.xdg.dataHome}/nvim/site/plugin
+  '';
   # }}}
 in {
   # Neovim
@@ -20,32 +25,25 @@ in {
   xdg.configFile."nvim".source = pkgs.fetchFromGitHub {
     owner = "rayandrew";
     repo = "nvim";
-    rev = "7694b83adb414489b52d655c75a8a511a67f87e3";
-    sha256 = "10nrgg6h2hy0g28pncy8hagykyq23j0rjflhkhw3qgagj03nkzmk";
+    rev = "658cfa7ea8086e64ecb405fc2814da8faa3e3b54";
+    sha256 = "0bv1dsys8qp28xpdnafj2pfzr9wdr84r2pdk85i1amv61kjk66z0";
   };
 
-  # xdg.configFile."nvim" = {
-  #  source = localNvim;
-  #  recursive = true;
-  # };
-  # xdg.configFile."nvim".source = if builtins.pathExists localNvim 
-  #   then 
-  #     builtins.trace ''${localNvim}'' mkOutOfStoreSymlink localNvim 
-  #     # mkOutOfStoreSymlink localNvim 
-  #   else 
-  #     builtins.trace ''hmm'' pkgs.fetchFromGitHub {
-  #       owner = "rayandrew";
-  #       repo = "nvim";
-  #       rev = "main";
-  #       sha256 = "0nkq5fbgd8pq806lankb2br0i313cly8m43wnkvnraq301pc0mn9";
-  #    };
+  home.packages = [
+    (pkgs.writeShellScriptBin "update-nvim-env" ''
+      #
+      # update-nvim-env
+      #
+      # Update neovim env such that it can be used in neovide or other GUIs.
+      #
+      ${populateEnvScript}
+    '')
+  ];
 
-  # From personal addon module `../modules/home/programs/neovim/extras.nix`
-  # programs.neovim.extras.termBufferAutoChangeDir = true;
-  # programs.neovim.extras.nvrAliases.enable = true;
-  # programs.neovim.extras.defaultEditor = true;
-
-  # }}}
+  home.activation.neovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    echo "Populating neovim env..."
+    ${populateEnvScript}
+  '';
 
   # Required packages -------------------------------------------------------------------------- {{{
 

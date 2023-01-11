@@ -3,6 +3,8 @@
 let
   barSize = "32";
   fontSize = "12";
+  barBackground = "16161e";
+  barForeground = "a9b1d6";
 in if builtins.hasAttr "hm" lib then {
   home.activation.sketchybar = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     ${pkgs.skhd}/bin/sketchybar --update || ${pkgs.killall}/bin/killall sketchybar || true
@@ -31,7 +33,7 @@ in if builtins.hasAttr "hm" lib then {
       blur_radius=0                                        \
       padding_left=4                                       \
       padding_right=4                                      \
-      color=0xff1a1b26                                     \
+      color=0xff${barBackground}                           \
       position=bottom                                      \
       sticky=on                                            \
       font_smoothing=on                                    \
@@ -44,8 +46,8 @@ in if builtins.hasAttr "hm" lib then {
       icon.padding_right=$PADDING                          \
       label.padding_left=$PADDING                          \
       label.padding_right=$PADDING                         \
-      label.color=0xffc0caf5                               \
-      icon.color=0xffc0caf5                                \
+      label.color=0xff${barForeground}                     \
+      icon.color=0xff${barForeground}                      \
 
 
       # left
