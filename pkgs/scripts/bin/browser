@@ -1,0 +1,4 @@
+#!/bin/sh
+
+open -a /Applications/Safari.app "$*"
+## open -a /Applications/Firefox.app $*

@@ -15,34 +15,7 @@ in {
     enable = true;
     shellAliases = shellAliases;
     defaultKeymap = "viins";
-    completionInit = "";
-    # zplug = {
-    #   enable = true;
-    #   plugins = [
-    #     { name = "zsh-users/zsh-autosuggestions"; tags = [  ]; }
-    #     { name = "zsh-users/zsh-syntax-highlighting"; tags = [  ]; }
-    #     { name = "hlissner/zsh-autopair"; tags = [  ]; }
-    #     { name = "marlonrichert/zsh-edit"; tags = [  ]; }
-    #     { name = "jeffreytse/zsh-vi-mode"; tags = [  ]; }
-    #     { name = "plugins/git"; tags = [ from:oh-my-zsh  ]; }
-    #   ];
-    # };
-    # oh-my-zsh = {
-    #   enable = true;
-    #   plugins = [
-    #     "asdf"
-    #     "aliases"
-    #     "bundler"
-    #     "dotenv"
-    #     "git"
-    #     "macos"
-    #     "rake"
-    #     "rbenv"
-    #     "ruby"
-    #     "z"
-    #   ];
-    # };
-
+    # completionInit = "";
     initExtraFirst = ''
       # zmodload zsh/zprof
 
@@ -63,22 +36,32 @@ in {
 
       # znap source ohmyzsh/ohmyzsh lib/{git,theme-and-appearance}
       # znap prompt ohmyzsh/ohmyzsh robbyrussell
+      
+      # ZVM_INIT_MODE='sourcing'
+      # uncomment when https://github.com/jeffreytse/zsh-vi-mode/pull/188 merged
+      # blocker causing syntax highlighting not working
+      # znap source jeffreytse/zsh-vi-mode
+      ZVM_CURSOR_STYLE_ENABLED=true
+      znap source fbearoff/zsh-vi-mode
 
-      ZVM_CURSOR_STYLE_ENABLED=false
-      znap source jeffreytse/zsh-vi-mode
-      zvm_after_init_commands+=("[ -f ${pkgs.fzf}/share/fzf/completion.zsh ] && source ${pkgs.fzf}/share/fzf/completion.zsh")
-      zvm_after_init_commands+=("[ -f ${pkgs.fzf}/share/fzf/key-bindings.zsh ] && source ${pkgs.fzf}/share/fzf/key-bindings.zsh")
+      function init_fzf() {
+        [ -f ${pkgs.fzf}/share/fzf/completion.zsh ] && source ${pkgs.fzf}/share/fzf/completion.zsh
+        [ -f ${pkgs.fzf}/share/fzf/key-bindings.zsh ] && source ${pkgs.fzf}/share/fzf/key-bindings.zsh
+      }
+      zvm_after_init_commands+=(init_fzf)
 
       # znap source marlonrichert/zsh-autocomplete
       znap source marlonrichert/zsh-edit
 
-      # ZSH_AUTOSUGGEST_STRATEGY=( history )
+      ZSH_AUTOSUGGEST_STRATEGY=(history completion)
       znap source zsh-users/zsh-autosuggestions
 
-      # ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)
+      ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
       typeset -A ZSH_HIGHLIGHT_STYLES
       ZSH_HIGHLIGHT_STYLES[cursor]='bg-blue underline'
       znap source zsh-users/zsh-syntax-highlighting
+
+      # znap source zdharma-continuum/fast-syntax-highlighting
 
       # znap install ohmyzsh/ohmyzsh
       # plugins=(

@@ -17,6 +17,11 @@ let
         # defaultText = "\${config.home.homeDirectory}/Projects";
         description = "Path to `Projects` directory";
       };
+
+      research = mkOption {
+        type = types.str;
+        description = "Path to `Research` directory";
+      };
     };
   };
   mainBranch = config.my.mainBranch;
@@ -62,6 +67,7 @@ in {
       directory = {
         nix = "${config.home.homeDirectory}/.config/nixpkgs";
         projects = "${config.home.homeDirectory}/Projects";
+        research = "${config.home.homeDirectory}/Research";
       };
       shellAliases = with pkgs; {
         # Nix related

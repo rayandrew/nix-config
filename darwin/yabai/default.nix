@@ -58,7 +58,7 @@ in {
       # focus window after active display changes
       yabai -m signal --add event=display_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
 
-      yabai -m rule --add app="^Finder$" sticky=on layer=above manage=off
+      yabai -m rule --add app="^Finder$" layer=above manage=off
       ## Do not manage some apps which are not resizable
       yabai -m rule --add app="^(LuLu|Vimac|Calculator|VLC|System Settings|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice)$" manage=off
       yabai -m rule --add label="raycast" app="^Raycast$" manage=off

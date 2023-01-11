@@ -49,16 +49,6 @@ if builtins.hasAttr "hm" lib then
       symbol_map U+100000-U+10FFFF SF Pro
     '';
   };
-
-  programs.zsh.initExtra = ''
-    # kitty shell integration
-    if [[ -n $KITTY_INSTALLATION_DIR ]]; then
-      export KITTY_SHELL_INTEGRATION="enabled"
-      autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
-      kitty-integration
-      unfunction kitty-integration
-    fi
-  '';
 }
 
 else
