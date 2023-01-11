@@ -37,7 +37,10 @@
     in mkFlake {
       inherit self inputs;
 
-      channelsConfig = { allowUnfree = true; };
+      channelsConfig = {
+        allowUnfree = true;
+        allowBroken = true;
+      };
 
       # channels.nixpkgs.patches = inputs.nixpkgs.lib.mkIf inputs.nixpkgs.lib.stdenv.isDarwin [ ./patches/sketchybar.patch ];
 
