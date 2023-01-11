@@ -32,7 +32,8 @@
     let
       inherit (flake-utils-plus.lib)
         mkFlake exportModules exportPackages exportOverlays;
-      # inherit (inputs.nixpkgs.lib) attrValues makeOverridable optionalAttrs singleton;
+      inherit (inputs.nixpkgs.lib)
+        attrValues makeOverridable optionalAttrs singleton;
     in mkFlake {
       inherit self inputs;
 
@@ -71,6 +72,18 @@
         modules = [ self.modules.darwin self.modules.midnight ];
         output = "darwinConfigurations";
         builder = darwin.lib.darwinSystem;
+      };
+
+      githubCI = self.hosts.midnight.override {
+        system = "x86_64-darwin";
+        username = "runner";
+        my = {
+          nix = "/Users/runner/work/nixpkgs/nixpkgs";
+          projects = "/Users/runner/work/Projects";
+          research = "/Users/runner/work/Research";
+        };
+        # nixConfigDirectory = "/Users/runner/work/nixpkgs/nixpkgs";
+        extraModules = singleton { homebrew.enable = self.lib.mkForce false; };
       };
     };
 }

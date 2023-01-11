@@ -11,7 +11,7 @@
       [ "https://cache.nixos.org/" "https://rayandrew.cachix.org" ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "rayandrew.cachix.org-1:BGo613xIGZS1R/anSwSf6ulU8h3Fz9zMDClZfV9n0Ug="
+      "rayandrew.cachix.org-1:kJnvdWgUyErPGaQWgh/yyu91szgRYD+V/WQ4Dbc4n9M="
     ];
 
     trusted-users = [ "@admin" ];
