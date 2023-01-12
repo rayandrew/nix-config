@@ -22,6 +22,11 @@ let
         type = types.str;
         description = "Path to `Research` directory";
       };
+
+      notes = mkOption {
+        type = types.str;
+        description = "Path to `Notes` directory";
+      };
     };
   };
   mainBranch = config.my.mainBranch;
@@ -68,6 +73,7 @@ in {
         nix = "${config.home.homeDirectory}/.config/nixpkgs";
         projects = "${config.home.homeDirectory}/Projects";
         research = "${config.home.homeDirectory}/Research";
+        notes = "${config.home.homeDirectory}/Notes";
       };
       shellAliases = with pkgs; {
         # Nix related

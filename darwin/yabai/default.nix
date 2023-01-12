@@ -81,7 +81,7 @@ in {
       yabai -m rule --add app="^(LuLu|Vimac|Calculator|VLC|System Settings|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice)$" manage=off
       yabai -m rule --add label="raycast" app="^Raycast$" manage=off
       yabai -m rule --add label="1Password" app="^1Password$" layer=above manage=off
-      yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
+      yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy Report|Advance)$" manage=off
       yabai -m rule --add label="System Settings" app="^System Preferences$" manage=off
       yabai -m rule --add label="App Store" app="^App Store$" manage=off
       yabai -m rule --add label="Activity Monitor" app="^Activity Monitor$" manage=off
@@ -91,6 +91,8 @@ in {
       yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
       yabai -m rule --add app="^IntelliJ IDEA$" manage=off
       yabai -m rule --add app="^coreautha$" manage=off # 1Password biometric
+      yabai -m rule --add app="^Installer$" manage=off 
+      yabai -m rule --add app="^Cisco AnyConnect Secure Mobility Client$" layer=above manage=off 
 
       yabai -m rule --add app="^Finder$" sticky=on layer=above manage=off
       yabai -m rule --add app="^Neovide$" manage=on space=3 # for note-taking

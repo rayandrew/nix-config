@@ -58,7 +58,6 @@ in {
       "loopback"
       "raycast"
       "skype"
-      "visual-studio-code"
       "vlc"
       "spotify"
       "neovide" # Neovim GUI

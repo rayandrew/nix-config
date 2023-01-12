@@ -25,8 +25,8 @@ in {
   xdg.configFile."nvim".source = pkgs.fetchFromGitHub {
     owner = "rayandrew";
     repo = "nvim";
-    rev = "658cfa7ea8086e64ecb405fc2814da8faa3e3b54";
-    sha256 = "0bv1dsys8qp28xpdnafj2pfzr9wdr84r2pdk85i1amv61kjk66z0";
+    rev = "1240547d1206e5f5ef780f5fb94cffd20af5b4de";
+    sha256 = "sha256-npWMv45eLp2XOY7cwCzFJbYxK4N/FMjl7fDqspdPmy8=";
   };
 
   home.packages = [
