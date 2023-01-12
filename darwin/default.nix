@@ -20,5 +20,5 @@
   ];
 
   hm.imports =
-    [ ./kitty.nix ./packages.nix ./skhd ./symlinks.nix ./vscode.nix ];
+    [ ./kitty.nix ./packages.nix ./git.nix ./skhd ./symlinks.nix ./vscode.nix ];
 }

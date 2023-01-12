@@ -12,6 +12,12 @@
       forwardX11 = true;
       extraOptions = { RequestTTY = "yes"; };
     };
+    "ucare-10" = {
+      hostname = "ucare-10.cs.uchicago.edu";
+      forwardAgent = true;
+      forwardX11 = true;
+      extraOptions = { RequestTTY = "yes"; };
+    };
   };
 
   home.packages = [
