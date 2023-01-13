@@ -53,7 +53,7 @@ in {
     casks = [
       "1password"
       "1password-cli"
-      "google-drive"
+      # "google-drive"
       "gpg-suite"
       "loopback"
       "raycast"
@@ -62,6 +62,10 @@ in {
       "spotify"
       "neovide" # Neovim GUI
       "alt-tab"
+      "forklift" # sftp client
+      "zoom"
+      "google-chrome"
+      "firefox"
     ];
 
     # For cli packages that aren't currently available for macOS in `nixpkgs`

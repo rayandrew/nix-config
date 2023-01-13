@@ -12,6 +12,7 @@
     findutils
     fup-repl
     gawk
+    gcc
     gnugrep
     gnupg
     gnused
@@ -46,5 +47,9 @@
     watch
     xz
     zstd
+
+    # rust
+    rustc
+    cargo
   ];
 }

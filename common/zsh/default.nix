@@ -3,7 +3,7 @@
 let
   inherit (lib) mkAfter elem optionalString;
   inherit (config.my) shellAliases directory;
-  # scripts = ./scripts;
+  scripts = ./scripts;
   dataDir = "${config.xdg.dataHome}";
 in {
   # Fish Shell
@@ -14,7 +14,8 @@ in {
   programs.zsh = {
     enable = true;
     shellAliases = shellAliases;
-    defaultKeymap = "viins";
+    # defaultKeymap = "viins";
+    defaultKeymap = null;
     # completionInit = "";
     initExtraFirst = ''
       # zmodload zsh/zprof
@@ -29,20 +30,15 @@ in {
       zstyle ':znap:*' repos-dir ${dataDir}/zsh-snap/pkgs
       source "${dataDir}/zsh-snap/znap.zsh"
 
+      zvm_config() {
+        ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+        ZVM_CURSOR_STYLE_ENABLED=false
+      }
+      znap source jeffreytse/zsh-vi-mode
+
       ## Starship Prompt
-      # export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/config.toml"
       znap eval starship "${pkgs.starship}/bin/starship init zsh"
       znap prompt starship
-
-      # znap source ohmyzsh/ohmyzsh lib/{git,theme-and-appearance}
-      # znap prompt ohmyzsh/ohmyzsh robbyrussell
-      
-      # ZVM_INIT_MODE='sourcing'
-      # uncomment when https://github.com/jeffreytse/zsh-vi-mode/pull/188 merged
-      # blocker causing syntax highlighting not working
-      # znap source jeffreytse/zsh-vi-mode
-      ZVM_CURSOR_STYLE_ENABLED=true
-      znap source fbearoff/zsh-vi-mode
 
       function init_fzf() {
         [ -f ${pkgs.fzf}/share/fzf/completion.zsh ] && source ${pkgs.fzf}/share/fzf/completion.zsh
@@ -50,35 +46,36 @@ in {
       }
       zvm_after_init_commands+=(init_fzf)
 
+      znap source zsh-users/zsh-history-substring-search
       # znap source marlonrichert/zsh-autocomplete
       znap source marlonrichert/zsh-edit
+      znap source zdharma-continuum/fast-syntax-highlighting
 
       ZSH_AUTOSUGGEST_STRATEGY=(history completion)
       znap source zsh-users/zsh-autosuggestions
-
-      ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-      typeset -A ZSH_HIGHLIGHT_STYLES
-      ZSH_HIGHLIGHT_STYLES[cursor]='bg-blue underline'
-      znap source zsh-users/zsh-syntax-highlighting
-
-      # znap source zdharma-continuum/fast-syntax-highlighting
-
-      # znap install ohmyzsh/ohmyzsh
-      # plugins=(
-      #   # asdf
-      #   aliases
-      #   bundler
-      #   dotenv
-      #   git
-      #   macos
-      # )
-      # znap source ohmyzsh/ohmyzsh # might be slow
 
       znap eval zoxide "${pkgs.zoxide}/bin/zoxide init zsh"
     '';
 
     initExtra = mkAfter ''
-      # zprof 
+      # >>> conda initialize >>>
+      declare CONDA_PATH="${config.home.homeDirectory}/.miniconda3"
+      # !! Contents within this block are managed by 'conda init' !!
+      __conda_setup="$('${config.home.homeDirectory}/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+      if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+      else
+        echo "ho"
+        if [ -f "$CONDA_PATH/etc/profile.d/conda.sh" ]; then
+          . "$CONDA_PATH/etc/profile.d/conda.sh"
+        else
+          path+=("$CONDA_PATH/bin:$PATH")
+        fi
+      fi
+      unset __conda_setup
+      [[ -z $TMUX ]] || conda deactivate; conda activate base
+      # conda config --set changeps1 False
+      # <<< conda initialize <<<
     '';
   };
 

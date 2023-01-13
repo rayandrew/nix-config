@@ -94,7 +94,7 @@ in {
       yabai -m rule --add app="^Installer$" manage=off 
       yabai -m rule --add app="^Cisco AnyConnect Secure Mobility Client$" layer=above manage=off 
 
-      yabai -m rule --add app="^Finder$" sticky=on layer=above manage=off
+      yabai -m rule --add app="^Finder$" sticky=on manage=off # layer=above 
       yabai -m rule --add app="^Neovide$" manage=on space=3 # for note-taking
       yabai -m rule --add app="^(Mail|Calendar)$" space=8
       yabai -m rule --add label="Communication" app="^(Skype|Slack)$" space=9

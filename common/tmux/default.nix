@@ -1,6 +1,12 @@
 { config, lib, pkgs, ... }:
 
 let
+  tmuxp-config = ./tmuxp;
+  resize-script = ./resize-adaptable.sh;
+  tmuxp-variables = config.my // {
+    inherit tmuxp-config;
+    resize = resize-script;
+  };
   one-password = pkgs.tmuxPlugins.mkTmuxPlugin {
     pluginName = "1password";
     version = "unstable-2022-01-01";
@@ -11,6 +17,29 @@ let
       sha256 = "11pvwyxxkxqxyg34mcrzydz9q1wfkj1x5vx3wmy3l4p89qf2dvlk";
     };
   };
+  # https://pablo.tools/blog/computers/nix-mustache-templates/
+  templateFile = name: template: data:
+    pkgs.stdenv.mkDerivation {
+      name = "${name}";
+      nativeBuildInpts = [ pkgs.mustache-go ];
+
+      # Pass Json as file to avoid escaping
+      passAsFile = [ "jsonData" ];
+      jsonData = builtins.toJSON data;
+
+      # Disable phases which are not needed. In particular the unpackPhase will
+      # fail, if no src attribute is set
+      phases = [ "buildPhase" "installPhase" ];
+
+      buildPhase = ''
+        ${pkgs.mustache-go}/bin/mustache $jsonDataPath ${template} > rendered_file
+      '';
+
+      installPhase = ''
+        cp rendered_file $out
+      '';
+    };
+
 in {
   programs.tmux = {
     enable = true;
@@ -37,7 +66,7 @@ in {
     ];
 
     extraConfig = ''
-      setw -g aggressive-resize off
+      # setw -g aggressive-resize off
 
       # https://github.com/folke/tokyonight.nvim#making-undercurls-work-properly-in-tmux 
       set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
@@ -66,7 +95,7 @@ in {
       bind C-k confirm kill-session
 
       # reload tmux conf
-      bind C-e source-file /Users/rayandrew/.config/tmux/tmux.conf
+      bind C-e source-file ${config.xdg.configHome}/tmux/tmux.conf
 
       # find session
       bind C-f command-prompt -p find-session 'switch-client -t %%'
@@ -168,8 +197,8 @@ in {
     '';
   };
 
-  home.packages = [
-    (pkgs.writeShellScriptBin "tmuxa" ''
+  home.packages = with pkgs; [
+    (writeShellScriptBin "tmuxa" ''
        #
        # tmuxa 
        #
@@ -177,5 +206,15 @@ in {
        #
       ${pkgs.tmux}/bin/tmux attach || ${pkgs.tmux}/bin/tmux
     '')
+    tmuxp # session manager
   ];
+
+  xdg.configFile = {
+    "tmuxp/research.yml".source =
+      templateFile "research.yml" ./tmuxp/research.yml tmuxp-variables;
+    "tmuxp/cl-data.yml".source =
+      templateFile "cl-data.yml" ./tmuxp/cl-data.yml tmuxp-variables;
+    "tmuxp/nix.yml".source =
+      templateFile "nix.yml" ./tmuxp/nix.yml tmuxp-variables;
+  };
 }

@@ -55,7 +55,7 @@
       end
     end
   '';
-  environment.variables.SHELL = "${pkgs.zsh}/bin/zsh";
+  # environment.variables.SHELL = "${pkgs.zsh}/bin/zsh";
 
   # Install and setup ZSH to work with nix(-darwin) as well
   programs.zsh.enable = true;

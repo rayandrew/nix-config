@@ -22,12 +22,22 @@ in {
 
   # Put neovim configuration located in this repository into place in a way that edits to the
   # configuration don't require rebuilding the `home-manager` environment to take effect.
-  xdg.configFile."nvim".source = pkgs.fetchFromGitHub {
-    owner = "rayandrew";
-    repo = "nvim";
-    rev = "1240547d1206e5f5ef780f5fb94cffd20af5b4de";
-    sha256 = "sha256-npWMv45eLp2XOY7cwCzFJbYxK4N/FMjl7fDqspdPmy8=";
-  };
+  # xdg.configFile."nvim".source = pkgs.fetchFromGitHub {
+  #   owner = "rayandrew";
+  #   repo = "nvim";
+  #   rev = "435fdfef0619d191cdbbfb8a9dce4feff0633c15";
+  #   sha256 = "sha256-UgVgTR/1Z+jfIK8Xg9IlBZKYjMZOjdNue8kP9RoHYH8=";
+  # };
+  xdg.configFile."nvim".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.my.directory.projects}/nvim";
+  # if lib.pathExists "/Users/rayandrew/Projects/nvim" then
+  # else
+  #   pkgs.fetchFromGitHub {
+  #     owner = "rayandrew";
+  #     repo = "nvim";
+  #     rev = "435fdfef0619d191cdbbfb8a9dce4feff0633c15";
+  #     sha256 = "sha256-UgVgTR/1Z+jfIK8Xg9IlBZKYjMZOjdNue8kP9RoHYH8=";
+  #   };
 
   home.packages = [
     (pkgs.writeShellScriptBin "update-nvim-env" ''

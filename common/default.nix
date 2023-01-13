@@ -21,7 +21,7 @@
     ./packages.nix
     ./ssh.nix
     ./fish.nix
-    ./tmux.nix
+    ./tmux
     ./zsh
     ./starship.nix
   ];
