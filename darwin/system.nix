@@ -14,7 +14,7 @@
       jetbrains-mono-nerdfont
       sf-symbols
       recursive
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      (nerdfonts.override { fonts = [ "FiraCode" "Ubuntu" ]; })
     ];
   };
   nix.settings.allowed-users = [ config.my.username ];

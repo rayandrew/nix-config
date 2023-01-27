@@ -7,8 +7,9 @@ if builtins.hasAttr "hm" lib then
     enable = true;
     darwinLaunchOptions = [ "--single-instance" "--directory=~" ];
     font = {
-      # name = "JetBrainsMono Nerd Font";
-      name = "Pragmata Pro Mono";
+      name = "JetBrainsMono Nerd Font";
+      # name = "Pragmata Pro Mono";
+      # name = "Ubuntu Nerd Font";
       size = 16;
     };
     settings = {

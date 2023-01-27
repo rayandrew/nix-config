@@ -1,5 +1,5 @@
 session_name: cl-data
-start_directory: "{{ directory.research }}/trace-info"
+start_directory: "{{ directory.research }}/trace"
 shell_command_before:
   - conda activate trace
 windows:
@@ -8,7 +8,7 @@ windows:
     shell_command_before:
     panes:
       - shell_command:
-          - "{{ resize }} -p 80 -l main-vertical"
+          - "{{ resize }} -p 75 -l main-vertical"
           - clear
           - vim
       - blank

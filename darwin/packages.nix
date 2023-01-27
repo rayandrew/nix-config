@@ -7,5 +7,6 @@
     hydra-check
     fontconfig
     texlive.combined.scheme-full
+    discord
   ];
 }

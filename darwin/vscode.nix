@@ -20,8 +20,10 @@ in {
     userSettings = {
       "workbench.colorTheme" = "Tokyo Night";
       "workbench.startupEditor" = "none";
-      "editor.fontFamily" = "Pragmata Pro Mono";
+      # "editor.fontFamily" = "Pragmata Pro Mono";
+      "editor.fontFamily" = "Ubuntu Nerd Font";
       "editor.fontSize" = 16;
+      "editor.wordWrap" = "on";
     };
   };
 }

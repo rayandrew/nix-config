@@ -54,6 +54,8 @@ in {
       ZSH_AUTOSUGGEST_STRATEGY=(history completion)
       znap source zsh-users/zsh-autosuggestions
 
+      znap source asdf-vm/asdf
+
       znap eval zoxide "${pkgs.zoxide}/bin/zoxide init zsh"
     '';
 
@@ -65,7 +67,6 @@ in {
       if [ $? -eq 0 ]; then
         eval "$__conda_setup"
       else
-        echo "ho"
         if [ -f "$CONDA_PATH/etc/profile.d/conda.sh" ]; then
           . "$CONDA_PATH/etc/profile.d/conda.sh"
         else
@@ -74,6 +75,8 @@ in {
       fi
       unset __conda_setup
       [[ -z $TMUX ]] || conda deactivate; conda activate base
+
+      export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib"
       # conda config --set changeps1 False
       # <<< conda initialize <<<
     '';

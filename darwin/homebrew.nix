@@ -23,6 +23,14 @@ in {
     end
   '';
 
+  programs.zsh.interactiveShellInit = mkIf brewEnabled ''
+    eval "$(${config.homebrew.brewPrefix}/brew shellenv)"
+    # if test -d $(brew --prefix)
+    # then
+    #   FPATH="$(brew --prefix)/share/zsh/site-functions:''${FPATH}"
+    # fi
+  '';
+
   homebrew = {
     enable = true;
     onActivation = {
@@ -46,6 +54,8 @@ in {
       "1Password for Safari" = 1569813296;
       "Dark Reader for Safari" = 1438243180;
       Slack = 803453959;
+      # "Caffeinated" = 1362171212;
+      "Amphetamine" = 937984704;
     };
 
     # If an app isn't available in the Mac App Store, or the version in the App Store has
@@ -65,11 +75,15 @@ in {
       "forklift" # sftp client
       "zoom"
       "google-chrome"
-      "firefox"
+      # "firefox"
+      "orion"
+      "pdf-expert"
+      "desmume" # nds emulator
     ];
 
     # For cli packages that aren't currently available for macOS in `nixpkgs`
     brews = [
+      "libiconv"
       # "mas"
     ];
   };

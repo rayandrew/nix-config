@@ -19,13 +19,14 @@
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
     flake-utils-plus.inputs.flake-utils.follows = "flake-utils";
 
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
+    flake-compat.url = "github:edolstra/flake-compat";
+    flake-compat.flake = false;
 
     agenix.url = "github:ryantm/agenix/pull/107/head";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
+
+    nvchad.url = "github:NvChad/NvChad";
+    nvchad.flake = false;
   };
 
   outputs = inputs@{ self, flake-utils-plus, nixpkgs, darwin, ... }:

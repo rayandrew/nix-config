@@ -59,8 +59,8 @@ in {
       yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
       # creating workspaces 
-      yabai -m signal --add event=display_added action="sleep 1 && bash ${scripts}/create-spaces.sh"
-      yabai -m signal --add event=display_removed action="sleep 1 && bash ${scripts}/create-spaces.sh"
+      # yabai -m signal --add event=display_added action="sleep 1 && bash ${scripts}/create-spaces.sh"
+      # yabai -m signal --add event=display_removed action="sleep 1 && bash ${scripts}/create-spaces.sh"
 
       # sketchybar utils
       yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
@@ -68,9 +68,9 @@ in {
       yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
 
       # destroy utils
-      yabai -m signal --add event=window_focused action="${recordWindowId}/bin/yabai-record-window-id"
-      yabai -m signal --add event=application_front_switched action="${recordWindowId}/bin/yabai-record-window-id"
-      yabai -m signal --add event=window_destroyed action="${focusPrevWindow}/bin/yabai-focus-prev-window"
+      # yabai -m signal --add event=window_focused action="${recordWindowId}/bin/yabai-record-window-id"
+      # yabai -m signal --add event=application_front_switched action="${recordWindowId}/bin/yabai-record-window-id"
+      # yabai -m signal --add event=window_destroyed action="${focusPrevWindow}/bin/yabai-focus-prev-window"
 
       # focus window after active space changes
       yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
@@ -93,23 +93,29 @@ in {
       yabai -m rule --add app="^coreautha$" manage=off # 1Password biometric
       yabai -m rule --add app="^Installer$" manage=off 
       yabai -m rule --add app="^Cisco AnyConnect Secure Mobility Client$" layer=above manage=off 
+      yabai -m rule --add label="Orion" app="^Orion$" title="^(General|Appearance|Browsing|Sync|Passwords|Privacy|Search|Websites)$" manage=off
+      yabai -m rule --add label="Arc" app="^Arc$" title="^(Account|General|Shortcuts|Little Arc|Previews|Updates|Archive|Site Settings|Advanced)$" manage=off
+      yabai -m rule --add label="Desmume" app="^DeSmuME$" manage=off
 
       yabai -m rule --add app="^Finder$" sticky=on manage=off # layer=above 
       yabai -m rule --add app="^Neovide$" manage=on space=3 # for note-taking
+      yabai -m rule --add app="^Linear$" space=3
       yabai -m rule --add app="^(Mail|Calendar)$" space=8
-      yabai -m rule --add label="Communication" app="^(Skype|Slack)$" space=9
-      yabai -m rule --add app="^(Google Chrome|Firefox|Safari)$" space=10
+      yabai -m rule --add label="Communication" app="^(Skype|Slack|Discord)$" space=9
+      yabai -m rule --add app="^(Google Chrome|Firefox|Safari|Orion|Arc)$" space=10
 
       yabai -m space 1 --label one                 # main 
-      yabai -m space 2 --label two                 # cloud dev
+      yabai -m space 2 --label two --layout stack  # cloud dev
       yabai -m space 3 --label three               # neovide
       yabai -m space 4 --label four                #
       yabai -m space 5 --label five                #
       yabai -m space 6 --label six                 #
       yabai -m space 7 --label seven               #
       yabai -m space 8 --label mail --layout stack # mail + calendar
-      yabai -m space 9 --label nine                # social + chat
-      yabai -m space 10 --label ten                # browsers
+      yabai -m space 9 --label nine --layout stack # social + chat
+      yabai -m space 10 --label ten --layout stack # browsers
+
+      # bash ${scripts}/create-spaces.sh
     '';
   };
 
@@ -133,4 +139,11 @@ in {
         'INSERT or REPLACE INTO access VALUES("kTCCServiceAccessibility","${path}",1,2,4,1,NULL,NULL,0,NULL,NULL,0,NULL);
       DELETE from access where client_type = 1 and client != "${path}" and client like "%/bin/yabai";'
     '';
+
+  environment.systemPackages = [
+    (pkgs.writeShellScriptBin "yabai-create-space" ''
+      bash ${scripts}/create-spaces.sh
+    '')
+  ];
+
 }

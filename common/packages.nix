@@ -5,6 +5,7 @@
     age
     borgbackup
     bzip2
+    cachix
     curl
     diffutils
     fd
@@ -33,6 +34,7 @@
     nix-tree
     openssh
     openssl
+    pandoc
     p7zip
     python39
     ripgrep
