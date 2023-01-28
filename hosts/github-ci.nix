@@ -5,7 +5,8 @@
   hm.imports = [ ];
 
   networking.computerName = "runner";
-  networking.hostName = "runner";
+  # networking.hostName = "runner";
+  # networking.knownNetworkServices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
 
   # config.my = {
   #   username = "runner";

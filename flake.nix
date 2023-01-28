@@ -41,7 +41,7 @@
       channelsConfig = {
         allowUnfree = true;
         # allowUnsupportedSystem = true;
-        # allowBroken = true;
+        allowBroken = true;
       };
 
       # channels.nixpkgs.patches = inputs.nixpkgs.lib.mkIf inputs.nixpkgs.lib.stdenv.isDarwin [ ./patches/sketchybar.patch ];
@@ -65,7 +65,7 @@
         packages = exportPackages self.overlays channels;
       };
 
-      modules = exportModules [ ./common ./darwin ./hosts/midnight.nix ];
+      modules = exportModules [ ./common ./darwin ];
 
       hostDefaults = {
         modules = [ self.modules.common ];
@@ -74,16 +74,16 @@
 
       hosts.midnight = {
         system = "aarch64-darwin";
-        modules = [ self.modules.darwin self.modules.midnight ];
+        modules = [ self.modules.darwin ./hosts/midnight.nix ];
         output = "darwinConfigurations";
         builder = darwin.lib.darwinSystem;
       };
 
-      # hosts.githubCI = {
-      #   system = "x86_64-darwin";
-      #   modules = [ self.modules.darwin self.modules.github-ci ];
-      #   output = "darwinConfigurations";
-      #   builder = darwin.lib.darwinSystem;
-      # };
+      hosts.githubCI = {
+        system = "x86_64-darwin";
+        modules = [ self.modules.darwin ./hosts/github-ci.nix ];
+        output = "darwinConfigurations";
+        builder = darwin.lib.darwinSystem;
+      };
     };
 }

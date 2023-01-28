@@ -47,9 +47,9 @@ jobs:
           nix-env --set-flag priority 1 cachix
           # Build and switch to bootstrap config
           nix build .#darwinConfigurations.githubCI.system -L --show-trace
-          ./result/sw/bin/darwin-rebuild switch --flake .#githubCI
+          # ./result/sw/bin/darwin-rebuild switch --flake .#githubCI
           # Build and switch to full config
-          # /run/current-system/sw/bin/zsh -c 'darwin-rebuild switch --flake .#githubCI'
+          /run/current-system/sw/bin/bash -c 'darwin-rebuild switch --flake .#githubCI'
 
       - name: If scheduled, push commit with updated inputs
         if: ${{ github.event_name == 'schedule' && success() }}
