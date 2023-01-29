@@ -1,4 +1,4 @@
-{ lib, pkgs, flake, super, ... }:
+{ config, lib, pkgs, flake, super, ... }:
 
 let inherit (flake) inputs;
 in {
@@ -20,7 +20,7 @@ in {
   # sudo echo "trusted-users = @wheel" >> /etc/nix/nix.conf
   nix = {
     package = lib.mkDefault pkgs.nix;
-    settings = (import ../../shared/nix-conf.nix { inherit lib; }) // {
+    settings = (import ../../shared/nix-conf.nix { inherit lib config; }) // {
       extra-substituters = [
         "https://cache.nixos.org/"
         "https://nix-community.cachix.org"
