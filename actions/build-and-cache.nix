@@ -15,8 +15,8 @@ with constants; {
         installNixActionStep
         cachixActionStep
         setDefaultGitBranchStep
-        # checkNixStep
-        # validateFlakesStep
+        checkNixStep
+        validateFlakesStep
         (buildHomeManagerConfigurations home-manager.linux.hostnames)
         # (buildNixOSConfigurations nixos.hostnames)
       ];
@@ -29,8 +29,8 @@ with constants; {
         installNixActionStep
         cachixActionStep
         setDefaultGitBranchStep
-        checkNixStep
-        validateFlakesStep
+        # checkNixStep
+        # validateFlakesStep
         (buildHomeManagerConfigurations home-manager.darwin.hostnames)
         (buildNixDarwinConfigurations nix-darwin.hostnames)
       ];
