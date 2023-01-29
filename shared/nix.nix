@@ -1,4 +1,4 @@
-{ pkgs, flake, ... }:
+{ flake, ... }:
 
 let inherit (flake) inputs;
 in {
@@ -10,12 +10,14 @@ in {
   # -p pkgs.htop` will keep using an old version of nixpkgs
   nixPath = [
     "nixpkgs=${inputs.nixpkgs}"
-    "nixpkgs-unstable=${inputs.unstable}"
+    "nixpkgs-stable=${inputs.stable}"
+    "nixpkgs-unstable=${inputs.nixpkgs}"
   ];
   # Same as above, but for `nix shell nixpkgs#htop`
   # FIXME: for non-free packages you need to use `nix shell --impure`
   registry = {
     nixpkgs.flake = inputs.nixpkgs;
-    nixpkgs-unstable.flake = inputs.unstable;
+    nixpkgs-stable.flake = inputs.stable;
+    nixpkgs-unstable.flake = inputs.nixpkgs;
   };
 }

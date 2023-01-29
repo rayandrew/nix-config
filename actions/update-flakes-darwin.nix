@@ -18,7 +18,7 @@ with constants; {
       steps = with steps; [
         cancelPreviousRuns
         checkoutStep
-        installNixActionStep
+        (installNixActionStep { channel = "nixpkgs-unstable"; })
         cachixActionStep
         setDefaultGitBranchStep
         (buildHomeManagerConfigurations home-manager.darwin.hostnames)

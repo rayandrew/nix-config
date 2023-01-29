@@ -13,14 +13,13 @@
     };
   };
   checkoutStep = { uses = "actions/checkout@v3"; };
-  installNixActionStep = {
+  installNixActionStep = { channel ? "nixos-unstable" }: {
     uses = "cachix/install-nix-action@v18";
     "with" = {
       # Need to define a channel, otherwise it wiill use bash from environment
-      nix_path = "nixpkgs=channel:nixos-unstable";
+      nix_path = "nixpkgs=channel:${channel}";
       # Should avoid GitHub API rate limit
-      extra_nix_config =
-        "access-tokens = github.com=\${{ secrets.GITHUB_TOKEN }}";
+      extra_nix_config = "access-tokens = github.com=\${{ secrets.GITHUB_TOKEN }}";
     };
   };
   cachixActionStep = {

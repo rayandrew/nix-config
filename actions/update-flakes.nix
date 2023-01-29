@@ -15,7 +15,7 @@ with constants; {
         cancelPreviousRuns
         maximimizeBuildSpaceStep
         checkoutStep
-        installNixActionStep
+        (installNixActionStep { })
         cachixActionStep
         updateFlakeLockStep
         setDefaultGitBranchStep

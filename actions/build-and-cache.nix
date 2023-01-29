@@ -12,7 +12,7 @@ with constants; {
         cancelPreviousRuns
         maximimizeBuildSpaceStep
         checkoutStep
-        installNixActionStep
+        (installNixActionStep { })
         cachixActionStep
         setDefaultGitBranchStep
         # checkNixStep # FIXME: dunno why this cannot run
@@ -26,7 +26,7 @@ with constants; {
       steps = with steps; [
         cancelPreviousRuns
         checkoutStep
-        installNixActionStep
+        (installNixActionStep { channel = "nixpkgs-unstable"; })
         cachixActionStep
         setDefaultGitBranchStep
         # checkNixStep

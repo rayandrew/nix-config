@@ -8,7 +8,12 @@ in {
       lib = prev.lib.extend
         (_: _: (import ../lib { inherit (prev) lib config; }));
 
-      unstable = import inputs.unstable {
+      unstable = import inputs.nixpkgs {
+        inherit system;
+        config = prev.config;
+      };
+
+      stable = import inputs.stable {
         inherit system;
         config = prev.config;
       };
