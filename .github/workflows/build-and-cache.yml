@@ -14,7 +14,7 @@ jobs:
       - uses: cachix/install-nix-action@v18
         with:
           extra_nix_config: access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-          nix_path: nixpkgs=channel:nixos-unstable
+          nix_path: nixpkgs=channel:nixpkgs-unstable
       - uses: cachix/cachix-action@v12
         with:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -23,7 +23,7 @@ jobs:
       - name: Set default git branch (to reduce log spam)
         run: git config --global init.defaultBranch main
       - name: Check if all `.nix` files are formatted correctly
-        run: nix run '.#formatCheck'
+        run: nix run '.#formatCheck' --show-trace
       - name: Validate Flakes
         run: nix flake check
       - name: Build Home-Manager configs
@@ -37,7 +37,7 @@ jobs:
       - uses: cachix/install-nix-action@v18
         with:
           extra_nix_config: access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-          nix_path: nixpkgs=channel:nixos-unstable
+          nix_path: nixpkgs=channel:nixpkgs-unstable
       - uses: cachix/cachix-action@v12
         with:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}

@@ -17,7 +17,7 @@
     uses = "cachix/install-nix-action@v18";
     "with" = {
       # Need to define a channel, otherwise it wiill use bash from environment
-      nix_path = "nixpkgs=channel:nixos-unstable";
+      nix_path = "nixpkgs=channel:nixpkgs-unstable";
       # Should avoid GitHub API rate limit
       extra_nix_config =
         "access-tokens = github.com=\${{ secrets.GITHUB_TOKEN }}";
@@ -37,7 +37,7 @@
   };
   checkNixStep = {
     name = "Check if all `.nix` files are formatted correctly";
-    run = "nix run '.#formatCheck'";
+    run = "nix run '.#formatCheck' --show-trace";
   };
   validateFlakesStep = {
     name = "Validate Flakes";
