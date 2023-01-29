@@ -11,6 +11,7 @@ in with constants; {
     update-flakes = {
       inherit (ubuntu) runs-on;
       steps = with steps; [
+        cancelPreviousRuns
         maximimizeBuildSpaceStep
         checkoutStep
         installNixActionStep

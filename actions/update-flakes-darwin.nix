@@ -1,8 +1,7 @@
 let
   steps = import ./steps.nix;
   constants = import ./constants.nix;
-in
-with constants; {
+in with constants; {
   name = "update-flakes-darwin";
   on = {
     workflow_run = {
@@ -16,6 +15,7 @@ with constants; {
       inherit (macos) runs-on;
       "if" = "\${{ github.event.workflow_run.conclusion == 'success' }}";
       steps = with steps; [
+        cancelPreviousRuns
         checkoutStep
         installNixActionStep
         cachixActionStep

@@ -1,4 +1,8 @@
 {
+  cancelPreviousRuns = {
+    name = "Cancel Previous Runs";
+    uses = "styfle/cancel-workflow-action@0.11.0";
+  };
   maximimizeBuildSpaceStep = {
     uses = "easimon/maximize-build-space@v6";
     "with" = {
