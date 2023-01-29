@@ -37,7 +37,7 @@
   };
   checkNixStep = {
     name = "Check if all `.nix` files are formatted correctly";
-    run = "nix build '.#formatCheck' && ./result/bin/formatCheck";
+    run = "nix-store --repair --verify --check-contents && nix build '.#formatCheck' && ./result/bin/formatCheck";
     # env = {
     #   NIX_LOG_DIR = "$TMPDIR";
     #   NIX_STATE_DIR = "$TMPDIR";
