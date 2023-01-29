@@ -2,7 +2,7 @@
 
 let inherit (config.my-meta) username;
 in {
-  imports = [ flake.inputs.home-manager.darwinModules.home-manager ];
+  imports = [ flake.inputs.home.darwinModules.home-manager ];
 
   programs.zsh.enable = true;
   environment.shells = [ pkgs.zsh ];

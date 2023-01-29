@@ -1,6 +1,6 @@
 # Shamelessly copied from https://github.com/thiagokokada/nix-configs/blob/master/lib/flake.nix
 
-{ self, nixpkgs, nix-darwin, home-manager, flake-utils, ... }@inputs:
+{ self, nixpkgs, nix-darwin, home, flake-utils, ... }@inputs:
 
 let inherit (flake-utils.lib) eachDefaultSystem mkApp;
 in {
@@ -113,7 +113,7 @@ in {
     , configuration ? ../home-manager
     , deviceType ? "desktop"
     , system ? "x86_64-linux"
-    , homeManagerConfiguration ? home-manager.lib.homeManagerConfiguration
+    , homeManagerConfiguration ? home.lib.homeManagerConfiguration
     }:
     let
       pkgs = import nixpkgs { inherit system; };

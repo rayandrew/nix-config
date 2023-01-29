@@ -1,4 +1,4 @@
-{ pkgs, lib, flake, system, ... }:
+{ flake, system, ... }:
 
 let inherit (flake) inputs;
 in {
@@ -6,7 +6,12 @@ in {
     inputs.deadnix.overlays.default
     (final: prev: rec {
       lib = prev.lib.extend
-        (finalLib: prevLib: (import ../lib { inherit (prev) lib config; }));
+        (_: _: (import ../lib { inherit (prev) lib config; }));
+
+      unstable = import inputs.unstable {
+        inherit system;
+        config = prev.config;
+      };
 
       jetbrains-mono-nerdfont =
         prev.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
@@ -14,9 +19,10 @@ in {
       nix-whereis = prev.callPackage ../packages/nix-whereis { };
       nixpkgs-review =
         if (prev.stdenv.isLinux) then
-          prev.nixpkgs-review.override { withSandboxSupport = true; }
+          final.unstable.nixpkgs-review.override { withSandboxSupport = true; }
         else
-          prev.nixpkgs-review;
+          final.unstable.nixpkgs-review;
+
 
       sf-symbols = final.sf-symbols-minimal;
       sf-symbols-app = prev.callPackage ../packages/sf-symbols {

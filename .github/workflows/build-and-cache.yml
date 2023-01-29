@@ -14,26 +14,7 @@ jobs:
       - uses: cachix/install-nix-action@v18
         with:
           extra_nix_config: access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-          nix_path: nixpkgs=channel:nixpkgs-unstable
-      - uses: cachix/cachix-action@v12
-        with:
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          extraPullNames: nix-community
-          name: rayandrew-nix-config
-      - name: Set default git branch (to reduce log spam)
-        run: git config --global init.defaultBranch main
-      - name: Build Home-Manager configs
-        run: nix build '.#homeConfigurations.home-linux.activationPackage'
-  build-macos:
-    runs-on: macos-latest
-    steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.11.0
-      - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v18
-        with:
-          extra_nix_config: access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-          nix_path: nixpkgs=channel:nixpkgs-unstable
+          nix_path: nixpkgs=channel:nixos-unstable
       - uses: cachix/cachix-action@v12
         with:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -45,6 +26,25 @@ jobs:
         run: nix run '.#formatCheck' --show-trace
       - name: Validate Flakes
         run: nix flake check
+      - name: Build Home-Manager configs
+        run: nix build '.#homeConfigurations.home-linux.activationPackage'
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v18
+        with:
+          extra_nix_config: access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+          nix_path: nixpkgs=channel:nixos-unstable
+      - uses: cachix/cachix-action@v12
+        with:
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          extraPullNames: nix-community
+          name: rayandrew-nix-config
+      - name: Set default git branch (to reduce log spam)
+        run: git config --global init.defaultBranch main
       - name: Build Home-Manager configs
         run: nix build '.#homeConfigurations.home-macos.activationPackage'
       - name: Build Nix Darwin configs
