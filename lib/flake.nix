@@ -37,12 +37,13 @@ in {
     { name, text, deps ? pkgs: with pkgs; [ coreutils findutils nixpkgs-fmt ] }:
     eachDefaultSystem (system:
     let pkgs = import nixpkgs { inherit system; };
-    in {
+    in rec {
+      packages.${name} = pkgs.writeShellApplication {
+        inherit name text;
+        runtimeInputs = (deps pkgs);
+      };
       apps.${name} = mkApp {
-        drv = pkgs.writeShellApplication {
-          inherit name text;
-          runtimeInputs = (deps pkgs);
-        };
+        drv = packages.${name};
         exePath = "/bin/${name}";
       };
     });
