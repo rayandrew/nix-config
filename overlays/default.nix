@@ -34,8 +34,6 @@ in {
       sf-symbols-minimal = prev.callPackage ../packages/sf-symbols { };
 
       scripts = prev.callPackage ../packages/scripts { }; # own scripts
-
-      sketchybar-shendy = prev.callPackage ../packages/sketchybar-shendy { };
     })
   ];
 }

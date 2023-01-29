@@ -5,6 +5,7 @@ let
   fontSize = "12";
   barBackground = "16161e";
   barForeground = "a9b1d6";
+  configs = ./configs;
 in
 if builtins.hasAttr "hm" lib then {
   home.activation.sketchybar = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -12,7 +13,7 @@ if builtins.hasAttr "hm" lib then {
     # touch /tmp/dynamic-island-cache
   '';
 } else {
-  environment.systemPackages = with pkgs; [ sketchybar-shendy ];
+  environment.systemPackages = with pkgs; [ ];
 
   services.sketchybar = {
     enable = true;
@@ -20,11 +21,11 @@ if builtins.hasAttr "hm" lib then {
     config = ''
       #!/usr/bin/env sh
 
-      source "${pkgs.sketchybar-shendy}/color.sh"
+      source "${configs}/color.sh"
 
-      PLUGIN_DIR="${pkgs.sketchybar-shendy}/controller"
-      PLUGIN_TOUCH="${pkgs.sketchybar-shendy}/controller/touch"
-      ITEM_DIR="${pkgs.sketchybar-shendy}/view"
+      PLUGIN_DIR="${configs}/controller"
+      PLUGIN_TOUCH="${configs}/controller/touch"
+      ITEM_DIR="${configs}/view"
 
       PADDING=4
       ICON="SF Symbols"
@@ -56,14 +57,7 @@ if builtins.hasAttr "hm" lib then {
       source "$ITEM_DIR/front_app.sh"
 
       # right
-      # source "$ITEM_DIR/time.sh"
-      # source "$ITEM_DIR/cal.sh"
-      # source "$ITEM_DIR/wifi.sh"
-      # source "$ITEM_DIR/mic.sh"
       source "$ITEM_DIR/battery.sh"
-      # source "$ITEM_DIR/airpodsbattery.sh"
-      # source "$ITEM_DIR/airpodscasebattery.sh"
-      # source "$ITEM_DIR/sound.sh"
       source "$ITEM_DIR/disk.sh"
       source "$ITEM_DIR/mem.sh"
       source "$ITEM_DIR/cpu.sh"
@@ -76,9 +70,9 @@ if builtins.hasAttr "hm" lib then {
   };
 
   launchd.user.agents.sketchybar.environment = {
-    PLUGIN_DIR = "${pkgs.sketchybar-shendy}/controller";
-    PLUGIN_TOUCH = "${pkgs.sketchybar-shendy}/controller/touch";
-    ITEM_DIR = "${pkgs.sketchybar-shendy}/view";
+    PLUGIN_DIR = "${configs}/controller";
+    PLUGIN_TOUCH = "${configs}/controller/touch";
+    ITEM_DIR = "${configs}/view";
   };
 
   launchd.user.agents.sketchybar.serviceConfig.ThrottleInterval = 30;
