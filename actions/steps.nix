@@ -38,10 +38,10 @@
   checkNixStep = {
     name = "Check if all `.nix` files are formatted correctly";
     run = "nix run '.#formatCheck'";
-    env = {
-      NIX_LOG_DIR = "$TMPDIR";
-      NIX_STATE_DIR = "$TMPDIR";
-    };
+    # env = {
+    #   NIX_LOG_DIR = "$TMPDIR";
+    #   NIX_STATE_DIR = "$TMPDIR";
+    # };
   };
   validateFlakesStep = {
     name = "Validate Flakes";
