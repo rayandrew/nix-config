@@ -64,7 +64,7 @@
         system = "aarch64-darwin";
       })
       (mkDarwinConfig {
-        hostname = "github-ci";
+        hostname = "github-ci-darwin";
         system = "x86_64-darwin";
       })
 

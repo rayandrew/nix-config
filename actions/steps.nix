@@ -37,7 +37,7 @@
   };
   checkNixStep = {
     name = "Check if all `.nix` files are formatted correctly";
-    run = "nix run '.#formatCheck' --show-trace";
+    run = "nix run .#formatCheck";
   };
   validateFlakesStep = {
     name = "Validate Flakes";
