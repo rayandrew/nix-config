@@ -34,7 +34,10 @@ in {
       });
 
   mkRunCmd =
-    { name, text, deps ? pkgs: with pkgs; [ coreutils findutils nixpkgs-fmt ] }:
+    { name
+    , text
+    , deps ? pkgs: with pkgs; [ coreutils findutils nixpkgs-fmt ]
+    }:
     eachDefaultSystem (system:
     let pkgs = import nixpkgs { inherit system; };
     in rec {

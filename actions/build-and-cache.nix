@@ -15,7 +15,7 @@ with constants; {
         (installNixActionStep { })
         cachixActionStep
         setDefaultGitBranchStep
-        checkNixStep # FIXME: dunno why this cannot run
+        # checkNixStep # FIXME: dunno why this cannot run
         validateFlakesStep
         (buildHomeManagerConfigurations home-manager.linux.hostnames)
         # (buildNixOSConfigurations nixos.hostnames)

@@ -37,13 +37,12 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, ... }@inputs:
     let
-      inherit (flake-utils.lib) eachDefaultSystem;
       inherit (import ./lib/attrsets.nix { inherit (nixpkgs) lib; })
         recursiveMergeAttrs;
       inherit (import ./lib/flake.nix inputs)
-        mkGHActionsYAMLs mkRunCmd mkNixOSConfig mkDarwinConfig mkHomeConfig;
+        mkGHActionsYAMLs mkRunCmd mkDarwinConfig mkHomeConfig;
     in
     (recursiveMergeAttrs [
       # Templates
@@ -61,7 +60,7 @@
         };
       }
 
-      # Systems
+      # Darwin 
       (mkDarwinConfig {
         hostname = "midnight";
         system = "aarch64-darwin";
@@ -70,7 +69,6 @@
         hostname = "github-ci-darwin";
         system = "x86_64-darwin";
       })
-
 
       # Home configurations
       (mkHomeConfig { hostname = "home-linux"; })
