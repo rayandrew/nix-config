@@ -1,89 +1,97 @@
 {
-  description = "Ray's Darwin System";
+  description = "Ray's Nix Configs";
 
   inputs = {
     # Package sets
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # nixpkgs.url = "github:azuwis/nixpkgs/sketchybar";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Environment/system management
-    darwin.url = "github:lnl7/nix-darwin/master";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin = {
+      url = "github:lnl7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # home manager
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Flake utilities
     flake-utils.url = "github:numtide/flake-utils";
-    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
-    flake-utils-plus.inputs.flake-utils.follows = "flake-utils";
-
-    flake-compat.url = "github:edolstra/flake-compat";
-    flake-compat.flake = false;
-
-    agenix.url = "github:ryantm/agenix/pull/107/head";
-    agenix.inputs.nixpkgs.follows = "nixpkgs";
-
-    nvchad.url = "github:NvChad/NvChad";
-    nvchad.flake = false;
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
   };
 
-  outputs = inputs@{ self, flake-utils-plus, nixpkgs, darwin, ... }:
+  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
     let
-      inherit (flake-utils-plus.lib)
-        mkFlake exportModules exportPackages exportOverlays;
-      inherit (inputs.nixpkgs.lib)
-        attrValues makeOverridable optionalAttrs singleton;
-    in mkFlake {
-      inherit self inputs;
+      inherit (flake-utils.lib) eachDefaultSystem;
+      inherit (import ./lib/attrsets.nix { inherit (nixpkgs) lib; })
+        recursiveMergeAttrs;
+      inherit (import ./lib/flake.nix inputs)
+        mkGHActionsYAMLs mkRunCmd mkNixOSConfig mkDarwinConfig mkHomeConfig;
+    in (recursiveMergeAttrs [
+      # Templates
+      {
+        templates = {
+          default = self.outputs.templates.new-host;
+          new-darwin = {
+            path = ./templates/new-darwin;
+            description = "Create a new Darwin host";
+          };
+          new-nixos = {
+            path = ./templates/new-nixos;
+            description = "Create a new NixOS host";
+          };
+        };
+      }
 
-      channelsConfig = {
-        allowUnfree = true;
-        # allowUnsupportedSystem = true;
-        allowBroken = true;
-      };
-
-      # channels.nixpkgs.patches = inputs.nixpkgs.lib.mkIf inputs.nixpkgs.lib.stdenv.isDarwin [ ./patches/sketchybar.patch ];
-
-      # channels.nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (inputs.nixpkgs.lib.getName pkg) [
-      #   "spotify"
-      # ];
-
-      # Add some additional functions to `lib`.
-      # lib = inputs.nixpkgs.lib.extend (_: _: {
-      #   mkDarwinSystem = import ./lib/mkDarwinSystem.nix inputs;
-      #   lsnix = import ./lib/lsnix.nix;
-      # });
-
-      # Overlays
-      overlay = import ./overlay.nix;
-      overlays = exportOverlays { inherit (self) pkgs inputs; };
-      sharedOverlays = [ self.overlay flake-utils-plus.overlay ];
-
-      outputsBuilder = channels: {
-        packages = exportPackages self.overlays channels;
-      };
-
-      modules = exportModules [ ./common ./darwin ];
-
-      hostDefaults = {
-        modules = [ self.modules.common ];
-        specialArgs = { inherit inputs; };
-      };
-
-      hosts.midnight = {
+      # Systems
+      (mkDarwinConfig {
+        hostname = "midnight";
         system = "aarch64-darwin";
-        modules = [ self.modules.darwin ./hosts/midnight.nix ];
-        output = "darwinConfigurations";
-        builder = darwin.lib.darwinSystem;
-      };
+      })
 
-      hosts.githubCI = {
+      # Home configurations
+      (mkHomeConfig { hostname = "home-linux"; })
+      (mkHomeConfig {
+        hostname = "home-macos";
+        configuration = ./home-manager/macos.nix;
         system = "x86_64-darwin";
-        modules = [ self.modules.darwin ./hosts/github-ci.nix ];
-        output = "darwinConfigurations";
-        builder = darwin.lib.darwinSystem;
-      };
-    };
+        homePath = "/Users";
+      })
+
+      # Commands
+      (mkRunCmd {
+        name = "formatCheck";
+        text = ''
+          find . -name '*.nix' \
+            ! -name 'hardware-configuration.nix' \
+            ! -name 'cachix.nix' \
+            ! -path './modules/home-manager/*' \
+            ! -path './modules/nixos/*' \
+            -exec nixpkgs-fmt --check {} \+
+        '';
+      })
+      (mkRunCmd {
+        name = "format";
+        text = ''
+          find . -name '*.nix' \
+            ! -name 'hardware-configuration.nix' \
+            ! -name 'cachix.nix' \
+            ! -path './modules/home-manager/*' \
+            ! -path './modules/nixos/*' \
+            -exec nixpkgs-fmt {} \+
+        '';
+      })
+
+      # GitHub Actions
+      (mkGHActionsYAMLs [
+        "build-and-cache"
+        "update-flakes"
+        "update-flakes-darwin"
+      ])
+    ]);
 }

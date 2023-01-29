@@ -1,0 +1,13 @@
+session_name: nix
+start_directory: "{{ nixConfigPath }}"
+shell_command_before:
+  - "conda activate trace"
+windows:
+  - window_name: "dev"
+    focus: True
+    shell_command_before:
+    panes:
+      - shell_command:
+          - "{{ resize }} -p 80 -l main-vertical"
+          - vim
+      - blank

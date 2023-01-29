@@ -1,47 +1,5 @@
 {
   "nodes": {
-    "agenix": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1652747504,
-        "narHash": "sha256-0FnoUBia9EYeDlg/XcPf043Tl/5RneSUaZ6IMsBYreY=",
-        "owner": "ryantm",
-        "repo": "agenix",
-        "rev": "36d70a4a1d0f1aaab60bd70c88c9010d9cc7abe8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ryantm",
-        "ref": "pull/107/head",
-        "repo": "agenix",
-        "type": "github"
-      }
-    },
-    "darwin": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1673295039,
-        "narHash": "sha256-AsdYgE8/GPwcelGgrntlijMg4t3hLFJFCRF3tL5WVjA=",
-        "owner": "lnl7",
-        "repo": "nix-darwin",
-        "rev": "87b9d090ad39b25b2400029c64825fc2a8868943",
-        "type": "github"
-      },
-      "original": {
-        "owner": "lnl7",
-        "ref": "master",
-        "repo": "nix-darwin",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -73,26 +31,6 @@
         "type": "github"
       }
     },
-    "flake-utils-plus": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ]
-      },
-      "locked": {
-        "lastModified": 1657226504,
-        "narHash": "sha256-GIYNjuq4mJlFgqKsZ+YrgzWm0IpA4axA3MCrdKYj7gs=",
-        "owner": "gytis-ivaskevicius",
-        "repo": "flake-utils-plus",
-        "rev": "2bf0f91643c2e5ae38c1b26893ac2927ac9bd82a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gytis-ivaskevicius",
-        "repo": "flake-utils-plus",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -101,61 +39,63 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1673301981,
-        "narHash": "sha256-E5C8nqf+XCGJLQjT/w9d5U+GPg7/ZchbLSe9FXbaDDA=",
+        "lastModified": 1674928308,
+        "narHash": "sha256-elVU4NUZEl11BdT4gC+lrpLYM8Ccxqxs19Ix84HTI9o=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f1b1594e7b8503dba812c4c1b1392d39da32793d",
+        "rev": "08a778d80308353f4f65c9dcd3790b5da02d6306",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nix-darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1673295039,
+        "narHash": "sha256-AsdYgE8/GPwcelGgrntlijMg4t3hLFJFCRF3tL5WVjA=",
+        "owner": "lnl7",
+        "repo": "nix-darwin",
+        "rev": "87b9d090ad39b25b2400029c64825fc2a8868943",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lnl7",
+        "ref": "master",
+        "repo": "nix-darwin",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1673134516,
-        "narHash": "sha256-mAZQKqkNQbBmJnmUU0blOfkKlgMSSVyPHdeWeuKad8U=",
+        "lastModified": 1674839022,
+        "narHash": "sha256-8F1U06t9glkgBC8gBfjoA2eeUb9MYRRp6NMKY3c0VEI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f6f44561884c3470e2b783683d5dbac42dfc833b",
+        "rev": "14b6cf7602c341e525a8fe17ac2349769376515e",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-unstable",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nvchad": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1674747386,
-        "narHash": "sha256-nYt/otqMfu/ViPdt/Mlpqob5dRW9NQz6q2IWPsbl14c=",
-        "owner": "NvChad",
-        "repo": "NvChad",
-        "rev": "6d66f1df11bc94725fc3b935ab29ed7c802cf22a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NvChad",
-        "repo": "NvChad",
         "type": "github"
       }
     },
     "root": {
       "inputs": {
-        "agenix": "agenix",
-        "darwin": "darwin",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
-        "flake-utils-plus": "flake-utils-plus",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs",
-        "nvchad": "nvchad"
+        "nix-darwin": "nix-darwin",
+        "nixpkgs": "nixpkgs"
       }
     },
     "utils": {
