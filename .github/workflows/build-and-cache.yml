@@ -22,8 +22,6 @@ jobs:
           name: rayandrew-nix-config
       - name: Set default git branch (to reduce log spam)
         run: git config --global init.defaultBranch main
-      - name: Check if all `.nix` files are formatted correctly
-        run: nix build '.#formatCheck'
       - name: Validate Flakes
         run: nix flake check
       - name: Build Home-Manager configs
