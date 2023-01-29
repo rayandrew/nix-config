@@ -26,7 +26,7 @@ jobs:
           NIX_LOG_DIR: $TMPDIR
           NIX_STATE_DIR: $TMPDIR
         name: Check if all `.nix` files are formatted correctly
-        run: nix run '.#formatCheck' --eval-store $PWD/nix
+        run: nix run '.#formatCheck'
       - name: Validate Flakes
         run: nix flake check
       - name: Build Home-Manager configs
