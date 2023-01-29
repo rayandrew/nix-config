@@ -23,7 +23,7 @@ jobs:
       - name: Set default git branch (to reduce log spam)
         run: git config --global init.defaultBranch main
       - name: Check if all `.nix` files are formatted correctly
-        run: nix run .#formatCheck
+        run: nix run '.#formatCheck' --eval-store $PWD/nix
       - name: Validate Flakes
         run: nix flake check
       - name: Build Home-Manager configs
@@ -48,7 +48,7 @@ jobs:
       - name: Build Home-Manager configs
         run: nix build '.#homeConfigurations.home-macos.activationPackage'
       - name: Build Nix Darwin configs
-        run: nix build '.#darwinConfigurations.github-ci.system'
+        run: nix build '.#darwinConfigurations.github-ci-darwin.system'
 name: build-and-cache
 "on":
   - push

@@ -20,7 +20,7 @@ jobs:
       - name: Build Home-Manager configs
         run: nix build '.#homeConfigurations.home-macos.activationPackage'
       - name: Build Nix Darwin configs
-        run: nix build '.#darwinConfigurations.github-ci.system'
+        run: nix build '.#darwinConfigurations.github-ci-darwin.system'
 name: update-flakes-darwin
 "on":
   workflow_dispatch: null

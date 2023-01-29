@@ -37,7 +37,7 @@
   };
   checkNixStep = {
     name = "Check if all `.nix` files are formatted correctly";
-    run = "nix run .#formatCheck";
+    run = "nix run '.#formatCheck' --eval-store $PWD/nix";
   };
   validateFlakesStep = {
     name = "Validate Flakes";
