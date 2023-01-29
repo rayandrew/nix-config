@@ -17,7 +17,7 @@
     uses = "cachix/install-nix-action@v18";
     "with" = {
       # Need to define a channel, otherwise it wiill use bash from environment
-      nix_path = "nixpkgs=channel:nixpkgs-unstable";
+      nix_path = "nixpkgs=channel:nixos-unstable";
       # Should avoid GitHub API rate limit
       extra_nix_config =
         "access-tokens = github.com=\${{ secrets.GITHUB_TOKEN }}";
