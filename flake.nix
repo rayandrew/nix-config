@@ -17,6 +17,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    deadnix = {
+      url = "github:astro/deadnix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.url = "flake-utils";
+    };
+
     # Flake utilities
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat = {
@@ -32,7 +38,8 @@
         recursiveMergeAttrs;
       inherit (import ./lib/flake.nix inputs)
         mkGHActionsYAMLs mkRunCmd mkNixOSConfig mkDarwinConfig mkHomeConfig;
-    in (recursiveMergeAttrs [
+    in
+    (recursiveMergeAttrs [
       # Templates
       {
         templates = {

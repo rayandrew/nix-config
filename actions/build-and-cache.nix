@@ -1,7 +1,8 @@
 let
   steps = import ./steps.nix;
   constants = import ./constants.nix;
-in with constants; {
+in
+with constants; {
   name = "build-and-cache";
   on = [ "push" "workflow_dispatch" ];
   jobs = {

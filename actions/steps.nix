@@ -45,14 +45,16 @@
   };
   buildHomeManagerConfigurations = hostnames: {
     name = "Build Home-Manager configs";
-    run = builtins.concatStringsSep "\n" (map (hostname:
-      "nix build '.#homeConfigurations.${hostname}.activationPackage'")
+    run = builtins.concatStringsSep "\n" (map
+      (hostname:
+        "nix build '.#homeConfigurations.${hostname}.activationPackage'")
       hostnames);
   };
   buildNixOSConfigurations = hostnames: {
     name = "Build NixOS configs";
-    run = builtins.concatStringsSep "\n" (map (hostname:
-      "nix build '.#nixosConfigurations.${hostname}.config.system.build.toplevel'")
+    run = builtins.concatStringsSep "\n" (map
+      (hostname:
+        "nix build '.#nixosConfigurations.${hostname}.config.system.build.toplevel'")
       hostnames);
   };
   buildNixDarwinConfigurations = hostnames: {

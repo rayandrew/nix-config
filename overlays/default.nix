@@ -3,6 +3,7 @@
 let inherit (flake) inputs;
 in {
   nixpkgs.overlays = [
+    inputs.deadnix.overlays.default
     (final: prev: rec {
       lib = prev.lib.extend
         (finalLib: prevLib: (import ../lib { inherit (prev) lib config; }));
@@ -11,10 +12,11 @@ in {
         prev.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
 
       nix-whereis = prev.callPackage ../packages/nix-whereis { };
-      nixpkgs-review = if (prev.stdenv.isLinux) then
-        prev.nixpkgs-review.override { withSandboxSupport = true; }
-      else
-        prev.nixpkgs-review;
+      nixpkgs-review =
+        if (prev.stdenv.isLinux) then
+          prev.nixpkgs-review.override { withSandboxSupport = true; }
+        else
+          prev.nixpkgs-review;
 
       sf-symbols = final.sf-symbols-minimal;
       sf-symbols-app = prev.callPackage ../packages/sf-symbols {

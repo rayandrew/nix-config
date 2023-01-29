@@ -7,7 +7,8 @@
 let
   inherit (flake) inputs;
   netDevices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
-in {
+in
+{
   imports = [ ../../nix-darwin ];
 
   device = {

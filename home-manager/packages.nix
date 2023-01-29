@@ -9,6 +9,7 @@
     coreutils-full
     curl
     daemon
+    deadnix
     diffutils
     discord
     fd

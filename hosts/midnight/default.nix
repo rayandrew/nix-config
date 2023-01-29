@@ -4,7 +4,8 @@ let
   inherit (config.my-meta) username;
   inherit (config.users.users.${username}) home;
   netDevices = [ "Wi-Fi" "USB 10/100/1000 LAN" ];
-in {
+in
+{
   imports = [ ../../nix-darwin ];
 
   networking.computerName = "midnight";
