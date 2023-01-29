@@ -43,7 +43,7 @@
       # Templates
       {
         templates = {
-          default = self.outputs.templates.new-host;
+          default = self.outputs.templates.new-darwin;
           new-darwin = {
             path = ./templates/new-darwin;
             description = "Create a new Darwin host";
@@ -60,6 +60,11 @@
         hostname = "midnight";
         system = "aarch64-darwin";
       })
+      (mkDarwinConfig {
+        hostname = "github-ci";
+        system = "x86_64-darwin";
+      })
+
 
       # Home configurations
       (mkHomeConfig { hostname = "home-linux"; })

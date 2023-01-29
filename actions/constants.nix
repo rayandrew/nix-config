@@ -6,5 +6,5 @@
     darwin.hostnames = [ "home-macos" ];
   };
   nixos.hostnames = [ ];
-  nix-darwin.hostnames = [ "midnight" ];
+  nix-darwin.hostnames = [ "github-ci" ];
 }
