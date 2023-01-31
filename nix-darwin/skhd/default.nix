@@ -86,9 +86,12 @@ if builtins.hasAttr "hm" lib then {
         hyper - b : brew services restart sketchybar
 
         # Open applications
-        lalt - return : open -n -a ${pkgs.kitty}/Applications/kitty.app
-        lalt + lshift - return : open -n -a ${pkgs.kitty}/Applications/kitty.app --args ${pkgs.zsh}/bin/zsh -c "${pkgs.tmux}/bin/tmux attach || ${pkgs.tmux}/bin/tmux"
+        # lalt - return : open -n -a ${pkgs.kitty}/Applications/kitty.app
+        # lalt + lshift - return : open -n -a ${pkgs.kitty}/Applications/kitty.app --args ${pkgs.zsh}/bin/zsh -c "${pkgs.tmux}/bin/tmux attach || ${pkgs.tmux}/bin/tmux"
         # lalt + lshift - return : open -n -a ${pkgs.kitty}/Applications/kitty.app --args --session ${scripts}/tmux-kitty.session
+        lalt - return : ${pkgs.wezterm}/bin/wezterm start
+        # lalt + shift - return : ${pkgs.wezterm}/bin/wezterm start -- zsh -l -c "tmux attach || tmux"
+
         lalt - e : open ~/
         lalt - n : open -n -a /Applications/Neovide.app --args --frame none
 

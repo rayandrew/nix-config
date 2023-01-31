@@ -2,6 +2,7 @@
 
 let
   tmuxp-config = ./tmuxp;
+  gitmux-config = ./gitmux.yml;
   resize-script = ./resize-adaptable.sh;
   tmuxp-variables = config.my-meta // {
     inherit tmuxp-config;
@@ -18,6 +19,17 @@ let
       sha256 = "11pvwyxxkxqxyg34mcrzydz9q1wfkj1x5vx3wmy3l4p89qf2dvlk";
     };
   };
+  # tokyo-night = pkgs.tmuxPlugins.mkTmuxPlugin {
+  #   pluginName = "tokyo-night";
+  #   version = "unstable-2022-01-01";
+  #   rtpFilePath = "tokyo-night.tmux";
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "janoamaral";
+  #     repo = "tokyo-night-tmux";
+  #     rev = "master";
+  #     sha256 = "sha256-QrZYdu1ulCVcmI6jRHQXmQ2EIcNU5ZHxciY3TjopT+I=";
+  #   };
+  # };
   # https://pablo.tools/blog/computers/nix-mustache-templates/
   templateFile = name: template: data:
     pkgs.stdenv.mkDerivation {
@@ -59,6 +71,7 @@ in
     plugins = with pkgs; [
       tmuxPlugins.cpu
       one-password
+      # tokyo-night
       {
         plugin = tmuxPlugins.resurrect;
         extraConfig = "set -g @resurrect-strategy-nvim 'session'";
@@ -70,6 +83,8 @@ in
 
     extraConfig = ''
       # setw -g aggressive-resize off
+      set-option -g detach-on-destroy off
+      set-option -g status-position top
 
       # https://github.com/folke/tokyonight.nvim#making-undercurls-work-properly-in-tmux 
       set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
@@ -112,6 +127,9 @@ in
       # split current window vertically
       bind _ split-window -h -c "#{pane_current_path}"
 
+      # Zoxide integration
+      bind-key T run-shell "t"
+
       # -- pane navigation -----------------------------------------------------------
       bind -r h select-pane -L  # move left
       bind -r j select-pane -D  # move down
@@ -134,6 +152,8 @@ in
       bind Tab last-window        # move to last active window
 
       # -- copy mode -----------------------------------------------------------------
+
+      set -g set-clipboard on
 
       bind Enter copy-mode # enter copy mode
 
@@ -167,6 +187,9 @@ in
       bind p paste-buffer  # paste from the top paste buffer
       bind P choose-buffer # choose which buffer to paste from
 
+      # -- gitmux --------------------------------------------------------------------
+      set -g status-left '#(${pkgs.gitmux}/bin/gitmux -cfg ${gitmux-config} "#{pane_current_path}")'
+
       # -- TokyoNight ----------------------------------------------------------------
 
       set -g mode-style "fg=#7aa2f7,bg=#3b4261"
@@ -187,10 +210,11 @@ in
 
       set -g status-left-style NONE
       set -g status-right-style NONE
-
-      set -g status-left "#[fg=#15161e,bg=#7aa2f7,bold] #S #[fg=#7aa2f7,bg=#16161e,nobold,nounderscore,noitalics]"
-      set -g status-right "#[fg=#16161e,bg=#16161e,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#16161e] #{prefix_highlight} #[fg=#3b4261,bg=#16161e,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#3b4261] %Y-%m-%d  %I:%M %p #[fg=#7aa2f7,bg=#3b4261,nobold,nounderscore,noitalics]#[fg=#15161e,bg=#7aa2f7,bold] #h "
-
+      
+      # set -g status-left "#[fg=#15161e,bg=#7aa2f7,bold] #S #[fg=#7aa2f7,bg=#16161e,nobold,nounderscore,noitalics]"
+      # set -g status-right "#[fg=#16161e,bg=#16161e,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#16161e] #{prefix_highlight} #[fg=#3b4261,bg=#16161e,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#3b4261] %Y-%m-%d  %I:%M %p #[fg=#7aa2f7,bg=#3b4261,nobold,nounderscore,noitalics]#[fg=#15161e,bg=#7aa2f7,bold] #h "
+      set -g status-right "#[fg=#16161e,bg=#16161e,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#16161e] #{prefix_highlight} #[fg=#3b4261,bg=#16161e,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#3b4261] %I:%M %p #[fg=#7aa2f7,bg=#3b4261,nobold,nounderscore,noitalics]#[fg=#15161e,bg=#7aa2f7,bold] #h "
+      
       setw -g window-status-activity-style "underscore,fg=#a9b1d6,bg=#16161e"
       setw -g window-status-separator ""
       setw -g window-status-style "NONE,fg=#a9b1d6,bg=#16161e"
@@ -210,6 +234,7 @@ in
          #
         ${pkgs.tmux}/bin/tmux attach || ${pkgs.tmux}/bin/tmux
       '')
+      gitmux
       # tmuxp # session manager ERROR: how to disable testing + checking
     ];
 

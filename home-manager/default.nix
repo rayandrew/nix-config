@@ -5,6 +5,7 @@
     ./direnv.nix
     ./git.nix
     ./gnupg.nix
+    ./htop.nix
     ./kitty.nix
     ./meta
     ./neovim.nix
@@ -15,6 +16,7 @@
     ./tmux
     ./zsh
     ./starship.nix
+    ./wezterm
   ];
 
   systemd.user.startServices = "sd-switch";
