@@ -6,3 +6,4 @@ private.nix
 private.nix
 
 result
+./config.nix
