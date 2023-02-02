@@ -28,7 +28,7 @@
   # nix profile diff-closures --profile /nix/var/nix/profiles/system
   system.activationScripts.postActivation.text = ''
     # disable spotlight
-    # launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist >/dev/null 2>&1 || true
+    launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist >/dev/null 2>&1 || true
     # show upgrade diff
     ${pkgs.nix}/bin/nix store --experimental-features nix-command diff-closures /run/current-system "$systemConfig"
   '';
@@ -76,7 +76,7 @@
     };
     screencapture = {
       disable-shadow = true;
-      location = "/tmp";
+      location = "/Users/${config.my-meta.username}/Documents";
     };
     trackpad = {
       Clicking = true;

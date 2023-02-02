@@ -61,5 +61,11 @@
 
     # latex
     texlive.combined.scheme-full
+
+    # gnuplot
+    gnuplot_qt
+
+    # static website
+    hugo
   ];
 }
