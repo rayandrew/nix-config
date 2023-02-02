@@ -1,4 +1,4 @@
-# My Macbook Config
+# Nix Config
 
 ## Inspirations
 
