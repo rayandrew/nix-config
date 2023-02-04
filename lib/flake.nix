@@ -1,6 +1,6 @@
 # Shamelessly copied from https://github.com/thiagokokada/nix-configs/blob/master/lib/flake.nix
 
-{ self, nixpkgs, nix-darwin, home, flake-utils, ... }@inputs:
+{ self, nixpkgs, stable, nix-darwin, home, flake-utils, ... }@inputs:
 
 let inherit (flake-utils.lib) eachDefaultSystem mkApp;
 in {
