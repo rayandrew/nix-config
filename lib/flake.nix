@@ -54,7 +54,7 @@ in {
   mkNixOSConfig =
     { hostname
     , system ? "x86_64-linux"
-    , nixosSystem ? nixpkgs.lib.nixosSystem
+    , nixosSystem ? stable.lib.nixosSystem
     , extraModules ? [ ]
     }: {
       nixosConfigurations.${hostname} = nixosSystem {
