@@ -16,7 +16,6 @@
       LC_NUMERIC = lib.mkDefault "en_US.UTF-8";
       LC_PAPER = lib.mkDefault "en_US.UTF-8";
       LC_TELEPHONE = lib.mkDefault "en_US.UTF-8";
-      LC_TIME = lib.mkDefault "en_US.UTF-8";
     };
   };
 
