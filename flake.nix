@@ -70,6 +70,9 @@
         system = "x86_64-darwin";
       })
 
+      # NixOS
+      (mkNixOSConfig { hostname = "ucare-07"; })
+
       # Home configurations
       (mkHomeConfig { hostname = "home-linux"; })
       (mkHomeConfig {

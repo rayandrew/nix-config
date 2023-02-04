@@ -2,7 +2,7 @@
 
 {
   # https://github.com/NixOS/nix/issues/7273
-  auto-optimise-store = lib.mkDefault true;
+  auto-optimise-store = lib.mkDefault false;
   trusted-users = [ "root" "@wheel" "@admin" ];
   experimental-features = [ "nix-command" "flakes" "recursive-nix" ];
 
