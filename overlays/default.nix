@@ -22,6 +22,7 @@ in {
         prev.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
 
       nix-cleanup = prev.callPackage ../packages/nix-cleanup { };
+      nixos-cleanup = prev.callPackage ../packages/nix-cleanup { isNixOS = true; };
       nix-whereis = prev.callPackage ../packages/nix-whereis { };
       nixpkgs-review =
         if (prev.stdenv.isLinux) then
