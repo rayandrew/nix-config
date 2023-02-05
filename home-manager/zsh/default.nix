@@ -61,27 +61,29 @@ in
     '';
 
     initExtra = mkAfter ''
-      # >>> conda initialize >>>
-      declare CONDA_PATH="${config.home.homeDirectory}/.miniconda3"
-      # !! Contents within this block are managed by 'conda init' !!
-      __conda_setup="$('${config.home.homeDirectory}/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-      if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
-      else
-        if [ -f "$CONDA_PATH/etc/profile.d/conda.sh" ]; then
-          . "$CONDA_PATH/etc/profile.d/conda.sh"
+      if [[ -d "${config.home.homeDirectory}/.miniconda3" ]]; then
+        # >>> conda initialize >>>
+        declare CONDA_PATH="${config.home.homeDirectory}/.miniconda3"
+        # !! Contents within this block are managed by 'conda init' !!
+        __conda_setup="$('${config.home.homeDirectory}/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+        if [ $? -eq 0 ]; then
+          eval "$__conda_setup"
         else
-          path+=("$CONDA_PATH/bin:$PATH")
+          if [ -f "$CONDA_PATH/etc/profile.d/conda.sh" ]; then
+            . "$CONDA_PATH/etc/profile.d/conda.sh"
+          else
+            path+=("$CONDA_PATH/bin:$PATH")
+          fi
         fi
+        unset __conda_setup
+        [[ -z $TMUX ]] || conda deactivate; conda activate base
+        # conda config --set changeps1 False
+        # <<< conda initialize <<<
       fi
-      unset __conda_setup
-      [[ -z $TMUX ]] || conda deactivate; conda activate base
 
       if [[ `uname` == "Darwin" ]]; then
         export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib"
       fi
-      # conda config --set changeps1 False
-      # <<< conda initialize <<<
     '';
   };
 
