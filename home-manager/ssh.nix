@@ -1,10 +1,13 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 
 let inherit (lib) optionalString mkAfter;
 in {
   # SSH 
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.ssh.enable
   programs.ssh.enable = true;
+
+  programs.ssh.serverAliveInterval = 60;
+  programs.ssh.serverAliveCountMax = 120;
 
   programs.ssh.matchBlocks = {
     "cl-data" = {
