@@ -3,7 +3,11 @@
 let inherit (flake) inputs;
 in {
   # Import overlays
-  imports = [ ../../overlays ../../modules/meta.nix ];
+  imports = [
+    ../../overlays
+    ../../modules/device.nix
+    ../../modules/meta.nix
+  ];
 
   # Add some Nix related packages
   home.packages = with pkgs; [
@@ -62,5 +66,6 @@ in {
   home.stateVersion = "22.11";
 
   # Inherit config from NixOS or homeConfigurations
+  device = super.device;
   my-meta = super.my-meta;
 }

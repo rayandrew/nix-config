@@ -58,7 +58,7 @@ in
 {
   programs.tmux = {
     enable = true;
-    prefix = "C-a";
+    prefix = if (config.device.type == "server") then "C-Space" else "C-a";
 
     shell = "${pkgs.zsh}/bin/zsh";
     keyMode = "vi";
