@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ flake, ... }:
 {
   imports = [
     flake.inputs.home.nixosModules.home-manager
