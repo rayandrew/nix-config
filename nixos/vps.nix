@@ -17,7 +17,7 @@
     fail2ban.enable = true;
   };
 
-  nixos.home = {
-    path = ../home-manager/vps.nix;
-  };
+  # nixos.home = {
+  #   path = ../home-manager/vps.nix;
+  # };
 }
