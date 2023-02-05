@@ -4,8 +4,12 @@
 
 { flake, ... }:
 
-let inherit (flake) inputs;
-in {
+let
+  inherit (flake) inputs;
+  inherit (config.my-meta) username;
+  inherit (config.users.users.${username}) home;
+in
+{
   imports = [
     # Use `nixos-generate-config` to generate `hardware-configuration.nix` file
     ./hardware-configuration.nix
@@ -47,4 +51,8 @@ in {
       "128.135.24.141"
     ];
   };
+
+  my-meta.nixConfigPath = "${home}/.config/nix-config";
+  my-meta.projectsDirPath = "${home}/Projects";
+  my-meta.researchDirPath = "${home}/Research";
 }
