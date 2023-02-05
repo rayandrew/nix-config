@@ -14,8 +14,8 @@ in {
       forwardX11 = true;
       extraOptions = { RequestTTY = "yes"; };
     };
-    "ucare-7" = {
-      hostname = "ucare-7.cs.uchicago.edu";
+    "ucare-07" = {
+      hostname = "ucare-07.cs.uchicago.edu";
       user = "rayandrew";
       forwardAgent = true;
       forwardX11 = true;
