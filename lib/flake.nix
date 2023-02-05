@@ -39,7 +39,7 @@ in {
     , deps ? pkgs: with pkgs; [ coreutils findutils nixpkgs-fmt ]
     }:
     eachDefaultSystem (system:
-    let pkgs = import nixpkgs { inherit system; };
+    let pkgs = import stable { inherit system; };
     in rec {
       packages.${name} = pkgs.writeShellApplication {
         inherit name text;

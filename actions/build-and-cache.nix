@@ -18,7 +18,7 @@ with constants; {
         # checkNixStep # FIXME: dunno why this cannot run
         validateFlakesStep
         (buildHomeManagerConfigurations home-manager.linux.hostnames)
-        # (buildNixOSConfigurations nixos.hostnames)
+        (buildNixOSConfigurations nixos.hostnames)
       ];
     };
     build-macos = {

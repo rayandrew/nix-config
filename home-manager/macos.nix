@@ -60,4 +60,8 @@ in {
       # /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.sketchybar.plist
     '';
   };
+
+  home.packages = with pkgs; [
+    nix-cleanup
+  ];
 }
