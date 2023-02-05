@@ -188,7 +188,7 @@ in
       bind P choose-buffer # choose which buffer to paste from
 
       # -- gitmux --------------------------------------------------------------------
-      set -g status-left '#(${pkgs.gitmux}/bin/gitmux -cfg ${gitmux-config} "#{pane_current_path}")'
+      set -g status-left '#(${pkgs.unstable.gitmux}/bin/gitmux -cfg ${gitmux-config} "#{pane_current_path}")'
 
       # -- TokyoNight ----------------------------------------------------------------
 
