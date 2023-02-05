@@ -234,7 +234,7 @@ in
          #
         ${pkgs.tmux}/bin/tmux attach || ${pkgs.tmux}/bin/tmux
       '')
-      gitmux
+      unstable.gitmux
       # tmuxp # session manager ERROR: how to disable testing + checking
     ];
 
