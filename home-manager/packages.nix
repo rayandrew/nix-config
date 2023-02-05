@@ -51,6 +51,7 @@
     unar
     unzip
     watch
+    wget
     xz
     zstd
 
