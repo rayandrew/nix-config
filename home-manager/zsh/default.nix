@@ -77,7 +77,9 @@ in
       unset __conda_setup
       [[ -z $TMUX ]] || conda deactivate; conda activate base
 
-      export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib"
+      if [[ `uname` == "Darwin" ]]; then
+        export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib"
+      fi
       # conda config --set changeps1 False
       # <<< conda initialize <<<
     '';
