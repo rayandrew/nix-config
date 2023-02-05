@@ -14,6 +14,7 @@ in {
     ../../nixos/ssh.nix
     ../../nixos/vps.nix
     inputs.hardware.nixosModules.common-cpu-intel
+    flake.inputs.home.nixosModules.home-manager
   ];
 
   device = {
