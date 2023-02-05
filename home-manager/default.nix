@@ -16,7 +16,6 @@
     ./tmux
     ./zsh
     ./starship.nix
-    ./wezterm
   ];
 
   systemd.user.startServices = "sd-switch";

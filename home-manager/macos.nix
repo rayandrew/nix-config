@@ -2,7 +2,7 @@
 
 let home = config.home.homeDirectory;
 in {
-  imports = [ ./. ];
+  imports = [ ./default.nix ./gui.nix ];
 
   targets.darwin.defaults = {
     # Disable all automatic substitution

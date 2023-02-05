@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 {
-  imports = [ ];
+  imports = [
+    flake.inputs.home.nixosModules.home-manager
+    ../modules/meta.nix
+    ./home.nix
+  ];
 
   # Enable NixOS auto-upgrade
   system.autoUpgrade = {
@@ -11,5 +15,9 @@
 
   services = {
     fail2ban.enable = true;
+  };
+
+  nixos = {
+    path = ../home-manager/vps.nix;
   };
 }

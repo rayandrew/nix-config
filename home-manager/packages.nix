@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -16,7 +16,6 @@
     fontconfig
     file
     findutils
-    # fup-repl
     gawk
     gcc
     gnugrep

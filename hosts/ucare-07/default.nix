@@ -22,32 +22,28 @@ in {
     netDevices = [ "enp0s31f6" ];
   };
 
-  # Bootloader.
-  # boot.loader.systemd-boot.enable = true;
-  # boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/nvme0n1";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.grub = {
+    enable = true;
+    device = "/dev/nvme0n1";
+    useOSProber = true;
+  };
 
-  networking.hostName = "ucare-07";
-  # networking.hostId = "ucare-07";
-  networking.domain = "cs.uchicago.edu";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-  networking.usePredictableInterfaceNames = true;
-  networking.interfaces.enp0s31f6 = {
-    #name = "enp0s31f6";
-    ipv4.addresses = [
-      {
-        address = "128.135.11.17";
-        prefixLength = 24;
-      }
+  networking = {
+    hostName = "ucare-07";
+    domain = "cs.uchicago.edu";
+    networkmanager.enable = true;
+    usePredictableInterfaceNames = true;
+    interfaces.enp0s31f6 = {
+      ipv4.addresses = [
+        {
+          address = "128.135.11.17";
+          prefixLength = 24;
+        }
+      ];
+    };
+    defaultGateway = "128.135.11.1";
+    nameservers = [
+      "128.135.164.141"
+      "128.135.24.141"
     ];
   };
-  networking.defaultGateway = "128.135.11.1";
-  networking.nameservers = [
-    "128.135.164.141"
-    "128.135.24.141"
-  ];
-}
