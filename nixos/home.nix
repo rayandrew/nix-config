@@ -23,7 +23,7 @@
   config = lib.mkIf config.nixos.home.enable {
     home-manager = {
       useUserPackages = true;
-      users.${config.nixos.home.username} = config.nixos.path;
+      users.${config.nixos.home.username} = config.nixos.home.path;
       extraSpecialArgs = {
         inherit flake system;
         super = config;
