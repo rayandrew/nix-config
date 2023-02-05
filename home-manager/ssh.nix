@@ -9,12 +9,28 @@ in {
   programs.ssh.matchBlocks = {
     "cl-data" = {
       hostname = "192.5.87.68";
+      user = "rayandrew";
+      forwardAgent = true;
+      forwardX11 = true;
+      extraOptions = { RequestTTY = "yes"; };
+    };
+    "ucare-7" = {
+      hostname = "ucare-7.cs.uchicago.edu";
+      user = "rayandrew";
       forwardAgent = true;
       forwardX11 = true;
       extraOptions = { RequestTTY = "yes"; };
     };
     "ucare-10" = {
       hostname = "ucare-10.cs.uchicago.edu";
+      user = "rayandrew";
+      forwardAgent = true;
+      forwardX11 = true;
+      extraOptions = { RequestTTY = "yes"; };
+    };
+    "ucare-mini" = {
+      hostname = "ucare-min.cs.uchicago.edu";
+      user = "ucare";
       forwardAgent = true;
       forwardX11 = true;
       extraOptions = { RequestTTY = "yes"; };
