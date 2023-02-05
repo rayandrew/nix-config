@@ -22,10 +22,14 @@ jobs:
           name: rayandrew-nix-config
       - name: Set default git branch (to reduce log spam)
         run: git config --global init.defaultBranch main
+      - name: Check if all `.nix` files are formatted correctly
+        run: nix run '.#formatCheck'
       - name: Validate Flakes
         run: nix flake check
       - name: Build Home-Manager configs
         run: nix build '.#homeConfigurations.home-linux.activationPackage'
+      - name: Build NixOS configs
+        run: nix build '.#nixosConfigurations.ucare-07.config.system.build.toplevel'
   build-macos:
     runs-on: macos-latest
     steps:
