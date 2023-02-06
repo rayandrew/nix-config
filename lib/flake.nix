@@ -88,6 +88,7 @@ in {
       };
 
       deploy.nodes.${hostname}.profiles.system = {
+        hostname = ${hostname};
         user = username;
         path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${hostname};
       };
