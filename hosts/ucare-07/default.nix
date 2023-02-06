@@ -60,4 +60,10 @@ in
     "root"
     username
   ];
+
+  # secrets
+  sops.secrets.ucare-07 = {
+    sopsFile = ./secrets.yaml;
+    neededForUsers = true;
+  };
 }

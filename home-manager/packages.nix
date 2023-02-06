@@ -46,6 +46,7 @@
     ruby
     scripts
     shellcheck
+    sops
     sshfs-fuse
     trash-cli
     tree
