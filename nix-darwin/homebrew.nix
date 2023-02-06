@@ -76,7 +76,7 @@ in
       "forklift" # sftp client
       "zoom"
       "google-chrome"
-      # "firefox"
+      "firefox"
       "orion"
       "pdf-expert"
       "desmume" # nds emulator
