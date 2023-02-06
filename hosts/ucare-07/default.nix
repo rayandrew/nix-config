@@ -55,4 +55,9 @@ in
   my-meta.nixConfigPath = "${home}/.config/nix-config";
   my-meta.projectsDirPath = "${home}/Projects";
   my-meta.researchDirPath = "${home}/Research";
+
+  users.groups.data.members = [
+    "root"
+    username
+  ];
 }
