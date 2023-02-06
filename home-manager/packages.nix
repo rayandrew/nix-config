@@ -46,6 +46,7 @@
     ruby
     scripts
     shellcheck
+    sshfs-fuse
     trash-cli
     tree
     unar
