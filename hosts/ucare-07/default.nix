@@ -62,8 +62,13 @@ in
   ];
 
   # secrets
-  sops.secrets.ucare-07 = {
-    sopsFile = ./secrets.yaml;
-    neededForUsers = true;
+  sops.secrets = {
+    nix-ssh-key = {
+      owner = username;
+      # group = username;
+      mode = "0440";
+      sopsFile = ./secrets.yaml;
+      # neededForUsers = true;
+    };
   };
 }
