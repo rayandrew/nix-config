@@ -1,0 +1,13 @@
+keys:
+  - &admin_rayandrew age1cmp8v76aj2a7vk4re5s9vjdy994t2hcznq76rugzptj9eqda0pesxmpvph
+  - &server_ucare-07 age1xlvqfm5y26k0yths8w3qxe68tm9xj50ccxlua4t6lkuz6wtjcs2s5qyrpj
+creation_rules:
+  - path_regex: secrets/[^/]+\.yaml$
+    key_groups:
+      - age:
+          - *admin_rayandrew
+  - path_regex: secrets/ucare-07/[^/]+\.yaml$
+    key_groups:
+      - age:
+          - *admin_rayandrew
+          - *server_ucare-07

@@ -3,38 +3,32 @@
 
   inputs = {
     # Package sets
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     stable.url = "github:NixOS/nixpkgs/release-22.11";
-    # unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     hardware.url = "github:NixOS/nixos-hardware";
     home = {
       url = "github:nix-community/home-manager";
-      # url = "github:nix-community/home-manager/release-22.11";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "flake-utils";
     };
-    # home-unstable = {
-    #   url = "github:nix-community/home-manager";
-    #   inputs.nixpkgs.follows = "unstable";
-    # };
     nix-darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     deadnix = {
       url = "github:astro/deadnix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.url = "flake-utils";
     };
-
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.url = "nixpkgs";
       inputs.utils.url = "flake-utils";
     };
-
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Flake utilities
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat = {
@@ -48,7 +42,7 @@
       inherit (import ./lib/attrsets.nix { inherit (nixpkgs) lib; })
         recursiveMergeAttrs;
       inherit (import ./lib/flake.nix inputs)
-        mkGHActionsYAMLs mkRunCmd mkDarwinConfig mkNixOSConfig mkHomeConfig mkChecks mkDevShell mkDeployConfig;
+        mkGHActionsYAMLs mkRunCmd mkDarwinConfig mkNixOSConfig mkHomeConfig mkDevShell mkDeployConfig;# mkChecks 
     in
     (recursiveMergeAttrs [
       # Templates
@@ -123,7 +117,7 @@
       (mkDeployConfig { })
 
       # Checks
-      (mkChecks { })
+      # (mkChecks { })
 
       # DevShells
       (mkDevShell { })

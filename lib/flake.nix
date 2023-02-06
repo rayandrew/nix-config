@@ -1,6 +1,6 @@
 # Shamelessly copied from https://github.com/thiagokokada/nix-configs/blob/master/lib/flake.nix
 
-{ self, nixpkgs, stable, nix-darwin, home, flake-utils, deploy-rs, ... }@inputs:
+{ self, nixpkgs, stable, nix-darwin, home, flake-utils, deploy-rs, sops-nix, ... }@inputs:
 
 let inherit (flake-utils.lib) eachDefaultSystem mkApp;
 in {
@@ -60,7 +60,10 @@ in {
     }: {
       nixosConfigurations.${hostname} = nixosSystem {
         inherit system;
-        modules = [ ../hosts/${hostname} ] ++ extraModules;
+        modules = [
+          ../hosts/${hostname}
+          sops-nix.nixosModules.sops
+        ] ++ extraModules;
         specialArgs = {
           inherit system;
           flake = self;
@@ -102,7 +105,9 @@ in {
     }: {
       darwinConfigurations.${hostname} = darwinSystem {
         inherit system;
-        modules = [ ../hosts/${hostname} ] ++ extraModules;
+        modules = [
+          ../hosts/${hostname}
+        ] ++ extraModules;
         specialArgs = {
           inherit system;
           flake = self;
