@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ flake, config, ... }:
+{ flake, lib, config, ... }:
 
 let
   inherit (flake) inputs;
@@ -36,7 +36,7 @@ in
     hostName = "ucare-07";
     domain = "cs.uchicago.edu";
     networkmanager.enable = true;
-    usePredictableInterfaceNames = true;
+    usePredictableInterfaceNames = lib.mkDefault true;
     interfaces.enp0s31f6 = {
       ipv4.addresses = [
         {

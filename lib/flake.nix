@@ -88,7 +88,7 @@ in {
       };
 
       deploy.nodes.${hostname}.profiles.system = {
-        hostname = ${hostname};
+        hostname = hostname;
         user = username;
         path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${hostname};
       };
@@ -161,4 +161,22 @@ in {
   mkChecks = {}: {
     checks = builtins.mapAttrs (_: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
   };
+
+  mkDeployConfig = {}: {
+    deploy = {
+      # fastConnection = true;
+      remoteBuild = true;
+    };
+  };
+
+  mkDevShell = {}: eachDefaultSystem (system:
+    let pkgs = import stable { inherit system; };
+    in rec {
+      devShells.default = pkgs.mkShell {
+        buildInputs = with pkgs; [
+          # NixOS deployment tool
+          deploy-rs.defaultPackage.${system}
+        ];
+      };
+    });
 }

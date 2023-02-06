@@ -48,7 +48,7 @@
       inherit (import ./lib/attrsets.nix { inherit (nixpkgs) lib; })
         recursiveMergeAttrs;
       inherit (import ./lib/flake.nix inputs)
-        mkGHActionsYAMLs mkRunCmd mkDarwinConfig mkNixOSConfig mkChecks mkHomeConfig;
+        mkGHActionsYAMLs mkRunCmd mkDarwinConfig mkNixOSConfig mkHomeConfig mkChecks mkDevShell mkDeployConfig;
     in
     (recursiveMergeAttrs [
       # Templates
@@ -119,7 +119,13 @@
         "update-flakes-darwin"
       ])
 
+      # Deploy config
+      (mkDeployConfig { })
+
       # Checks
       (mkChecks { })
+
+      # DevShells
+      (mkDevShell { })
     ]);
 }
