@@ -1,6 +1,6 @@
 # Shamelessly copied from https://github.com/thiagokokada/nix-configs/blob/master/lib/flake.nix
 
-{ self, nixpkgs, stable, nix-darwin, home, flake-utils, ... }@inputs:
+{ self, nixpkgs, stable, nix-darwin, home, flake-utils, deploy-rs, ... }@inputs:
 
 let inherit (flake-utils.lib) eachDefaultSystem mkApp;
 in {
@@ -54,6 +54,7 @@ in {
   mkNixOSConfig =
     { hostname
     , system ? "x86_64-linux"
+    , username ? "rayandrew"
     , nixosSystem ? stable.lib.nixosSystem
     , extraModules ? [ ]
     }: {
@@ -84,6 +85,11 @@ in {
             '';
             exePath = "/bin/run-${hostname}-vm";
           };
+      };
+
+      deploy.nodes.${hostname}.profiles.system = {
+        user = username;
+        path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${hostname};
       };
     };
 
@@ -150,4 +156,8 @@ in {
         exePath = "/activate";
       };
     };
+
+  mkChecks = {}: {
+    checks = builtins.mapAttrs (_: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+  };
 }

@@ -29,6 +29,12 @@
       inputs.utils.url = "flake-utils";
     };
 
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.url = "nixpkgs";
+      inputs.utils.url = "flake-utils";
+    };
+
     # Flake utilities
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat = {
@@ -42,7 +48,7 @@
       inherit (import ./lib/attrsets.nix { inherit (nixpkgs) lib; })
         recursiveMergeAttrs;
       inherit (import ./lib/flake.nix inputs)
-        mkGHActionsYAMLs mkRunCmd mkDarwinConfig mkNixOSConfig mkHomeConfig;
+        mkGHActionsYAMLs mkRunCmd mkDarwinConfig mkNixOSConfig mkChecks mkHomeConfig;
     in
     (recursiveMergeAttrs [
       # Templates
@@ -112,5 +118,8 @@
         "update-flakes"
         "update-flakes-darwin"
       ])
+
+      # Checks
+      (mkChecks { })
     ]);
 }
