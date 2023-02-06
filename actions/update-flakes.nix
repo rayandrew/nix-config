@@ -20,7 +20,7 @@ with constants; {
         updateFlakeLockStep
         setDefaultGitBranchStep
         (buildHomeManagerConfigurations home-manager.linux.hostnames)
-        # (buildNixOSConfigurations nixos.hostnames)
+        (buildNixOSConfigurations nixos.hostnames)
         createPullRequestStep
       ];
     };
