@@ -1,6 +1,14 @@
 # Shamelessly copied from https://github.com/thiagokokada/nix-configs/blob/master/lib/flake.nix
 
-{ self, nixpkgs, stable, nix-darwin, home, flake-utils, deploy-rs, sops-nix, ...
+{ self
+, nixpkgs
+, stable
+, nix-darwin
+, home
+, flake-utils
+, deploy-rs
+, sops-nix
+, ...
 }@inputs:
 
 let inherit (flake-utils.lib) eachDefaultSystem mkApp;
@@ -13,14 +21,16 @@ in {
           let
             file = import (../actions/${name}.nix);
             json = builtins.toJSON file;
-          in pkgs.runCommand name { } ''
+          in
+          pkgs.runCommand name { } ''
             mkdir -p $out
             echo ${
               pkgs.lib.escapeShellArg json
             } | ${pkgs.yj}/bin/yj -jy > $out/${name}.yml
           '';
         ghActionsYAMLs = (map mkGHActionsYAML names);
-      in {
+      in
+      {
         apps.githubActions = mkApp {
           drv = pkgs.writeShellScriptBin "generate-gh-actions" ''
             for dir in ${builtins.toString ghActionsYAMLs}; do
@@ -35,20 +45,25 @@ in {
   mkRunCmd =
     { name, text, deps ? pkgs: with pkgs; [ coreutils findutils nixpkgs-fmt ] }:
     eachDefaultSystem (system:
-      let pkgs = import stable { inherit system; };
-      in rec {
-        packages.${name} = pkgs.writeShellApplication {
-          inherit name text;
-          runtimeInputs = (deps pkgs);
-        };
-        apps.${name} = mkApp {
-          drv = packages.${name};
-          exePath = "/bin/${name}";
-        };
-      });
+    let pkgs = import stable { inherit system; };
+    in rec {
+      packages.${name} = pkgs.writeShellApplication {
+        inherit name text;
+        runtimeInputs = (deps pkgs);
+      };
+      apps.${name} = mkApp {
+        drv = packages.${name};
+        exePath = "/bin/${name}";
+      };
+    });
 
-  mkNixOSConfig = { hostname, system ? "x86_64-linux", username ? "rayandrew"
-    , nixosSystem ? stable.lib.nixosSystem, extraModules ? [ ] }: {
+  mkNixOSConfig =
+    { hostname
+    , system ? "x86_64-linux"
+    , username ? "rayandrew"
+    , nixosSystem ? stable.lib.nixosSystem
+    , extraModules ? [ ]
+    }: {
       nixosConfigurations.${hostname} = nixosSystem {
         inherit system;
         modules = [ ../hosts/${hostname} sops-nix.nixosModules.sops ]
@@ -66,16 +81,17 @@ in {
           exePath = "/activate";
         };
 
-        "nixosVMs/${hostname}" = let pkgs = import nixpkgs { inherit system; };
-        in mkApp {
-          drv = pkgs.writeShellScriptBin "run-${hostname}-vm" ''
-            env QEMU_OPTS="''${QEMU_OPTS:--cpu max -smp 4 -m 4096M -machine type=q35}" \
-              ${
-                self.outputs.nixosConfigurations.${hostname}.config.system.build.vm
-              }/bin/run-${hostname}-vm
-          '';
-          exePath = "/bin/run-${hostname}-vm";
-        };
+        "nixosVMs/${hostname}" =
+          let pkgs = import nixpkgs { inherit system; };
+          in mkApp {
+            drv = pkgs.writeShellScriptBin "run-${hostname}-vm" ''
+              env QEMU_OPTS="''${QEMU_OPTS:--cpu max -smp 4 -m 4096M -machine type=q35}" \
+                ${
+                  self.outputs.nixosConfigurations.${hostname}.config.system.build.vm
+                }/bin/run-${hostname}-vm
+            '';
+            exePath = "/bin/run-${hostname}-vm";
+          };
       };
 
       deploy.nodes.${hostname}.profiles.system = {
@@ -86,8 +102,12 @@ in {
       };
     };
 
-  mkDarwinConfig = { hostname, system ? "x86_64-darwin"
-    , darwinSystem ? nix-darwin.lib.darwinSystem, extraModules ? [ ] }: {
+  mkDarwinConfig =
+    { hostname
+    , system ? "x86_64-darwin"
+    , darwinSystem ? nix-darwin.lib.darwinSystem
+    , extraModules ? [ ]
+    }: {
       darwinConfigurations.${hostname} = darwinSystem {
         inherit system;
         modules = [ ../hosts/${hostname} ] ++ extraModules;
@@ -104,14 +124,21 @@ in {
     };
 
   # https://github.com/nix-community/home-manager/issues/1510
-  mkHomeConfig = { hostname, username ? "rayandrew", homePath ? "/home"
-    , configPosfix ? ".config/nix-config", configuration ? ../home-manager
-    , deviceType ? "desktop", system ? "x86_64-linux"
-    , homeManagerConfiguration ? home.lib.homeManagerConfiguration }:
+  mkHomeConfig =
+    { hostname
+    , username ? "rayandrew"
+    , homePath ? "/home"
+    , configPosfix ? ".config/nix-config"
+    , configuration ? ../home-manager
+    , deviceType ? "desktop"
+    , system ? "x86_64-linux"
+    , homeManagerConfiguration ? home.lib.homeManagerConfiguration
+    }:
     let
       pkgs = import nixpkgs { inherit system; };
       homeDirectory = "${homePath}/${username}";
-    in {
+    in
+    {
       homeConfigurations.${hostname} = homeManagerConfiguration rec {
         inherit pkgs;
         modules = [
@@ -140,20 +167,20 @@ in {
       };
     };
 
-  mkChecks = { }: {
+  mkChecks = {}: {
     checks =
       builtins.mapAttrs (_: deployLib: deployLib.deployChecks self.deploy)
-      deploy-rs.lib;
+        deploy-rs.lib;
   };
 
-  mkDeployConfig = { }: {
+  mkDeployConfig = {}: {
     deploy = {
       # fastConnection = true;
       remoteBuild = true;
     };
   };
 
-  mkDevShell = { }:
+  mkDevShell = {}:
     eachDefaultSystem (system:
       let pkgs = import stable { inherit system; };
       in rec {
