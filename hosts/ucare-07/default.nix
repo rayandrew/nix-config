@@ -17,6 +17,7 @@ in
     ../../nixos/security.nix
     ../../nixos/ssh.nix
     ../../nixos/vps.nix
+    ../../nixos/fhs.nix
     inputs.hardware.nixosModules.common-cpu-intel
     flake.inputs.home.nixosModules.home-manager
   ];

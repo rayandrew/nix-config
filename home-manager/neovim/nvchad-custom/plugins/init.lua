@@ -166,4 +166,17 @@ return {
       },
     },
   },
+
+  ["hrsh7th/nvim-cmp"] = {
+    override_options = {
+      sources = {
+        { name = "luasnip" },
+        { name = "copilot" },
+        { name = "nvim_lsp" },
+        { name = "buffer" },
+        { name = "nvim_lua" },
+        { name = "path" },
+      },
+    },
+  },
 }
