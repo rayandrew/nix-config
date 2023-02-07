@@ -48,10 +48,10 @@ in {
       '';
       type = types.attrsOf types.str;
       default = with pkgs; {
-        drb = "darwin-rebuild build --flake ${cfg.nixConfigPath}";
-        drs = "darwin-rebuild switch --flake ${cfg.nixConfigPath}";
-        nrb = "nixos-rebuild build --flake ${cfg.nixConfigPath}";
-        nrs = "sudo nixos-rebuild switch --flake ${cfg.nixConfigPath}";
+        drb = lib.mkIf (stdenv.isDarwin) "darwin-rebuild build --flake ${cfg.nixConfigPath}";
+        drs = lib.mkIf (stdenv.isDarwin) "darwin-rebuild switch --flake ${cfg.nixConfigPath}";
+        nrb = lib.mkIf (stdenv.isLinux) "nixos-rebuild build --flake ${cfg.nixConfigPath}";
+        nrs = lib.mkIf (stdenv.isLinux) "sudo nixos-rebuild switch --flake ${cfg.nixConfigPath}";
         flakeup = "nix flake update ${cfg.nixConfigPath}";
         nb = "nix build";
         nd = "nix develop";
