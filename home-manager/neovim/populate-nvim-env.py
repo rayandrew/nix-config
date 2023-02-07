@@ -51,7 +51,7 @@ def main(output_path):
         for key, value in env.items():
             if key in KEYS:
                 if key == "PATH":
-                    f.write('vim.env.PATH = vim.env.PATH .. "{}"\n'.format(value))
+                    f.write('vim.env.PATH = vim.env.PATH .. ":{}"\n'.format(value))
                     continue
                 f.write('vim.fn.setenv("{}", "{}")\n'.format(key, value))
         f.close()

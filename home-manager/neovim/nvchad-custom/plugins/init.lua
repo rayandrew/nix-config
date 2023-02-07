@@ -67,7 +67,7 @@ return {
   ["nathom/filetype.nvim"] = {},
   ["akinsho/toggleterm.nvim"] = {
     tag = "*",
-    setup = function()
+    config = function()
       require("toggleterm").setup({})
     end,
   },
