@@ -8,8 +8,7 @@ let
   inherit (flake) inputs;
   inherit (config.my-meta) username;
   inherit (config.users.users.${username}) home;
-in
-{
+in {
   imports = [
     # Use `nixos-generate-config` to generate `hardware-configuration.nix` file
     ./hardware-configuration.nix
@@ -38,32 +37,39 @@ in
     networkmanager.enable = true;
     usePredictableInterfaceNames = lib.mkDefault true;
     interfaces.enp0s31f6 = {
-      ipv4.addresses = [
-        {
-          address = "128.135.11.17";
-          prefixLength = 24;
-        }
-      ];
+      ipv4.addresses = [{
+        address = "128.135.11.17";
+        prefixLength = 24;
+      }];
     };
     defaultGateway = "128.135.11.1";
-    nameservers = [
-      "128.135.164.141"
-      "128.135.24.141"
-    ];
+    nameservers = [ "128.135.164.141" "128.135.24.141" ];
   };
 
   my-meta.nixConfigPath = "${home}/.config/nix-config";
   my-meta.projectsDirPath = "${home}/Projects";
   my-meta.researchDirPath = "${home}/Research";
 
-  users.groups.data.members = [
-    "root"
-    username
-  ];
+  users.groups.data.members = [ "root" username ];
+
+  home-manager.users.${config.my-meta.username}.imports = [{
+    programs.git.signing = {
+      key = builtins.readFile sops.secrets.pub-key.path;
+      signByDefault = true;
+    };
+  }];
 
   # secrets
   sops.secrets = {
-    nix-ssh-key = {
+    pub-key = {
+      owner = username;
+      # group = username;
+      mode = "0440";
+      sopsFile = ./secrets.yaml;
+      # neededForUsers = true;
+    };
+
+    priv-key = {
       owner = username;
       # group = username;
       mode = "0440";
