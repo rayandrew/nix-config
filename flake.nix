@@ -26,7 +26,7 @@
       inputs.utils.url = "flake-utils";
     };
     sops-nix = {
-      url = "github:Mic92/sops-nix";
+      url = "github:Mic92/sops-nix/feat/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Flake utilities
@@ -43,9 +43,8 @@
         recursiveMergeAttrs;
       inherit (import ./lib/flake.nix inputs)
         mkGHActionsYAMLs mkRunCmd mkDarwinConfig mkNixOSConfig mkHomeConfig
-        mkDevShell mkDeployConfig;# mkChecks
-    in
-    (recursiveMergeAttrs [
+        mkDevShell mkDeployConfig; # mkChecks
+    in (recursiveMergeAttrs [
       # Templates
       {
         templates = {

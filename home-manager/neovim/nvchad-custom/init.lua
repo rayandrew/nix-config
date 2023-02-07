@@ -29,3 +29,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- Relative number
 vim.wo.relativenumber = true
 vim.opt.relativenumber = true
+
+-- Cursor
+vim.opt.guicursor = ""

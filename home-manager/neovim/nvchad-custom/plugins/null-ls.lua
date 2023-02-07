@@ -5,17 +5,32 @@ if mason_null_ls_status then
   mason_null_ls.setup({
     automatic_installation = true,
     ensure_installed = {
+      -- lua
       "stylua",
+
+      -- c / c++
+      "clang-format",
+
+      -- shell
       "jq",
+      "shfmt",
+
+      -- web stuffs
       "prettier",
       "eslint_d",
+
+      -- config
       "yamlfmt",
-      "rustfmt",
+
+      -- python
       "black",
-      -- "pint",
-      "clang-format",
-      "shfmt",
-      "nixfmt",
+
+      -- rust
+      "rustfmt",
+
+      -- nix
+      "nixpkgs_fmt",
+      -- "nixfmt",
     },
   })
 end
@@ -37,10 +52,15 @@ null_ls.setup({
   -- setup formatters & linters
   sources = {
     completion.spell,
+    code_actions.gitsigns,
+
+    -- lua
+    formatting.stylua,
+
+    -- web stuffs
     formatting.prettier.with({
       extra_filetypes = { "svelte" },
     }), -- js/ts formatter
-    formatting.stylua, -- lua formatter
     diagnostics.eslint_d.with({ -- js/ts linter
       -- only enable eslint if root has .eslintrc.js (not in youtube nvim video)
       condition = function(utils)
@@ -65,23 +85,28 @@ null_ls.setup({
         "svelte",
       },
     }),
-    code_actions.gitsigns,
+
     -- php
     diagnostics.php,
-    -- diagnostics.phpcs,
-    -- diagnostics.phpstan,
     formatting.blade_formatter,
     -- formatting.pint,
-    -- formatting.phpcsfixer,
-    -- formatting.phpcbf,
-    -- formatting.rustywind,
+
+    -- python
     formatting.black,
+
+    -- shell
     formatting.shfmt,
-    formatting.rustfmt,
-    -- formatting.yamlfmt,
-    formatting.clang_format,
     formatting.jq,
-    formatting.nixfmt,
+
+    -- rust
+    formatting.rustfmt,
+
+    -- c / c++
+    formatting.clang_format,
+
+    -- nix
+    formatting.nixpkgs_fmt,
+    -- formatting.nixfmt,
   },
   -- configure format on save
   on_attach = function(current_client, bufnr)
