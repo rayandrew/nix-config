@@ -8,7 +8,8 @@ let
   inherit (flake) inputs;
   inherit (config.my-meta) username;
   inherit (config.users.users.${username}) home;
-in {
+in
+{
   imports = [
     # Use `nixos-generate-config` to generate `hardware-configuration.nix` file
     ./hardware-configuration.nix
