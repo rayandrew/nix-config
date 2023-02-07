@@ -1,6 +1,15 @@
 # Shamelessly copied from https://github.com/thiagokokada/nix-configs/blob/master/lib/flake.nix
 
-{ self, nixpkgs, stable, nix-darwin, home, flake-utils, deploy-rs, sops-nix, ... }@inputs:
+{ self
+, nixpkgs
+, stable
+, nix-darwin
+, home
+, flake-utils
+, deploy-rs
+, sops-nix
+, ...
+}@inputs:
 
 let inherit (flake-utils.lib) eachDefaultSystem mkApp;
 in {
@@ -34,10 +43,7 @@ in {
       });
 
   mkRunCmd =
-    { name
-    , text
-    , deps ? pkgs: with pkgs; [ coreutils findutils nixpkgs-fmt ]
-    }:
+    { name, text, deps ? pkgs: with pkgs; [ coreutils findutils nixpkgs-fmt ] }:
     eachDefaultSystem (system:
     let pkgs = import stable { inherit system; };
     in rec {
@@ -60,10 +66,8 @@ in {
     }: {
       nixosConfigurations.${hostname} = nixosSystem {
         inherit system;
-        modules = [
-          ../hosts/${hostname}
-          sops-nix.nixosModules.sops
-        ] ++ extraModules;
+        modules = [ ../hosts/${hostname} sops-nix.nixosModules.sops ]
+          ++ extraModules;
         specialArgs = {
           inherit system;
           flake = self;
@@ -93,7 +97,8 @@ in {
       deploy.nodes.${hostname}.profiles.system = {
         hostname = hostname;
         user = username;
-        path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${hostname};
+        path = deploy-rs.lib.${system}.activate.nixos
+          self.nixosConfigurations.${hostname};
       };
     };
 
@@ -105,9 +110,7 @@ in {
     }: {
       darwinConfigurations.${hostname} = darwinSystem {
         inherit system;
-        modules = [
-          ../hosts/${hostname}
-        ] ++ extraModules;
+        modules = [ ../hosts/${hostname} ] ++ extraModules;
         specialArgs = {
           inherit system;
           flake = self;
@@ -164,7 +167,9 @@ in {
     };
 
   mkChecks = {}: {
-    checks = builtins.mapAttrs (_: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+    checks =
+      builtins.mapAttrs (_: deployLib: deployLib.deployChecks self.deploy)
+        deploy-rs.lib;
   };
 
   mkDeployConfig = {}: {
@@ -174,14 +179,16 @@ in {
     };
   };
 
-  mkDevShell = {}: eachDefaultSystem (system:
-    let pkgs = import stable { inherit system; };
-    in rec {
-      devShells.default = pkgs.mkShell {
-        buildInputs = with pkgs; [
-          # NixOS deployment tool
-          deploy-rs.defaultPackage.${system}
-        ];
-      };
-    });
+  mkDevShell = {}:
+    eachDefaultSystem (system:
+      let pkgs = import stable { inherit system; };
+      in rec {
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs;
+            [
+              # NixOS deployment tool
+              deploy-rs.defaultPackage.${system}
+            ];
+        };
+      });
 }

@@ -22,7 +22,7 @@
     };
     deploy-rs = {
       url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.url = "nixpkgs";
+      # inputs.nixpkgs.url = "nixpkgs";
       inputs.utils.url = "flake-utils";
     };
     sops-nix = {
@@ -42,7 +42,8 @@
       inherit (import ./lib/attrsets.nix { inherit (nixpkgs) lib; })
         recursiveMergeAttrs;
       inherit (import ./lib/flake.nix inputs)
-        mkGHActionsYAMLs mkRunCmd mkDarwinConfig mkNixOSConfig mkHomeConfig mkDevShell mkDeployConfig;# mkChecks 
+        mkGHActionsYAMLs mkRunCmd mkDarwinConfig mkNixOSConfig mkHomeConfig
+        mkDevShell mkDeployConfig;# mkChecks
     in
     (recursiveMergeAttrs [
       # Templates

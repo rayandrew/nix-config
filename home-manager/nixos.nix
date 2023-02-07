@@ -1,11 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports = [
-    ./default.nix
-  ];
+  imports = [ ./default.nix ];
 
-  home.packages = with pkgs; [
-    parted
-  ];
+  home.packages = with pkgs; [ parted xclip ];
 }
