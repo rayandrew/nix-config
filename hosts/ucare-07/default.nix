@@ -52,7 +52,8 @@ in {
 
   users.groups.data.members = [ "root" username ];
 
-  home-manager.users.${config.my-meta.username}.imports = [{
+  home-manager.users.${config.my-meta.username}.imports = [
+  { }: {
     programs.git.signing = {
       key = builtins.readFile sops.secrets.pub-key.path;
       signByDefault = true;
