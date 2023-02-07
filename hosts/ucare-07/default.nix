@@ -52,15 +52,13 @@ in {
 
   users.groups.data.members = [ "root" username ];
 
-  home-manager.users.${config.my-meta.username}.imports = [
-    ({ }: {
-      programs.git.signing = {
-        key =
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILqoNddaHxhWrYEReVH3bAW2u74cVUOvIqxeWJdLByB5 rayandrew@ucare-07";
-        signByDefault = true;
-      };
-    })
-  ];
+  home-manager.users.${config.my-meta.username}.imports = [{
+    programs.git.signing = {
+      key =
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILqoNddaHxhWrYEReVH3bAW2u74cVUOvIqxeWJdLByB5 rayandrew@ucare-07";
+      signByDefault = true;
+    };
+  }];
 
   # secrets
   sops.secrets = {
