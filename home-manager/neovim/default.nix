@@ -6,14 +6,14 @@ let
   inherit (config.home.user-info) directory;
 
   customNvChad = ./nvchad-custom;
+  populateEnv = ./populate-nvim-env.py;
 
   populateEnvScript = ''
     mkdir -p ${config.xdg.dataHome}/nvim/site/plugin
-    # ${pkgs.python39}/bin/python ${config.xdg.configHome}/nvim/populate-env.py -o ${config.xdg.dataHome}/nvim/site/plugin
+    ${pkgs.python39}/bin/python ${populateEnv} -o ${config.xdg.dataHome}/nvim/site/plugin
   '';
   # }}}
-in
-{
+in {
   # Neovim
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.neovim.enable
   programs.neovim.enable = true;
@@ -40,7 +40,7 @@ in
       # update-nvim-env
       #
       # Update neovim env such that it can be used in neovide or other GUIs.
-      #
+
       ${populateEnvScript}
     '')
   ];
