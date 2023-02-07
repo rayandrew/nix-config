@@ -64,20 +64,34 @@ return {
       require("custom.plugins.visual-multi")
     end,
   },
-  ["nathom/filetype.nvim"] = {},
+  ["nathom/filetype.nvim"] = {
+    config = function()
+      require("custom.plugins.filetype")
+    end,
+  },
   ["akinsho/toggleterm.nvim"] = {
     tag = "*",
     config = function()
       require("toggleterm").setup({})
     end,
   },
-  ["kylechui/nvim-surround"] = { tag = "*" },
+  -- ["echasnovski/mini.surround"] = {
+  --   -- tag = "*",
+  --   config = function()
+  --     require("mini.surround").setup({})
+  --   end,
+  -- },
   ["iamcco/markdown-preview.nvim"] = {
     run = "cd app && npm install",
     setup = function()
       vim.g.mkdp_filetypes = { "markdown" }
     end,
     ft = { "markdown" },
+  },
+  ["ggandor/leap.nvim"] = {
+    config = function()
+      require("leap").add_default_mappings()
+    end,
   },
 
   -- overrides

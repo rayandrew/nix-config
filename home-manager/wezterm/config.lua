@@ -123,7 +123,11 @@ return {
   window_decorations = "RESIZE",
   font_size = 16.0,
   line_height = 1.4,
-  color_scheme = "TokyoNight (Gogh)",
+  -- color_scheme = "ayu",
+  -- color_scheme = "AyuDark (Gogh)",
+  -- color_scheme = "TokyoNight (Gogh)",
+  color_scheme = "OneHalfBlack (Gogh)",
+  -- color_scheme = "Afterglow (Gogh)",
   -- color_scheme = "theme2 (terminal.sexy)",
   default_prog = { "zsh" },
   keys = {
