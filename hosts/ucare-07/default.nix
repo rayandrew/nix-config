@@ -55,7 +55,8 @@ in {
   home-manager.users.${config.my-meta.username}.imports = [
     ({ }: {
       programs.git.signing = {
-        key = builtins.readFile sops.secrets.pub-key.path;
+        key =
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILqoNddaHxhWrYEReVH3bAW2u74cVUOvIqxeWJdLByB5 rayandrew@ucare-07";
         signByDefault = true;
       };
     })
@@ -63,14 +64,6 @@ in {
 
   # secrets
   sops.secrets = {
-    pub-key = {
-      owner = username;
-      # group = username;
-      mode = "0440";
-      sopsFile = ./secrets.yaml;
-      # neededForUsers = true;
-    };
-
     priv-key = {
       owner = username;
       # group = username;
