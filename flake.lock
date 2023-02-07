@@ -172,9 +172,10 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 0,
+        "lastModified": 1675545634,
         "narHash": "sha256-TbQeQcM5TA/wIho6xtzG+inUfiGzUXi8ewwttiQWYJE=",
         "path": "/nix/store/gm8c760jh9w22vybdj99g1ciz2npmj7c-source",
+        "rev": "0591d6b57bfeb55dfeec99a671843337bc2c3323",
         "type": "path"
       },
       "original": {
