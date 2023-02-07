@@ -5,9 +5,11 @@ let
   inherit (config.lib.file) mkOutOfStoreSymlink;
   inherit (config.home.user-info) directory;
 
+  customNvChad = ./nvchad-custom;
+
   populateEnvScript = ''
     mkdir -p ${config.xdg.dataHome}/nvim/site/plugin
-    ${pkgs.python39}/bin/python ${config.xdg.configHome}/nvim/populate-env.py -o ${config.xdg.dataHome}/nvim/site/plugin
+    # ${pkgs.python39}/bin/python ${config.xdg.configHome}/nvim/populate-env.py -o ${config.xdg.dataHome}/nvim/site/plugin
   '';
   # }}}
 in
@@ -21,26 +23,18 @@ in
 
   # Config and plugins ------------------------------------------------------------------------- {{{
 
-  # Put neovim configuration located in this repository into place in a way that edits to the
-  # configuration don't require rebuilding the `home-manager` environment to take effect.
-  # xdg.configFile."nvim".source = pkgs.fetchFromGitHub {
-  #   owner = "rayandrew";
-  #   repo = "nvim";
-  #   rev = "435fdfef0619d191cdbbfb8a9dce4feff0633c15";
-  #   sha256 = "sha256-UgVgTR/1Z+jfIK8Xg9IlBZKYjMZOjdNue8kP9RoHYH8=";
-  # };
-  xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink
-    "${config.my-meta.projectsDirPath}/nvim";
-  # if lib.pathExists "/Users/rayandrew/Projects/nvim" then
-  # else
-  #   pkgs.fetchFromGitHub {
-  #     owner = "rayandrew";
-  #     repo = "nvim";
-  #     rev = "435fdfef0619d191cdbbfb8a9dce4feff0633c15";
-  #     sha256 = "sha256-UgVgTR/1Z+jfIK8Xg9IlBZKYjMZOjdNue8kP9RoHYH8=";
-  #   };
+  xdg.configFile."nvim" = {
+    source = "${pkgs.nvchad}";
+    recursive = true;
+  };
 
-  home.packages = [
+  xdg.configFile."nvim/lua/custom" = {
+    source = customNvChad;
+    # recursive = true;
+  };
+
+  home.packages = with pkgs; [
+    nvchad
     (pkgs.writeShellScriptBin "update-nvim-env" ''
       #
       # update-nvim-env

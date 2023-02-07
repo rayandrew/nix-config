@@ -8,7 +8,7 @@
     ./htop.nix
     ./kitty.nix
     ./meta
-    ./neovim.nix
+    ./neovim
     ./nix-index.nix
     ./packages.nix
     ./ssh.nix

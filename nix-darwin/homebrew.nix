@@ -80,6 +80,7 @@ in
       "orion"
       "pdf-expert"
       "desmume" # nds emulator
+      "notion"
 
       # r
       "r"

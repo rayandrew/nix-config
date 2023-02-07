@@ -11,4 +11,6 @@
 # in
 {
   imports = [ ./wezterm ];
+
+  home.packages = with pkgs; [ ];
 }

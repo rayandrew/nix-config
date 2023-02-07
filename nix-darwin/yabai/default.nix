@@ -99,11 +99,12 @@ in
       yabai -m rule --add label="Desmume" app="^DeSmuME$" manage=off
 
       yabai -m rule --add app="^Finder$" sticky=on manage=off # layer=above 
-      yabai -m rule --add app="^Neovide$" manage=on space=3 # for note-taking
+      yabai -m rule --add app="^(Neovide|Notion)$" manage=on space=3 # for note-taking
       yabai -m rule --add app="^Linear$" space=3
       yabai -m rule --add app="^(Mail|Calendar)$" space=8
       yabai -m rule --add label="Communication" app="^(Skype|Slack|Discord)$" space=9
       yabai -m rule --add app="^(Google Chrome|Firefox|Safari|Orion|Arc)$" space=10
+      yabai -m rule --add label="Little Arc" app="^Arc$" title="^Space.*" manage=off # for Little Arc to be happy
 
       yabai -m space 1 --label one                 # main 
       yabai -m space 2 --label two --layout stack  # cloud dev

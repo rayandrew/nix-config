@@ -40,7 +40,7 @@ in {
       extraOptions = { RequestTTY = "yes"; };
     };
     "ucare-mini" = {
-      hostname = "ucare-min.cs.uchicago.edu";
+      hostname = "ucare-mini.cs.uchicago.edu";
       user = "ucare";
       forwardAgent = true;
       forwardX11 = true;

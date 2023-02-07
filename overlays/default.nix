@@ -30,6 +30,7 @@ in {
         else
           final.unstable.nixpkgs-review;
 
+      nvchad = prev.callPackage ../packages/nvchad { };
 
       sf-symbols = final.sf-symbols-minimal;
       sf-symbols-app = prev.callPackage ../packages/sf-symbols {
