@@ -123,4 +123,24 @@ return {
       },
     },
   },
+
+  ["nvim-treesitter/nvim-treesitter"] = {
+    override_options = {
+      ensure_installed = {
+        "c",
+        "cpp",
+        "css",
+        "go",
+        "lua",
+        "python",
+        "rust",
+        "typescript",
+        "svelte",
+        "html",
+        "java",
+        "help",
+        "nix",
+      },
+    },
+  },
 }
