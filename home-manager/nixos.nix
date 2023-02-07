@@ -3,5 +3,5 @@
 {
   imports = [ ./default.nix ];
 
-  home.packages = with pkgs; [ parted xclip ];
+  home.packages = with pkgs; [ parted xclip conda-shell ];
 }
