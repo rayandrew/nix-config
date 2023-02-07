@@ -48,6 +48,9 @@ in
     nameservers = [ "128.135.164.141" "128.135.24.141" ];
   };
 
+
+  services.openssh.forwardX11 = lib.mkDefault true;
+
   my-meta.nixConfigPath = "${home}/.config/nix-config";
   my-meta.projectsDirPath = "${home}/Projects";
   my-meta.researchDirPath = "${home}/Research";
