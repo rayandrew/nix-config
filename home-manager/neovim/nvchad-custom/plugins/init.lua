@@ -157,4 +157,13 @@ return {
       },
     },
   },
+
+  ["nvim-tree/nvim-tree.lua"] = {
+    override_options = {
+      git = {
+        enable = true,
+        ignore = true,
+      },
+    },
+  },
 }
