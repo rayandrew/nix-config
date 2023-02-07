@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 
 {
   # Please use this module with extra cautions!!
