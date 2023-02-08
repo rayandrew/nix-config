@@ -100,6 +100,17 @@ return {
   },
 
   -- overrides
+  ["wbthomason/packer.nvim"] = {
+    override_options = {
+      compile_path = table.concat({
+        vim.fn.stdpath("data"),
+        "site",
+        "plugin",
+        "packer_compiled.lua",
+      }, "/"),
+    },
+  },
+
   ["neovim/nvim-lspconfig"] = {
     config = function()
       require("plugins.configs.lspconfig")

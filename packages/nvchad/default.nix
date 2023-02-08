@@ -1,5 +1,8 @@
 { lib, stdenv, pkgs }:
 
+let
+  custom = ./custom;
+in
 stdenv.mkDerivation {
   pname = "nvchad";
   version = "1.0.0";
@@ -14,6 +17,8 @@ stdenv.mkDerivation {
   installPhase = ''
     mkdir $out
     cp -r * "$out/"
+    mkdir -p "$out/lua/custom"
+    cp -r ${custom}/* "$out/lua/custom/"
   '';
 
   meta = with lib; {

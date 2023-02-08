@@ -5,7 +5,7 @@ let
   inherit (config.lib.file) mkOutOfStoreSymlink;
   inherit (config.home.user-info) directory;
 
-  customNvChad = ./nvchad-custom;
+  # customNvChad = ./nvchad-custom;
   populateEnv = ./populate-nvim-env.py;
 
   populateEnvScript = ''
@@ -26,13 +26,13 @@ in
 
   xdg.configFile."nvim" = {
     source = "${pkgs.nvchad}";
-    recursive = true;
-  };
-
-  xdg.configFile."nvim/lua/custom" = {
-    source = customNvChad;
     # recursive = true;
   };
+
+  # xdg.configFile."nvim/lua/custom" = {
+  #   source = customNvChad;
+  #   # recursive = true;
+  # };
 
   home.packages = with pkgs; [
     nvchad
