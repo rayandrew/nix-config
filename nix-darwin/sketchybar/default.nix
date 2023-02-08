@@ -60,7 +60,7 @@ if builtins.hasAttr "hm" lib then {
       source "$ITEM_DIR/battery.sh"
       source "$ITEM_DIR/disk.sh"
       source "$ITEM_DIR/mem.sh"
-      source "$ITEM_DIR/cpu.sh"
+      # source "$ITEM_DIR/cpu.sh"
 
       # initializing
       sketchybar --update
