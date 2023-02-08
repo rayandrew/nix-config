@@ -1,40 +1,3 @@
--- mason null ls
-local mason_null_ls_status, mason_null_ls = pcall(require, "mason-null-ls")
-
-if mason_null_ls_status then
-  mason_null_ls.setup({
-    automatic_installation = true,
-    ensure_installed = {
-      -- lua
-      "stylua",
-
-      -- c / c++
-      "clang-format",
-
-      -- shell
-      "jq",
-      "shfmt",
-
-      -- web stuffs
-      "prettier",
-      "eslint_d",
-
-      -- config
-      "yamlfmt",
-
-      -- python
-      "black",
-
-      -- rust
-      "rustfmt",
-
-      -- nix
-      "nixpkgs_fmt",
-      -- "nixfmt",
-    },
-  })
-end
-
 -- null-ls
 -- to setup format on save
 local null_ls = require("null-ls")
@@ -131,3 +94,4 @@ null_ls.setup({
     end
   end,
 })
+

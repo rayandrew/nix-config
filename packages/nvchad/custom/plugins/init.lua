@@ -21,9 +21,6 @@ return {
   -- Formatter
   ["jose-elias-alvarez/null-ls.nvim"] = {
     after = "nvim-lspconfig",
-    requires = {
-      "jayp0521/mason-null-ls.nvim",
-    },
     config = function()
       require("custom.plugins.null-ls")
     end,
@@ -136,6 +133,7 @@ return {
 
         -- rust
         "rust-analyzer",
+        "rustfmt",
 
         -- web dev
         "css-lsp",
