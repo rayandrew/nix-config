@@ -75,6 +75,11 @@ return {
       require("toggleterm").setup({})
     end,
   },
+  ["tpope/vim-surround"] = {
+    requires = {
+      "tpope/vim-repeat",
+    },
+  },
   -- ["echasnovski/mini.surround"] = {
   --   -- tag = "*",
   --   config = function()
