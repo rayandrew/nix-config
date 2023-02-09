@@ -94,11 +94,14 @@ in {
           };
       };
 
-      deploy.nodes.${hostname}.profiles.system = {
+      deploy.nodes.${hostname} = {
         hostname = hostname;
-        user = username;
-        path = deploy-rs.lib.${system}.activate.nixos
-          self.nixosConfigurations.${hostname};
+
+        profiles.system = {
+          user = username;
+          path = deploy-rs.lib.${system}.activate.nixos
+            self.nixosConfigurations.${hostname};
+        };
       };
     };
 

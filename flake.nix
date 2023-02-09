@@ -43,7 +43,7 @@
         recursiveMergeAttrs;
       inherit (import ./lib/flake.nix inputs)
         mkGHActionsYAMLs mkRunCmd mkDarwinConfig mkNixOSConfig mkHomeConfig
-        mkDevShell mkDeployConfig;# mkChecks
+        mkDevShell mkDeployConfig mkChecks;
     in
     (recursiveMergeAttrs [
       # Templates
@@ -118,7 +118,7 @@
       (mkDeployConfig { })
 
       # Checks
-      # (mkChecks { })
+      (mkChecks { })
 
       # DevShells
       (mkDevShell { })
