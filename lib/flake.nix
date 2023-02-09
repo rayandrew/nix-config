@@ -171,10 +171,15 @@ in {
       };
     };
 
-  mkChecks = {}: {
-    checks = nixpkgs.lib.mkIf (nixpkgs.stdenv.isLinux) builtins.mapAttrs (_: deployLib: deployLib.deployChecks self.deploy)
-      deploy-rs.lib;
-  };
+  mkChecks = {}:
+    let
+      deploy-rs-checks = builtins.removeAttrs (builtins.mapAttrs (_: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib) [
+        "aarch64-darwin" # not supported
+      ];
+    in
+    {
+      checks = deploy-rs-checks;
+    };
 
   mkDeployConfig = {}: {
     deploy = {
