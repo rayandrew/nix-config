@@ -11,7 +11,7 @@
   # keep-outputs = true;
   # keep-derivations = true;
 
-  system-features = [ "recursive-nix" ];
+  system-features = [ "recursive-nix" "kvm" "big-parallel" ];
 
   tarball-ttl = 43200;
 }
