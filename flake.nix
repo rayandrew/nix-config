@@ -26,7 +26,7 @@
       inputs.utils.url = "flake-utils";
     };
     sops-nix = {
-      url = "github:Mic92/sops-nix/feat/home-manager";
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Flake utilities
