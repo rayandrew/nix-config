@@ -65,6 +65,8 @@ in
     };
   }];
 
+  security.pam.enableSSHAgentAuth = true; # to make deploy-rs works
+
   # secrets
   sops.secrets = {
     priv-key = {
