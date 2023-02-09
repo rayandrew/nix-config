@@ -72,7 +72,13 @@
       })
 
       # NixOS
-      (mkNixOSConfig { hostname = "ucare-07"; })
+      (mkNixOSConfig {
+        hostname = "ucare-07";
+        deployConfigurations = {
+          fastConnection = true;
+          remoteBuild = true; # sometimes I need to run this on my macbook
+        };
+      })
 
       # Home configurations
       (mkHomeConfig { hostname = "home-linux"; })

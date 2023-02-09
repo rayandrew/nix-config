@@ -54,6 +54,8 @@ in
     };
   };
 
+  security.pam.enableSSHAgentAuth = true;
+
   # TODO: Enable usbguard after finding some way to easily manage it
   # services.usbguard = {
   #   enable = true;

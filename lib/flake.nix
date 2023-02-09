@@ -63,6 +63,7 @@ in {
     , username ? "rayandrew"
     , nixosSystem ? stable.lib.nixosSystem
     , extraModules ? [ ]
+    , deployConfigurations ? { }
     }: {
       nixosConfigurations.${hostname} = nixosSystem {
         inherit system;
@@ -94,11 +95,11 @@ in {
           };
       };
 
-      deploy.nodes.${hostname} = {
+      deploy.nodes.${hostname} = deployConfigurations // {
         hostname = hostname;
 
         profiles.system = {
-          user = username;
+          user = "root";
           path = deploy-rs.lib.${system}.activate.nixos
             self.nixosConfigurations.${hostname};
         };
@@ -171,15 +172,16 @@ in {
     };
 
   mkChecks = {}: {
-    checks =
-      builtins.mapAttrs (_: deployLib: deployLib.deployChecks self.deploy)
-        deploy-rs.lib;
+    checks = nixpkgs.lib.mkIf (nixpkgs.stdenv.isLinux) builtins.mapAttrs (_: deployLib: deployLib.deployChecks self.deploy)
+      deploy-rs.lib;
   };
 
   mkDeployConfig = {}: {
     deploy = {
+      autoRollback = true;
+      magicRollback = true;
       # fastConnection = true;
-      remoteBuild = true;
+      # remoteBuild = true;
     };
   };
 
