@@ -7,6 +7,7 @@
 let
   inherit (flake) inputs;
   inherit (config.my-meta) username;
+  inherit (config.users.users.${username}) home;
 in
 {
   imports = [
@@ -65,7 +66,7 @@ in
 
   zramSwap.enable = true;
 
-  my-meta.nixConfigPath = "/etc/nixos";
+  my-meta.nixConfigPath = "${home}/.config/nix-config";
   my-meta.projectsDirPath = "";
   my-meta.researchDirPath = "";
 
