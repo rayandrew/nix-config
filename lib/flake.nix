@@ -8,6 +8,7 @@
 , flake-utils
 , deploy-rs
 , sops-nix
+, nixos-modules
 , ...
 }@inputs:
 
@@ -67,8 +68,11 @@ in {
     }: {
       nixosConfigurations.${hostname} = nixosSystem {
         inherit system;
-        modules = [ ../hosts/${hostname} sops-nix.nixosModules.sops ]
-          ++ extraModules;
+        modules = [
+          ../hosts/${hostname}
+          sops-nix.nixosModules.sops
+          nixos-modules.nixosModule
+        ] ++ extraModules;
         specialArgs = {
           inherit system;
           flake = self;

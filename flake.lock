@@ -170,6 +170,26 @@
         "type": "github"
       }
     },
+    "nixos-modules": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1675356566,
+        "narHash": "sha256-SSi2iQpaoLeOn4A/5UqdzoDm5Xy2rVuUSlikTzXNt6A=",
+        "owner": "SuperSandro2000",
+        "repo": "nixos-modules",
+        "rev": "47969984613be67e7cb51bf01ee095c994b9f63e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SuperSandro2000",
+        "repo": "nixos-modules",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1671417167,
@@ -227,6 +247,7 @@
         "hardware": "hardware",
         "home": "home",
         "nix-darwin": "nix-darwin",
+        "nixos-modules": "nixos-modules",
         "nixpkgs": "nixpkgs_2",
         "sops-nix": "sops-nix",
         "stable": "stable"

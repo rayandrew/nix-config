@@ -29,6 +29,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-modules = {
+      url = "github:SuperSandro2000/nixos-modules";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
     # Flake utilities
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat = {
