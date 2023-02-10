@@ -1,13 +1,21 @@
 keys:
   - &rayandrew age1cmp8v76aj2a7vk4re5s9vjdy994t2hcznq76rugzptj9eqda0pesxmpvph
   - &ucare-07 age1xlvqfm5y26k0yths8w3qxe68tm9xj50ccxlua4t6lkuz6wtjcs2s5qyrpj
+  - &gitea age1lvprmf420c46gt2z78vegmzn8022y4yzceymyk663vg7d7mtwvrqwry3vf
 creation_rules:
-  - path_regex: secrets/[^/]+\.yaml$
+  - path_regex: secrets.ya?ml$
     key_groups:
       - age:
           - *rayandrew
+          - *ucare-07
+          - *gitea
   - path_regex: hosts/ucare-07/secrets.ya?ml$
     key_groups:
       - age:
           - *rayandrew
           - *ucare-07
+  - path_regex: hosts/gitea/secrets.ya?ml$
+    key_groups:
+      - age:
+          - *rayandrew
+          - *gitea

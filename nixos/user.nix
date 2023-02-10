@@ -9,6 +9,16 @@ in
     uid = 1000;
     extraGroups = [ "wheel" "networkmanager" "video" ];
     shell = pkgs.zsh;
-    password = "changeme";
+    # password = "changeme";
+    passwordFile = config.sops.secrets.rayandrew-password.path;
+  };
+
+  sops.secrets = {
+    rayandrew-password = {
+      owner = username;
+      mode = "0440";
+      sopsFile = ../secrets.yaml;
+      neededForUsers = true;
+    };
   };
 }
