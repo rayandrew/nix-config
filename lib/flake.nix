@@ -71,7 +71,7 @@ in {
         modules = [
           ../hosts/${hostname}
           sops-nix.nixosModules.sops
-          nixos-modules.nixosModule
+          # nixos-modules.nixosModule
         ] ++ extraModules;
         specialArgs = {
           inherit system;

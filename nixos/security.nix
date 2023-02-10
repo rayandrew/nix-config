@@ -54,6 +54,15 @@ in
     };
   };
 
+  security.acme = {
+    acceptTerms = true;
+    defaults = {
+      email = "rayandrew@cs.uchicago.edu";
+      # letsencrypt staging server with way higher rate limits
+      # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+    };
+  };
+
   # TODO: Enable usbguard after finding some way to easily manage it
   # services.usbguard = {
   #   enable = true;
