@@ -15,7 +15,6 @@ in
 
   sops.secrets = {
     rayandrew-password = {
-      owner = username;
       mode = "0440";
       sopsFile = ../secrets.yaml;
       neededForUsers = true;
