@@ -185,10 +185,10 @@ in
 
     postgresql = {
       enable = true;
-      ensureDatabases = [ cfg.user ];
+      ensureDatabases = [ cfg.database.name ];
       ensureUsers = [{
-        name = cfg.user;
-        ensurePermissions = { "DATABASE ${cfg.user}" = "ALL PRIVILEGES"; };
+        name = cfg.database.user;
+        ensurePermissions = { "DATABASE ${cfg.database.name}" = "ALL PRIVILEGES"; };
       }];
       package = pkgs.postgresql_15;
       # upgrade.stopServices = [ "gitea" ];
