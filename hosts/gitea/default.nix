@@ -80,8 +80,8 @@ in
     gitea = rec {
       enable = true;
       appName = "GIT -- Ray Andrew";
-      domain = " git.rayandrew.me ";
-      rootUrl = " https://$ { domain }/";
+      domain = " git.rayandrew.me";
+      rootUrl = " https://${domain}/";
 
       database.type = "postgres";
 
