@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   # CLI packages.
@@ -31,6 +31,9 @@
       withNodeJs = false;
     };
     traceroute.enable = true;
-    zsh.enable = true;
+    zsh = {
+      enable = true;
+      shellAliases = config.my-meta.systemShellAliases;
+    };
   };
 }

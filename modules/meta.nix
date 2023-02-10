@@ -35,6 +35,25 @@ in {
       type = types.str;
       default = "";
     };
+    systemShellAliases = mkOption {
+      example = literalExpression ''
+        {
+          ll = "ls -l";
+          ".." = "cd ..";
+        }
+      '';
+      description = ''
+        An attribute set that maps aliases (the top level attribute names in
+        this option) to command strings or directly to build outputs.
+      '';
+      type = types.attrsOf types.str;
+      default = with pkgs; {
+        drb = lib.mkIf (stdenv.isDarwin) "darwin-rebuild build --flake ${cfg.nixConfigPath}";
+        drs = lib.mkIf (stdenv.isDarwin) "darwin-rebuild switch --flake ${cfg.nixConfigPath}";
+        nrb = lib.mkIf (stdenv.isLinux) "nixos-rebuild build --flake ${cfg.nixConfigPath}";
+        nrs = lib.mkIf (stdenv.isLinux) "sudo nixos-rebuild switch --flake ${cfg.nixConfigPath}";
+      };
+    };
     shellAliases = mkOption {
       example = literalExpression ''
         {
