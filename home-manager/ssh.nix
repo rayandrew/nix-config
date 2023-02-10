@@ -1,7 +1,16 @@
 { config, pkgs, lib, ... }:
 
-let inherit (lib) optionalString mkAfter;
-in {
+let
+  inherit (lib) optionalString mkAfter;
+  gitea = {
+    hostname = "5.161.195.146";
+    user = "rayandrew";
+    forwardAgent = true;
+    forwardX11 = true;
+    extraOptions = { RequestTTY = "yes"; };
+  };
+in
+{
   # SSH 
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.ssh.enable
   programs.ssh.enable = true;
@@ -10,6 +19,8 @@ in {
   programs.ssh.serverAliveCountMax = 120;
 
   programs.ssh.matchBlocks = {
+    "gitea" = gitea;
+    "gitea.rayandrew.me" = gitea;
     "*.github.com" = {
       extraOptions = {
         AddKeysToAgent = "yes";

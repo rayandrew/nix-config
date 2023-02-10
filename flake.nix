@@ -79,6 +79,13 @@
           remoteBuild = true; # sometimes I need to run this on my macbook
         };
       })
+      (mkNixOSConfig {
+        hostname = "gitea";
+        deployConfigurations = {
+          fastConnection = true;
+          remoteBuild = true; # sometimes I need to run this on my macbook
+        };
+      })
 
       # Home configurations
       (mkHomeConfig { hostname = "home-linux"; })
