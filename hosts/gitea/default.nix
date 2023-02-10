@@ -8,7 +8,6 @@ let
   inherit (flake) inputs;
   inherit (config.my-meta) username;
   inherit (config.users.users.${username}) home;
-  cfg = config.services.gitea;
 in
 {
   imports = [
@@ -184,12 +183,6 @@ in
     };
 
     postgresql = {
-      enable = true;
-      ensureDatabases = [ cfg.database.name ];
-      ensureUsers = [{
-        name = cfg.database.user;
-        ensurePermissions = { "DATABASE ${cfg.database.name}" = "ALL PRIVILEGES"; };
-      }];
       package = pkgs.postgresql_15;
       # upgrade.stopServices = [ "gitea" ];
     };
