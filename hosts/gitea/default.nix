@@ -74,4 +74,6 @@ in
   my-meta.nixConfigPath = "/etc/nixos";
   my-meta.projectsDirPath = "";
   my-meta.researchDirPath = "";
+
+  nixos.home.enable = lib.mkDefault false;
 }
