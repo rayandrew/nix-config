@@ -32,7 +32,7 @@ in
   };
 
   networking = {
-    hostName = "git";
+    hostName = "gitea";
     nameservers = [
       "8.8.8.8"
     ];
