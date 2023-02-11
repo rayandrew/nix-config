@@ -8,6 +8,7 @@ let
   inherit (flake) inputs;
   inherit (config.my-meta) username;
   inherit (config.users.users.${username}) home;
+  giteaSshPort = 2222;
 in
 {
   imports = [
@@ -56,7 +57,7 @@ in
         ipv6.routes = [{ address = "fe80::1"; prefixLength = 128; }];
       };
     };
-    firewall.allowedTCPPorts = [ 80 443 2222 ];
+    firewall.allowedTCPPorts = [ 80 443 giteaSshPort ];
   };
 
   services.udev.extraRules = ''
@@ -139,7 +140,8 @@ in
           ENABLE_GZIP = true;
           SSH_AUTHORIZED_KEYS_BACKUP = false;
           SSH_DOMAIN = domain;
-          SSH_PORT = 2222;
+          START_SSH_SERVER = giteaSshPort != 22;
+          SSH_PORT = giteaSshPort;
         };
         service = {
           DISABLE_REGISTRATION = true;
