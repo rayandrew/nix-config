@@ -56,7 +56,7 @@ in
         ipv6.routes = [{ address = "fe80::1"; prefixLength = 128; }];
       };
     };
-    firewall.allowedTCPPorts = [ 2222 ];
+    firewall.allowedTCPPorts = [ 80 443 2222 ];
   };
 
   services.udev.extraRules = ''
