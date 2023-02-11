@@ -138,4 +138,28 @@ M.git = {
   },
 }
 
+M.lsp = {
+  n = {
+    -- ["gD"] = {
+    --   function()
+    --     vim.lsp.buf.declaration()
+    --   end,
+    --   "lsp declaration",
+    -- },
+    --
+    -- ["gd"] = {
+    --   function()
+    --     vim.lsp.buf.definition()
+    --   end,
+    --   "lsp definition",
+    -- },
+
+    ["gh"] = { "<cmd>Lspsaga lsp_finder<CR>" },
+    -- ["K"] = { "<cmd>Lspsaga hover_doc<CR>", "Hover Documentation" },
+    ["<leader>ld"] = { "<cmd>Lspsaga show_line_diagnostics<CR>", "[L]ine [D]iagnostics" },
+    ["<leader>cd"] = { "<cmd>Lspsaga show_cursor_diagnostics<CR>", "[C]ursor [D]iagnostics" },
+    ["<leader>ad"] = { "<cmd>Lspsaga show_buffer_diagnostics<CR>", "Buffer [D]iagnostics" },
+  },
+}
+
 return M

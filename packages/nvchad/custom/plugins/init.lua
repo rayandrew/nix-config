@@ -13,6 +13,16 @@ return {
     after = "nvim-treesitter",
   },
 
+  -- LSPs
+  ["glepnir/lspsaga.nvim"] = {
+    branch = "main",
+    requires = { { "nvim-tree/nvim-web-devicons" } },
+    cmd = { "Lspsaga" },
+    config = function()
+      require("lspsaga").setup({})
+    end,
+  },
+
   -- Git
   ["tpope/vim-fugitive"] = {},
   ["tpope/vim-rhubarb"] = {},
@@ -148,6 +158,9 @@ return {
 
         -- yaml
         "yaml-language-server",
+
+        -- toml
+        "taplo",
       },
     },
   },

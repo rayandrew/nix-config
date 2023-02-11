@@ -70,6 +70,9 @@ null_ls.setup({
     -- nix
     formatting.nixpkgs_fmt,
     -- formatting.nixfmt,
+
+    -- config
+    formatting.taplo,
   },
   -- configure format on save
   on_attach = function(current_client, bufnr)
@@ -94,4 +97,3 @@ null_ls.setup({
     end
   end,
 })
-
