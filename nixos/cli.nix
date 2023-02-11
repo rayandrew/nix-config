@@ -39,4 +39,5 @@
       enable = true;
       shellAliases = config.my-meta.systemShellAliases;
     };
-  }
+  };
+}
