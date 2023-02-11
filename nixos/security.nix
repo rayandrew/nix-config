@@ -57,7 +57,8 @@ in
   security.acme = {
     acceptTerms = true;
     defaults = {
-      email = "rayandrew@cs.uchicago.edu";
+      # email = "rayandrew@cs.uchicago.edu";
+      email = "raydreww@gmail.com";
       # letsencrypt staging server with way higher rate limits
       # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
     };
