@@ -169,8 +169,8 @@ in
     nginx = {
       enable = true;
       virtualHosts."git.rs.ht" = {
-        forceSSL = true;
-        enableACME = true;
+        forceSSL = false;
+        # enableACME = true;
         locations."/".proxyPass = "http://localhost:3000";
       };
     };
