@@ -32,7 +32,7 @@ in
   };
 
   networking = {
-    hostName = "gitea";
+    hostName = "git";
     nameservers = [
       "8.8.8.8"
     ];
@@ -80,7 +80,7 @@ in
     gitea = rec {
       enable = true;
       appName = "GIT -- Ray Andrew";
-      domain = "git.rayandrew.me";
+      domain = "git.rs.ht";
       rootUrl = "https://${domain}/";
 
       database.type = "postgres";
@@ -119,7 +119,7 @@ in
         };
         mailer = {
           ENABLED = false;
-          FROM = "git@rayandrew.me";
+          FROM = "git@rs.ht";
           MAILER_TYPE = "sendmail";
           SENDMAIL_PATH = "/run/wrappers/bin/sendmail";
           SENDMAIL_ARGS = "--";
@@ -139,7 +139,7 @@ in
         };
         service = {
           DISABLE_REGISTRATION = true;
-          NO_REPLY_ADDRESS = "no_reply@rayandrew.me";
+          NO_REPLY_ADDRESS = "no-reply@rs.ht";
           REGISTER_EMAIL_CONFIRM = true;
           ENABLE_NOTIFY_MAIL = true;
         };
@@ -164,7 +164,7 @@ in
 
     nginx = {
       enable = true;
-      virtualHosts."git.rayandrew.me" = {
+      virtualHosts."git.rs.ht" = {
         forceSSL = true;
         enableACME = true;
         locations."/".proxyPass = "http://localhost:3000";
