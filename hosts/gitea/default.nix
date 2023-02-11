@@ -188,7 +188,7 @@ in
 
     postgresql = {
       package = pkgs.postgresql_15;
-      # upgrade.stopServices = [ "gitea" ];
+      upgrade.stopServices = [ "gitea" ];
     };
   };
 
