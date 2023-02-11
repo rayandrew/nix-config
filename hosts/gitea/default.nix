@@ -83,9 +83,10 @@ in
   services = {
     gitea = rec {
       enable = true;
-      appName = "GIT -- Ray Andrew";
+      appName = "git.rs.ht";
       domain = "git.rs.ht";
       rootUrl = "https://${domain}/";
+      httpPort = 3003;
 
       database.type = "postgres";
 
@@ -140,6 +141,7 @@ in
           ENABLE_GZIP = true;
           SSH_AUTHORIZED_KEYS_BACKUP = false;
           SSH_DOMAIN = domain;
+          SSH_PORT = 2222;
         };
         service = {
           DISABLE_REGISTRATION = true;
@@ -171,7 +173,7 @@ in
       virtualHosts."git.rs.ht" = {
         forceSSL = true;
         enableACME = true;
-        locations."/".proxyPass = "http://localhost:3000";
+        locations."/".proxyPass = "http://localhost:${toString config.services.gitea.httpPort}";
       };
     };
 
@@ -187,7 +189,7 @@ in
     };
 
     postgresql = {
-      package = pkgs.postgresql_15;
+      package = pkgs.postgresql_14;
       upgrade.stopServices = [ "gitea" ];
     };
   };

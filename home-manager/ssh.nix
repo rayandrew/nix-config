@@ -3,8 +3,9 @@
 let
   inherit (lib) optionalString mkAfter;
   gitea = {
-    hostname = "5.161.195.146";
+    hostname = "git.rs.ht";
     user = "rayandrew";
+    port = 2222;
     forwardAgent = true;
     forwardX11 = true;
     extraOptions = { RequestTTY = "yes"; };
@@ -20,7 +21,7 @@ in
 
   programs.ssh.matchBlocks = {
     "gitea" = gitea;
-    "gitea.rayandrew.me" = gitea;
+    "git.rs.ht" = gitea;
     "*.github.com" = {
       extraOptions = {
         AddKeysToAgent = "yes";
