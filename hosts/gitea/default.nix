@@ -74,11 +74,15 @@ in
 
   nixos.home.enable = lib.mkDefault false;
 
+  users.users.${username}.shell = lib.mkForce pkgs.bash;
+
+  services.smartd.enable = lib.mkForce false;
+
   ### GITEA CONFIGURATIONS ###
 
   services = {
     gitea = rec {
-      enable = true;
+      enable = false;
       appName = "GIT -- Ray Andrew";
       domain = "git.rs.ht";
       rootUrl = "https://${domain}/";
