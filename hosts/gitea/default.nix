@@ -82,7 +82,7 @@ in
 
   services = {
     gitea = rec {
-      enable = false;
+      enable = true;
       appName = "GIT -- Ray Andrew";
       domain = "git.rs.ht";
       rootUrl = "https://${domain}/";
@@ -169,8 +169,8 @@ in
     nginx = {
       enable = true;
       virtualHosts."git.rs.ht" = {
-        forceSSL = false;
-        # enableACME = true;
+        forceSSL = true;
+        enableACME = true;
         locations."/".proxyPass = "http://localhost:3000";
       };
     };
