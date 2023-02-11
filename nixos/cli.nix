@@ -36,7 +36,6 @@
       shellAliases = config.my-meta.systemShellAliases;
     };
     bash = {
-      enable = true;
       shellAliases = config.my-meta.systemShellAliases;
     };
   };
