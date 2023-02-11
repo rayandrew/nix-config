@@ -5,6 +5,6 @@
     linux.hostnames = [ "home-linux" ];
     darwin.hostnames = [ "home-macos" ];
   };
-  nixos.hostnames = [ "ucare-07" ];
+  nixos.hostnames = [ "ucare-07" "gitea" ];
   nix-darwin.hostnames = [ "github-ci-darwin" ];
 }

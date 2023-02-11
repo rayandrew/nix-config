@@ -1,9 +1,7 @@
 { flake, ... }:
 {
   imports = [
-    flake.inputs.home.nixosModules.home-manager
     ../modules/meta.nix
-    ./home.nix
   ];
 
   # Enable NixOS auto-upgrade

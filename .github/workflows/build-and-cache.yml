@@ -29,7 +29,9 @@ jobs:
       - name: Build Home-Manager configs
         run: nix build '.#homeConfigurations.home-linux.activationPackage'
       - name: Build NixOS configs
-        run: nix build '.#nixosConfigurations.ucare-07.config.system.build.toplevel'
+        run: |-
+          nix build '.#nixosConfigurations.ucare-07.config.system.build.toplevel'
+          nix build '.#nixosConfigurations.gitea.config.system.build.toplevel'
   build-macos:
     runs-on: macos-latest
     steps:

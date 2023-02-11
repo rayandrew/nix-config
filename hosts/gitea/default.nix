@@ -72,8 +72,6 @@ in
 
   security.pam.enableSSHAgentAuth = true; # to make deploy-rs works
 
-  nixos.home.enable = lib.mkDefault false;
-
   users.users.${username}.shell = lib.mkForce pkgs.bash;
 
   services.smartd.enable = lib.mkForce false;
