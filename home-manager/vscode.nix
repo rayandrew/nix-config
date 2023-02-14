@@ -14,6 +14,12 @@ let
       version = "2022.7.13271013";
       sha256 = "sha256-wXAIPrk52L9xZNY3bitMUaUNl5q0iCNmRKK+Z/ZHmsU=";
     }
+    {
+      name = "copilot";
+      publisher = "GitHub";
+      version = "1.73.8685";
+      sha256 = "sha256-W1j1VAuSM1sgxHRIahqVncUlknT+MPi7uutY+0NURZQ=";
+    }
   ];
 in
 {
