@@ -36,6 +36,7 @@ in
       "editor.fontFamily" = "JetBrainsMono Nerd Font Mono";
       "editor.fontSize" = 18;
       "editor.wordWrap" = "on";
+      "editor.minimap.enabled" = false;
       # python
       "python.formatting.provider" = "none";
       "[python]" = {
