@@ -1,4 +1,4 @@
-{ flake, system, ... }:
+{ flake, system, lib, platforms, ... }:
 
 let inherit (flake) inputs;
 in {
@@ -17,6 +17,12 @@ in {
         inherit system;
         config = prev.config;
       };
+
+      gdb =
+        if (final.stdenv.isDarwin) then
+          (prev.gdb.overrideAttrs (finalAttrs: prevAttrs: {
+            meta.platforms = prevAttrs.meta.platforms ++ [ "x86_64-darwin" "aarch64-darwin" ];
+          })) else prev.gdb;
 
       jetbrains-mono-nerdfont =
         prev.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
