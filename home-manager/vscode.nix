@@ -35,14 +35,20 @@ in
         ms-azuretools.vscode-docker
         ms-vscode-remote.remote-ssh
       ] ++ marketplaceExtensions;
-    userSettings = {
+    userSettings = let fontSize = 18; in {
       "workbench.colorTheme" = "Tokyo Night";
       "workbench.startupEditor" = "none";
+
+      # editor
       # "editor.fontFamily" = "Pragmata Pro Mono";
       "editor.fontFamily" = "JetBrainsMono Nerd Font Mono";
-      "editor.fontSize" = 18;
+      "editor.fontSize" = fontSize;
       "editor.wordWrap" = "on";
       "editor.minimap.enabled" = false;
+
+      # integrated terminal
+      "terminal.integrated.fontSize" = fontSize;
+
       # python
       "python.formatting.provider" = "none";
       "[python]" = {
