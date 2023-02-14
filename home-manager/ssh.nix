@@ -19,6 +19,13 @@ in
   programs.ssh.serverAliveCountMax = 120;
 
   programs.ssh.matchBlocks = {
+    "gpu-ray-0" = {
+      hostname = "192.5.87.181";
+      user = "rayandrew";
+      forwardAgent = true;
+      forwardX11 = true;
+      extraOptions = { RequestTTY = "yes"; };
+    };
     "gitea" = giteaHost // {
       user = "rayandrew";
     };
