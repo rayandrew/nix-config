@@ -10,7 +10,10 @@
 #   darwinModules = if (pkgs.stdenv.isDarwin) then _darwinModules else [ ];
 # in
 {
-  imports = [ ./wezterm ];
+  imports = [
+    ./wezterm
+    ./vscode.nix
+  ];
 
   home.packages = with pkgs; [ ];
 }
