@@ -3,7 +3,6 @@
 let
   inherit (lib) mkAfter elem optionalString;
   inherit (config.my-meta) shellAliases;
-  scripts = ./scripts;
   dataDir = "${config.xdg.dataHome}";
 in
 {

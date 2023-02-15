@@ -50,7 +50,10 @@ in
       user = "rayandrew";
       forwardAgent = true;
       forwardX11 = true;
-      extraOptions = { RequestTTY = "yes"; };
+      extraOptions = {
+        RequestTTY = "yes";
+        IdentityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
+      };
     };
     "ucare-10" = {
       hostname = "ucare-10.cs.uchicago.edu";
@@ -79,6 +82,8 @@ in
     #   ${optionalString pkgs.stdenv.isDarwin ''
     # # Only set `IdentityAgent` not connected remotely via SSH.
     # # This allows using agent forwarding when connecting remotely.
+    Match host * exec "test -z $SSH_TTY"
+      IdentityFile "${config.home.homeDirectory}/.ssh/id_ed25519"
     # Match host * exec "test -z $SSH_TTY"
     #   IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
     #   ''}

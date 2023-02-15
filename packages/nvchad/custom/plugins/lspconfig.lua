@@ -4,7 +4,7 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 local lspconfig = require("lspconfig")
 local servers = {
   -- lua stuff
-  "sumneko_lua",
+  "lua_ls",
 
   -- shell
   "bashls",

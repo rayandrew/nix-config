@@ -26,13 +26,7 @@ in
 
   xdg.configFile."nvim" = {
     source = "${pkgs.nvchad}";
-    # recursive = true;
   };
-
-  # xdg.configFile."nvim/lua/custom" = {
-  #   source = customNvChad;
-  #   # recursive = true;
-  # };
 
   home.packages = with pkgs; [
     nvchad
@@ -49,6 +43,14 @@ in
   home.activation.neovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     echo "Populating neovim env..."
     ${populateEnvScript}
+  '';
+
+  programs.bash.initExtra = lib.mkAfter ''
+    export EDITOR="${config.programs.neovim.package}/bin/nvim"
+  '';
+
+  programs.zsh.initExtra = lib.mkAfter ''
+    export EDITOR="${config.programs.neovim.package}/bin/nvim"
   '';
 
   # Required packages -------------------------------------------------------------------------- {{{
