@@ -47,6 +47,9 @@ in {
         prev.callPackage ../packages/sf-symbols { full = true; };
       sf-symbols-minimal = prev.callPackage ../packages/sf-symbols { };
 
+      # cargo
+      cargo-leptos = prev.callPackage ../packages/cargo-leptos { };
+
       scripts = prev.callPackage ../packages/scripts { }; # own scripts
     })
   ];
