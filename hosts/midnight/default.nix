@@ -15,6 +15,7 @@ in
   device = {
     type = "laptop";
     netDevices = netDevices;
+    # netDevices = [ ];
   };
 
   my-meta.nixConfigPath = "${home}/.config/nix-config";

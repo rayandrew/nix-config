@@ -14,11 +14,14 @@ rustPlatform.buildRustPackage rec {
   cargoSha256 = "sha256-MqEErweIHHF8w7WANfh8OpzvS774aIfcfkEOwEofSqw=";
 
   buildInputs = with pkgs; [
-    pkg-config
     # Add additional build inputs here
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     pkgs.darwin.apple_sdk.frameworks.CoreServices
     pkgs.darwin.apple_sdk.frameworks.Security
+  ];
+
+  nativeBuildInputs = with pkgs; [
+    pkg-config
   ];
 
   doCheck = false;
