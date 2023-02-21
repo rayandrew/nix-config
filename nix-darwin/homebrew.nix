@@ -79,6 +79,7 @@ in
       "firefox"
       "orion"
       "pdf-expert"
+      "readdle-spark"
       "desmume" # nds emulator
       "notion"
 
