@@ -21,7 +21,9 @@ rustPlatform.buildRustPackage rec {
   ];
 
   nativeBuildInputs = with pkgs; [
+  ] ++ lib.optionals pkgs.stdenv.isLinux [
     pkg-config
+    openssl
   ];
 
   doCheck = false;

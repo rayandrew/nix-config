@@ -30,8 +30,8 @@ in
       window_placement = "second_child";
       # Gaps
       window_gap = 18;
-      top_padding = 18;
-      bottom_padding = 52;
+      top_padding = 10;
+      bottom_padding = 44;
       left_padding = 18;
       right_padding = 18;
       # mouse
