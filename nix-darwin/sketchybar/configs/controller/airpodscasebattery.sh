@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 AIRPODSCASEBATTERY=$(system_profiler SPBluetoothDataType | grep 'Case Battery' | awk '{print $4}')
 AIRPODCASE=􁅐

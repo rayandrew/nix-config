@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 AIRPODSBATTERY=$(system_profiler SPBluetoothDataType | grep 'Left Battery\|Right Battery' | awk '{printf $4}' | awk '{printf $1+$2}')
 AIRPODICON=􁄡

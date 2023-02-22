@@ -29,11 +29,12 @@ in
       split_ratio = "0.50";
       window_placement = "second_child";
       # Gaps
-      window_gap = 18;
+      window_gap = 14;
       top_padding = 10;
-      bottom_padding = 44;
-      left_padding = 14;
-      right_padding = 14;
+      # bottom_padding = 44;
+      bottom_padding = 8;
+      left_padding = 12;
+      right_padding = 12;
       # mouse
       mouse_follows_focus = "off";
       focus_follows_mouse = "off";

@@ -36,7 +36,7 @@ if builtins.hasAttr "hm" lib then {
       padding_left=4                                       \
       padding_right=4                                      \
       color=0xff${barBackground}                           \
-      position=bottom                                      \
+      position=top                                         \
       sticky=on                                            \
       font_smoothing=on                                    \
                                                            \
@@ -60,7 +60,7 @@ if builtins.hasAttr "hm" lib then {
       source "$ITEM_DIR/battery.sh"
       source "$ITEM_DIR/disk.sh"
       source "$ITEM_DIR/mem.sh"
-      # source "$ITEM_DIR/cpu.sh"
+      source "$ITEM_DIR/cpu.sh"
 
       # initializing
       sketchybar --update
@@ -86,5 +86,5 @@ if builtins.hasAttr "hm" lib then {
   };
 
   services.yabai.config.external_bar = "main:4:4";
-  system.defaults.NSGlobalDomain._HIHideMenuBar = false; # show menu bar
+  system.defaults.NSGlobalDomain._HIHideMenuBar = true; # show menu bar
 }
