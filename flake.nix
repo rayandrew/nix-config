@@ -39,6 +39,13 @@
       url = "github:edolstra/flake-compat";
       flake = false;
     };
+
+    # Rust
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.url = "flake-utils";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:

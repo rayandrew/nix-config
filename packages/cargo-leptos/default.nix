@@ -24,6 +24,7 @@ rustPlatform.buildRustPackage rec {
 
 
   nativeBuildInputs = with pkgs; [
+    rust-bin.nightly.latest.default
   ] ++ lib.optionals pkgs.stdenv.isLinux [
     pkg-config
   ];

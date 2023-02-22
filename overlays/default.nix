@@ -4,6 +4,7 @@ let inherit (flake) inputs;
 in {
   nixpkgs.overlays = [
     inputs.deadnix.overlays.default
+    inputs.rust-overlay.overlays.default
     (final: prev: rec {
       lib = prev.lib.extend
         (_: _: (import ../lib { inherit (prev) lib config; }));
