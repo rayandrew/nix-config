@@ -102,7 +102,7 @@ in
       yabai -m rule --add app="^Finder$" sticky=on manage=off # layer=above 
       yabai -m rule --add app="^(Neovide|Notion)$" manage=on space=3 # for note-taking
       yabai -m rule --add app="^Linear$" space=3
-      yabai -m rule --add app="^(Mail|Calendar|Spark Desktop)$" space=8
+      yabai -m rule --add app="^(Mail|Calendar|Fantastical|Spark Desktop)$" space=8
       yabai -m rule --add label="Communication" app="^(Skype|Slack|Discord)$" space=9
       yabai -m rule --add app="^(Google Chrome|Firefox|Safari|Orion|Arc)$" space=10
       yabai -m rule --add label="Little Arc" app="^Arc$" title="^Space.*" manage=off # for Little Arc to be happy

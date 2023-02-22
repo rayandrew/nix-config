@@ -82,6 +82,7 @@ in
       "readdle-spark"
       "desmume" # nds emulator
       "notion"
+      "fantastical"
 
       # r
       "r"
