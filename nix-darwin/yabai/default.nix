@@ -32,8 +32,8 @@ in
       window_gap = 18;
       top_padding = 10;
       bottom_padding = 44;
-      left_padding = 18;
-      right_padding = 18;
+      left_padding = 14;
+      right_padding = 14;
       # mouse
       mouse_follows_focus = "off";
       focus_follows_mouse = "off";

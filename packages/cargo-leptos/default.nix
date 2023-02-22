@@ -18,12 +18,14 @@ rustPlatform.buildRustPackage rec {
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     pkgs.darwin.apple_sdk.frameworks.CoreServices
     pkgs.darwin.apple_sdk.frameworks.Security
+  ] ++ lib.optionals pkgs.stdenv.isLinux [
+    openssl
   ];
+
 
   nativeBuildInputs = with pkgs; [
   ] ++ lib.optionals pkgs.stdenv.isLinux [
     pkg-config
-    openssl
   ];
 
   doCheck = false;
