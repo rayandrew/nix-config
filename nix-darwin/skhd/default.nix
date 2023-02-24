@@ -47,39 +47,45 @@ if builtins.hasAttr "hm" lib then {
         lalt + shift - c : skhd -k "escape"; sh ${scripts}/move-window.sh 13
 
         # Window Navigation (through display borders): lalt - {h, j, k, l}
-        lalt - h    : ${yabai} -m window --focus west  || ${yabai} -m display --focus west
-        lalt - j    : ${yabai} -m window --focus south || ${yabai} -m display --focus south
-        lalt - k    : ${yabai} -m window --focus north || ${yabai} -m display --focus north
-        lalt - l    : ${yabai} -m window --focus east  || ${yabai} -m display --focus east
+        lalt - h    : yabai -m window --focus west  || yabai -m display --focus west
+        lalt - j    : yabai -m window --focus south || yabai -m display --focus south
+        lalt - k    : yabai -m window --focus north || yabai -m display --focus north
+        lalt - l    : yabai -m window --focus east  || yabai -m display --focus east
+
+        # Window Swapping
+        lalt + shift - h    : yabai -m window --swap west
+        lalt + shift - j    : yabai -m window --swap south
+        lalt + shift - k    : yabai -m window --swap north 
+        lalt + shift - l    : yabai -m window --swap east
 
         # Make window zoom to fullscreen: lalt - f
-        lalt - f : ${yabai} -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
+        lalt - f : yabai -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
 
         # Make window zoom to parent node: shift + lalt - f 
-        shift + lalt - f : ${yabai} -m window --toggle zoom-parent; sketchybar --trigger window_focus
+        shift + lalt - f : yabai -m window --toggle zoom-parent; sketchybar --trigger window_focus
 
         # floating window
-        lalt - space : ${yabai} -m window --toggle float --grid 5:5:1:1:3:3; sketchybar --trigger window_focus
+        lalt - space : yabai -m window --toggle float --grid 5:5:1:1:3:3; sketchybar --trigger window_focus
 
         # fill screen
-        lalt - o : ${yabai} -m window --grid 1:1:0:0:1:1
+        lalt - o : yabai -m window --grid 1:1:0:0:1:1
 
         # toggle stack
-        lalt - s : ${yabai} -m space --layout "$(${yabai} -m query --spaces --space | jq -r 'if .type == "bsp" then "stack" else "bsp" end')"
+        lalt - s : yabai -m space --layout "$(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "stack" else "bsp" end')"
 
         # go to next window
-        lctrl - right : ${yabai} -m query --spaces --space \
+        lctrl - right : yabai -m query --spaces --space \
           | ${pkgs.jq}/bin/jq -re ".index" \
-          | xargs -I{} ${yabai} -m query --windows --space {} \
+          | xargs -I{} yabai -m query --windows --space {} \
           | ${pkgs.jq}/bin/jq -sre "add | map(select(.minimized != 1)) | sort_by(.display, .frame.y, .frame.y, .id) | reverse | nth(index(map(select(.\"has-focus\" == true))) - 1).id" \
-          | xargs -I{} ${yabai} -m window --focus {}
+          | xargs -I{} yabai -m window --focus {}
 
         # go to prev window
-        lctrl - left: ${yabai} -m query --spaces --space \
+        lctrl - left: yabai -m query --spaces --space \
           | ${pkgs.jq}/bin/jq -re ".index" \
-          | xargs -I{} ${yabai} -m query --windows --space {} \
+          | xargs -I{} yabai -m query --windows --space {} \
           | ${pkgs.jq}/bin/jq -sre "add | map(select(.minimized != 1)) | sort_by(.display, .frame.y, .frame.y, .id) | nth(index(map(select(.\"has-focus\" == true))) - 1).id" \
-          | xargs -I{} ${yabai} -m window --focus {}
+          | xargs -I{} yabai -m window --focus {}
 
         # killall dock - when desktop transitions act weird
         hyper - x : ${pkgs.killall}/bin/killall Dock
@@ -89,28 +95,27 @@ if builtins.hasAttr "hm" lib then {
         # lalt - return : open -n -a ${pkgs.kitty}/Applications/kitty.app
         # lalt + lshift - return : open -n -a ${pkgs.kitty}/Applications/kitty.app --args ${pkgs.zsh}/bin/zsh -c "${pkgs.tmux}/bin/tmux attach || ${pkgs.tmux}/bin/tmux"
         # lalt + lshift - return : open -n -a ${pkgs.kitty}/Applications/kitty.app --args --session ${scripts}/tmux-kitty.session
-        lalt - return : ${pkgs.wezterm}/bin/wezterm start
-        # lalt + shift - return : ${pkgs.wezterm}/bin/wezterm start -- zsh -l -c "tmux attach || tmux"
-
+        lalt - return : ${pkgs.wezterm}/bin/wezterm start --always-new-process
+        # lalt + shift - return : ${pkgs.wezterm}/bin/wezterm start --always-new-process -- zsh -l -c "tmux attach || tmux"
         lalt - e : open ~/
         lalt - n : open -n -a /Applications/Neovide.app --args --frame none
 
         # rotate tree
-        lalt + shift - r : ${yabai} -m space --rotate 90
+        lalt + shift - r : yabai -m space --rotate 90
 
         :: resize @
         lalt - r ; resize
         resize < escape ; default
         resize < q ; default
 
-        resize < h : ${yabai} -m window --resize left:-20:0 || \
-            ${yabai} -m window --resize right:-20:0
-        resize < l : ${yabai} -m window --resize left:20:0 || \
-            ${yabai} -m window --resize right:20:0
-        resize < j : ${yabai} -m window --resize top:0:20 || \
-            ${yabai} -m window --resize bottom:0:20
-        resize < k : ${yabai} -m window --resize top:0:-20 || \
-            ${yabai} -m window --resize bottom:0:-20
+        resize < h : yabai -m window --resize left:-20:0 || \
+            yabai -m window --resize right:-20:0
+        resize < l : yabai -m window --resize left:20:0 || \
+            yabai -m window --resize right:20:0
+        resize < j : yabai -m window --resize top:0:20 || \
+            yabai -m window --resize bottom:0:20
+        resize < k : yabai -m window --resize top:0:-20 || \
+            yabai -m window --resize bottom:0:-20
       '';
     };
 

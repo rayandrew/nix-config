@@ -3,7 +3,6 @@
 let
   inherit (lib) concatStringsSep optional;
   inherit (config.lib.file) mkOutOfStoreSymlink;
-  inherit (config.home.user-info) directory;
 
   # customNvChad = ./nvchad-custom;
   populateEnv = ./populate-nvim-env.py;
