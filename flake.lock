@@ -313,11 +313,11 @@
     },
     "stable": {
       "locked": {
-        "lastModified": 1677198947,
-        "narHash": "sha256-zm98x+CFaPR1MlnMzlKRh1wfy4ggqLZmSjHzzJsaSZc=",
+        "lastModified": 1677358141,
+        "narHash": "sha256-qie2N9TWU9pM5TwznVB9z08eJs367TCa66dQezt0TSc=",
         "owner": "rayandrew",
         "repo": "nixpkgs",
-        "rev": "4c3575d2fb83ad597beda98570e9adac1179b66e",
+        "rev": "b249d2636d1b7914ce7ab0248c0d789e5f912347",
         "type": "github"
       },
       "original": {
