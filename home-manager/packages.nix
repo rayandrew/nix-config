@@ -32,6 +32,7 @@
     less
     lsof
     man
+    nb # note taking
     nixfmt
     nodejs
     netcat-gnu

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "0" "z" "x" "c" "v" "b" "n" "m" "a" "s" "d" "f" "g")
+# SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "0" "z" "x" "c" "v" "b" "n" "m" "a" "s" "d" "f" "g")
+SPACE_ICONS=("0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "0" "z" "x" "c" "v" "b" "n" "m" "a" "s" "d" "f" "g")
 
 # sid=0
 for i in "${!SPACE_ICONS[@]}"; do

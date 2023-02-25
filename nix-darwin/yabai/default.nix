@@ -100,23 +100,37 @@ in
       yabai -m rule --add label="Desmume" app="^DeSmuME$" manage=off
 
       yabai -m rule --add app="^Finder$" sticky=on manage=off # layer=above 
-      yabai -m rule --add app="^(Neovide|Notion)$" manage=on space=3 # for note-taking
-      yabai -m rule --add app="^Linear$" space=3
-      yabai -m rule --add app="^(Mail|Calendar|Fantastical|Spark Desktop)$" space=8
-      yabai -m rule --add label="Communication" app="^(Skype|Slack|Discord)$" space=9
-      yabai -m rule --add app="^(Google Chrome|Firefox|Safari|Orion|Arc)$" space=10
-      yabai -m rule --add label="Little Arc" app="^Arc$" title="^Space.*" manage=off # for Little Arc to be happy
+      # yabai -m rule --add app="^(Neovide|Notion)$" manage=on space=3 # for note-taking
+      # yabai -m rule --add app="^Linear$" space=3
+      yabai -m rule --add app="^(Mail|Calendar|Fantastical|Spark Desktop)$" space=4
+      yabai -m rule --add label="Communication" app="^(Skype|Slack|Discord)$" space=4
+      yabai -m rule --add app="^(Google Chrome|Firefox|Safari|Orion|Arc)$" space=1
+      # yabai -m rule --add label="Little Arc" app="^Arc$" title="^Space.*" manage=off # for Little Arc to be happy
 
-      yabai -m space 1 --label one                 # main 
-      yabai -m space 2 --label two --layout stack  # cloud dev
-      yabai -m space 3 --label three               # neovide
-      yabai -m space 4 --label four                #
-      yabai -m space 5 --label five                #
-      yabai -m space 6 --label six                 #
-      yabai -m space 7 --label seven               #
-      yabai -m space 8 --label mail --layout stack # mail + calendar
-      yabai -m space 9 --label nine --layout stack # social + chat
-      yabai -m space 10 --label ten --layout stack # browsers
+      for _ in $(yabai -m query --spaces | jq '.[].index | select(. > 6)'); do
+        yabai -m space --destroy 7
+      done
+      
+      function setup_space {
+        local idx="$1"
+        local name="$2"
+        local space=
+        echo "setup space $idx : $name"
+      
+        space=$(yabai -m query --spaces --space "$idx")
+        if [ -z "$space" ]; then
+          yabai -m space --create
+        fi
+      
+        yabai -m space "$idx" --label "$name"
+      }
+      
+      setup_space 1 web 
+      setup_space 2 main 
+      setup_space 3 code
+      setup_space 4 social 
+      setup_space 5 other
+      setup_space 6 other
 
       # bash ${scripts}/create-spaces.sh
     '';

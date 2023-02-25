@@ -18,33 +18,34 @@ if builtins.hasAttr "hm" lib then {
         lctrl + lshift - right : yabai -m space --focus next
         lctrl - z              : yabai -m space --focus recent
 
-        lalt - 1 : yabai -m space --focus 1
-        lalt - 2 : yabai -m space --focus 2
-        lalt - 3 : yabai -m space --focus 3
-        lalt - 4 : yabai -m space --focus 4
-        lalt - 5 : yabai -m space --focus 5
-        lalt - 6 : yabai -m space --focus 6
-        lalt - 7 : yabai -m space --focus 7
-        lalt - 8 : yabai -m space --focus 8
-        lalt - 9 : yabai -m space --focus 9
-        lalt - 0 : yabai -m space --focus 10
+        lalt - 0 : yabai -m space --focus 1
+        lalt - 1 : yabai -m space --focus 2
+        lalt - 2 : yabai -m space --focus 3
+        lalt - 3 : yabai -m space --focus 4
+        lalt - 4 : yabai -m space --focus 5
+        lalt - 5 : yabai -m space --focus 6
+        lalt - 6 : yabai -m space --focus 7
+        lalt - 7 : yabai -m space --focus 8
+        lalt - 8 : yabai -m space --focus 9
+        lalt - 9 : yabai -m space --focus 10
         lalt - z : yabai -m space --focus 11
         lalt - x : yabai -m space --focus 12
         lalt - c : yabai -m space --focus 13
 
-        lalt + shift - 1 : skhd -k "escape"; sh ${scripts}/move-window.sh 1
-        lalt + shift - 2 : skhd -k "escape"; sh ${scripts}/move-window.sh 2
-        lalt + shift - 3 : skhd -k "escape"; sh ${scripts}/move-window.sh 3
-        lalt + shift - 4 : skhd -k "escape"; sh ${scripts}/move-window.sh 4
-        lalt + shift - 5 : skhd -k "escape"; sh ${scripts}/move-window.sh 5
-        lalt + shift - 6 : skhd -k "escape"; sh ${scripts}/move-window.sh 6
-        lalt + shift - 7 : skhd -k "escape"; sh ${scripts}/move-window.sh 7
-        lalt + shift - 8 : skhd -k "escape"; sh ${scripts}/move-window.sh 8
-        lalt + shift - 9 : skhd -k "escape"; sh ${scripts}/move-window.sh 9
-        lalt + shift - 0 : skhd -k "escape"; sh ${scripts}/move-window.sh 10
-        lalt + shift - z : skhd -k "escape"; sh ${scripts}/move-window.sh 11
-        lalt + shift - x : skhd -k "escape"; sh ${scripts}/move-window.sh 12
-        lalt + shift - c : skhd -k "escape"; sh ${scripts}/move-window.sh 13
+        lalt + shift - 0 : skhd -k "escape"; sh ${scripts}/move-window.sh 1
+        lalt + shift - 1 : skhd -k "escape"; sh ${scripts}/move-window.sh 2
+        lalt + shift - 2 : skhd -k "escape"; sh ${scripts}/move-window.sh 3
+        lalt + shift - 3 : skhd -k "escape"; sh ${scripts}/move-window.sh 4
+        lalt + shift - 4 : skhd -k "escape"; sh ${scripts}/move-window.sh 5
+        lalt + shift - 5 : skhd -k "escape"; sh ${scripts}/move-window.sh 6
+        lalt + shift - 6 : skhd -k "escape"; sh ${scripts}/move-window.sh 7
+        lalt + shift - 7 : skhd -k "escape"; sh ${scripts}/move-window.sh 8
+        lalt + shift - 8 : skhd -k "escape"; sh ${scripts}/move-window.sh 9
+        lalt + shift - 9 : skhd -k "escape"; sh ${scripts}/move-window.sh 10
+        lalt + shift - 0 : skhd -k "escape"; sh ${scripts}/move-window.sh 11
+        lalt + shift - z : skhd -k "escape"; sh ${scripts}/move-window.sh 12
+        lalt + shift - x : skhd -k "escape"; sh ${scripts}/move-window.sh 13
+        lalt + shift - c : skhd -k "escape"; sh ${scripts}/move-window.sh 14
 
         # Window Navigation (through display borders): lalt - {h, j, k, l}
         lalt - h    : yabai -m window --focus west  || yabai -m display --focus west
@@ -64,8 +65,12 @@ if builtins.hasAttr "hm" lib then {
         # Make window zoom to parent node: shift + lalt - f 
         shift + lalt - f : yabai -m window --toggle zoom-parent; sketchybar --trigger window_focus
 
+        # Toggle split orientation of the selected windows node: shift + lalt - s
+        shift + lalt - s : yabai -m window --toggle split
+
         # floating window
-        lalt - space : yabai -m window --toggle float --grid 5:5:1:1:3:3; sketchybar --trigger window_focus
+        lalt - space : yabai -m window --toggle float --grid 5:5:1:1:5:5; sketchybar --trigger window_focus
+        # lalt - space : yabai -m window --toggle float; sketchybar --trigger window_focus
 
         # fill screen
         lalt - o : yabai -m window --grid 1:1:0:0:1:1

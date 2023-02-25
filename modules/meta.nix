@@ -75,12 +75,12 @@ in {
         nrb = lib.mkIf (stdenv.isLinux) "nixos-rebuild build --flake ${cfg.nixConfigPath}";
         nrs = lib.mkIf (stdenv.isLinux) "sudo nixos-rebuild switch --flake ${cfg.nixConfigPath}";
         flakeup = "nix flake update ${cfg.nixConfigPath}";
-        nb = "nix build";
-        nd = "nix develop";
-        nf = "nix flake";
-        nr = "nix run";
-        ns = "nix search";
-        npu = "nix-prefetch-url --unpack";
+        nxb = "nix build";
+        nxd = "nix develop";
+        nxf = "nix flake";
+        nxr = "nix run";
+        nxs = "nix search";
+        nxpu = "nix-prefetch-url --unpack";
 
         # Git
         ## Git status alias
