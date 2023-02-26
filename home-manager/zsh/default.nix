@@ -83,6 +83,8 @@ in
       if [[ `uname` == "Darwin" ]]; then
         export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib"
       fi
+
+      # export BROWSER="browser"
     '';
   };
 

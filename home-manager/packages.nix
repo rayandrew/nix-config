@@ -33,6 +33,7 @@
     lsof
     man
     nb # note taking
+    nmap
     nixfmt
     nodejs
     netcat-gnu
@@ -53,6 +54,7 @@
     tree
     unar
     unzip
+    w3m
     watch
     wget
     xz
@@ -68,6 +70,9 @@
 
     # gnuplot
     gnuplot_qt
+
+    # node packages
+    # nodePackages_latest.readability-cli
 
     # static website
     hugo
