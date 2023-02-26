@@ -114,6 +114,8 @@ in
       function setup_space {
         local idx="$1"
         local name="$2"
+        shift
+        shift
         local space=
         echo "setup space $idx : $name"
       
@@ -122,13 +124,13 @@ in
           yabai -m space --create
         fi
       
-        yabai -m space "$idx" --label "$name"
+        yabai -m space "$idx" --label "$name" $@
       }
       
-      setup_space 1 web 
+      setup_space 1 web --layout stack
       setup_space 2 main 
       setup_space 3 code
-      setup_space 4 social 
+      setup_space 4 social --layout stack
       setup_space 5 other
       setup_space 6 other
 
