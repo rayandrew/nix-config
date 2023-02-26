@@ -12,6 +12,7 @@ let
   one-password = pkgs.tmuxPlugins.mkTmuxPlugin {
     pluginName = "1password";
     version = "unstable-2022-01-01";
+    rtpFilePath = "plugin.tmux";
     src = pkgs.fetchFromGitHub {
       owner = "yardnsm";
       repo = "tmux-1password";
@@ -70,7 +71,13 @@ in
 
     plugins = with pkgs; [
       tmuxPlugins.cpu
-      one-password
+      {
+        plugin = one-password;
+        extraConfig = ''
+          # set -g @1password-debug 'on'
+          set -g @1password-key 'P'
+        '';
+      }
       # tokyo-night
       {
         plugin = tmuxPlugins.resurrect;
@@ -128,7 +135,7 @@ in
       bind _ split-window -h -c "#{pane_current_path}"
 
       # Zoxide integration
-      bind-key T run-shell "t"
+      bind-key t run-shell "t"
 
       # -- pane navigation -----------------------------------------------------------
       bind -r h select-pane -L  # move left
@@ -183,9 +190,9 @@ in
 
       # -- buffers -------------------------------------------------------------------
 
-      bind b list-buffers  # list paste buffers
-      bind p paste-buffer  # paste from the top paste buffer
-      bind P choose-buffer # choose which buffer to paste from
+      # bind b list-buffers  # list paste buffers
+      # bind p paste-buffer  # paste from the top paste buffer
+      # bind P choose-buffer # choose which buffer to paste from
 
       # -- gitmux --------------------------------------------------------------------
       set -g status-left '#(${pkgs.unstable.gitmux}/bin/gitmux -cfg ${gitmux-config} "#{pane_current_path}")'
