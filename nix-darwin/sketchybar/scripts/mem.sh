@@ -12,4 +12,4 @@ WIRED_MEMORY=$(printf "%.2f\n" $(top -l 1 | grep 'wired' | awk -F '(' '{print $2
 COMPRESSED=$(printf "%.2f\n" $(top -l 1 | grep 'compressor' | awk -F '(' '{print $2}' | awk '{print $3/1024}'))
 MEMORY_USAGE=$(printf "%.2f\n" $(awk "BEGIN {print (($APP_MEMORY+$WIRED_MEMORY+$COMPRESSED)+0.529)}"))
 
-sketchybar -m --set $NAME icon=$MEMICON label="mem $MEMORY_USAGE GB |"
+sketchybar -m --set "$NAME" icon=$MEMICON label="$MEMORY_USAGE GB"

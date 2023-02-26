@@ -1,11 +1,21 @@
 { config, lib, pkgs, ... }:
 
 let
-  barSize = "32";
-  fontSize = "12";
-  barBackground = "16161e";
-  barForeground = "a9b1d6";
-  configs = ./configs;
+  barSize = "36";
+  fontSize = "14";
+  barBackground = "000000";
+  # barBackground = "161616";
+  barForeground = "ffffff";
+  scripts = ./scripts;
+  separator = id: position: ''
+    sketchybar --add item ${id} ${position} \
+      --set ${id} icon= \
+      icon.padding_left=0 \
+      icon.padding_right=0 \
+      background.padding_left=0
+      background.padding_right=0
+      icon.align=center
+  '';
 in
 if builtins.hasAttr "hm" lib then {
   home.activation.sketchybar = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -21,58 +31,95 @@ if builtins.hasAttr "hm" lib then {
     config = ''
       #!/usr/bin/env sh
 
-      source "${configs}/color.sh"
-
-      PLUGIN_DIR="${configs}/controller"
-      PLUGIN_TOUCH="${configs}/controller/touch"
-      ITEM_DIR="${configs}/view"
+      # Unload the macOS on screen indicator overlay for volume change
+      launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist > /dev/null 2>&1 & 
 
       PADDING=4
-      ICON="SF Symbols"
-      LABEL="JetBrainsMono Nerd Font Mono"
-
-      sketchybar --bar height=${barSize}                   \
-      blur_radius=0                                        \
-      padding_left=4                                       \
-      padding_right=4                                      \
-      color=0xff${barBackground}                           \
-      position=top                                         \
-      sticky=on                                            \
-      font_smoothing=on                                    \
-                                                           \
-      --default updates=when_shown                         \
-      drawing=on                                           \
-      icon.font="$ICON:SemiBold:${fontSize}.0"             \
-      label.font="$LABEL:SemiBold:${fontSize}.0"           \
-      icon.padding_left=$PADDING                           \
-      icon.padding_right=$PADDING                          \
-      label.padding_left=$PADDING                          \
-      label.padding_right=$PADDING                         \
-      label.color=0xff${barForeground}                     \
-      icon.color=0xff${barForeground}                      \
+      ICON="Liga SFMono Nerd Font"
+      LABEL="Liga SFMono Nerd Font"
 
 
-      # left
-      source "$ITEM_DIR/space.sh"
-      source "$ITEM_DIR/front_app.sh"
+      sketchybar --bar height=${barSize}                                       \
+                       blur_radius=0                                           \
+                       color=0xff${barBackground}                              \
+                       position=top                                            \
+                       sticky=on                                               \
+                       font_smoothing=on                                       \
+                 --default updates=when_shown                                  \
+                           drawing=on                                          \
+                           icon.padding_left=$PADDING                          \
+                           icon.padding_right=$PADDING                         \
+                           label.padding_left=$PADDING                         \
+                           label.padding_right=$PADDING                        \
+                           icon.font="$ICON:Bold:${fontSize}.0"                \
+                           label.font="$LABEL:Regular:${fontSize}.0"           \
+                           label.color=0xff${barForeground}                    \
+                           icon.color=0xff${barForeground}                      
 
-      # right
-      source "$ITEM_DIR/battery.sh"
-      source "$ITEM_DIR/disk.sh"
-      source "$ITEM_DIR/mem.sh"
-      source "$ITEM_DIR/cpu.sh"
 
-      # initializing
-      sketchybar --update
+        SPACE_ICONS=("􀤆" "􀍕" "􀈊" "􀌤" "4" "5" "6" "7" "8" "9" "0")
+        sid=0
+        for i in "''${!SPACE_ICONS[@]}"
+        do 
+          sid=$(($i+1))
+          sketchybar --add space space.$sid left \
+                     --set space.$sid associated_space=$sid \
+                                      icon=''${SPACE_ICONS[i]} \
+                                      icon.padding_left=6 \
+                                      icon.padding_right=6 \
+                                      background.padding_left=4 \
+                                      background.padding_right=4 \
+                                      background.height=24 \
+                                      background.corner_radius=2 \
+                                      label.drawing=off \
+                                      script="${scripts}/space.sh" \
+                                      click_script="yabai -m space --focus \$SID 2>/dev/null"
 
-      echo "sketchybar configuration loaded.." 
+          if [[ $sid == 1 ]]; then
+            ${separator "space_separator" "left"}
+          fi
+        done          
+
+        sketchybar --add item battery right \
+                   --subscribe battery system_woke \
+                   --set battery update_freq=5 \
+                         script="${scripts}/battery.sh"
+
+        ${separator "sep_right_1" "right"}
+
+        sketchybar -m --add item cpu right \
+                      --set cpu update_freq=3 \
+                            script="${scripts}/cpu.sh"
+
+        ${separator "sep_right_2" "right"}
+
+        sketchybar -m --add item disk right \
+                      --set disk update_freq=10 \
+                      script="${scripts}/disk.sh"
+
+        ${separator "sep_right_3" "right"}
+
+        sketchybar -m --add item ram right \
+                      --set ram update_freq=5 \
+                            script="${scripts}/mem.sh"
+
+        ${separator "sep_right_4" "right"}
+
+        # Title
+        sketchybar --add item window_title right \
+                   --set window_title script="${scripts}/window_title.sh" \
+                                      icon.drawing=off \
+                                      label.color=0xff${barForeground} \
+                   --subscribe window_title front_app_switched  
+
+        # initializing
+        sketchybar --update
     '';
   };
 
   launchd.user.agents.sketchybar.environment = {
-    PLUGIN_DIR = "${configs}/controller";
-    PLUGIN_TOUCH = "${configs}/controller/touch";
-    ITEM_DIR = "${configs}/view";
+    FOREGROUND = "0xff${barForeground}";
+    BACKGROUND = "0xff${barBackground}";
   };
 
   launchd.user.agents.sketchybar.serviceConfig.ThrottleInterval = 30;

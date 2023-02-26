@@ -11,9 +11,11 @@
     ./skhd
     ./yabai
     ./symlinks.nix
+    ./preferences.nix
     ../overlays
     ../modules
     ../modules/darwin/sketchybar
     ../modules/darwin/pam
+    ../shared/fonts.nix
   ];
 }

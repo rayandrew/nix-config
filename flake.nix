@@ -46,6 +46,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.url = "flake-utils";
     };
+
+    # Fonts
+    sf-mono-liga-src = {
+      url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:

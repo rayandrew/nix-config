@@ -7,15 +7,16 @@
     LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
   };
-  fonts = {
-    fontDir.enable = true;
-    fonts = with pkgs; [
-      jetbrains-mono-nerdfont
-      sf-symbols
-      recursive
-      (nerdfonts.override { fonts = [ "FiraCode" "Ubuntu" ]; })
-    ];
-  };
+  # fonts = {
+  #   fontDir.enable = true;
+  #   fonts = with pkgs; [
+  #     jetbrains-mono-nerdfont
+  #     sf-symbols
+  #     sf-mono-liga
+  #     recursive
+  #     (nerdfonts.override { fonts = [ "FiraCode" "Ubuntu" ]; })
+  #   ];
+  # };
   nix.extraOptions = ''
     extra-platforms = x86_64-darwin
   '';
@@ -38,7 +39,8 @@
       AppleMetricUnits = 1;
       AppleShowAllExtensions = true;
       AppleTemperatureUnit = "Celsius";
-      AppleInterfaceStyle = "Light";
+      # AppleInterfaceStyle = "Dark";
+      AppleInterfaceStyle = null;
       AppleInterfaceStyleSwitchesAutomatically = false;
       InitialKeyRepeat = 20;
       KeyRepeat = 2;

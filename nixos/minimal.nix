@@ -8,5 +8,6 @@
     ./system.nix
     ./user.nix
     ../modules
+    ../shared/fonts.nix
   ];
 }

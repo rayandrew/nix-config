@@ -47,6 +47,7 @@ in {
       sf-symbols-full =
         prev.callPackage ../packages/sf-symbols { full = true; };
       sf-symbols-minimal = prev.callPackage ../packages/sf-symbols { };
+      sf-mono-liga = prev.callPackage ../packages/sf-mono-liga { inherit flake; };
 
       # cargo
       cargo-leptos = prev.callPackage ../packages/cargo-leptos { };

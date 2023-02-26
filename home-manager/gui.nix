@@ -13,6 +13,7 @@
   imports = [
     ./wezterm
     ./vscode.nix
+    ./fonts.nix
   ];
 
   home.packages = with pkgs; [ ];
