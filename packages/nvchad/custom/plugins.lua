@@ -1,6 +1,10 @@
 return {
   { "preservim/vimux" },
-  { "christoomey/vim-tmux-navigator" },
+  {
+    "christoomey/vim-tmux-navigator",
+    cmd = { "TmuxNavigateLeft", "TmuxNavigateDown", "TmuxNavigateUp", "TmuxNavigateRight" },
+    keys = { "<C-h>", "<C-j>", "<C-k>", "<C-l>" },
+  },
   { "JoosepAlviste/nvim-ts-context-commentstring" },
   { "nvim-treesitter/nvim-treesitter-textobjects" },
   { "mrjones2014/nvim-ts-rainbow" },
@@ -8,9 +12,12 @@ return {
 
   {
     "glepnir/lspsaga.nvim",
-    event = "VeryLazy",
+    event = "BufRead",
+    cmd = { "Lspsaga" },
+    config = true,
     dependencies = {
-      "nvim-tree/nvim-web-devicons",
+      { "nvim-tree/nvim-web-devicons" },
+      { "nvim-treesitter/nvim-treesitter" },
     },
   },
 
@@ -75,7 +82,7 @@ return {
   },
   {
     "mg979/vim-visual-multi",
-    keys = "<C-d>",
+    keys = { "<C-d>" },
     -- lazy = true,
     config = function(_, _)
       vim.g.VM_Mono_hl = "Substitute"
@@ -345,6 +352,8 @@ return {
           "java",
           "help",
           "nix",
+          "markdown",
+          "markdown_inline",
         },
       })
     end,

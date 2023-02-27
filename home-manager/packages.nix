@@ -49,6 +49,7 @@
     scripts
     shellcheck
     sops
+    spotify-player
     sshfs-fuse
     trash-cli
     tree

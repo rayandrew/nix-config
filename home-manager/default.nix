@@ -17,6 +17,7 @@
     ./tmux
     ./zsh
     ./starship.nix
+    ./spotify.nix
   ];
 
   systemd.user.startServices = "sd-switch";

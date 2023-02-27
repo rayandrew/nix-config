@@ -51,6 +51,7 @@ in {
 
       # cargo
       cargo-leptos = prev.callPackage ../packages/cargo-leptos { };
+      spotify-player = prev.callPackage ../packages/spotify-player { };
 
       scripts = prev.callPackage ../packages/scripts { }; # own scripts
     })
