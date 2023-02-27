@@ -4,7 +4,7 @@ local M = {}
 M.ui = {
   theme_toggle = {},
   -- theme = "one_light",
-  theme = "ayu-light",
+  theme = "ayu_light",
   transparency = false,
 }
 
