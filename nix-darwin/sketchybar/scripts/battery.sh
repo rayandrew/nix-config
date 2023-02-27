@@ -34,7 +34,7 @@ if [[ "$CHARGING" != "" ]]; then
 	case ${PERCENTAGE} in
 	[0-9][0-9] | 100)
 		ICON=􀢋
-		sketchybar --set "$NAME" icon=$ICON label="${PERCENTAGE}%" icon.color="0xffC8DF52" label.color="0xffC8DF52"
+		sketchybar --set "$NAME" icon=$ICON label="${PERCENTAGE}%" icon.color="0xff31d157" label.color="0xff31d157"
 		;;
 	esac
 fi
