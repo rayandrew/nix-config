@@ -9,6 +9,8 @@ in
     passwordAuthentication = false;
   };
 
+  programs.ssh.startAgent = true;
+
   # Enable mosh
   programs.mosh.enable = true;
 
