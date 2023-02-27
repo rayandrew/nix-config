@@ -80,6 +80,13 @@ if builtins.hasAttr "hm" lib then {
           fi
         done          
 
+        sketchybar  --add item time right \
+                    --set time update_freq=5 \
+                          icon.drawing=off \
+                          script="${scripts}/time.sh"
+
+        ${separator "sep_right_0" "right"}
+
         sketchybar --add item battery right \
                    --subscribe battery system_woke \
                    --set battery update_freq=5 \
