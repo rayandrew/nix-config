@@ -106,7 +106,7 @@ in
       # yabai -m rule --add app="^Linear$" space=3
       yabai -m rule --add app="^(Mail|Calendar|Fantastical|Spark Desktop)$" space=4
       yabai -m rule --add label="Communication" app="^(Skype|Slack|Discord)$" space=4
-      yabai -m rule --add app="^(Google Chrome|Firefox|Safari|Orion|Arc)$" space=1
+      yabai -m rule --add app="^(Google Chrome|Firefox|Safari|Orion|Arc|Microsoft Edge)$" space=1
       # yabai -m rule --add label="Little Arc" app="^Arc$" title="^Space.*" manage=off # for Little Arc to be happy
 
       for _ in $(yabai -m query --spaces | jq '.[].index | select(. > 6)'); do

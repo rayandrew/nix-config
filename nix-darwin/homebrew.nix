@@ -62,23 +62,24 @@ in
     # If an app isn't available in the Mac App Store, or the version in the App Store has
     # limitiations, e.g., Transmit, install the Homebrew Cask.
     casks = [
-      "balenaetcher"
+      # "balenaetcher"
       "1password"
       "1password-cli"
       # "google-drive"
-      "gpg-suite"
-      "loopback"
+      # "gpg-suite"
+      # "loopback"
       "raycast"
       "skype"
       "vlc"
-      "spotify"
+      # "spotify"
       "neovide" # Neovim GUI
       "alt-tab"
       "forklift" # sftp client
       "zoom"
       "google-chrome"
-      "firefox"
-      "orion"
+      # "firefox"
+      # "orion"
+      "microsoft-edge"
       "pdf-expert"
       "readdle-spark"
       "desmume" # nds emulator
