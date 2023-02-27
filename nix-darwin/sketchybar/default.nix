@@ -132,6 +132,6 @@ if builtins.hasAttr "hm" lib then {
     StandardOutPath = "/tmp/sketchybar.out.log";
   };
 
-  services.yabai.config.external_bar = "main:4:4";
+  services.yabai.config.external_bar = "main:${barSize}:4";
   system.defaults.NSGlobalDomain._HIHideMenuBar = true; # show menu bar
 }

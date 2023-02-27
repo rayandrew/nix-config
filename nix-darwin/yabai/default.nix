@@ -84,7 +84,7 @@ in
       ## Do not manage some apps which are not resizable
       yabai -m rule --add app="^(LuLu|Vimac|Calculator|VLC|System Settings|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice)$" manage=off
       yabai -m rule --add label="raycast" app="^Raycast$" manage=off
-      yabai -m rule --add label="1Password" app="^1Password$" layer=above manage=off
+      yabai -m rule --add label="1Password" app="^1Password$" manage=off
       yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy Report|Advance)$" manage=off
       yabai -m rule --add label="System Settings" app="^System Preferences$" manage=off
       yabai -m rule --add label="App Store" app="^App Store$" manage=off
