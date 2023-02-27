@@ -44,11 +44,13 @@ in
       mouse_drop_action = "swap";
       # shadows and borders
       window_shadow = "float";
-      window_border = "off";
-      window_border_width = 3;
-      window_border_radius = 3;
-      active_window_border_color = "0xff5c7e81";
-      normal_window_border_color = "0xff505050";
+      window_border = "on";
+      window_border_width = 2;
+      window_border_radius = 10;
+      # window_border_hidpi = "on";
+      # window_border_blur = "on";
+      active_window_border_color = "0xff575F66";
+      normal_window_border_color = "0xfffafafa";
       # insert_window_border_color   = "0xffd75f5f";
       # Bar
       external_bar = "all:32:0";
