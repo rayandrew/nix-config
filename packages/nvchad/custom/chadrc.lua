@@ -1,19 +1,18 @@
 ---@type ChadrcConfig
 local M = {}
 
--- local highlights = require "custom.highlights"
-
 M.ui = {
-  theme_toggle = { "tokyodark", "one_light" },
-  theme = "tokyodark",
-  -- theme_toggle = { "ayu-dark", "one_light" },
-  -- theme = "ayu-dark",
-  -- hl_override = highlights.override,
-  -- hl_add = highlights.add,
+  theme_toggle = {},
+  -- theme = "one_light",
+  theme = "ayu-light",
   transparency = false,
 }
 
-M.plugins = require("custom.plugins")
+M.plugins = "custom.plugins"
 M.mappings = require("custom.mappings")
+
+M.lazy_nvim = {
+  lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
+}
 
 return M

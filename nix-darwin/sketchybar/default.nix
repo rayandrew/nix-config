@@ -3,9 +3,11 @@
 let
   barSize = "36";
   fontSize = "14";
-  barBackground = "000000";
-  # barBackground = "161616";
-  barForeground = "ffffff";
+  # barBackground = "000000";
+  # barForeground = "ffffff";
+  barBackground = "fafafa";
+  # barForeground = "3a3a3a";
+  barForeground = "575F66";
   scripts = ./scripts;
   separator = id: position: ''
     sketchybar --add item ${id} ${position} \

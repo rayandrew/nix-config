@@ -1,17 +1,15 @@
 { config, pkgs, lib, ... }:
-# Let-In ----------------------------------------------------------------------------------------{{{
+
 let
   inherit (lib) concatStringsSep optional;
   inherit (config.lib.file) mkOutOfStoreSymlink;
 
-  # customNvChad = ./nvchad-custom;
   populateEnv = ./populate-nvim-env.py;
 
   populateEnvScript = ''
     mkdir -p ${config.xdg.dataHome}/nvim/site/plugin
     ${pkgs.python39}/bin/python ${populateEnv} -o ${config.xdg.dataHome}/nvim/site/plugin
   '';
-  # }}}
 in
 {
   # Neovim
@@ -25,6 +23,7 @@ in
 
   xdg.configFile."nvim" = {
     source = "${pkgs.nvchad}";
+    recursive = false;
   };
 
   home.packages = with pkgs; [

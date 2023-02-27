@@ -63,7 +63,7 @@
     # rust
     rustc
     cargo
-    cargo-leptos
+    # cargo-leptos
 
     # latex
     texlive.combined.scheme-full

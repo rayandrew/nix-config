@@ -56,6 +56,7 @@ in
       Slack = 803453959;
       # "Caffeinated" = 1362171212;
       "Amphetamine" = 937984704;
+      "Color Picker" = 1545870783;
     };
 
     # If an app isn't available in the Mac App Store, or the version in the App Store has

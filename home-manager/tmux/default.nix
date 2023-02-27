@@ -20,17 +20,10 @@ let
       sha256 = "11pvwyxxkxqxyg34mcrzydz9q1wfkj1x5vx3wmy3l4p89qf2dvlk";
     };
   };
-  # tokyo-night = pkgs.tmuxPlugins.mkTmuxPlugin {
-  #   pluginName = "tokyo-night";
-  #   version = "unstable-2022-01-01";
-  #   rtpFilePath = "tokyo-night.tmux";
-  #   src = pkgs.fetchFromGitHub {
-  #     owner = "janoamaral";
-  #     repo = "tokyo-night-tmux";
-  #     rev = "master";
-  #     sha256 = "sha256-QrZYdu1ulCVcmI6jRHQXmQ2EIcNU5ZHxciY3TjopT+I=";
-  #   };
-  # };
+
+  backgroundColor = "#fafafa";
+  foregroundColor = "#575f66";
+
   # https://pablo.tools/blog/computers/nix-mustache-templates/
   templateFile = name: template: data:
     pkgs.stdenv.mkDerivation {
@@ -61,6 +54,7 @@ in
     enable = true;
     prefix = if (config.device.type == "server") then "C-Space" else "C-a";
 
+    terminal = "screen-256color";
     shell = "${pkgs.zsh}/bin/zsh";
     keyMode = "vi";
     clock24 = false;
@@ -120,7 +114,8 @@ in
       bind C-k confirm kill-session
 
       # reload tmux conf
-      bind C-e source-file ${config.xdg.configHome}/tmux/tmux.conf
+      # bind C-e source-file ${config.xdg.configHome}/tmux/tmux.conf
+      bind r source-file ${config.xdg.configHome}/tmux/tmux.conf
 
       # find session
       bind C-f command-prompt -p find-session 'switch-client -t %%'
@@ -137,7 +132,7 @@ in
       # Zoxide integration
       bind-key t run-shell "t"
 
-      # -- pane navigation -----------------------------------------------------------
+      # pane navigation
       bind -r h select-pane -L  # move left
       bind -r j select-pane -D  # move down
       bind -r k select-pane -U  # move up
@@ -145,23 +140,21 @@ in
       bind > swap-pane -D       # swap current pane with the next one
       bind < swap-pane -U       # swap current pane with the previous one
 
-      # -- pane resizing -------------------------------------------------------------
+      # pane resizing
       bind -r H resize-pane -L 2
       bind -r J resize-pane -D 2
       bind -r K resize-pane -U 2
       bind -r L resize-pane -R 2
 
-      # -- window navigation ---------------------------------------------------------
+      # window navigation
       unbind n
       unbind p
       bind -r C-h previous-window # select previous window
       bind -r C-l next-window     # select next window
       bind Tab last-window        # move to last active window
 
-      # -- copy mode -----------------------------------------------------------------
-
+      # copy mode
       set -g set-clipboard on
-
       bind Enter copy-mode # enter copy mode
 
       run -b 'tmux bind -t vi-copy v begin-selection 2> /dev/null || true'
@@ -178,7 +171,7 @@ in
       run -b 'tmux bind -t vi-copy L end-of-line 2> /dev/null || true'
       run -b 'tmux bind -T copy-mode-vi L send -X end-of-line 2> /dev/null || true'
 
-      # -- copy to X11 clipboard ----------------------------------------------------
+      # copy to X11 clipboard
       if -b 'command -v xsel > /dev/null 2>&1' 'bind y run -b "tmux save-buffer - | xsel -i -b"'
       if -b '! command -v xsel > /dev/null 2>&1 && command -v xclip > /dev/null 2>&1' 'bind y run -b "tmux save-buffer - | xclip -i -selection clipboard >/dev/null 2>&1"'
       # copy to macOS clipboard
@@ -188,29 +181,26 @@ in
       if -b 'command -v clip.exe > /dev/null 2>&1' 'bind y run -b "tmux save-buffer - | clip.exe"'
       if -b '[ -c /dev/clipboard ]' 'bind y run -b "tmux save-buffer - > /dev/clipboard"'
 
-      # -- buffers -------------------------------------------------------------------
+      # buffers
 
       # bind b list-buffers  # list paste buffers
       # bind p paste-buffer  # paste from the top paste buffer
       # bind P choose-buffer # choose which buffer to paste from
 
-      # -- gitmux --------------------------------------------------------------------
-      set -g status-left '#(${pkgs.unstable.gitmux}/bin/gitmux -cfg ${gitmux-config} "#{pane_current_path}")'
+      # Panes
 
-      # -- TokyoNight ----------------------------------------------------------------
+      set -g mode-style "fg=${foregroundColor},bg=${backgroundColor}"
 
-      set -g mode-style "fg=#7aa2f7,bg=#3b4261"
+      set -g message-style "fg=${foregroundColor},bg=${backgroundColor}"
+      set -g message-command-style "fg=${foregroundColor},bg=${backgroundColor}"
 
-      set -g message-style "fg=#7aa2f7,bg=#3b4261"
-      set -g message-command-style "fg=#7aa2f7,bg=#3b4261"
-
-      set -g pane-border-style "fg=#3b4261"
-      set -g pane-active-border-style "fg=#7aa2f7"
+      set -g pane-border-style "fg=${backgroundColor}"
+      set -g pane-active-border-style "fg=${backgroundColor}"
 
       set -g status "on"
       set -g status-justify "left"
 
-      set -g status-style "fg=#7aa2f7,bg=#16161e"
+      set -g status-style "fg=${foregroundColor},bg=${backgroundColor}"
 
       set -g status-left-length "100"
       set -g status-right-length "100"
@@ -218,15 +208,14 @@ in
       set -g status-left-style NONE
       set -g status-right-style NONE
       
-      # set -g status-left "#[fg=#15161e,bg=#7aa2f7,bold] #S #[fg=#7aa2f7,bg=#16161e,nobold,nounderscore,noitalics]"
-      # set -g status-right "#[fg=#16161e,bg=#16161e,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#16161e] #{prefix_highlight} #[fg=#3b4261,bg=#16161e,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#3b4261] %Y-%m-%d  %I:%M %p #[fg=#7aa2f7,bg=#3b4261,nobold,nounderscore,noitalics]#[fg=#15161e,bg=#7aa2f7,bold] #h "
-      set -g status-right "#[fg=#16161e,bg=#16161e,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#16161e] #{prefix_highlight} #[fg=#3b4261,bg=#16161e,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#3b4261] %I:%M %p #[fg=#7aa2f7,bg=#3b4261,nobold,nounderscore,noitalics]#[fg=#15161e,bg=#7aa2f7,bold] #h "
+      set -g status-left '#(${pkgs.unstable.gitmux}/bin/gitmux -cfg ${gitmux-config} "#{pane_current_path}")'
+      set -g status-right "#[fg=${foregroundColor},bg=${backgroundColor}] %I:%M %p #[fg=${foregroundColor},bg=${backgroundColor},nobold,nounderscore,noitalics]#[fg=${backgroundColor},bg=${foregroundColor},bold] #h "
       
-      setw -g window-status-activity-style "underscore,fg=#a9b1d6,bg=#16161e"
+      setw -g window-status-activity-style "underscore,fg=${foregroundColor},bg=${backgroundColor}"
       setw -g window-status-separator ""
-      setw -g window-status-style "NONE,fg=#a9b1d6,bg=#16161e"
-      setw -g window-status-format "#[fg=#16161e,bg=#16161e,nobold,nounderscore,noitalics]#[default] #I  #W #F #[fg=#16161e,bg=#16161e,nobold,nounderscore,noitalics]"
-      setw -g window-status-current-format "#[fg=#16161e,bg=#3b4261,nobold,nounderscore,noitalics]#[fg=#7aa2f7,bg=#3b4261,bold] #I  #W #F #[fg=#3b4261,bg=#16161e,nobold,nounderscore,noitalics]"
+      setw -g window-status-style "NONE,fg=${foregroundColor},bg=${backgroundColor}"
+      setw -g window-status-format "#[fg=${backgroundColor},bg=${backgroundColor},nobold,nounderscore,noitalics]#[default] #I  #W #F #[fg=${backgroundColor},bg=${backgroundColor},nobold,nounderscore,noitalics]"
+      setw -g window-status-current-format "#[fg=${backgroundColor},bg=${foregroundColor},nobold,nounderscore,noitalics]#[fg${backgroundColor},bg=${foregroundColor},bold] #I  #W #F #[fg=${foregroundColor},bg=${backgroundColor},nobold,nounderscore,noitalics]"
 
     '';
   };
