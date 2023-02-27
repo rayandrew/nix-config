@@ -349,4 +349,19 @@ return {
       })
     end,
   },
+  {
+    "hrsh7th/nvim-cmp",
+    opts = function()
+      return vim.tbl_deep_extend("force", require("plugins.configs.cmp"), {
+        sources = {
+          { name = "luasnip" },
+          { name = "copilot" },
+          { name = "nvim_lsp" },
+          { name = "buffer" },
+          { name = "nvim_lua" },
+          { name = "path" },
+        },
+      })
+    end,
+  },
 }
