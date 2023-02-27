@@ -19,8 +19,7 @@ in
   programs.neovim.viAlias = true;
   programs.neovim.vimAlias = true;
 
-  # Config and plugins ------------------------------------------------------------------------- {{{
-
+  # Config and plugins
   xdg.configFile."nvim" = {
     source = "${pkgs.nvchad}";
     recursive = false;
@@ -51,9 +50,7 @@ in
     export EDITOR="${config.programs.neovim.package}/bin/nvim"
   '';
 
-  # Required packages -------------------------------------------------------------------------- {{{
-
+  # Required packages
   programs.neovim.extraPackages = with pkgs; [ ];
-  # }}}
 }
 # vim: foldmethod=marker
