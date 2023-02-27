@@ -57,7 +57,7 @@ if builtins.hasAttr "hm" lib then {
                            label.font="$LABEL:Regular:${fontSize}.0"           \
                            label.color=0xff${barForeground}                    \
                            icon.color=0xff${barForeground}                      
-        SPACE_ICONS=("􀤆" "􀎞" "􀈊" "􀍕" "4" "5" "6" "7" "8" "9" "0")
+        SPACE_ICONS=("􀤆" "􀎞" "􀈊" "􀍕" "􀆔" "􀧵" "6" "7" "8" "9" "0")
         sid=0
         for i in "''${!SPACE_ICONS[@]}"
         do 

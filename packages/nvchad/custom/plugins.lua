@@ -82,9 +82,9 @@ return {
   },
   {
     "mg979/vim-visual-multi",
-    keys = { "<C-d>" },
-    -- lazy = true,
-    config = function(_, _)
+    -- keys = { "<C-d>" },
+    lazy = false,
+    init = function(_)
       vim.g.VM_Mono_hl = "Substitute"
       vim.g.VM_Cursor_hl = "IncSearch"
 

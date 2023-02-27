@@ -194,8 +194,8 @@ in
       set -g message-style "fg=${foregroundColor},bg=${backgroundColor}"
       set -g message-command-style "fg=${foregroundColor},bg=${backgroundColor}"
 
-      set -g pane-border-style "fg=${backgroundColor}"
-      set -g pane-active-border-style "fg=${backgroundColor}"
+      set -g pane-border-style "fg=${foregroundColor}"
+      set -g pane-active-border-style "fg=${foregroundColor}"
 
       set -g status "on"
       set -g status-justify "left"
