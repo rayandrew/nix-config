@@ -85,7 +85,7 @@ in
       "desmume" # nds emulator
       "notion"
       "fantastical"
-      "shade"
+      "shades"
 
       # r
       "r"
