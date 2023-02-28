@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    age
+    stable.age
     borgbackup
     bzip2
     cachix
