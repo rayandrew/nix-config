@@ -57,6 +57,7 @@ in
       # "Caffeinated" = 1362171212;
       "Amphetamine" = 937984704;
       "Color Picker" = 1545870783;
+      "Spf - Screen Polarizer" = 1463398888;
     };
 
     # If an app isn't available in the Mac App Store, or the version in the App Store has
@@ -85,7 +86,6 @@ in
       "desmume" # nds emulator
       "notion"
       "fantastical"
-      "shades"
 
       # r
       "r"
