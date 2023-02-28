@@ -16,6 +16,7 @@
   installNixActionStep = { channel ? "nixos-unstable" }: {
     uses = "cachix/install-nix-action@v19";
     "with" = {
+      install_url = "https://releases.nixos.org/nix/nix-2.13.3/install";
       # Need to define a channel, otherwise it wiill use bash from environment
       nix_path = "nixpkgs=channel:${channel}";
       # Should avoid GitHub API rate limit
