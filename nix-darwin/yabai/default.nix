@@ -105,7 +105,7 @@ in
       # yabai -m rule --add app="^(Neovide|Notion)$" manage=on space=3 # for note-taking
       # yabai -m rule --add app="^Linear$" space=3
       yabai -m rule --add app="^(Mail|Calendar|Fantastical|Spark Desktop)$" space=4
-      yabai -m rule --add label="Communication" app="^(Skype|Slack|Discord)$" space=4
+      yabai -m rule --add label="Communication" app="^(Skype|Slack|Discord)$" space=5
       yabai -m rule --add app="^(Google Chrome|Firefox|Safari|Orion|Arc|Microsoft Edge)$" space=1
       # yabai -m rule --add label="Little Arc" app="^Arc$" title="^Space.*" manage=off # for Little Arc to be happy
 
@@ -132,9 +132,10 @@ in
       setup_space 1 web --layout stack
       setup_space 2 main 
       setup_space 3 code
-      setup_space 4 social --layout stack
-      setup_space 5 commands 
-      setup_space 6 other
+      setup_space 4 mail --layout stack
+      setup_space 5 social --layout stack
+      setup_space 6 commands 
+      # setup_space 7 other
 
       # bash ${scripts}/create-spaces.sh
     '';
