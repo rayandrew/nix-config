@@ -14,7 +14,7 @@
   };
   checkoutStep = { uses = "actions/checkout@v3"; };
   installNixActionStep = { channel ? "nixos-unstable" }: {
-    uses = "cachix/install-nix-action@v18";
+    uses = "cachix/install-nix-action@v19";
     "with" = {
       # Need to define a channel, otherwise it wiill use bash from environment
       nix_path = "nixpkgs=channel:${channel}";
