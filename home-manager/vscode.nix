@@ -23,8 +23,8 @@ let
     {
       name = "ayu";
       publisher = "teabyii";
-      version = "1.0.2";
-      sha256 = "sha256-ieGuou4NaRzo53qO3YjgJcIv7P2+nAb1Q4yCqIAVRJ0=";
+      version = "1.0.5";
+      sha256 = "sha256-+IFqgWliKr+qjBLmQlzF44XNbN7Br5a119v9WAnZOu4=";
     }
   ];
 in
@@ -33,6 +33,7 @@ in
     enable = true;
     extensions = with pkgs.vscode-extensions;
       [
+        vscodevim.vim
         bbenoist.nix
         (ms-python.python.overrideAttrs (finalAttrs: previousAttrs: {
           postPatch = "";
@@ -41,26 +42,70 @@ in
         ms-azuretools.vscode-docker
         ms-vscode-remote.remote-ssh
       ] ++ marketplaceExtensions;
-    userSettings = let fontSize = 18; in {
-      "workbench.colorTheme" = "Ayu Light";
-      "workbench.startupEditor" = "none";
+    userSettings =
+      let
+        fontSize = 18;
+      in
+      {
+        "workbench.colorTheme" = "Ayu Light";
+        "workbench.startupEditor" = "none";
 
-      # editor
-      # "editor.fontFamily" = "Pragmata Pro Mono";
-      "editor.fontFamily" = "JetBrainsMono Nerd Font Mono";
-      "editor.fontSize" = fontSize;
-      "editor.wordWrap" = "on";
-      "editor.minimap.enabled" = false;
+        # editor
+        # "editor.fontFamily" = "Pragmata Pro Mono";
+        "editor.fontFamily" = "JetBrainsMono Nerd Font Mono";
+        "editor.fontSize" = fontSize;
+        "editor.wordWrap" = "on";
+        "editor.minimap.enabled" = false;
+        "editor.lineNumbers" = "relative";
 
-      # integrated terminal
-      "terminal.integrated.fontSize" = fontSize;
+        # integrated terminal
+        "terminal.integrated.fontSize" = fontSize;
 
-      # python
-      "python.formatting.provider" = "none";
-      "[python]" = {
-        "editor.defaultFormatter" = "ms-python.black-formatter";
-        "editor.formatOnSave" = true;
+        # python
+        "python.formatting.provider" = "none";
+        "[python]" = {
+          "editor.defaultFormatter" = "ms-python.black-formatter";
+          "editor.formatOnSave" = true;
+        };
+
+        # vim 
+        "vim.easymotion" = true;
+        "vim.incsearch" = true;
+        "vim.useSystemClipboard" = true;
+        "vim.useCtrlKeys" = true;
+        "vim.hlsearch" = true;
+        "vim.insertModeKeyBindings" = [
+          {
+            "before" = [ "j" "j" ];
+            "after" = [ "<Esc>" ];
+          }
+        ];
+        "vim.normalModeKeyBindingsNonRecursive" = [
+          {
+            "before" = [ "<leader>" "d" ];
+            "after" = [ "d" "d" ];
+          }
+          {
+            "before" = [ "<C-n>" ];
+            "commands" = [ ":nohl" ];
+          }
+          {
+            "before" = [ "K" ];
+            "commands" = [ "lineBreakInsert" ];
+            "silent" = true;
+          }
+          {
+            "before" = [ "<leader>" "f" "s" ];
+            "commands" = [
+              ":w"
+            ];
+          }
+        ];
+        "vim.leader" = "<space>";
+        "vim.handleKeys" = {
+          "<C-a>" = false;
+          "<C-f>" = false;
+        };
       };
-    };
   };
 }
