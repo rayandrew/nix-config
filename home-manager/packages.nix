@@ -77,5 +77,9 @@
 
     # static website
     hugo
+
+    # task manager
+    taskwarrior
+    taskwarrior-tui
   ];
 }

@@ -13,7 +13,7 @@
   '';
   xdg.configFile."spotify-player/keymap.toml".text = ''
     [[keymaps]]
-    command = "ResumePause"
+    command = "PreviousPage"
     key_sequence = "q"
   '';
 }
