@@ -4,6 +4,12 @@ local M = {}
 M.general = {
   n = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
+    ["gc"] = {
+      function()
+        require("Comment.api").toggle.linewise.current()
+      end,
+      "toggle comment",
+    },
     ["gcc"] = {
       function()
         require("Comment.api").toggle.linewise.current()
@@ -12,6 +18,10 @@ M.general = {
     },
   },
   v = {
+    ["gc"] = {
+      "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+      "toggle comment",
+    },
     ["gcc"] = {
       "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
       "toggle comment",
