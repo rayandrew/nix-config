@@ -12,8 +12,8 @@
     audio_cache = false
   '';
   xdg.configFile."spotify-player/keymap.toml".text = ''
-    [[keymaps]]
-    command = "PreviousPage"
-    key_sequence = "q"
+    # [[keymaps]]
+    # command = "PreviousPage"
+    # key_sequence = "q"
   '';
 }
