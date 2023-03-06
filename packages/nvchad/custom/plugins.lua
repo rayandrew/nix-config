@@ -14,7 +14,9 @@ return {
     "glepnir/lspsaga.nvim",
     event = "BufRead",
     cmd = { "Lspsaga" },
-    config = true,
+    config = function()
+      require("lspsaga").setup({})
+    end,
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
       { "nvim-treesitter/nvim-treesitter" },
@@ -324,6 +326,10 @@ return {
 
           -- python
           "pyright",
+
+          -- javascript
+          "prettier",
+          "prettierd",
 
           -- yaml
           "yaml-language-server",
