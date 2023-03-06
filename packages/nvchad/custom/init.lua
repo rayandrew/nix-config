@@ -30,5 +30,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.wo.relativenumber = true
 vim.opt.relativenumber = true
 
+-- Notify me for line length
+vim.opt.colorcolumn = "80"
+
 -- Cursor
 vim.opt.guicursor = ""
