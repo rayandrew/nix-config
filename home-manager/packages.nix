@@ -30,6 +30,7 @@
     jq
     lazygit
     less
+    lf # file manager
     lsof
     man
     nb # note taking

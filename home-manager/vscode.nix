@@ -41,6 +41,7 @@ in
         }))
         ms-azuretools.vscode-docker
         ms-vscode-remote.remote-ssh
+        alefragnani.project-manager
       ] ++ marketplaceExtensions;
     userSettings =
       let

@@ -85,6 +85,7 @@ in
       fi
 
       # export BROWSER="browser"
+      export DIRPAPERS=${config.home.homeDirectory}/ucare/DIR-PAPERS
     '';
   };
 
