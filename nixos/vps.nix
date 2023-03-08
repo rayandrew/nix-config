@@ -7,7 +7,7 @@
   # Enable NixOS auto-upgrade
   system.autoUpgrade = {
     enable = true;
-    allowReboot = false;
+    allowReboot = lib.mkDefault false;
     flake = "github:rayandrew/nix-config";
   };
 
