@@ -1,4 +1,4 @@
-{ flake, ... }:
+{ flake, lib, ... }:
 {
   imports = [
     ../modules/meta.nix
