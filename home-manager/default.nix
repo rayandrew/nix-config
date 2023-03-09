@@ -15,9 +15,10 @@
     ./fish.nix
     ./fonts.nix
     ./tmux
-    ./zsh
     ./starship.nix
     ./spotify.nix
+    ./zellij.nix
+    ./zsh
   ];
 
   systemd.user.startServices = "sd-switch";
