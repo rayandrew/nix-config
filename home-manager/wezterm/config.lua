@@ -85,6 +85,11 @@ return {
     saturation = 0.5,
     brightness = 0.5,
   },
+
+  -- color_scheme = "AyuLight (Gogh)",
+  -- color_scheme = "everforest-dark-hard",
+  -- color_scheme = "GruvboxDark",
+  color_scheme = "Gruvbox dark, medium (base16)",
   colors = {
     tab_bar = {
       background = TAB_BAR_BG,
@@ -123,9 +128,6 @@ return {
   window_decorations = "RESIZE",
   font_size = 16.0,
   line_height = 1.4,
-  -- color_scheme = "One Light (base16)",
-  color_scheme = "AyuLight (Gogh)",
-  -- color_scheme = "ayu_light",
   default_prog = { "zsh" },
   keys = {
     { key = "n", mods = "SHIFT|CTRL", action = "ToggleFullScreen" },

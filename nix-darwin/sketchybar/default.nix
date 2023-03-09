@@ -3,11 +3,16 @@
 let
   barSize = "36";
   fontSize = "14";
-  # barBackground = "000000";
-  # barForeground = "ffffff";
-  barBackground = "fafafa";
-  # barForeground = "3a3a3a";
-  barForeground = "575F66";
+  # for ayu light
+  # barBackground = "fafafa";
+  # barForeground = "575F66";
+  # for everforest
+  # barBackground = "2b3339";
+  # barForeground = "dfad81";
+  # for gruvbox
+  barBackground = "282828";
+  barForeground = "ebdbb2";
+
   scripts = ./scripts;
   separator = id: position: ''
     sketchybar --add item ${id} ${position} \

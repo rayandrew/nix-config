@@ -59,6 +59,17 @@ return {
   { "tpope/vim-rhubarb" },
   { "lewis6991/gitsigns.nvim" },
 
+  -- theme
+  -- {
+  --   "sainnhe/everforest",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.g.everforest_background = "hard"
+  --     vim.cmd([[colorscheme everforest]])
+  --   end,
+  -- },
+
   -- Others
   {
     "Pocco81/TrueZen.nvim",

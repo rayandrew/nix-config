@@ -102,13 +102,13 @@ if builtins.hasAttr "hm" lib then {
         # lalt + lshift - return : open -n -a ${pkgs.kitty}/Applications/kitty.app --args --session ${scripts}/tmux-kitty.session
         lalt - return : ${pkgs.wezterm}/bin/wezterm start --always-new-process
         # lalt + shift - return : ${pkgs.wezterm}/bin/wezterm start --always-new-process -- zsh -l -c "tmux attach || tmux"
-        lalt - e : open ~/
+        # lalt - e : open ~/
         # lalt - n : open -n -a /Applications/Neovide.app --args --frame none
         lctrl - w: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- taskwarrior-tui
         lctrl - s: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- spotify_player
         lctrl - m: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- htop
-        lalt - n: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- lf
-        lctrl - e: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- zsh -l -c "nvim"
+        lalt - e : ${pkgs.wezterm}/bin/wezterm start --always-new-process -- lf
+        lalt - n : ${pkgs.wezterm}/bin/wezterm start --always-new-process -- zsh -l -c "nvim"
 
         # rotate tree
         lalt + shift - r : yabai -m space --rotate 90

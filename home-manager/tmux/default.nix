@@ -21,8 +21,12 @@ let
     };
   };
 
-  backgroundColor = "#fafafa";
-  foregroundColor = "#575f66";
+  # backgroundColor = "#fafafa";
+  # foregroundColor = "#575f66";
+
+  # gruvbox
+  backgroundColor = "#282828";
+  foregroundColor = "#ebdbb2";
 
   # https://pablo.tools/blog/computers/nix-mustache-templates/
   templateFile = name: template: data:
