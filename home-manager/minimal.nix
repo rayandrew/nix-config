@@ -8,7 +8,7 @@
     ./neovim.nix
     ./ssh.nix
     ./tmux
-    ./zellij.nix
+    ./zellij
     ./zsh
   ];
 }

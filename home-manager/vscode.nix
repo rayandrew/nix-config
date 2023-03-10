@@ -45,7 +45,8 @@
         fontSize = 18;
       in
       {
-        "workbench.colorTheme" = "Ayu Light";
+        # "workbench.colorTheme" = "Ayu Light";
+        "workbench.colorTheme" = "Gruvbox Dark Medium";
         "workbench.startupEditor" = "none";
 
         # editor

@@ -50,8 +50,10 @@ in
       window_border_radius = 10;
       # window_border_hidpi = "on";
       window_border_blur = "off";
-      active_window_border_color = "0xff575F66";
-      normal_window_border_color = "0xfffafafa";
+      # active_window_border_color = "0xff575F66";
+      # normal_window_border_color = "0xfffafafa";
+      normal_window_border_color = "#282828";
+      active_window_border_color = "#ebdbb2";
       # insert_window_border_color   = "0xffd75f5f";
       # Bar
       external_bar = "all:32:0";

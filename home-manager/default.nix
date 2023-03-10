@@ -17,7 +17,7 @@
     ./tmux
     ./starship.nix
     ./spotify.nix
-    ./zellij.nix
+    ./zellij
     ./zsh
   ];
 

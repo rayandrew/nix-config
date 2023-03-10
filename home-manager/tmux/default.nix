@@ -194,7 +194,7 @@ in
       # Panes
 
       # set -g mode-style "fg=${foregroundColor},bg=${backgroundColor}"
-      set -g mode-style "reverse"
+      # set -g mode-style "reverse"
 
       set -g message-style "fg=${foregroundColor},bg=${backgroundColor}"
       set -g message-command-style "fg=${foregroundColor},bg=${backgroundColor}"
