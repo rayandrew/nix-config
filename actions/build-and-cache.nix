@@ -9,7 +9,7 @@ with constants; {
     build-linux = {
       inherit (ubuntu) runs-on;
       steps = with steps; [
-        cancelPreviousRuns
+        # cancelPreviousRuns
         maximimizeBuildSpaceStep
         checkoutStep
         (installNixActionStep { })
@@ -24,7 +24,7 @@ with constants; {
     build-macos = {
       inherit (constants.macos) runs-on;
       steps = with steps; [
-        cancelPreviousRuns
+        # cancelPreviousRuns
         checkoutStep
         (installNixActionStep { channel = "nixpkgs-unstable"; })
         cachixActionStep
