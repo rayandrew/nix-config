@@ -216,6 +216,8 @@ in
       cmp-copilot.enable = lib.mkForce false;
       cmp_luasnip.enable = true;
 
+      toggleterm.enable = true;
+
       nvim-cmp = {
         # enable = true;
         enable = helpers.mkRaw ''
