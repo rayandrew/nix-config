@@ -200,7 +200,7 @@ in
 
       copilot-lua = {
         enable = true;
-        package = pkgs.vimPlugins.copilot-lua;
+        package = pkgs.unstable.vimPlugins.copilot-lua;
         suggestion = {
           keymap = {
             accept = "<c-g>";
