@@ -55,8 +55,8 @@
 
     # Neovim
     nixvim = {
-      # url = "github:rayandrew/nixvim";
-      url = "/Users/rayandrew/Code/nixvim";
+      url = "github:rayandrew/nixvim";
+      # url = "/Users/rayandrew/Code/nixvim";
       inputs.nixpkgs.url = "nixpkgs";
     };
   };

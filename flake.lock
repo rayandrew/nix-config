@@ -382,14 +382,17 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1678603986,
-        "narHash": "sha256-eBFNP6h2A4l4DQl7jPCf6GruOxbK+pq0mwIGcaisZWI=",
-        "type": "git",
-        "url": "file:///Users/rayandrew/Code/nixvim"
+        "lastModified": 1678605448,
+        "narHash": "sha256-r4km6GPRbMbpegvOSNz4OR8YXx9sNRQKTalHSzKzWus=",
+        "owner": "rayandrew",
+        "repo": "nixvim",
+        "rev": "7f3b00aae93461dd045bff1bbbe89436af9ce7bd",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///Users/rayandrew/Code/nixvim"
+        "owner": "rayandrew",
+        "repo": "nixvim",
+        "type": "github"
       }
     },
     "poetry2nix": {
