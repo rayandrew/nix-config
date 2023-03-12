@@ -73,7 +73,7 @@ in {
           ../hosts/${hostname}
           sops-nix.nixosModules.sops
           nixos-modules.nixosModule
-          nixvim.nixosModules.nixvim
+          # nixvim.nixosModules.nixvim
         ] ++ extraModules;
         specialArgs = {
           inherit system;
@@ -122,7 +122,7 @@ in {
         inherit system;
         modules = [
           ../hosts/${hostname}
-          nixvim.nixosModules.nixvim
+          # nixvim.nixosModules.nixvim
         ] ++ extraModules;
         specialArgs = {
           inherit system;
