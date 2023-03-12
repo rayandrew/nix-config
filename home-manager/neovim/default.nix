@@ -517,6 +517,18 @@ in
       "<leader>cd" = "<cmd>Lspsaga show_cursor_diagnostics<CR>";
       "<leader>ad" = "<cmd>Lspsaga show_buffer_diagnostics<CR>";
 
+      # term
+      "<leader>gg" = helpers.mkRaw ''
+        function()
+          term.lazygit:toggle()
+        end
+      '';
+      "<leader>gl" = helpers.mkRaw ''
+        function()
+          term.htop:toggle()
+        end
+      '';
+
       # Movements
       "j" = "gj";
       "k" = "gk";
@@ -589,7 +601,31 @@ in
           { "╰", hl_name },
           { "│", hl_name },
         }
-      end
+        end
+
+        local term = {}
+        local Terminal = require("toggleterm.terminal").Terminal
+        term.lazygit = Terminal:new({
+          cmd = "lazygit",
+          hidden = true,
+          direction = "float",
+          float_opts = {
+            border = "double",
+          },
+          on_open = function(term)
+            vim.cmd("startinsert!")
+            vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+          end,
+          on_close = function(_)
+            vim.cmd("startinsert!")
+          end,
+        })
+        
+        term.htop = Terminal:new({
+          cmd = "htop",
+          hidden = true,
+          direction = "float",
+        })
     '';
 
     extraPlugins = with pkgs.vimPlugins; [

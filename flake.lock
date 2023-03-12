@@ -362,12 +362,10 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1678470307,
+        "lastModified": 0,
         "narHash": "sha256-OEeMUr3ueLIXyW/OaFUX5jUdimyQwMg/7e+/Q0gC/QE=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "0c4800d579af4ed98ecc47d464a5e7b0870c4b1f",
-        "type": "github"
+        "path": "/nix/store/hcyb3afl1n2mdd906yb32c9ivss28msd-source",
+        "type": "path"
       },
       "original": {
         "owner": "NixOS",
@@ -385,16 +383,13 @@
       },
       "locked": {
         "lastModified": 1678603986,
-        "narHash": "sha256-bFHUQPOACIJBWA+KLm6ObaTw7WrJwT/ISxkyShHWINI=",
-        "owner": "rayandrew",
-        "repo": "nixvim",
-        "rev": "346a0e6547a8fe1e661d68db1e360ff3604e8d5c",
-        "type": "github"
+        "narHash": "sha256-eBFNP6h2A4l4DQl7jPCf6GruOxbK+pq0mwIGcaisZWI=",
+        "type": "git",
+        "url": "file:///Users/rayandrew/Code/nixvim"
       },
       "original": {
-        "owner": "rayandrew",
-        "repo": "nixvim",
-        "type": "github"
+        "type": "git",
+        "url": "file:///Users/rayandrew/Code/nixvim"
       }
     },
     "poetry2nix": {
@@ -436,11 +431,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1677722096,
-        "narHash": "sha256-7mjVMvCs9InnrRybBfr5ohqcOz+pyEX8m22C1XsDilg=",
+        "lastModified": 1678376203,
+        "narHash": "sha256-3tyYGyC8h7fBwncLZy5nCUjTJPrHbmNwp47LlNLOHSM=",
         "owner": "cachix",
         "repo": "pre-commit-hooks.nix",
-        "rev": "61a3511668891c68ebd19d40122150b98dc2fe3b",
+        "rev": "1a20b9708962096ec2481eeb2ddca29ed747770a",
         "type": "github"
       },
       "original": {
