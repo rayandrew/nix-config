@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ flake, config, pkgs, lib, ... }:
 
 # some configurations are taken from 
 # https://github.com/NvChad/NvChad
@@ -18,7 +18,9 @@ let
 in
 {
   # Neovim
-
+  imports = [
+    flake.inputs.nixvim.homeManagerModules.nixvim
+  ];
 
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.neovim.enable
   # programs.neovim.enable = true;
