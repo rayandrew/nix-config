@@ -3,7 +3,6 @@
 let home = config.home.homeDirectory;
 in {
   imports = [
-    flake.inputs.nixvim.homeManagerModules.nixvim
     ./default.nix
     ./gui.nix
     ./fonts.nix

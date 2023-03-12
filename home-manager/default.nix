@@ -1,7 +1,8 @@
-{ ... }:
+{ flake, ... }:
 
 {
   imports = [
+    flake.inputs.nixvim.homeManagerModules.nixvim
     ./alacritty.nix
     ./direnv.nix
     ./git.nix
