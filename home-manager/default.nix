@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./alacritty.nix
     ./direnv.nix
     ./git.nix
     ./gnupg.nix
@@ -19,6 +20,8 @@
     ./spotify.nix
     ./zellij
     ./zsh
+    ./lazygit.nix
+    ./gitui.nix
   ];
 
   systemd.user.startServices = "sd-switch";

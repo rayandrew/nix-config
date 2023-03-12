@@ -48,14 +48,31 @@
         # "workbench.colorTheme" = "Ayu Light";
         "workbench.colorTheme" = "Gruvbox Dark Medium";
         "workbench.startupEditor" = "none";
+        "workbench.activityBar.visible" = false;
+        "workbench.statusBar.visible" = false;
+        "workbench.layoutControl.enabled" = false;
+        "workbench.layoutControl.type" = "menu";
+        "workbench.editor.limit.enabled" = true;
+        "workbench.editor.limit.value" = 1;
+        "workbench.editor.limit.perEditorGroup" = true;
+        "workbench.editor.showTabs" = false;
+
+        "breadcrumbs.enabled" = false;
+        "explorer.openEditors.visible" = 0;
+        "window.commandCenter" = true;
 
         # editor
         # "editor.fontFamily" = "Pragmata Pro Mono";
+        "editor.renderControlCharacters" = false;
         "editor.fontFamily" = "JetBrainsMono Nerd Font Mono";
         "editor.fontSize" = fontSize;
         "editor.wordWrap" = "on";
         "editor.minimap.enabled" = false;
         "editor.lineNumbers" = "relative";
+        "editor.scrollbar.verticalScrollbarSize" = 2;
+        "editor.scrollbar.horizontalScrollbarSize" = 2;
+        "editor.scrollbar.vertical" = "hidden";
+        "editor.scrollbar.horizontal" = "hidden";
 
         # integrated terminal
         "terminal.integrated.fontSize" = fontSize;

@@ -19,8 +19,8 @@ let
       --set ${id} icon= \
       icon.padding_left=0 \
       icon.padding_right=0 \
-      background.padding_left=0
-      background.padding_right=0
+      background.padding_left=0 \
+      background.padding_right=0 \
       icon.align=center
   '';
 in
@@ -45,6 +45,9 @@ if builtins.hasAttr "hm" lib then {
       ICON="Liga SFMono Nerd Font"
       LABEL="Liga SFMono Nerd Font"
 
+      sketchybar -m --add event window_created \
+                    --add event window_destroyed
+
 
       sketchybar --bar height=${barSize}                                       \
                        blur_radius=0                                           \
@@ -62,28 +65,16 @@ if builtins.hasAttr "hm" lib then {
                            label.font="$LABEL:Regular:${fontSize}.0"           \
                            label.color=0xff${barForeground}                    \
                            icon.color=0xff${barForeground}                      
-        SPACE_ICONS=("􀤆" "􀎞" "􀈊" "􀍕" "􀌨" "􀆔" "􀧵" "6" "7" "8" "9" "0")
-        sid=0
-        for i in "''${!SPACE_ICONS[@]}"
-        do 
-          sid=$(($i+1))
-          sketchybar --add space space.$sid left \
-                     --set space.$sid associated_space=$sid \
-                                      icon=''${SPACE_ICONS[i]} \
-                                      icon.padding_left=6 \
-                                      icon.padding_right=6 \
-                                      background.padding_left=4 \
-                                      background.padding_right=4 \
-                                      background.height=24 \
-                                      background.corner_radius=2 \
-                                      label.drawing=off \
-                                      script="${scripts}/space.sh" \
-                                      click_script="yabai -m space --focus \$SID 2>/dev/null"
 
-          if [[ $sid == 1 ]]; then
-            ${separator "space_separator" "left"}
-          fi
-        done          
+      sketchybar -m --add item yabai_spaces left \
+       --set yabai_spaces drawing=off \
+                          updates=on \
+                          script="${scripts}/yabai_spaces.sh" \
+       --subscribe yabai_spaces space_change window_created window_destroyed \
+       --add item space_template left \
+       --set space_template icon.highlight_color=0xff9dd274 \
+             drawing=off \
+             click_script="yabai -m space --focus \$NAME"
 
         sketchybar  --add item time right \
                     --set time update_freq=5 \

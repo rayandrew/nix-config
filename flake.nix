@@ -52,6 +52,13 @@
       url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
       flake = false;
     };
+
+    # Neovim
+    nixvim = {
+      # url = "github:rayandrew/nixvim";
+      url = "/Users/rayandrew/Code/nixvim";
+      inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:

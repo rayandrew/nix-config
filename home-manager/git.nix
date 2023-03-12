@@ -1,4 +1,8 @@
-{ config, pkgs, ... }:
+{ config
+, pkgs
+, lib
+, ...
+}:
 
 let
   home = config.home.homeDirectory;
@@ -20,14 +24,13 @@ in
 
     aliases = { };
     signing = {
-      # key = "E2E8D63137DD489E";
-      key = "${home}/.ssh/id_ed25519.pub";
+      key = if pkgs.stdenv.isDarwin then "E2E8D63137DD489E" else "${home}/.ssh/id_ed25519.pub";
       signByDefault = true;
-      gpgPath = "";
+      gpgPath = if (pkgs.stdenv.isDarwin) then "${pkgs.gnupg}/bin/gpg" else "";
     };
     extraConfig = {
       init = { defaultBranch = config.my-meta.mainBranch; };
-      gpg = { format = "ssh"; };
+      gpg = lib.mkIf (pkgs.stdenv.isLinux) { format = "ssh"; };
     };
 
     # Enhanced diffs

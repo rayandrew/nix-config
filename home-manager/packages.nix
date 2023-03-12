@@ -28,7 +28,6 @@
     inetutils
     ipcalc
     jq
-    lazygit
     less
     lf # file manager
     lsof

@@ -1,8 +1,13 @@
-{ config, lib, pkgs, ... }:
+{ flake, config, lib, pkgs, ... }:
 
 let home = config.home.homeDirectory;
 in {
-  imports = [ ./default.nix ./gui.nix ./fonts.nix ];
+  imports = [
+    ./default.nix
+    ./gui.nix
+    ./fonts.nix
+    flake.inputs.nixvim.homeManagerModules.nixvim
+  ];
 
   targets.darwin.defaults = {
     # Disable all automatic substitution

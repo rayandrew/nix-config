@@ -10,5 +10,7 @@
     ./tmux
     ./zellij
     ./zsh
+    ./lazygit.nix
+    ./gitui.nix
   ];
 }

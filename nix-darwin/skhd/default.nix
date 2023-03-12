@@ -18,12 +18,12 @@ if builtins.hasAttr "hm" lib then {
         lctrl + lshift - right : yabai -m space --focus next
         lctrl - z              : yabai -m space --focus recent
 
-        lalt - 0 : yabai -m space --focus 1
-        lalt - 1 : yabai -m space --focus 2
-        lalt - 2 : yabai -m space --focus 3
-        lalt - 3 : yabai -m space --focus 4
-        lalt - 4 : yabai -m space --focus 5
-        lalt - 5 : yabai -m space --focus 6
+        lalt - 0 : yabai -m space --focus "web"
+        lalt - 1 : yabai -m space --focus "main"
+        lalt - 2 : yabai -m space --focus "code"
+        lalt - 3 : yabai -m space --focus "mail"
+        lalt - 4 : yabai -m space --focus "social"
+        lalt - 5 : yabai -m space --focus "commands"
         lalt - 6 : yabai -m space --focus 7
         lalt - 7 : yabai -m space --focus 8
         lalt - 8 : yabai -m space --focus 9
@@ -32,12 +32,12 @@ if builtins.hasAttr "hm" lib then {
         lalt - x : yabai -m space --focus 12
         lalt - c : yabai -m space --focus 13
 
-        lalt + shift - 0 : skhd -k "escape"; sh ${scripts}/move-window.sh 1
-        lalt + shift - 1 : skhd -k "escape"; sh ${scripts}/move-window.sh 2
-        lalt + shift - 2 : skhd -k "escape"; sh ${scripts}/move-window.sh 3
-        lalt + shift - 3 : skhd -k "escape"; sh ${scripts}/move-window.sh 4
-        lalt + shift - 4 : skhd -k "escape"; sh ${scripts}/move-window.sh 5
-        lalt + shift - 5 : skhd -k "escape"; sh ${scripts}/move-window.sh 6
+        lalt + shift - 0 : skhd -k "escape"; sh ${scripts}/move-window.sh "web"
+        lalt + shift - 1 : skhd -k "escape"; sh ${scripts}/move-window.sh "main"
+        lalt + shift - 2 : skhd -k "escape"; sh ${scripts}/move-window.sh "code"
+        lalt + shift - 3 : skhd -k "escape"; sh ${scripts}/move-window.sh "mail"
+        lalt + shift - 4 : skhd -k "escape"; sh ${scripts}/move-window.sh "social"
+        lalt + shift - 5 : skhd -k "escape"; sh ${scripts}/move-window.sh "commands"
         lalt + shift - 6 : skhd -k "escape"; sh ${scripts}/move-window.sh 7
         lalt + shift - 7 : skhd -k "escape"; sh ${scripts}/move-window.sh 8
         lalt + shift - 8 : skhd -k "escape"; sh ${scripts}/move-window.sh 9
@@ -102,13 +102,12 @@ if builtins.hasAttr "hm" lib then {
         # lalt + lshift - return : open -n -a ${pkgs.kitty}/Applications/kitty.app --args --session ${scripts}/tmux-kitty.session
         lalt - return : ${pkgs.wezterm}/bin/wezterm start --always-new-process
         # lalt + shift - return : ${pkgs.wezterm}/bin/wezterm start --always-new-process -- zsh -l -c "tmux attach || tmux"
-        # lalt - e : open ~/
-        # lalt - n : open -n -a /Applications/Neovide.app --args --frame none
+        lalt - e : open ~/
         lctrl - w: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- taskwarrior-tui
-        lctrl - s: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- spotify_player
-        lctrl - m: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- htop
-        lalt - e : ${pkgs.wezterm}/bin/wezterm start --always-new-process -- lf
-        lalt - n : ${pkgs.wezterm}/bin/wezterm start --always-new-process -- zsh -l -c "nvim"
+        lctrl - m: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- spotify_player
+        lctrl - 0x2A: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- htop          # alt + \
+        lalt - 0x2C: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- lf             # alt + /
+        lalt - n: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- zsh -l -c "nvim"
 
         # rotate tree
         lalt + shift - r : yabai -m space --rotate 90

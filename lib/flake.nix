@@ -9,6 +9,7 @@
 , deploy-rs
 , sops-nix
 , nixos-modules
+, nixvim
 , ...
 }@inputs:
 
@@ -72,6 +73,7 @@ in {
           ../hosts/${hostname}
           sops-nix.nixosModules.sops
           nixos-modules.nixosModule
+          nixvim.nixosModules.nixvim
         ] ++ extraModules;
         specialArgs = {
           inherit system;
@@ -118,7 +120,10 @@ in {
     }: {
       darwinConfigurations.${hostname} = darwinSystem {
         inherit system;
-        modules = [ ../hosts/${hostname} ] ++ extraModules;
+        modules = [
+          ../hosts/${hostname}
+          nixvim.nixosModules.nixvim
+        ] ++ extraModules;
         specialArgs = {
           inherit system;
           flake = self;
@@ -154,6 +159,7 @@ in {
             home = { inherit username homeDirectory; };
             imports = [ configuration ];
           })
+          nixvim.homeManagerModules.nixvim
           sops-nix.homeManagerModules.sops
         ];
         extraSpecialArgs = {
