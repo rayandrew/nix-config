@@ -110,7 +110,10 @@ in
         separatorStyle = "slant";
       };
       nvim-autopairs.enable = true;
-      nvim-tree.enable = true;
+      nvim-tree = {
+        enable = true;
+        package = pkgs.unstable.vimPlugins.nvim-tree-lua;
+      };
 
       undotree.enable = true;
       surround.enable = true;
