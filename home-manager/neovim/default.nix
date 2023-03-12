@@ -18,9 +18,6 @@ let
 in
 {
   # Neovim
-  imports = [
-    flake.inputs.nixvim.homeManagerModules.nixvim
-  ];
 
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.neovim.enable
   # programs.neovim.enable = true;
