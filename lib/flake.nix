@@ -159,7 +159,6 @@ in {
             home = { inherit username homeDirectory; };
             imports = [ configuration ];
           })
-          nixvim.homeManagerModules.nixvim
           sops-nix.homeManagerModules.sops
         ];
         extraSpecialArgs = {
