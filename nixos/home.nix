@@ -3,7 +3,6 @@
 {
   imports = [
     flake.inputs.home.nixosModules.home-manager
-    flake.inputs.nixvim.homeManagerModules.nixvim
     ../modules/meta.nix
   ];
 

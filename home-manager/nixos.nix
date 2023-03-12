@@ -1,7 +1,10 @@
-{ pkgs, ... }:
+{ flake, pkgs, ... }:
 
 {
-  imports = [ ./default.nix ];
+  imports = [
+    flake.inputs.nixvim.homeManagerModules.nixvim
+    ./default.nix
+  ];
 
   home.packages = with pkgs; [ parted xclip conda ];
 }
