@@ -20,6 +20,7 @@
   };
 
   config = lib.mkIf config.nixos.home.enable {
+    # imports = [ flake.inputs.nixvim.homeManagerModules.nixvim ];
     home-manager = {
       useUserPackages = true;
       users.${config.nixos.home.username} = config.nixos.home.path;

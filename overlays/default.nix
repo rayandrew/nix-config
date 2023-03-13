@@ -7,7 +7,11 @@ in {
     inputs.rust-overlay.overlays.default
     (final: prev: rec {
       lib = prev.lib.extend
-        (_: _: (import ../lib { inherit (prev) lib config; }));
+        (_: _: (import ../lib {
+          inherit (prev) lib config;
+          inherit flake;
+          pkgs = final;
+        }));
 
       unstable = import inputs.nixpkgs {
         inherit system;

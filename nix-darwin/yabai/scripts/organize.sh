@@ -5,6 +5,7 @@
 
 UUID_MIDNIGHT="37D8832A-2D66-02CA-B9F7-8F30A301B230"
 UUID_VP229="9E041B4A-1854-4D12-9822-F9B494EA5AFF"
+UUID_APPLE_STUDIO="3E3DA20F-B1F1-4506-AA57-C97148A2A31D"
 
 DISPLAYS=$(yabai -m query --displays)
 MONITORS=$(echo "$DISPLAYS" | jq '.[].index')
@@ -58,6 +59,7 @@ MIDNIGHT=$(echo "$DISPLAYS" | jq --arg UUID "$UUID_MIDNIGHT" '.[] | select(.uuid
 MIDNIGHT_INDEX=$(echo "$MIDNIGHT" | jq '.index')
 
 VP229=$(echo "$DISPLAYS" | jq --arg UUID "$UUID_VP229" '.[] | select(.uuid == $UUID)')
+APPLE_STUDIO=$(echo "$DISPLAYS" | jq --arg UUID "$UUID_APPLE_STUDIO" '.[] | select(.uuid == $UUID)')
 if [ -n "$VP229" ]; then
   # VP229 CONNECTED
 
@@ -71,6 +73,19 @@ if [ -n "$VP229" ]; then
   create_space_on_monitor "$VP229_INDEX" "code"
   create_space_on_monitor "$VP229_INDEX" "mail"
   create_space_on_monitor "$VP229_INDEX" "social"
+elif [ -n "$APPLE_STUDIO" ]; then
+  # APPLE_STUDIO CONNECTED
+
+  # midnight 
+  name_first_space "$MIDNIGHT_INDEX" "commands"
+
+  ## APPLE_STUDIO
+  APPLE_STUDIO_INDEX=$(echo "$APPLE_STUDIO" | jq '.index')
+  name_first_space "$APPLE_STUDIO_INDEX" "web"
+  create_space_on_monitor "$APPLE_STUDIO_INDEX" "main"
+  create_space_on_monitor "$APPLE_STUDIO_INDEX" "code"
+  create_space_on_monitor "$APPLE_STUDIO_INDEX" "mail"
+  create_space_on_monitor "$APPLE_STUDIO_INDEX" "social"
 fi
 
 yabai -m space --focus 1 # focus main display

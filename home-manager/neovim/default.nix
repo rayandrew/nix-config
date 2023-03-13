@@ -6,7 +6,7 @@
 let
   inherit (lib) concatStringsSep optional;
   inherit (config.lib.file) mkOutOfStoreSymlink;
-  inherit (config.nixvim) helpers;
+  inherit (lib.nixvim) helpers;
 
   home = config.home.homeDirectory;
   populateEnv = ./populate-nvim-env.py;
@@ -313,7 +313,7 @@ in
         window.completion = {
           winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel";
           # col_offset = -4;
-          side_padding = 1;
+          sidePadding = 1;
           scrollbar = false;
           # border = "single";
           border = helpers.mkRaw "cmp_border 'CmpBorder'";
