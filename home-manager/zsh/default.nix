@@ -86,6 +86,17 @@ in
 
       # export BROWSER="browser"
       export DIRPAPERS=${config.home.homeDirectory}/ucare/DIR-PAPERS
+
+      # https://github.com/zshzoo/cd-ls/blob/main/cd-ls.zsh
+      if ! (( $chpwd_functions[(I)chpwd_cdls] )); then
+        chpwd_functions+=(chpwd_cdls)
+      fi
+      function chpwd_cdls() {
+        if [[ -o interactive ]]; then
+          emulate -L zsh
+          ${pkgs.exa}/bin/exa -la
+        fi
+      }
     '';
   };
 
@@ -97,6 +108,11 @@ in
   programs.zoxide = {
     enable = true;
     enableZshIntegration = false;
+  };
+
+  programs.exa = {
+    enable = true;
+    enableAliases = false;
   };
 }
 # vim: foldmethod=marker

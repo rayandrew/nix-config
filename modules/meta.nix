@@ -152,9 +152,14 @@ in {
         ":q" = "exit";
         cat = "${bat}/bin/bat";
         du = "${du-dust}/bin/dust";
-        la = "ll -a";
-        ll = "ls -l --time-style long-iso --icons";
         ls = "${exa}/bin/exa";
+        ll = "${exa}/bin/exa -l --time-style long-iso --icons";
+        la = "${exa}/bin/exa -a";
+        lt = "${exa}/bin/exa --tree";
+        lla = "${exa}/bin/exa -la";
+        # la = "ll -a";
+        # ll = lib.mkForce "ls -l --time-style long-iso --icons";
+        # ls = "${exa}/bin/exa";
         tb = "toggle-background";
       };
     };

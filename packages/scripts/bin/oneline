@@ -41,7 +41,7 @@ if [ $silent -eq 1 ]; then
 	# textedit /tmp/oneline.txt &
 fi
 
-textedit /tmp/oneline.txt &
+$EDITOR /tmp/oneline.txt &
 # cat /tmp/oneline.txt
 
 echo ""

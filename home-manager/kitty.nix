@@ -37,7 +37,7 @@
         scrollback_pager_history_size = 1;
         update_check_interval = 0;
         editor = "${pkgs.neovim}/bin/nvim";
-        background_opacity = "0.96";
+        # background_opacity = "0.96";
         # dynamic_background_opacity = "yes";
       };
       keybindings = { "cmd+t" = "new_tab_with_cwd"; };
@@ -51,7 +51,7 @@
     }
 
     (lib.mkIf (pkgs.stdenv.isDarwin) {
-      darwinLaunchOptions = [ "--single-instance" "--directory=~" ];
+      darwinLaunchOptions = [ "--directory=~" ];
     })
   ];
 }

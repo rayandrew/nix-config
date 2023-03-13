@@ -97,17 +97,21 @@ if builtins.hasAttr "hm" lib then {
         hyper - b : brew services restart sketchybar
 
         # Open applications
-        # lalt - return : open -n -a ${pkgs.kitty}/Applications/kitty.app
-        # lalt + lshift - return : open -n -a ${pkgs.kitty}/Applications/kitty.app --args ${pkgs.zsh}/bin/zsh -c "${pkgs.tmux}/bin/tmux attach || ${pkgs.tmux}/bin/tmux"
-        # lalt + lshift - return : open -n -a ${pkgs.kitty}/Applications/kitty.app --args --session ${scripts}/tmux-kitty.session
-        lalt - return : ${pkgs.wezterm}/bin/wezterm start --always-new-process
-        # lalt + shift - return : ${pkgs.wezterm}/bin/wezterm start --always-new-process -- zsh -l -c "tmux attach || tmux"
         lalt - e : open ~/
-        lctrl - w: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- taskwarrior-tui
-        lctrl - m: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- spotify_player
-        lctrl - 0x2A: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- htop          # alt + \
-        lalt - 0x2C: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- lf             # alt + /
-        lalt - n: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- zsh -l -c "nvim"
+
+        lalt - return: ${pkgs.kitty}/bin/kitty --directory=~
+        lctrl - w: ${pkgs.kitty}/bin/kitty --directory=~ taskwarrior-tui 
+        lctrl - m: ${pkgs.kitty}/bin/kitty --directory=~ spotify_player
+        lctrl - 0x2A: ${pkgs.kitty}/bin/kitty --directory=~ htop
+        lctrl - 0x2C: ${pkgs.kitty}/bin/kitty --directory=~ lf
+        lalt - n: ${pkgs.kitty}/bin/kitty --directory=~ zsh -l -c "nvim"
+
+        # lalt - return : ${pkgs.wezterm}/bin/wezterm start --always-new-process
+        # lctrl - w: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- taskwarrior-tui
+        # lctrl - m: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- spotify_player
+        # lctrl - 0x2A: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- htop          # alt + \
+        # lalt - 0x2C: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- lf             # alt + /
+        # lalt - n: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- zsh -l -c "nvim"
 
         # rotate tree
         lalt + shift - r : yabai -m space --rotate 90
