@@ -4,7 +4,7 @@ let home = config.home.homeDirectory;
 in {
   imports = [
     ./default.nix
-    ./gui.nix
+    ./graphical.nix
     ./fonts.nix
   ];
 

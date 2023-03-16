@@ -26,6 +26,14 @@ in
       forwardX11 = true;
       extraOptions = { RequestTTY = "yes"; };
     };
+    "mail" = {
+      user = "rayandrew";
+      hostname = "mail.rs.ht";
+      port = 22;
+      forwardAgent = true;
+      forwardX11 = true;
+      extraOptions = { RequestTTY = "yes"; };
+    };
     "gitea" = giteaHost // {
       user = "rayandrew";
     };

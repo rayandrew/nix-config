@@ -59,6 +59,12 @@
       # url = "/Users/rayandrew/Code/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    simple-nixos-mailserver = {
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-22.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+      nixpkgs-22_11.url = "stable";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
@@ -100,14 +106,21 @@
         hostname = "ucare-07";
         deployConfigurations = {
           fastConnection = true;
-          remoteBuild = true; # sometimes I need to run this on my macbook
+          remoteBuild = true;
         };
       })
       (mkNixOSConfig {
         hostname = "gitea";
         deployConfigurations = {
           fastConnection = true;
-          remoteBuild = true; # sometimes I need to run this on my macbook
+          remoteBuild = true;
+        };
+      })
+      (mkNixOSConfig {
+        hostname = "mail";
+        deployConfigurations = {
+          fastConnection = true;
+          remoteBuild = true;
         };
       })
 
