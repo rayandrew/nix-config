@@ -103,7 +103,7 @@ in
 
     # whether to scan inbound emails for viruses (note that this requires at least
     # 1 Gb RAM for the server. Without virus scanning 256 MB RAM should be plenty)
-    virusScanning = true;
+    virusScanning = false;
   };
 
   services = {
