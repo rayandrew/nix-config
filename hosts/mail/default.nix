@@ -56,7 +56,13 @@ in
         ipv6.routes = [{ address = "fe80::1"; prefixLength = 128; }];
       };
     };
-    firewall.allowedTCPPorts = [ 80 443 25 587 ];
+    firewall.allowedTCPPorts = [
+      80
+      443
+      993 # imap ssl
+      995 # pop3 ssl
+      465 # smtp ssl
+    ];
   };
 
   services.udev.extraRules = ''
@@ -93,8 +99,8 @@ in
     # down nginx and opens port 80.
     certificateScheme = 3;
 
-    enableImap = true;
-    enablePop3 = true;
+    enableImap = false;
+    enablePop3 = false;
     enableImapSsl = true;
     enablePop3Ssl = true;
 
