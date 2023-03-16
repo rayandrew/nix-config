@@ -10,6 +10,7 @@
 , sops-nix
 , nixos-modules
 , nixvim
+, simple-nixos-mailserver
 , ...
 }@inputs:
 
@@ -73,6 +74,7 @@ in {
           ../hosts/${hostname}
           sops-nix.nixosModules.sops
           nixos-modules.nixosModule
+          simple-nixos-mailserver.nixosModule
         ] ++ extraModules;
         specialArgs = {
           inherit system;

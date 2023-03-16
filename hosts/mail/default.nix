@@ -77,8 +77,19 @@ in
   services.smartd.enable = lib.mkForce false;
 
   ### MAIL CONFIGURATIONS ###
+  mailserver = {
+    enable = true;
+    fqdn = "mail.rs.ht";
+    domains = [ "rs.ht" ];
 
-  services = { };
+    # A list of all login accounts. To create the password hashes, use
+    # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
+    loginAccounts = { };
+
+    # Use Let's Encrypt certificates. Note that this needs to set up a stripped
+    # down nginx and opens port 80.
+    certificateScheme = 3;
+  };
 
   environment.systemPackages = with pkgs; [ unzip ];
 }
