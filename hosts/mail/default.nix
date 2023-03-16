@@ -101,8 +101,10 @@ in
 
     enableImap = false;
     enablePop3 = false;
+    enableSubmission = false;
     enableImapSsl = true;
     enablePop3Ssl = true;
+    enableSubmissionSsl = true;
 
     # Enable the ManageSieve protocol
     enableManageSieve = true;
