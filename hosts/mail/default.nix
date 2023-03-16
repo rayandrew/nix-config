@@ -82,14 +82,44 @@ in
     fqdn = "mail.rs.ht";
     domains = [ "rs.ht" ];
 
-    # A list of all login accounts. To create the password hashes, use
-    # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
-    loginAccounts = { };
+    loginAccounts = {
+      "rs@rs.ht" = {
+        hashedPasswordFile = secrets.rs-rs-ht;
+        aliases = [ ];
+      };
+    };
 
     # Use Let's Encrypt certificates. Note that this needs to set up a stripped
     # down nginx and opens port 80.
     certificateScheme = 3;
   };
 
-  environment.systemPackages = with pkgs; [ unzip ];
+  services = {
+    roundcube = {
+      enable = true;
+      # this is the url of the vhost, not necessarily the same as the fqdn of
+      # the mailserver
+      hostName = "mail.example.com";
+      extraConfig = ''
+        # starttls needed for authentication, so the fqdn required to match
+        # the certificate
+        $config['smtp_server'] = "tls://${config.mailserver.fqdn}";
+        $config['smtp_user'] = "%u";
+        $config['smtp_pass'] = "%p";
+      '';
+    };
+
+    nginx.enable = true;
+  };
+
+  environment.systemPackages = with pkgs;[ unzip ];
+
+  # secrets
+  sops.secrets = {
+    rs-rs-ht = {
+      owner = username;
+      mode = "0440";
+      sopsFile = ./secrets.yaml;
+    };
+  };
 }
