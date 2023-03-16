@@ -84,7 +84,7 @@ in
 
     loginAccounts = {
       "rs@rs.ht" = {
-        hashedPasswordFile = secrets.rs-rs-ht;
+        hashedPasswordFile = config.sops.secrets.rs-rs-ht.path;
         aliases = [ ];
       };
     };
