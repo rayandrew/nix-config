@@ -60,7 +60,6 @@ in
       80
       443
       993 # imap ssl
-      995 # pop3 ssl
       465 # smtp ssl
     ];
   };
@@ -93,6 +92,10 @@ in
         hashedPasswordFile = config.sops.secrets.rs-rs-ht.path;
         aliases = [ ];
       };
+      "sw@rs.ht" = {
+        hashedPasswordFile = config.sops.secrets.sw-rs-ht.path;
+        aliases = [ ];
+      };
     };
 
     # Use Let's Encrypt certificates. Note that this needs to set up a stripped
@@ -103,7 +106,7 @@ in
     enablePop3 = false;
     enableSubmission = false;
     enableImapSsl = true;
-    enablePop3Ssl = true;
+    enablePop3Ssl = false;
     enableSubmissionSsl = true;
 
     # Enable the ManageSieve protocol
@@ -121,9 +124,9 @@ in
       # the mailserver
       hostName = "mail.rs.ht";
       extraConfig = ''
-        # starttls needed for authentication, so the fqdn required to match
-        # the certificate
-        $config['smtp_server'] = "tls://${config.mailserver.fqdn}";
+        $config['imap_host'] = "ssl://${config.mailserver.fqdn}:993";
+        $config['smtp_server'] = "ssl://${config.mailserver.fqdn}:465";
+        # $config['smtp_server'] = "tls://${config.mailserver.fqdn}";
         $config['smtp_user'] = "%u";
         $config['smtp_pass'] = "%p";
       '';
@@ -137,6 +140,11 @@ in
   # secrets
   sops.secrets = {
     rs-rs-ht = {
+      owner = username;
+      mode = "0440";
+      sopsFile = ./secrets.yaml;
+    };
+    sw-rs-ht = {
       owner = username;
       mode = "0440";
       sopsFile = ./secrets.yaml;
