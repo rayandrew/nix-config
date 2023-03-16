@@ -6,7 +6,7 @@
 let
   inherit (lib) concatStringsSep optional;
   inherit (config.lib.file) mkOutOfStoreSymlink;
-  inherit (lib.nixvim) helpers;
+  inherit (flake.inputs.nixvim.lib.${pkgs.system}) helpers;
 
   home = config.home.homeDirectory;
   populateEnv = ./populate-nvim-env.py;

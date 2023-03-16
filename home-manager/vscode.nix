@@ -56,6 +56,7 @@
         "workbench.editor.limit.value" = 1;
         "workbench.editor.limit.perEditorGroup" = true;
         "workbench.editor.showTabs" = false;
+        "workbench.editor.enablePreview" = false;
 
         "breadcrumbs.enabled" = false;
         "explorer.openEditors.visible" = 0;

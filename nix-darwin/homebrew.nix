@@ -72,7 +72,7 @@ in
       "raycast"
       "skype"
       "vlc"
-      # "spotify"
+      "spotify"
       "neovide" # Neovim GUI
       "alt-tab"
       "forklift" # sftp client
@@ -86,6 +86,7 @@ in
       "desmume" # nds emulator
       "notion"
       "fantastical"
+      "multipass"
 
       # r
       "r"

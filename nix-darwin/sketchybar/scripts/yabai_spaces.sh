@@ -39,6 +39,8 @@ do
   NAMES="$NAMES $NAME"
   args+=(--clone "$NAME" space_template after \
          --set "$NAME" label="${label}" \
+                       label.highlight_color="${highlight_colors[${index}]}" \
+                       label.highlight="$visible" \
                        icon="${icon}" \
                        icon.highlight_color="${highlight_colors[${index}]}" \
                        associated_display="$display" \

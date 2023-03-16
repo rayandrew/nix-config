@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   home.packages = with pkgs; [
@@ -82,4 +82,5 @@
     taskwarrior
     taskwarrior-tui
   ];
+  # ++ lib.optionals pkgs.stdenv.isDarwin [ pkgs.utm ];
 }
