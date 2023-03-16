@@ -8,7 +8,6 @@ let
   inherit (flake) inputs;
   inherit (config.my-meta) username;
   inherit (config.users.users.${username}) home;
-  giteaSshPort = 22;
 in
 {
   imports = [
