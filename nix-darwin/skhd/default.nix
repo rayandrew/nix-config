@@ -99,12 +99,19 @@ if builtins.hasAttr "hm" lib then {
         # Open applications
         lalt - e : open ~/
 
-        lalt - return: ${pkgs.kitty}/bin/kitty --directory=~
-        lctrl - w: ${pkgs.kitty}/bin/kitty --directory=~ taskwarrior-tui 
-        lctrl - m: ${pkgs.kitty}/bin/kitty --directory=~ spotify_player
-        lctrl - 0x2A: ${pkgs.kitty}/bin/kitty --directory=~ htop
-        lctrl - 0x2C: ${pkgs.kitty}/bin/kitty --directory=~ lf
-        lalt - n: ${pkgs.kitty}/bin/kitty --directory=~ zsh -l -c "nvim"
+        # lalt - return: ${pkgs.kitty}/bin/kitty --directory=~
+        # lctrl - w: ${pkgs.kitty}/bin/kitty --directory=~ taskwarrior-tui 
+        # lctrl - m: ${pkgs.kitty}/bin/kitty --directory=~ spotify_player
+        # lctrl - 0x2A: ${pkgs.kitty}/bin/kitty --directory=~ htop
+        # lctrl - 0x2C: ${pkgs.kitty}/bin/kitty --directory=~ lf
+        # lalt - n: ${pkgs.kitty}/bin/kitty --directory=~ zsh -l -c "nvim"
+
+        lalt - return: open -n -a ${pkgs.kitty}/Applications/kitty.app --args
+        lctrl - w: open -n -a ${pkgs.kitty}/Applications/kitty.app --args taskwarrior-tui 
+        lctrl - m: open -n -a ${pkgs.kitty}/Applications/kitty.app --args spotify_player
+        lctrl - 0x2A: open -n -a ${pkgs.kitty}/Applications/kitty.app --args htop
+        lctrl - 0x2C: open -n -a ${pkgs.kitty}/Applications/kitty.app --args lf
+        lalt - n: open -n -a ${pkgs.kitty}/Applications/kitty.app --args zsh -l -c "nvim"
 
         # lalt - return : ${pkgs.wezterm}/bin/wezterm start --always-new-process
         # lctrl - w: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- taskwarrior-tui

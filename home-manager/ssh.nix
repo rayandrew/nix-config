@@ -9,6 +9,7 @@ let
     forwardX11 = true;
     extraOptions = { RequestTTY = "yes"; };
   };
+  controlChannel = "${config.home.homeDirectory}/.ssh/.control_channels";
 in
 {
   # SSH 
@@ -17,6 +18,8 @@ in
 
   programs.ssh.serverAliveInterval = 60;
   programs.ssh.serverAliveCountMax = 120;
+
+  programs.ssh.controlPath = "${controlChannel}/%h:%p:%r";
 
   programs.ssh.matchBlocks = {
     "gpu-ray-0" = {
@@ -77,6 +80,28 @@ in
       forwardX11 = true;
       extraOptions = { RequestTTY = "yes"; };
     };
+
+    # Argonne
+    "login-gce" = {
+      user = "ac.rayandrew";
+      hostname = "logins.cels.anl.gov";
+      extraOptions = {
+        ControlMaster = "auto";
+        ControlPersist = "yes";
+        LogLevel = "FATAL";
+      };
+    };
+    "homes-gce" = lib.hm.dag.entryAfter [ "login-gce" ] {
+      user = "ac.rayandrew";
+      hostname = "homes.cels.anl.gov";
+      proxyJump = "login-gce";
+      forwardX11Trusted = true;
+    };
+    "*.cels.anl.gov" = lib.hm.dag.entryAfter [ "login-gce" ] {
+      user = "ac.rayandrew";
+      proxyJump = "login-gce";
+      forwardX11Trusted = true;
+    };
   };
 
   # Configuration related to casks
@@ -105,4 +130,9 @@ in
       ssh cl-data
     '')
   ];
+
+  home.activation.ssh-control = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    echo "Creating SSH control directory..."
+    mkdir -p ${controlChannel}
+  '';
 }

@@ -51,7 +51,7 @@
     }
 
     (lib.mkIf (pkgs.stdenv.isDarwin) {
-      darwinLaunchOptions = [ "--directory=~" ];
+      darwinLaunchOptions = [ "--directory=~" "--single-instance" ];
     })
   ];
 }

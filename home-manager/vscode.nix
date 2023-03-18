@@ -7,10 +7,11 @@
       [
         vscodevim.vim
         bbenoist.nix
-        (ms-python.python.overrideAttrs (finalAttrs: previousAttrs: {
-          postPatch = "";
-          separateDebugInfo = true;
-        }))
+        # ms-python.python
+        # (ms-python.python.overrideAttrs (finalAttrs: previousAttrs: {
+        #   postPatch = "";
+        #   separateDebugInfo = true;
+        # }))
         ms-azuretools.vscode-docker
         ms-vscode-remote.remote-ssh
         alefragnani.project-manager
