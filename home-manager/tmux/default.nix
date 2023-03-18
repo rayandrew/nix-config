@@ -239,12 +239,12 @@ in
       # tmuxp # session manager ERROR: how to disable testing + checking
     ];
 
-  xdg.configFile = {
-    "tmuxp/research.yml".source =
-      templateFile "research.yml" ./tmuxp/research.yml tmuxp-variables;
-    "tmuxp/cl-data.yml".source =
-      templateFile "cl-data.yml" ./tmuxp/cl-data.yml tmuxp-variables;
-    "tmuxp/nix.yml".source =
-      templateFile "nix.yml" ./tmuxp/nix.yml tmuxp-variables;
-  };
+  # xdg.configFile = {
+  #   "tmuxp/research.yml".source =
+  #     templateFile "research.yml" ./tmuxp/research.yml tmuxp-variables;
+  #   "tmuxp/cl-data.yml".source =
+  #     templateFile "cl-data.yml" ./tmuxp/cl-data.yml tmuxp-variables;
+  #   "tmuxp/nix.yml".source =
+  #     templateFile "nix.yml" ./tmuxp/nix.yml tmuxp-variables;
+  # };
 }
