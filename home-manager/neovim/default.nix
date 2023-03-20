@@ -1,4 +1,9 @@
-{ flake, config, pkgs, lib, ... }:
+{ flake
+, config
+, pkgs
+, lib
+, ...
+}:
 
 # some configurations are taken from 
 # https://github.com/NvChad/NvChad
@@ -6,7 +11,8 @@
 let
   inherit (lib) concatStringsSep optional;
   inherit (config.lib.file) mkOutOfStoreSymlink;
-  inherit (flake.inputs.nixvim.lib.${pkgs.system}) helpers;
+
+  cfg = config.programs.neovim;
 
   home = config.home.homeDirectory;
   populateEnv = ./populate-nvim-env.py;
@@ -30,26 +36,21 @@ let
 
       # Disable phases which are not needed. In particular the unpackPhase will
       # fail, if no src attribute is set
-      phases = [ "buildPhase" "installPhase" ];
+      phases = [ "buildPhase" ];
 
       buildPhase = ''
         mkdir -p $out
-      	for file in $(find $src -type f -print); do
-	  stripped_path=''${file#"$src/"}
-	  dir_path=$(dirname $stripped_path)
-	  filename=$(basename $file)
-	  if [[ $dir_path == "." ]]; then
-	    dir_path=""
-	  else
-	    mkdir -p $out/$dir_path
-	  fi
-	  ${pkgs.mustache-go}/bin/mustache $jsonDataPath $file > "$out/$dir_path/$filename"
-	  # cp $file "$out/$dir_path"
-	done
-      '';
-
-      installPhase = ''
-
+        for file in $(find $src -type f -print); do
+          stripped_path=''${file#"$src/"}
+          dir_path=$(dirname $stripped_path)
+          filename=$(basename $file)
+          if [[ $dir_path == "." ]]; then
+            dir_path=""
+          else
+            mkdir -p $out/$dir_path
+          fi
+          ${pkgs.mustache-go}/bin/mustache $jsonDataPath $file > "$out/$dir_path/$filename"
+        done
       '';
     };
 in
@@ -62,29 +63,40 @@ in
     viAlias = true;
     vimAlias = true;
     defaultEditor = true;
-    # extraLuaConfig = builtins.readFile (parseTemplate "nvim-config" ./config {
-    #   plugins = with pkgs; {
-    #     lazy = vimPlugins.lazy-nvim;
-    #     gruvbox = vimPlugins.gruvbox-nvim;
-    #     plenary = vimPlugins.plenary-nvim;
-    #     telescope = vimPlugins.telescope-nvim;
-    #   };
-    # });
   };
 
-  # xdg.configFile."nvim" = {
-  #   source = parseTemplate "nvim-config" ./config {
-  #     plugins = with pkgs; {
-  #       lazy = vimPlugins.lazy-nvim;
-  #       gruvbox = vimPlugins.gruvbox-nvim;
-  #       plenary = vimPlugins.plenary-nvim;
-  #       telescope = vimPlugins.telescope-nvim;
-  #     };
-  #   };
-  #   recursive = false;
-  # };
+  xdg.configFile."nvim" = {
+    source = flake.inputs.nvim-config;
+    recursive = true;
+  };
 
-  home.packages = with pkgs; [
+  home.packages = with pkgs.unstable; [
+    lua-language-server
+    stylua
+    shfmt
+
+    # python
+    python311Packages.flake8
+    python311Packages.black
+    python311Packages.python-lsp-server
+
+    # web stuff
+    nodePackages_latest.prettier
+    nodePackages_latest.eslint_d
+    nodePackages_latest.vscode-langservers-extracted
+    nodePackages_latest.typescript-language-server
+
+    # rust
+    rust-analyzer
+    rustfmt
+
+    # config
+    taplo
+
+    # nix
+    nixpkgs-fmt
+    rnix-lsp
+
     #   (pkgs.writeShellScriptBin "update-nvim-env" ''
     #     #
     #     # update-nvim-env
@@ -93,9 +105,15 @@ in
     #
     #     ${populateEnvScript}
     #   '')
+    (pkgs.writeShellScriptBin "clean-nvim-all" ''
+      rm -rf ${config.xdg.dataHome}/nvim
+      rm -rf ${config.xdg.cacheHome}/nvim
+      rm -rf ${config.xdg.stateHome}/nvim
+      rm -rf ${config.xdg.configHome}/nvim
+    '')
     (pkgs.writeShellScriptBin "clean-nvim" ''
       rm -rf ${config.xdg.dataHome}/nvim
-      rm -rf ${config.xdg.configHome}/nvim
+      rm -rf ${config.xdg.stateHome}/nvim
       rm -rf ${config.xdg.cacheHome}/nvim
     '')
   ];
@@ -104,5 +122,9 @@ in
   #   echo "Populating neovim env..."
   #   ${populateEnvScript}
   # '';
+
+  programs.zsh.initExtra = lib.mkIf cfg.enable (lib.mkAfter ''
+    alias e="${pkgs.neovim}/bin/nvim"
+  '');
 }
 # vim: foldmethod=marker

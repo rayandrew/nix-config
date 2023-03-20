@@ -2,6 +2,8 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
       - uses: easimon/maximize-build-space@v6
         with:
           overprovision-lvm: true
@@ -33,6 +35,8 @@ jobs:
   build-macos:
     runs-on: macos-latest
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v20
         with:

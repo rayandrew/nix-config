@@ -10,6 +10,7 @@
     ./htop.nix
     ./meta
     ./neovim
+    ./emacs
     ./nix-index.nix
     ./packages.nix
     ./ssh.nix
@@ -21,6 +22,7 @@
     ./zsh
     ./lazygit.nix
     ./gitui.nix
+    ./lf.nix
   ];
 
   systemd.user.startServices = "sd-switch";

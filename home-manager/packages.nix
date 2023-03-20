@@ -29,7 +29,6 @@
     ipcalc
     jq
     less
-    lf # file manager
     lsof
     man
     nb # note taking
