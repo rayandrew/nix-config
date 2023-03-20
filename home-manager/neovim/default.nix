@@ -17,10 +17,12 @@ let
   '';
 
   # https://pablo.tools/blog/computers/nix-mustache-templates/
-  templateFile = name: template: data:
+  parseTemplate = name: src: data:
     pkgs.stdenv.mkDerivation {
+      inherit src;
+
       name = "${name}";
-      nativeBuildInpts = [ pkgs.mustache-go ];
+      nativeBuildInpts = [ pkgs.mustache-go pkgs.findutils ];
 
       # Pass Json as file to avoid escaping
       passAsFile = [ "jsonData" ];
@@ -31,16 +33,25 @@ let
       phases = [ "buildPhase" "installPhase" ];
 
       buildPhase = ''
-        echo $jsonDataPath
-        ${pkgs.mustache-go}/bin/mustache $jsonDataPath ${template} > rendered_file
+        mkdir -p $out
+      	for file in $(find $src -type f -print); do
+	  stripped_path=''${file#"$src/"}
+	  dir_path=$(dirname $stripped_path)
+	  filename=$(basename $file)
+	  if [[ $dir_path == "." ]]; then
+	    dir_path=""
+	  else
+	    mkdir -p $out/$dir_path
+	  fi
+	  ${pkgs.mustache-go}/bin/mustache $jsonDataPath $file > "$out/$dir_path/$filename"
+	  # cp $file "$out/$dir_path"
+	done
       '';
 
       installPhase = ''
-        cp rendered_file $out
+
       '';
     };
-
-
 in
 {
   # Neovim
@@ -51,33 +62,29 @@ in
     viAlias = true;
     vimAlias = true;
     defaultEditor = true;
-    # plugins = with pkgs; [
-    # vimPlugins.lazy-nvim
-    # vimPlugins.gruvbox-nvim
-    # ];
-    extraLuaConfig = builtins.readFile (templateFile "init.lua" ./config/init.lua {
+    # extraLuaConfig = builtins.readFile (parseTemplate "nvim-config" ./config {
+    #   plugins = with pkgs; {
+    #     lazy = vimPlugins.lazy-nvim;
+    #     gruvbox = vimPlugins.gruvbox-nvim;
+    #     plenary = vimPlugins.plenary-nvim;
+    #     telescope = vimPlugins.telescope-nvim;
+    #   };
+    # });
+  };
+
+  xdg.configFile."nvim" = {
+    source = parseTemplate "nvim-config" ./config {
       plugins = with pkgs; {
         lazy = vimPlugins.lazy-nvim;
         gruvbox = vimPlugins.gruvbox-nvim;
-        telescope = vimPlugins.telescope-nvim;
         plenary = vimPlugins.plenary-nvim;
+        telescope = vimPlugins.telescope-nvim;
       };
-    });
+    };
+    recursive = false;
   };
 
-  # xdg.configFile."nvim" = {
-  #   source = ./config;
-  #   recursive = false;
-  # };
-
-  # Config and plugins
-  # xdg.configFile."nvim" = {
-  #   source = "${pkgs.nvchad}";
-  #   recursive = false;
-  # };
-  #
   home.packages = with pkgs; [
-    #   nvchad
     #   (pkgs.writeShellScriptBin "update-nvim-env" ''
     #     #
     #     # update-nvim-env
@@ -92,18 +99,10 @@ in
       rm -rf ${config.xdg.cacheHome}/nvim
     '')
   ];
-  #
+
   # home.activation.neovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
   #   echo "Populating neovim env..."
   #   ${populateEnvScript}
-  # '';
-
-  # programs.bash.initExtra = lib.mkAfter ''
-  #   export EDITOR="${config.programs.neovim.package}/bin/nvim"
-  # '';
-  #
-  # programs.zsh.initExtra = lib.mkAfter ''
-  #   export EDITOR="${config.programs.neovim.package}/bin/nvim"
   # '';
 }
 # vim: foldmethod=marker
