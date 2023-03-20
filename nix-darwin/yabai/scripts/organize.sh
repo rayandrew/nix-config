@@ -64,12 +64,14 @@ if [ -n "$VP229" ]; then
   # VP229 CONNECTED
 
   # midnight 
-  name_first_space "$MIDNIGHT_INDEX" "web"
-  create_space_on_monitor "$MIDNIGHT_INDEX" "commands"
+  # name_first_space "$MIDNIGHT_INDEX" "web"
+  # create_space_on_monitor "$MIDNIGHT_INDEX" "commands"
+  name_first_space "$MIDNIGHT_INDEX" "commands"
 
   ## VP229
   VP229_INDEX=$(echo "$VP229" | jq '.index')
-  name_first_space "$VP229_INDEX" "main"
+  name_first_space "$VP229_INDEX" "web"
+  create_space_on_monitor "$VP229_INDEX" "main"
   create_space_on_monitor "$VP229_INDEX" "code"
   create_space_on_monitor "$VP229_INDEX" "mail"
   create_space_on_monitor "$VP229_INDEX" "social"

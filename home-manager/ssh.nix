@@ -45,7 +45,7 @@ in
       extraOptions = {
         AddKeysToAgent = "yes";
         # UseKeychain = "yes";
-        IdentityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
+        # IdentityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
         # IgnoreUnknown = "UseKeychain";
       };
     };
@@ -63,7 +63,6 @@ in
       forwardX11 = true;
       extraOptions = {
         RequestTTY = "yes";
-        IdentityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
       };
     };
     "ucare-10" = {
@@ -85,9 +84,10 @@ in
     "login-gce" = {
       user = "ac.rayandrew";
       hostname = "logins.cels.anl.gov";
+      # identityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
       extraOptions = {
-        ControlMaster = "auto";
-        ControlPersist = "yes";
+        # ControlMaster = "auto";
+        # ControlPersist = "yes";
         LogLevel = "FATAL";
       };
     };
@@ -97,7 +97,7 @@ in
       proxyJump = "login-gce";
       forwardX11Trusted = true;
     };
-    "*.cels.anl.gov" = lib.hm.dag.entryAfter [ "login-gce" ] {
+    "*.cels.anl.gov !logins.cels.anl.gov" = lib.hm.dag.entryAfter [ "login-gce" ] {
       user = "ac.rayandrew";
       proxyJump = "login-gce";
       forwardX11Trusted = true;
@@ -106,20 +106,6 @@ in
 
   # Configuration related to casks
   programs.ssh.extraConfig = mkAfter ''
-      ${optionalString pkgs.stdenv.isLinux ''
-    # Only set `IdentityAgent` not connected remotely via SSH.
-    # This allows using agent forwarding when connecting remotely.
-    Match host * exec "test -z $SSH_TTY"
-      IdentityFile "${config.home.homeDirectory}/.ssh/id_ed25519"
-      ''}
-    #   ${optionalString pkgs.stdenv.isDarwin ''
-    # # Only set `IdentityAgent` not connected remotely via SSH.
-    # # This allows using agent forwarding when connecting remotely.
-    Match host * exec "test -z $SSH_TTY"
-      IdentityFile "${config.home.homeDirectory}/.ssh/id_ed25519"
-    # Match host * exec "test -z $SSH_TTY"
-    #   IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-    #   ''}
   '';
 
   home.packages = [
