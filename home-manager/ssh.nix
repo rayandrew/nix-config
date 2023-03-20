@@ -2,13 +2,6 @@
 
 let
   inherit (lib) optionalString mkAfter;
-  giteaHost = {
-    hostname = "git.rs.ht";
-    port = 22;
-    forwardAgent = true;
-    forwardX11 = true;
-    extraOptions = { RequestTTY = "yes"; };
-  };
   controlChannel = "${config.home.homeDirectory}/.ssh/.control_channels";
 in
 {
@@ -37,10 +30,19 @@ in
       forwardX11 = true;
       extraOptions = { RequestTTY = "yes"; };
     };
-    "gitea" = giteaHost // {
-      user = "rayandrew";
+    "gitea" = {
+      hostname = "git.rs.ht";
+      port = 22;
+      forwardAgent = true;
+      forwardX11 = true;
+      extraOptions = { RequestTTY = "yes"; };
     };
-    "git.rs.ht" = giteaHost;
+    "git.rs.ht" = {
+      hostname = "git.rs.ht";
+      port = 22;
+      forwardAgent = true;
+      extraOptions = { RequestTTY = "yes"; };
+    };
     "*.github.com" = {
       extraOptions = {
         AddKeysToAgent = "yes";
