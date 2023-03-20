@@ -86,10 +86,9 @@ in
     "login-gce" = {
       user = "ac.rayandrew";
       hostname = "logins.cels.anl.gov";
-      # identityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
       extraOptions = {
-        # ControlMaster = "auto";
-        # ControlPersist = "yes";
+        ControlMaster = "auto";
+        ControlPersist = "yes";
         LogLevel = "FATAL";
       };
     };
