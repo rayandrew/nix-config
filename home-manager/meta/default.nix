@@ -14,7 +14,6 @@ in {
     hydra-check
     nix-update
     nix-whereis
-    nixpkgs-fmt
     nixpkgs-review
   ];
 
