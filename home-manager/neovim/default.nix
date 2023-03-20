@@ -72,17 +72,17 @@ in
     # });
   };
 
-  xdg.configFile."nvim" = {
-    source = parseTemplate "nvim-config" ./config {
-      plugins = with pkgs; {
-        lazy = vimPlugins.lazy-nvim;
-        gruvbox = vimPlugins.gruvbox-nvim;
-        plenary = vimPlugins.plenary-nvim;
-        telescope = vimPlugins.telescope-nvim;
-      };
-    };
-    recursive = false;
-  };
+  # xdg.configFile."nvim" = {
+  #   source = parseTemplate "nvim-config" ./config {
+  #     plugins = with pkgs; {
+  #       lazy = vimPlugins.lazy-nvim;
+  #       gruvbox = vimPlugins.gruvbox-nvim;
+  #       plenary = vimPlugins.plenary-nvim;
+  #       telescope = vimPlugins.telescope-nvim;
+  #     };
+  #   };
+  #   recursive = false;
+  # };
 
   home.packages = with pkgs; [
     #   (pkgs.writeShellScriptBin "update-nvim-env" ''
