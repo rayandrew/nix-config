@@ -89,11 +89,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1679389595,
-        "narHash": "sha256-FEMLDJWfPszmdCu+uomkhTxlOqAL3dFl9y2RBbobF54=",
+        "lastModified": 1679422052,
+        "narHash": "sha256-E9mk222GxJUXqK2TP0umn5kk4BA6UOh8yck6aAB2iCg=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "add5c977ba4e6a78d00b8f25277809e2301a5c29",
+        "rev": "4e0b09e0d1bcd0f4bf382d69846d1fdb32ba69d4",
         "type": "github"
       },
       "original": {
@@ -438,11 +438,11 @@
     "nvim-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1679353485,
-        "narHash": "sha256-W4znJ6WTizGVoCc35rYc1USW8YPaonNxv9OncN4ZEZ4=",
+        "lastModified": 1679424080,
+        "narHash": "sha256-c2xCkMpwHzEK+REAAUf5V/5gKvxZ5vKHhAF/T0pMdBk=",
         "ref": "refs/heads/main",
-        "rev": "656cebcbd145c2164a28fb2774200fffcc7d1c4d",
-        "revCount": 3,
+        "rev": "3e8daed05034975fb3470f236412581c96039d1e",
+        "revCount": 4,
         "type": "git",
         "url": "https://git.rs.ht/rayandrew/nvim.git"
       },
