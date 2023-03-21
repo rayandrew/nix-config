@@ -9,6 +9,7 @@
     ./sudo.nix
     ./sketchybar
     ./skhd
+    ./emacs.nix
     ./yabai
     ./symlinks.nix
     ./preferences.nix

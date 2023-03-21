@@ -46,8 +46,7 @@ if builtins.hasAttr "hm" lib then {
       LABEL="Liga SFMono Nerd Font"
 
       sketchybar -m --add event window_created \
-                    --add event window_destroyed \
-                    --add event space_changed
+                    --add event window_destroyed
 
       sketchybar --bar height=${barSize}                                       \
                        blur_radius=0                                           \
@@ -70,7 +69,7 @@ if builtins.hasAttr "hm" lib then {
        --set yabai_spaces drawing=off \
                           updates=on \
                           script="${scripts}/yabai_spaces.sh" \
-       --subscribe yabai_spaces space_change space_changed window_created window_destroyed \
+       --subscribe yabai_spaces space_change window_created window_destroyed \
        --add item space_template left \
        --set space_template icon.highlight_color=0xff9dd274 \
              drawing=off \

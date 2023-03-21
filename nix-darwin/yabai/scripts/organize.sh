@@ -119,7 +119,7 @@ yabai -m rule --add label="Desmume" app="^DeSmuME$" manage=off
 yabai -m rule --add app="^Finder$" sticky=on manage=off # layer=above
 # yabai -m rule --add app="^(Neovide|Notion)$" manage=on space=3 # for note-taking
 # yabai -m rule --add app="^Linear$" space=3
-yabai -m rule --add label="Emacs" app="^Emacs$" manage=on space="^note"
+yabai -m rule --add label="Emacs" app="^(Emacs|emacs|emacsclient)$" manage=on space="^note"
 yabai -m rule --add app="^(Mail|Calendar|Fantastical|Spark Desktop)$" space="^mail"
 yabai -m rule --add label="Communication" app="^(Skype|Slack|Discord)$" space="^chat"
 yabai -m rule --add app="^(Google Chrome|Firefox|Safari|Orion|Arc|Microsoft Edge)$" space="^web"

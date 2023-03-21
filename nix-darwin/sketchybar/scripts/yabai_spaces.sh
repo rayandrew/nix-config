@@ -40,7 +40,7 @@ while read -r index window yabai_name display visible fullscreen; do
 	fi
 
 	NAMES="$NAMES $NAME"
-	args+=(--clone "$NAME" space_template after
+	args+=(--remove "$NAME" --clone "$NAME" space_template after
 		--set "$NAME" label="${label}"
 		label.highlight_color="${highlight_colors[${index}]}"
 		label.highlight="$visible"

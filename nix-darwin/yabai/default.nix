@@ -71,7 +71,7 @@ in
       yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_destroyed"
 
       # focus window after active space changes
-      yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+      yabai -m signal --add event=space_change action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
       # focus window after active display changes
       yabai -m signal --add event=display_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
 

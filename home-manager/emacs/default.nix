@@ -47,6 +47,7 @@ in
 
   services.emacs = lib.mkIf (pkgs.stdenv.isLinux) {
     enable = true;
+    package = pkgs.emacsGit;
   };
 
   xdg.configFile."doom" = {
@@ -59,11 +60,12 @@ in
     export PATH="${config.xdg.configHome}/emacs/bin:$PATH"
   '');
 
-  home.activation.doom-sync = lib.hm.dag.entryAfter [ "doom-sync" ] ''
-    echo "Doom sync..."
-    if [[ -f ${config.xdg.configHome}/emacs/bin/doom ]]; then
-      export PATH="${cfg.package}/bin:${pkgs.git}/bin:$PATH"
-      ${config.xdg.configHome}/emacs/bin/doom sync
-    fi
-  '';
+  # home.activation.doom-sync = lib.hm.dag.entryAfter [ "doom-sync" ] ''
+  #   echo "Doom sync..."
+  #   if [[ -f ${config.xdg.configHome}/emacs/bin/doom ]]; then
+  #     export PATH="${cfg.package}/bin:${pkgs.git}/bin:$PATH"
+  #     ${config.xdg.configHome}/emacs/bin/doom sync
+  #     ${config.xdg.configHome}/emacs/bin/doom env
+  #   fi
+  # '';
 }

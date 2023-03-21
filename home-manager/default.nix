@@ -22,7 +22,7 @@
     ./zsh
     ./lazygit.nix
     ./gitui.nix
-    ./lf.nix
+    ./lf
   ];
 
   systemd.user.startServices = "sd-switch";

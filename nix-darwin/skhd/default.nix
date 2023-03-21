@@ -97,7 +97,6 @@ if builtins.hasAttr "hm" lib then {
         hyper - b : brew services restart sketchybar
 
         # Open applications
-        lalt - e : open ~/
 
         # lalt - return: ${pkgs.kitty}/bin/kitty --directory=~
         # lctrl - w: ${pkgs.kitty}/bin/kitty --directory=~ taskwarrior-tui 
@@ -111,7 +110,9 @@ if builtins.hasAttr "hm" lib then {
         lctrl - m: open -n -a ${pkgs.kitty}/Applications/kitty.app --args spotify_player
         lctrl - 0x2A: open -n -a ${pkgs.kitty}/Applications/kitty.app --args htop
         lctrl - 0x2C: open -n -a ${pkgs.kitty}/Applications/kitty.app --args lf
+        lalt - 0x2C: open ~/
         lalt - n: open -n -a ${pkgs.kitty}/Applications/kitty.app --args zsh -l -c "nvim"
+        lalt - e: emacsclient -r
 
         # lalt - return : ${pkgs.wezterm}/bin/wezterm start --always-new-process
         # lctrl - w: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- taskwarrior-tui
@@ -146,7 +147,7 @@ if builtins.hasAttr "hm" lib then {
 
     launchd.user.agents.skhd.serviceConfig.EnvironmentVariables.PATH =
       lib.mkForce
-        "${config.services.yabai.package}/bin:${config.services.skhd.package}/bin:${config.my-meta.systemPath}";
+        "${config.services.yabai.package}/bin:${config.services.skhd.package}/bin:${config.my-meta.systemPath}:${config.services.emacs.package}/bin";
 
     # launchd.user.agents.skhd.serviceConfig.ProgramArguments = lib.mkBefore [ 
     #   "/bin/sh -c"
