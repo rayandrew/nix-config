@@ -16,7 +16,7 @@ in
 
   programs.ssh.matchBlocks = {
     "gpu-ray-0" = {
-      hostname = "192.5.86.158";
+      hostname = "129.114.109.115";
       user = "rayandrew";
       forwardAgent = true;
       forwardX11 = true;

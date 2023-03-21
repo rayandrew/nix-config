@@ -97,6 +97,7 @@ in
           ${pkgs.exa}/bin/exa -la
         fi
       }
+      alias kssh="kitty +kitten ssh"
     '';
   };
 
