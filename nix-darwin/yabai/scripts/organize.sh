@@ -73,8 +73,9 @@ if [ -n "$VP229" ]; then
 	name_first_space "$VP229_INDEX" "web"
 	create_space_on_monitor "$VP229_INDEX" "main"
 	create_space_on_monitor "$VP229_INDEX" "code"
+	create_space_on_monitor "$VP229_INDEX" "note"
 	create_space_on_monitor "$VP229_INDEX" "mail"
-	create_space_on_monitor "$VP229_INDEX" "social"
+	create_space_on_monitor "$VP229_INDEX" "chat"
 elif [ -n "$APPLE_STUDIO" ]; then
 	# APPLE_STUDIO CONNECTED
 
@@ -86,8 +87,9 @@ elif [ -n "$APPLE_STUDIO" ]; then
 	name_first_space "$APPLE_STUDIO_INDEX" "web"
 	create_space_on_monitor "$APPLE_STUDIO_INDEX" "main"
 	create_space_on_monitor "$APPLE_STUDIO_INDEX" "code"
+	create_space_on_monitor "$APPLE_STUDIO_INDEX" "note"
 	create_space_on_monitor "$APPLE_STUDIO_INDEX" "mail"
-	create_space_on_monitor "$APPLE_STUDIO_INDEX" "social"
+	create_space_on_monitor "$APPLE_STUDIO_INDEX" "chat"
 fi
 
 yabai -m space --focus 1 # focus main display
@@ -115,10 +117,10 @@ yabai -m rule --add label="Arc" app="^Arc$" title="^(Account|General|Shortcuts|L
 yabai -m rule --add label="Desmume" app="^DeSmuME$" manage=off
 
 yabai -m rule --add app="^Finder$" sticky=on manage=off # layer=above
-yabai -m rule --add label="Emacs" app="^Emacs" manage=on
 # yabai -m rule --add app="^(Neovide|Notion)$" manage=on space=3 # for note-taking
 # yabai -m rule --add app="^Linear$" space=3
+yabai -m rule --add label="Emacs" app="^Emacs$" manage=on space="^note"
 yabai -m rule --add app="^(Mail|Calendar|Fantastical|Spark Desktop)$" space="^mail"
-yabai -m rule --add label="Communication" app="^(Skype|Slack|Discord)$" space="^social"
+yabai -m rule --add label="Communication" app="^(Skype|Slack|Discord)$" space="^chat"
 yabai -m rule --add app="^(Google Chrome|Firefox|Safari|Orion|Arc|Microsoft Edge)$" space="^web"
 # yabai -m rule --add label="Little Arc" app="^Arc$" title="^Space.*" manage=off # for Little Arc to be happy

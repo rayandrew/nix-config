@@ -21,10 +21,10 @@ if builtins.hasAttr "hm" lib then {
         lalt - 0 : yabai -m space --focus "web"
         lalt - 1 : yabai -m space --focus "main"
         lalt - 2 : yabai -m space --focus "code"
-        lalt - 3 : yabai -m space --focus "mail"
-        lalt - 4 : yabai -m space --focus "social"
-        lalt - 5 : yabai -m space --focus "commands"
-        lalt - 6 : yabai -m space --focus 7
+        lalt - 3 : yabai -m space --focus "note"
+        lalt - 4 : yabai -m space --focus "mail"
+        lalt - 5 : yabai -m space --focus "chat"
+        lalt - 6 : yabai -m space --focus "commands"
         lalt - 7 : yabai -m space --focus 8
         lalt - 8 : yabai -m space --focus 9
         lalt - 9 : yabai -m space --focus 10

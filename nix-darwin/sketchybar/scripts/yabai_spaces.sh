@@ -4,23 +4,26 @@ declare -A SPACE_ICONS
 SPACE_ICONS["web"]="􀤆"
 SPACE_ICONS["main"]="􀎞"
 SPACE_ICONS["code"]="􀈊"
-SPACE_ICONS["mail"]="􀍕"
 SPACE_ICONS["note"]="􀓕"
-SPACE_ICONS["social"]="􀌨"
+SPACE_ICONS["mail"]="􀍕"
+SPACE_ICONS["chat"]="􀌨"
 SPACE_ICONS["commands"]="􀆔"
 
 icons=("0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
-highlight_colors=("" "0xff9dd274" "0xfff69c5e" "0xff72cce8" "0xffeacb64" "0xff9dd274" "0xfff69c5e" "0xff72cce8" "0xffeacb64" "0xff9dd274" "0xfff69c5e" "0xff72cce8" "0xffeacb64" "0xff9dd274" "0xfff69c5e")
+highlight_colors=("0xff9dd274" "0xfff69c5e" "0xff72cce8" "0xffeacb64" "0xff9dd274" "0xfff69c5e" "0xff72cce8" "0xffeacb64" "0xff9dd274" "0xfff69c5e" "0xff72cce8" "0xffeacb64" "0xff9dd274" "0xfff69c5e")
 
 args=()
 QUERY="$(yabai -m query --spaces | jq -r '.[] | [.index, .windows[0], .label, .display, ."is-visible", ."is-native-fullscreen"] | @sh')"
 
 NAMES=""
 while read -r index window yabai_name display visible fullscreen; do
+	echo "$index $window $yabai_name $display $visible $fullscreen"
+	if [ "$yabai_name" = "null" ]; then
+		continue
+	fi
 	if [ "$fullscreen" = "true" ]; then
 		continue
 	fi
-	# echo "$index $window $yabai_name $display $visible"
 	NAME="$(echo "${yabai_name}" | tr -d "'")"
 	if [ "${window}" = "null" ]; then
 		label="$NAME"
