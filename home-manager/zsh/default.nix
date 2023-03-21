@@ -85,7 +85,7 @@ in
       fi
 
       # export BROWSER="browser"
-      export DIRPAPERS=${config.home.homeDirectory}/ucare/DIR-PAPERS
+      export DIRPAPERS=${config.home.homeDirectory}/Ucare/DIR-PAPERS
 
       # https://github.com/zshzoo/cd-ls/blob/main/cd-ls.zsh
       if ! (( $chpwd_functions[(I)chpwd_cdls] )); then
