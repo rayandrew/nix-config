@@ -2,6 +2,8 @@
 
 ;;; Shamelessly copied from https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/doom/config.org?plain=1
 
+(setq doom-theme 'doom-gruvbox)
+
 (setq user-full-name "Ray Andrew"
       user-mail-address "rs@rs.ht")
 
@@ -49,6 +51,7 @@
              "RESEARCH(r)"       ; A project that contains other tasks
              "PROJ(p)"           ; A project that contains other tasks
              "WAIT(w)"           ; Something is holding up this task
+             "IGNORED(i)"        ; Helper
              "|"                 ; The pipe necessary to separate "active" states and "inactive" states
              "DONE(d)"           ; Task has been completed
              "CANCELLED(c)" )))) ; Task has been cancelled
@@ -67,22 +70,24 @@
        (?C :foreground "#c678dd" :weight bold))
      org-agenda-block-separator 8411))
 
+(setq org-agenda-tags-todo-honor-ignore-options t)
+
 (setq org-agenda-custom-commands
       '(("v" "A better agenda view"
-         ((tags "PRIORITY=\"A\""
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+         ((tags-todo "PRIORITY=\"A\" -IGNORED"
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "IGNORED")))
                  (org-agenda-overriding-header "High priority:")))
-          (tags "RESEARCH"
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+          (tags-todo "RESEARCH -IGNORED"
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "IGNORED")))
                  (org-agenda-overriding-header "RESEARCH:")))
-          (tags "PRIORITY=\"B\""
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+          (tags-todo "PRIORITY=\"B\" -IGNORED"
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "IGNORED")))
                  (org-agenda-overriding-header "Medium priority:")))
-          (tags "PRIORITY=\"C\""
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+          (tags-todo "PRIORITY=\"C\" -IGNORED"
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "IGNORED")))
                  (org-agenda-overriding-header "Low-priority:")))
-          (tags "UCARE"
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+          (tags-todo "UCARE -IGNORED"
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "IGNORED")))
                  (org-agenda-overriding-header "UCARE:")))
 
           (agenda "")
@@ -126,8 +131,25 @@
     (set-face-attribute (nth 0 face) nil :font doom-variable-pitch-font :weight (nth 3 face) :height (nth 1 face) :foreground (nth 2 face)))
     (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
 
+
+(defun dt/org-colors-gruvbox-dark ()
+  "Enable Gruvbox Dark colors for Org headers."
+  (interactive)
+  (dolist
+      (face
+       '((org-level-1 1.35 "#458588" ultra-bold)
+         (org-level-2 1.3 "#b16286" extra-bold)
+         (org-level-3 1.25 "#98971a" bold)
+         (org-level-4 1.2 "#fb4934" semi-bold)
+         (org-level-5 1.15 "#83a598" normal)
+         (org-level-6 1.1 "#d3869b" normal)
+         (org-level-7 1.05 "#d79921" normal)
+         (org-level-8 1.0 "#8ec07c" normal)))
+    (set-face-attribute (nth 0 face) nil :font doom-variable-pitch-font :weight (nth 3 face) :height (nth 1 face) :foreground (nth 2 face)))
+    (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
+
 (after! org
-  (dt/org-colors-doom-one))
+  (dt/org-colors-gruvbox-dark))
 
 (after! org
   (setq org-roam-directory "~/Cloud/Org/roam/"
