@@ -102,6 +102,9 @@ in
       };
 
       settings = {
+        actions = {
+          ENABLED = true;
+        };
         cors = {
           ALLOW_DOMAIN = config.services.gitea.domain;
           ENABLED = true;
