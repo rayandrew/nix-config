@@ -2,7 +2,7 @@
 
 {
   programs.wezterm = {
-    enable = true;
+    enable = false;
     colorSchemes = {
       # GPT3 license
       # modified from https://github.com/frdwin/everforest-for-wezterm/blob/main/everforest-dark-hard.toml

@@ -86,6 +86,7 @@ in
       domain = "git.rs.ht";
       rootUrl = "https://${domain}/";
       httpPort = 3003;
+      package = pkgs.unstable.gitea;
 
       database.type = "postgres";
 

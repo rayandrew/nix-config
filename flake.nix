@@ -5,6 +5,7 @@
     # Package sets
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     stable.url = "github:rayandrew/nixpkgs/nixos-22.11";
+    master.url = "github:NixOS/nixpkgs/master";
     hardware.url = "github:NixOS/nixos-hardware";
     home = {
       url = "github:nix-community/home-manager";

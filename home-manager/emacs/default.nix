@@ -56,7 +56,7 @@ in
   };
 
   programs.zsh.initExtra = lib.mkIf cfg.enable (lib.mkAfter ''
-    alias en="${pkgs.emacs}/bin/emacs -nw"
+    alias e="${config.programs.emacs.package}/bin/emacs -nw"
     export PATH="${config.xdg.configHome}/emacs/bin:$PATH"
   '');
 

@@ -124,7 +124,7 @@ in
   '';
 
   programs.zsh.initExtra = lib.mkIf cfg.enable (lib.mkAfter ''
-    alias e="${pkgs.neovim}/bin/nvim"
+    alias n="${pkgs.neovim}/bin/nvim"
   '');
 }
 # vim: foldmethod=marker

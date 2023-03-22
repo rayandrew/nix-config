@@ -1,4 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ config
+, lib
+, pkgs
+, ...
+}:
 
 if builtins.hasAttr "hm" lib then {
   home.activation.skhd = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -8,6 +12,7 @@ if builtins.hasAttr "hm" lib then {
   let
     scripts = ./scripts;
     yabai = "${pkgs.yabai}/bin/yabai";
+    kitty = "${pkgs.kitty}/Applications/kitty.app";
   in
   {
     services.skhd = {
@@ -97,29 +102,16 @@ if builtins.hasAttr "hm" lib then {
         hyper - b : brew services restart sketchybar
 
         # Open applications
-
-        # lalt - return: ${pkgs.kitty}/bin/kitty --directory=~
-        # lctrl - w: ${pkgs.kitty}/bin/kitty --directory=~ taskwarrior-tui 
-        # lctrl - m: ${pkgs.kitty}/bin/kitty --directory=~ spotify_player
-        # lctrl - 0x2A: ${pkgs.kitty}/bin/kitty --directory=~ htop
-        # lctrl - 0x2C: ${pkgs.kitty}/bin/kitty --directory=~ lf
-        # lalt - n: ${pkgs.kitty}/bin/kitty --directory=~ zsh -l -c "nvim"
-
-        lalt - return: open -n -a ${pkgs.kitty}/Applications/kitty.app --args
-        lctrl - w: open -n -a ${pkgs.kitty}/Applications/kitty.app --args taskwarrior-tui 
-        lctrl - m: open -n -a ${pkgs.kitty}/Applications/kitty.app --args spotify_player
-        lctrl - 0x2A: open -n -a ${pkgs.kitty}/Applications/kitty.app --args htop
-        lctrl - 0x2C: open -n -a ${pkgs.kitty}/Applications/kitty.app --args lf
+        
+        lalt - return: open -n -a ${kitty} --args
+        # lctrl - w: open -n -a ${kitty} --args taskwarrior-tui 
+        lctrl - m: open -n -a ${kitty} --args spotify_player
+        lctrl - 0x2A: open -n -a ${kitty} --args htop
+        lctrl - 0x2C: open -n -a ${kitty} --args lf
         lalt - 0x2C: open ~/
-        lalt - n: open -n -a ${pkgs.kitty}/Applications/kitty.app --args zsh -l -c "nvim"
-        lalt - e: emacsclient -r
-
-        # lalt - return : ${pkgs.wezterm}/bin/wezterm start --always-new-process
-        # lctrl - w: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- taskwarrior-tui
-        # lctrl - m: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- spotify_player
-        # lctrl - 0x2A: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- htop          # alt + \
-        # lalt - 0x2C: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- lf             # alt + /
-        # lalt - n: ${pkgs.wezterm}/bin/wezterm start --always-new-process -- zsh -l -c "nvim"
+        lalt - n: open -n -a ${kitty} --args zsh -l -c "nvim"
+        # lalt - e: emacsclient -r
+        lalt - e: open -n -a ${pkgs.emacsGit}/Applications/Emacs.app
 
         # rotate tree
         lalt + shift - r : yabai -m space --rotate 90

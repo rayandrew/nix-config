@@ -26,6 +26,11 @@
        :desc "Edit eshell aliases"   "a" #'(lambda () (interactive) (find-file "~/.config/doom/eshell/aliases"))
        :desc "Edit eshell profile"   "p" #'(lambda () (interactive) (find-file "~/.config/doom/eshell/profile"))))
 
+(map! "C-h" #'evil-window-left
+      "C-k" #'evil-window-up
+      "C-l" #'evil-window-right)
+(map! :map 'override "C-j" #'evil-window-down)
+
 (map! :leader
       :desc "Org babel tangle" "m B" #'org-babel-tangle)
 (after! org
@@ -45,16 +50,24 @@
             ("wiki" . "https://en.wikipedia.org/wiki/"))
         org-table-convert-region-max-lines 20000
         org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
-          '((sequence
-             "TODO(t)"           ; A task that is ready to be tackled
-             "BLOG(b)"           ; Blog writing assignments
-             "RESEARCH(r)"       ; A project that contains other tasks
-             "PROJ(p)"           ; A project that contains other tasks
-             "WAIT(w)"           ; Something is holding up this task
-             "IGNORED(i)"        ; Helper
-             "|"                 ; The pipe necessary to separate "active" states and "inactive" states
-             "DONE(d)"           ; Task has been completed
-             "CANCELLED(c)" )))) ; Task has been cancelled
+          '(;; Sequence for TASKS
+            ;; TODO means it's an item that needs addressing
+            ;; WAITING means it's dependent on something else happening
+            ;; DELEGATED means someone else is doing it and I need to follow up with them
+            ;; ASSIGNED means someone else has full, autonomous responsibility for it
+            ;; CANCELLED means it's no longer necessary to finish
+            ;; DONE means it's complete
+            (sequence "TODO(t@/!)" "WAITING(w@/!)" "DELEGATED(e@/!)" "|" "ASSIGNED(.@/!)" "CANCELLED(x@/!)" "DONE(d@/!)" )
+            ;; Sequence for RESEARCH
+            (sequence "RESEARCH(r@/!)" "IDEA(i@/!)" "|" "IMPLEMENTED(x@/!)" "POSTPONED(n@/!)")
+            ;; Sequence for EVENTS
+            ;; VISIT means that there is something you would physically like to do, no dates associated
+            ;; DIDNOTGO means the event was cancelled or I didn't go
+            ;; MEETING means a real time meeting, i.e. at work, or on the phone for something official
+            ;; VISITED means the event took place and is no longer scheduled
+            (sequence "VISIT(v@/!)" "|" "DIDNOTGO(z@/!)" "MEETING(m@/!)" "VISITED(y@/!)")
+            (sequence )
+            ))) ; Task has been cancelled
 
 (after! org
   (setq org-agenda-files '("~/Cloud/Org/agenda.org")))
@@ -163,4 +176,26 @@
        :desc "Insert node"         "i" #'org-roam-node-insert
        :desc "Capture to node"     "n" #'org-roam-capture
        :desc "Toggle roam buffer"  "r" #'org-roam-buffer-toggle))
+
+(after! org
+  (setq +org-capture-todo-file "agenda.org"
+         org-capture-templates
+      '(
+   ("t" "Tasks")
+   ;; TODO     (t) Todo template
+   ("tt" "TODO      (t) Todo" entry (file +org-capture-todo-file)
+    "* TODO %?
+  :PROPERTIES:
+  :Via:
+  :Note:
+  :END:
+  :LOGBOOK:
+  - State \"TODO\"       from \"\"           %U
+  :END:" :empty-lines 1)
+
+  ("b" "Bookmark" entry (file "~/Cloud/Org/bookmarks.org")
+       "* %(org-cliplink-capture) :%?:\n")
+  ("p" "process email" entry (file +org-capture-todo-file)
+             "* TODO %? %:fromname: %a"))))
+
 

@@ -6,7 +6,7 @@
 
 {
   services.emacs = {
-    enable = true;
+    enable = false;
     package = pkgs.emacsGit;
     additionalPath = [
       "${pkgs.gzip}/bin"

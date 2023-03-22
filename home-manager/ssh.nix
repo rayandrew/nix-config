@@ -20,7 +20,11 @@ in
       user = "rayandrew";
       forwardAgent = true;
       forwardX11 = true;
-      extraOptions = { RequestTTY = "yes"; };
+      extraOptions = {
+        RequestTTY = "yes";
+        UserKnownHostsFile = "/dev/null";
+        StrictHostKeyChecking = "no";
+      };
     };
     "mail" = {
       user = "rayandrew";
@@ -41,7 +45,6 @@ in
       hostname = "git.rs.ht";
       port = 22;
       forwardAgent = true;
-      extraOptions = { RequestTTY = "yes"; };
     };
     "*.github.com" = {
       extraOptions = {
@@ -101,6 +104,20 @@ in
     "*.cels.anl.gov !logins.cels.anl.gov" = lib.hm.dag.entryAfter [ "login-gce" ] {
       user = "ac.rayandrew";
       proxyJump = "login-gce";
+      forwardX11Trusted = true;
+    };
+    "bebop" = lib.hm.dag.entryBefore [ "*.lcrc.anl.gov" ] {
+      user = "ac.rayandrew";
+      hostname = "bebop.lcrc.anl.gov";
+      forwardX11Trusted = true;
+    };
+    "swing" = lib.hm.dag.entryBefore [ "*.lcrc.anl.gov" ] {
+      user = "ac.rayandrew";
+      hostname = "swing.lcrc.anl.gov";
+      forwardX11Trusted = true;
+    };
+    "*.lcrc.anl.gov" = {
+      user = "ac.rayandrew";
       forwardX11Trusted = true;
     };
   };
