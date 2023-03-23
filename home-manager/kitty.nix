@@ -5,10 +5,10 @@
     {
       enable = true;
       font = {
-        name = "JetBrainsMono Nerd Font";
+        # name = "JetBrainsMono Nerd Font";
         # name = "Pragmata Pro Mono";
-        # name = "Ubuntu Nerd Font";
-        size = 16;
+        name = "UbuntuMono Nerd Font Mono";
+        size = 18;
       };
       settings = {
         # https://fsd.it/shop/fonts/pragmatapro/

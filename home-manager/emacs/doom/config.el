@@ -7,9 +7,10 @@
 (setq user-full-name "Ray Andrew"
       user-mail-address "rs@rs.ht")
 
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18)
-      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 18)
-      doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 18))
+(setq +rs/my-font "UbuntuMono Nerd Font Mono"
+      doom-font (font-spec :family +rs/my-font :size 20)
+      doom-variable-pitch-font (font-spec :family +rs/my-font :size 20)
+      doom-big-font (font-spec :family +rs/my-font :size 20))
 
 ;;; to disable frame in emacsclient
 ;; (after! persp-mode
@@ -92,19 +93,19 @@
       '(("v" "A better agenda view"
          ((tags-todo "PRIORITY=\"A\" -IGNORED"
                 ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "IGNORED")))
-                 (org-agenda-overriding-header "High priority:")))
+                 (org-agenda-overriding-header "🟥 High priority:")))
           (tags-todo "RESEARCH -IGNORED"
                 ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "IGNORED")))
-                 (org-agenda-overriding-header "RESEARCH:")))
+                 (org-agenda-overriding-header "⁖ RESEARCH:")))
           (tags-todo "PRIORITY=\"B\" -IGNORED"
                 ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "IGNORED")))
-                 (org-agenda-overriding-header "Medium priority:")))
+                 (org-agenda-overriding-header "🟧 Medium priority:")))
           (tags-todo "PRIORITY=\"C\" -IGNORED"
                 ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "IGNORED")))
-                 (org-agenda-overriding-header "Low-priority:")))
+                 (org-agenda-overriding-header "🟨 Low-priority:")))
           (tags-todo "UCARE -IGNORED"
                 ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "IGNORED")))
-                 (org-agenda-overriding-header "UCARE:")))
+                 (org-agenda-overriding-header "● UCARE:")))
 
           (agenda "")
           (alltodo "")))))
@@ -169,7 +170,8 @@
 
 (after! org
   (setq org-roam-directory "~/Cloud/Org/roam/"
-        org-roam-graph-viewer "/usr/bin/brave"))
+        org-roam-graph-viewer "/usr/bin/brave"
+        org-roam-completion-everywhere t))
 
 (map! :leader
       (:prefix ("n r" . "org-roam")
