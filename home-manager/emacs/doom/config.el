@@ -19,7 +19,8 @@
 (map! :leader
       (:prefix ("=" . "open file")
        :desc "Edit agenda file"      "a" #'(lambda () (interactive) (find-file "~/Cloud/Org/agenda.org"))
-       :desc "Edit doom config.el"  "c" #'(lambda () (interactive) (find-file "~/.config/doom/config.el"))
+       :desc "Edit bookmark file"    "b" #'(lambda () (interactive) (find-file "~/Cloud/Org/bookmark.org"))
+       :desc "Edit doom config.el"   "c" #'(lambda () (interactive) (find-file "~/.config/doom/config.el"))
        :desc "Edit doom init.el"     "i" #'(lambda () (interactive) (find-file "~/.config/doom/init.el"))
        :desc "Edit doom packages.el" "p" #'(lambda () (interactive) (find-file "~/.config/doom/packages.el"))))
 (map! :leader
