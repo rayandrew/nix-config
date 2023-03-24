@@ -58,7 +58,7 @@ in
       serviceConfig.EnvironmentVariables = {
         PATH = "${pkgs.rsync}/bin:${copyAction}/bin:${config.environment.systemPath}";
       };
-      serviceConfig.StartInterval = 900;
+      serviceConfig.StartInterval = 600;
       serviceConfig.StandardErrorPath = lib.mkDefault "/tmp/dav.err.log";
       serviceConfig.StandardOutPath = lib.mkDefault "/tmp/dav.out.log";
     };
