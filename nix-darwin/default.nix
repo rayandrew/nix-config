@@ -13,6 +13,7 @@
     ./yabai
     ./symlinks.nix
     ./preferences.nix
+    ./dav
     ../overlays
     ../modules
     ../modules/darwin/sketchybar

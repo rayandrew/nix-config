@@ -21,5 +21,6 @@ in
   my-meta.nixConfigPath = "${home}/.config/nix-config";
   my-meta.projectsDirPath = "${home}/Projects";
   my-meta.researchDirPath = "${home}/Research";
+  my-meta.davDirPath = "${home}/Cloud";
   # nix.registry.my.flake = inputs.self;
 }

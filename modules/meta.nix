@@ -182,5 +182,11 @@ in {
       description = "Path to `Research` directory";
       default = null;
     };
+
+    davDirPath = mkOption {
+      type = types.nullOr types.str;
+      description = "Path to `dav` directory";
+      default = null;
+    };
   };
 }

@@ -76,6 +76,11 @@
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    osync = {
+      url = "github:deajan/osync";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
