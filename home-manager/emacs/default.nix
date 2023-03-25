@@ -42,12 +42,12 @@ in
 {
   programs.emacs = {
     enable = true;
-    package = pkgs.emacsGit;
+    package = pkgs.emacsUnstable;
   };
 
   services.emacs = lib.mkIf (pkgs.stdenv.isLinux) {
     enable = true;
-    package = pkgs.emacsGit;
+    package = pkgs.emacsUnstable;
   };
 
   xdg.configFile."doom" = {

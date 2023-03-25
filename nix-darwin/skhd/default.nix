@@ -111,7 +111,7 @@ if builtins.hasAttr "hm" lib then {
         lalt - 0x2C: open ~/
         lalt - n: open -n -a ${kitty} --args zsh -l -c "nvim"
         # lalt - e: emacsclient -r
-        lalt - e: open -n -a ${pkgs.emacsGit}/Applications/Emacs.app
+        lalt - e: open -n -a ${pkgs.emacsUnstable}/Applications/Emacs.app
 
         # rotate tree
         lalt + shift - r : yabai -m space --rotate 90
