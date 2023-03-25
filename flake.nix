@@ -67,11 +67,6 @@
       inputs.nixpkgs-22_11.follows = "stable";
     };
 
-    nvim-config = {
-      url = "git+https://git.rs.ht/rayandrew/nvim.git";
-      flake = false;
-    };
-
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";

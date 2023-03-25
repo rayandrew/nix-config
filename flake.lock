@@ -451,22 +451,6 @@
         "type": "github"
       }
     },
-    "nvim-config": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1679724579,
-        "narHash": "sha256-VTy3fJeBsQjxOajRldeBqAhNzijFkU1MjVt3OG0vcV4=",
-        "ref": "refs/heads/main",
-        "rev": "b4b03c347d4e24d7b4368b3cea93a1f1bfda43d3",
-        "revCount": 13,
-        "type": "git",
-        "url": "https://git.rs.ht/rayandrew/nvim.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://git.rs.ht/rayandrew/nvim.git"
-      }
-    },
     "osync": {
       "flake": false,
       "locked": {
@@ -549,7 +533,6 @@
         "nixos-modules": "nixos-modules",
         "nixpkgs": "nixpkgs_2",
         "nixvim": "nixvim",
-        "nvim-config": "nvim-config",
         "osync": "osync",
         "rust-overlay": "rust-overlay",
         "sf-mono-liga-src": "sf-mono-liga-src",

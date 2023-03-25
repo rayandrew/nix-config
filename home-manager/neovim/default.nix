@@ -66,7 +66,7 @@ in
   };
 
   xdg.configFile."nvim" = {
-    source = config.lib.file.mkOutOfStoreSymlink flake.inputs.nvim-config;
+    source = config.lib.file.mkOutOfStoreSymlink "${home}/.config/nvim";
     recursive = true;
   };
 
