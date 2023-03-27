@@ -1,7 +1,9 @@
 { flake, system, lib, platforms, ... }:
 
-let inherit (flake) inputs;
-in {
+let
+  inherit (flake) inputs;
+in
+{
   nixpkgs.overlays = [
     inputs.deadnix.overlays.default
     inputs.rust-overlay.overlays.default
@@ -65,6 +67,11 @@ in {
       gitui = prev.callPackage ../packages/gitui { };
 
       scripts = prev.callPackage ../packages/scripts { }; # own scripts
+
+      # template
+      parseTemplate = (prev.callPackage ../packages/template { }).parseTemplate;
+      parseTemplateWithOut = (prev.callPackage ../packages/template { }).parseTemplateWithOut;
+      parseTemplateDir = (prev.callPackage ../packages/template { }).parseTemplateDir;
     })
   ];
 }

@@ -6,50 +6,24 @@
 }:
 
 let
-  inherit (config.my-meta) davDirPath;
+  inherit (config.my-meta) orgDirPath;
 
-  program = "sync-nc-webdav";
+  program = "sync-org-nc-webdav";
 
-
-  parseTemplate = name: template: data:
-    pkgs.stdenv.mkDerivation {
-      name = "${name}";
-      nativeBuildInpts = [ pkgs.mustache-go ];
-
-      # Pass Json as file to avoid escaping
-      passAsFile = [ "jsonData" ];
-      jsonData = builtins.toJSON data;
-
-      # Disable phases which are not needed. In particular the unpackPhase will
-      # fail, if no src attribute is set
-      phases = [ "buildPhase" "installPhase" ];
-
-      buildPhase = ''
-        ${pkgs.mustache-go}/bin/mustache $jsonDataPath ${template} > rendered_file
-      '';
-
-      installPhase = ''
-        mkdir -p $out
-        cp rendered_file $out/sync.conf
-      '';
-    };
-
-
-  configFile = parseTemplate "${program}-config" ./sync.conf {
-    iniator = davDirPath;
-    target = "/Volumes/rayandrew/";
+  configFile = pkgs.parseTemplateWithOut "${program}-config" ./sync.conf "sync.conf" {
+    iniator = orgDirPath;
+    target = "/Volumes/rayandrew/Org";
   };
 
   copyAction = pkgs.writeShellScriptBin program ''
-    # rsync -auv ${davDirPath}/* /Volumes/rayandrew/
     bash ${flake.inputs.osync}/osync.sh ${configFile}/sync.conf --summary
   '';
 in
 {
-  config = lib.mkIf (!builtins.isNull davDirPath) {
+  config = lib.mkIf (!builtins.isNull orgDirPath) {
     environment.systemPackages = [ copyAction ];
 
-    launchd.user.agents.dav = {
+    launchd.user.agents.org-dav = {
       # serviceConfig.Label = "nc-rs-dav";
       serviceConfig.ProgramArguments = [ "${pkgs.bash}/bin/bash" "-c" program ];
 
@@ -59,8 +33,8 @@ in
         PATH = "${pkgs.rsync}/bin:${copyAction}/bin:${config.environment.systemPath}";
       };
       serviceConfig.StartInterval = 600;
-      serviceConfig.StandardErrorPath = lib.mkDefault "/tmp/dav.err.log";
-      serviceConfig.StandardOutPath = lib.mkDefault "/tmp/dav.out.log";
+      # serviceConfig.StandardErrorPath = lib.mkDefault "/tmp/org-dav.err.log";
+      # serviceConfig.StandardOutPath = lib.mkDefault "/tmp/org-dav.out.log";
     };
   };
 }

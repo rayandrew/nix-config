@@ -183,9 +183,9 @@ in {
       default = null;
     };
 
-    davDirPath = mkOption {
+    orgDirPath = mkOption {
       type = types.nullOr types.str;
-      description = "Path to `dav` directory";
+      description = "Path to `org` directory";
       default = null;
     };
   };

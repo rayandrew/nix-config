@@ -25,10 +25,20 @@ in
       f = "$vi $(${fzf})";
       "<c-f>" = ":fzf_jump";
       gs = ":fzf_search";
+      d = "";
+      dd = "delete";
+      dD = "push :remove";
       # f = "push :fzf<space>";
     };
     commands = {
       # fzf = ''$vi $(find . -name "$1" | ${fzf})'';
+      remove = ''
+        ''${{
+          echo 'delete?[y/n]'
+          read ans
+          [ $ans = 'y' ] && echo 'deleting files..' || echo 'cancelled.'
+        }}
+      '';
       fzf_jump = ''
         ''${{
             res="$(${find} . -maxdepth 1 | ${fzf} --reverse --header='Jump to location' | ${sed} 's/\\/\\\\/g;s/"/\\"/g')"

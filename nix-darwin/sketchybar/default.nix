@@ -14,15 +14,6 @@ let
   barForeground = "ebdbb2";
 
   scripts = ./scripts;
-  separator = id: position: ''
-    sketchybar --add item ${id} ${position} \
-      --set ${id} icon= \
-      icon.padding_left=0 \
-      icon.padding_right=0 \
-      background.padding_left=0 \
-      background.padding_right=0 \
-      icon.align=center
-  '';
 in
 if builtins.hasAttr "hm" lib then {
   home.activation.sketchybar = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -35,88 +26,9 @@ if builtins.hasAttr "hm" lib then {
   services.sketchybar = {
     enable = true;
     package = pkgs.sketchybar;
-    config = ''
-      #!/usr/bin/env sh
-
-      # Unload the macOS on screen indicator overlay for volume change
-      launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist > /dev/null 2>&1 & 
-
-      PADDING=4
-      ICON="Liga SFMono Nerd Font"
-      LABEL="Liga SFMono Nerd Font"
-
-      sketchybar -m --add event window_created \
-                    --add event window_destroyed
-
-      sketchybar --bar height=${barSize}                                       \
-                       blur_radius=0                                           \
-                       color=0xff${barBackground}                              \
-                       position=top                                            \
-                       sticky=on                                               \
-                       font_smoothing=on                                       \
-                 --default updates=when_shown                                  \
-                           drawing=on                                          \
-                           icon.padding_left=$PADDING                          \
-                           icon.padding_right=$PADDING                         \
-                           label.padding_left=$PADDING                         \
-                           label.padding_right=$PADDING                        \
-                           icon.font="$ICON:Bold:${fontSize}.0"                \
-                           label.font="$LABEL:Regular:${fontSize}.0"           \
-                           label.color=0xff${barForeground}                    \
-                           icon.color=0xff${barForeground}                      
-
-      sketchybar -m --add item yabai_spaces left \
-       --set yabai_spaces drawing=off \
-                          updates=on \
-                          script="${scripts}/yabai_spaces.sh" \
-       --subscribe yabai_spaces space_change window_created window_destroyed \
-       --add item space_template left \
-       --set space_template icon.highlight_color=0xff9dd274 \
-             drawing=off \
-             click_script="yabai -m space --focus \$NAME"
-
-        sketchybar  --add item time right \
-                    --set time update_freq=5 \
-                          icon.drawing=off \
-                          script="${scripts}/time.sh"
-
-        ${separator "sep_right_0" "right"}
-
-        sketchybar --add item battery right \
-                   --subscribe battery system_woke \
-                   --set battery update_freq=5 \
-                         script="${scripts}/battery.sh"
-
-        ${separator "sep_right_1" "right"}
-
-        sketchybar -m --add item cpu right \
-                      --set cpu update_freq=3 \
-                            script="${scripts}/cpu.sh"
-
-        ${separator "sep_right_2" "right"}
-
-        sketchybar -m --add item disk right \
-                      --set disk update_freq=10 \
-                      script="${scripts}/disk.sh"
-
-        ${separator "sep_right_3" "right"}
-
-        sketchybar -m --add item ram right \
-                      --set ram update_freq=5 \
-                            script="${scripts}/mem.sh"
-
-        ${separator "sep_right_4" "right"}
-
-        # Title
-        sketchybar --add item window_title right \
-                   --set window_title script="${scripts}/window_title.sh" \
-                                      icon.drawing=off \
-                                      label.color=0xff${barForeground} \
-                   --subscribe window_title front_app_switched  
-
-        # initializing
-        sketchybar --update
-    '';
+    config = builtins.readFile (pkgs.parseTemplate "sketchybar-config" ./config.sh {
+      inherit barSize fontSize barBackground barForeground scripts;
+    });
   };
 
   launchd.user.agents.sketchybar.environment = {

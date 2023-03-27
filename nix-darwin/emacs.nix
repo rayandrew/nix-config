@@ -7,7 +7,7 @@
 {
   services.emacs = {
     enable = false;
-    package = pkgs.emacsGit;
+    package = pkgs.emacsUnstable;
     additionalPath = [
       "${pkgs.gzip}/bin"
     ];

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-declare -A SPACE_ICONS
+declare -a SPACE_ICONS
 SPACE_ICONS["web"]="􀤆"
 SPACE_ICONS["main"]="􀎞"
 SPACE_ICONS["code"]="􀈊"
@@ -34,10 +34,11 @@ while read -r index window yabai_name display visible fullscreen; do
 		NAME="${index}"
 	fi
 
-	icon="${icons[${index}]}"
-	if [[ -v SPACE_ICONS["$NAME"] ]]; then
-		icon="${SPACE_ICONS["$NAME"]}"
-	fi
+	idx=$((index - 1))
+	icon="${icons[${idx}]}"
+	# if [[ -v SPACE_ICONS["$NAME"] ]]; then
+	# 	icon="${SPACE_ICONS["$NAME"]}"
+	# fi
 
 	NAMES="$NAMES $NAME"
 	args+=(--clone "$NAME" space_template after

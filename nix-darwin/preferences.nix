@@ -78,7 +78,7 @@
     };
     screencapture = {
       disable-shadow = true;
-      location = "/Users/${config.my-meta.username}/Documents";
+      location = "/Users/${config.my-meta.username}/Screenshots";
     };
     trackpad = {
       Clicking = true;

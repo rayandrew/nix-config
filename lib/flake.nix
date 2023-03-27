@@ -148,13 +148,16 @@ in {
     , homeManagerConfiguration ? home.lib.homeManagerConfiguration
     }:
     let
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs {
+        inherit system;
+      };
       homeDirectory = "${homePath}/${username}";
     in
     {
       homeConfigurations.${hostname} = homeManagerConfiguration rec {
         inherit pkgs;
         modules = [
+          ./overlays
           ({ ... }: {
             home = { inherit username homeDirectory; };
             imports = [ configuration ];
