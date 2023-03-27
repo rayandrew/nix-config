@@ -52,6 +52,7 @@ in
     };
     defaultGateway = "128.135.11.1";
     nameservers = [ "128.135.164.141" "128.135.24.141" ];
+    firewall.allowedTCPPorts = [ 22 ];
   };
 
 
