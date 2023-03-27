@@ -77,8 +77,8 @@ for i in "${!SPACE_ICONS[@]}"; do
 		label.highlight_color="${HIGHLIGHT_COLORS[$idx]}" \
 		script="{{ scripts }}/space.sh" \
 		click_script="yabai -m space --focus $sid" \
-		padding_left=2 \
-		padding_right=2 \
+		padding_left=0 \
+		padding_right=0 \
 		drawing=on
 done
 
