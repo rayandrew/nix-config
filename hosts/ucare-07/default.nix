@@ -19,6 +19,7 @@ in
     ../../nixos/vps.nix
     ../../nixos/home.nix
     ../../nixos/fhs.nix
+    ../../modules/linux/gitea-runner
     inputs.hardware.nixosModules.common-cpu-intel
   ];
 
@@ -67,11 +68,18 @@ in
 
   security.pam.enableSSHAgentAuth = true; # to make deploy-rs works
 
+  services.gitea-runner = {
+    enable = true;
+    package = pkgs.unstable.gitea-actions-runner;
+    instanceUrl = "https://git.rs.ht";
+    tokenFile = config.sops.secrets.gitea-runner-token.path;
+  };
+
   # secrets
   sops.secrets = {
-    priv-key = {
-      owner = username;
-      # group = username;
+    gitea-runner-token = {
+      owner = "gitea-runner";
+      group = "gitea-runner";
       mode = "0440";
       sopsFile = ./secrets.yaml;
       # neededForUsers = true;
