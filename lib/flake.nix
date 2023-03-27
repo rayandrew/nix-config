@@ -157,7 +157,7 @@ in {
       homeConfigurations.${hostname} = homeManagerConfiguration rec {
         inherit pkgs;
         modules = [
-          ./overlays
+          ../overlays
           ({ ... }: {
             home = { inherit username homeDirectory; };
             imports = [ configuration ];
