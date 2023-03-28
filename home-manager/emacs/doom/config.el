@@ -222,9 +222,9 @@
          "* %?\n"))))
 
 (after! org
-        (setq org-refile-targets '(("gtd/gtd.org" :maxlevel . 3)
-                                   ("gtd/someday.org" :level . 1)
-                                   ("gtd/tickler.org" :maxlevel . 2))))
+        (setq org-refile-targets '(("~/Org/gtd/projects.org" :maxlevel . 3)
+                                   ("~/Org/gtd/someday.org" :level . 1)
+                                   ("~/Org/gtd/tickler.org" :maxlevel . 2))))
 
 (defun rs/org-capture-inbox ()
   (interactive)
@@ -241,6 +241,32 @@
 (bind-key "C-c <tab>" #'rs/org-capture-inbox)
 (bind-key "C-c SPC" #'rs/org-agenda)
 
+
+(defun rs/org-rg-search ()
+  "Search org directory using consult-ripgrep. With live-preview."
+  (interactive)
+  (let ((consult-ripgrep (concat "rg "
+                                 "--null --multiline --ignore-case --type org --line-buffered --color=always --max-columns=1000 "
+                                 "--no-heading --line-number "
+                                 "--hidden -g !.git -g !.svn -g !.hg -g !.osync_workdir -g !.orgids"
+                                 ". -e ARG OPTS")))
+    (consult-ripgrep org-directory)))
+
+(map! :leader
+      :desc "Search org notes"
+      "n s" #'rs/org-rg-search)
+
+;; https://org-roam.discourse.group/t/using-consult-ripgrep-with-org-roam-for-searching-notes/1226/19
+(defun rs/org-roam-rg-search ()
+  "Search org-roam directory using consult-ripgrep. With live-preview."
+  (interactive)
+  (let ((consult-ripgrep (concat "rg "
+                                 "--null --multiline --ignore-case --type org --line-buffered --color=always --max-columns=1000 "
+                                 "--no-heading --line-number "
+                                 "--hidden -g !.git -g !.svn -g !.hg -g !.osync_workdir -g !.orgids"
+                                 ". -e ARG OPTS")))
+    (consult-ripgrep org-roam-directory)))
+
 (use-package! org-roam
   :init
   (map! :leader
@@ -252,7 +278,8 @@
         :desc "Find references" "r" #'org-roam-ref-find
         :desc "Show graph" "g" #'org-roam-show-graph
         :desc "Capture slipbox" "<tab>" #'rs/org-capture-slipbox
-        :desc "Capture to node" "n" #'org-roam-capture)
+        :desc "Capture to node" "n" #'org-roam-capture
+        :desc "Search" "s" #'rs/org-roam-rg-search)
   (setq org-roam-directory (file-truename "~/Org/brain/")
         ; org-roam-database-connector 'sqlite-builtin
         org-roam-db-gc-threshold most-positive-fixnum
