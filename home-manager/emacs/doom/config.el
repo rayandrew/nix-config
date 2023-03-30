@@ -256,6 +256,8 @@
       :desc "Search org notes"
       "n s" #'rs/org-rg-search)
 
+(map! "S-M-RET" #'vertico-exit-input)
+
 ;; https://org-roam.discourse.group/t/using-consult-ripgrep-with-org-roam-for-searching-notes/1226/19
 (defun rs/org-roam-rg-search ()
   "Search org-roam directory using consult-ripgrep. With live-preview."
