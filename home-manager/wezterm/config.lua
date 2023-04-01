@@ -132,6 +132,23 @@ return {
   keys = {
     { key = "n", mods = "SHIFT|CTRL", action = "ToggleFullScreen" },
   },
+  -- ssh_domains = {
+  --   {
+  --     -- This name identifies the domain
+  --     name = "swing",
+  --     -- The hostname or address to connect to. Will be used to match settings
+  --     -- from your ssh config file
+  --     remote_address = "swing.lcrc.anl.gov",
+  --     -- The username to use on the remote host
+  --     username = "ac.rayandrew",
+  --   },
+  -- },
+  -- unix_domains = {
+  --   {
+  --     name = "swing",
+  --   },
+  -- },
+  -- default_gui_startup_args = { 'connect', 'unix' };
   mouse_bindings = {
     -- Ctrl-click will open the link under the mouse cursor
     {

@@ -80,6 +80,7 @@
     # task manager
     taskwarrior
     taskwarrior-tui
-  ];
-  # ++ lib.optionals pkgs.stdenv.isDarwin [ pkgs.utm ];
+
+    chafa # image terminal viewer
+  ] ++ lib.optionals pkgs.stdenv.isDarwin [ macfuse-stubs ];
 }

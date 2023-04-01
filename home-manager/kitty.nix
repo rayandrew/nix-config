@@ -40,7 +40,14 @@
         # background_opacity = "0.96";
         # dynamic_background_opacity = "yes";
       };
-      keybindings = { "cmd+t" = "new_tab_with_cwd"; };
+      keybindings = {
+        "cmd+t" = "new_tab_with_cwd";
+        "ctrl+c" = "copy_to_clipboard";
+        "cmd+c" = "copy_to_clipboard";
+        "ctrl+v" = "paste_from_clipboard";
+        "cmd+v" = "paste_from_clipboard";
+        "shift+insert" = "paste_from_clipboard";
+      };
       # theme = "Nord";
       # theme = "Tokyo Night";
       theme = "Gruvbox Dark";
