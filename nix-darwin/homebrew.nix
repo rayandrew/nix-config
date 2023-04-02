@@ -75,7 +75,7 @@ in
       "forklift" # sftp client
       "zoom"
       "google-chrome"
-      "firefox"
+      # "firefox"
       "microsoft-edge"
       "pdf-expert"
       "readdle-spark"

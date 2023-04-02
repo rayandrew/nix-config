@@ -11,12 +11,13 @@ let
   find = "${pkgs.findutils}/bin/find";
   sed = "${pkgs.gnused}/bin/sed";
   rg = "${pkgs.ripgrep}/bin/rg";
+  ctpv = pkgs.ctpv;
 in
 {
   programs.lf = {
     enable = true;
     settings = {
-      color256 = true;
+      # color256 = true;
       icons = true;
       preview = true;
     };
@@ -81,10 +82,14 @@ in
 
     extraConfig = ''
       # set drawbox # enable border
-      set previewer ${scripts}/previewer.sh
-      set cleaner ${scripts}/cleaner.sh
+      # set previewer ${scripts}/previewer.sh
+      # set cleaner ${scripts}/cleaner.sh
       # set colors ${scripts}/colors
       # set icons ${scripts}/icons
+      set previewer ${ctpv}/bin/ctpv
+      set cleaner ${ctpv}/bin/ctpvclear
+      &${ctpv}/bin/ctpv -s $id
+      &${ctpv}/bin/ctpvquit $id
     '';
   };
 
@@ -93,5 +98,6 @@ in
 
   home.packages = with pkgs; [
     pistol
+    ctpv
   ];
 }

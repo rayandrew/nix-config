@@ -28,6 +28,7 @@ if builtins.hasAttr "hm" lib then {
     package = pkgs.sketchybar;
     config = builtins.readFile (pkgs.parseTemplate "sketchybar-config" ./config.sh {
       inherit barSize fontSize barBackground barForeground scripts;
+      yabai_spaces_file = config.yabai_spaces_file;
     });
   };
 

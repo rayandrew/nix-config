@@ -11,6 +11,7 @@
 , nixos-modules
 , nixvim
 , simple-nixos-mailserver
+, nur
 , ...
 }@inputs:
 
@@ -72,6 +73,7 @@ in {
         inherit system;
         modules = [
           ../hosts/${hostname}
+          nur.nixosModules.nur
           sops-nix.nixosModules.sops
           nixos-modules.nixosModule
           simple-nixos-mailserver.nixosModule

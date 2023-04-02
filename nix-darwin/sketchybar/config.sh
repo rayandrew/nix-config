@@ -11,7 +11,7 @@ LABEL="Liga SFMono Nerd Font"
 declare -a SPACES
 while read -r index name; do
 	SPACES[$index]="$name"
-done </tmp/yabai-spaces
+done <"{{ yabai_spaces_file }}"
 
 function add_separator() {
 	local id=$1

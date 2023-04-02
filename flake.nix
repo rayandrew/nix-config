@@ -76,6 +76,13 @@
       url = "github:deajan/osync";
       flake = false;
     };
+
+    firefox-darwin = {
+      url = "github:bandithedoge/nixpkgs-firefox-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nur.url = "github:nix-community/NUR";
   };
 
   outputs = { self, nixpkgs, ... }@inputs:

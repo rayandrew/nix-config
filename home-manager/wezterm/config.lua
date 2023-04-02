@@ -162,6 +162,8 @@ return {
     --   action = wezterm.action.OpenLinkAtMouseCursor,
     -- },
   },
+  enable_kitty_graphics = true,
+  window_close_confirmation = "NeverPrompt",
   skip_close_confirmation_for_processes_named = {
     "bash",
     "sh",

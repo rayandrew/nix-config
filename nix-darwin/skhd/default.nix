@@ -12,7 +12,9 @@ if builtins.hasAttr "hm" lib then {
   let
     scripts = ./scripts;
     yabai = "${pkgs.yabai}/bin/yabai";
-    kitty = "${pkgs.kitty}/Applications/kitty.app";
+    # term = "open -n -a ${pkgs.kitty}/Applications/kitty.app --args";
+    term = "${pkgs.unstable.wezterm}/bin/wezterm start --always-new-process --";
+    # term = "${wezterm} --";
   in
   {
     services.skhd = {
@@ -130,15 +132,16 @@ if builtins.hasAttr "hm" lib then {
 
         # Open applications
         
-        lalt - return: open -n -a ${kitty} --args
-        # lctrl - w: open -n -a ${kitty} --args taskwarrior-tui 
-        lctrl - m: open -n -a ${kitty} --args spotify_player
-        lctrl - 0x2A: open -n -a ${kitty} --args htop
-        lctrl - 0x2C: open -n -a ${kitty} --args lf
+        # lalt - return: ${term}
+        lalt - return: ${term}
+        # lctrl - w: ${term} taskwarrior-tui 
+        lctrl - m: ${term} spotify_player
+        lctrl - 0x2A: ${term} htop
+        lctrl - 0x2C: ${term} lf
         lalt - 0x2C: open ~/
-        lalt - n: open -n -a ${kitty} --args zsh -l -c "nvim"
+        lalt - n: ${term} zsh -l -c "nvim"
         # lalt - e: emacsclient -r
-        lalt - e: open -n -a ${pkgs.emacsUnstable}/Applications/Emacs.app
+        lalt - e: ${pkgs.emacsUnstable}/Applications/Emacs.app
 
         # rotate tree
         lalt + shift - r : yabai -m space --rotate 90

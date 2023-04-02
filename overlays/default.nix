@@ -1,4 +1,9 @@
-{ flake, system, lib, platforms, ... }:
+{ flake
+, system
+, lib
+, platforms
+, ...
+}:
 
 let
   inherit (flake) inputs;
@@ -8,6 +13,7 @@ in
     inputs.deadnix.overlays.default
     inputs.rust-overlay.overlays.default
     inputs.emacs-overlay.overlays.default
+    inputs.nur.overlay
     (final: prev: rec {
       lib = prev.lib.extend
         (_: _: (import ../lib {
@@ -72,6 +78,12 @@ in
       parseTemplate = (prev.callPackage ../packages/template { }).parseTemplate;
       parseTemplateWithOut = (prev.callPackage ../packages/template { }).parseTemplateWithOut;
       parseTemplateDir = (prev.callPackage ../packages/template { }).parseTemplateDir;
+
+      ctpv = prev.callPackage ../packages/ctpv { };
+
+      firefox-beta-bin =
+        if prev.stdenv.isDarwin then (inputs.firefox-darwin.overlay prev final).firefox-beta-bin
+        else prev.firefox-beta-bin;
     })
   ];
 }

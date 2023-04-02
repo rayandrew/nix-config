@@ -1,0 +1,269 @@
+#root.root {
+    --tabs-height: 42px;
+}
+
+.Tab {
+	width: 92%;
+  margin: 0 auto;
+}
+
+.Tab .title {
+  overflow: hidden;
+  margin-right: 8px;
+}
+
+.Sidebar {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+}
+
+.TabsPanel {
+    margin-top: 0px !important;
+}
+
+/*
+.container, .PinnedTabsBar {
+    margin: 0px !important;
+    max-width: 150px;
+}*/
+
+.NavigationBar {
+   # margin: 50px 5px 12px 13px !important;
+    margin: 8px 5px 2px 8px !important;
+    width: auto !important;
+    border: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+z-index: 9002 !important;
+}
+
+.NavigationBar:after {
+    position: absolute;
+    content: '';
+    border-bottom: 1px solid var(--tabs-bg-hover);
+    width: 110%;
+    transform: translateX(-50%);
+    bottom: -5px;
+    left: 50%;
+}
+
+
+.NavigationBar .nav-item[data-active=true] {
+
+		box-shadow: none !important;
+    background-color: var(--tabs-activated-bg) !important;
+}
+
+.NavigationBar .nav-item .audio svg {
+    padding: 2.5px !important;
+    height: 12px !important;
+    width: 12px !important;
+    background: var(--frame-bg) !important;
+    border-radius: 50%;
+		box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    margin-left: 0px !important;
+}
+
+@media (prefers-color-scheme:light) {
+    #root {
+        --frame-bg: white !important;
+        --toolbar-bg: white !important;
+        --popup-bg: var(--frame-bg) !important;
+        --ctx-menu-bg: var(--frame-bg) !important;
+        --frame-fg: #000 !important;
+        --toolbar-fg: var(--frame-fg) !important;
+        --popup-fg: var(--frame-fg) !important;
+        --tabs-fg: #323232 !important;
+        --tabs-bg-hover: #dedddaff !important;
+        --tabs-activated-bg: #f0f0f0 !important;
+        --btn-fg: #555 !important;
+        --nav-btn-fg: var(--btn-fg) !important;
+        --border-color: rgba(0,0,0,0.1);
+        --search-border: red !important;
+    }
+}
+
+@media (prefers-color-scheme:dark) {
+    #root {
+        --frame-bg: #181818 !important;
+        --toolbar-bg: var(--frame-bg) !important;
+        --popup-bg: var(--frame-bg) !important;
+        --ctx-menu-bg: var(--frame-bg) !important;
+        --frame-fg: #f2f2f2 !important;
+        --toolbar-fg: var(--frame-fg) !important;
+        --popup-fg: var(--frame-fg) !important;
+        --tabs-bg-hover: #323232!important;
+        --tabs-activated-bg: #363636!important;
+        --btn-fg: #fff !important;
+        --nav-btn-fg: var(--btn-fg) !important;
+        --border-color: #242424 !important;
+        --border: 5px solid rgba(86, 86, 86, 0.26) !important;
+    }
+}
+
+.SearchBar {
+    #margin: 5px 4px 18px 12px !important;
+    margin: 5px 4px 0px 12px !important;
+    width: auto !important;
+    background: transparent!important;
+    box-shadow: none !important;
+    #height: 38px !important;
+		#position: absolute !important;
+		#top:5px !important;
+}
+
+.SearchBar:after {
+   position: absolute;
+    content: '';
+    #border-bottom: 1px solid var(--tabs-bg-hover);
+    width: 110%;
+    transform: translateX(-50%);
+    bottom: 47px;
+    left: 50%;
+		height:145px !important;
+
+}
+
+.SearchBar svg {
+    margin-left: 8px !important;
+    padding-right: 2px !important;
+		margin-right:5px !important;
+		margin-top: -3px !important;
+}
+
+.SearchBar:before {
+    border-radius: 5px;
+    background-color: var(--tabs-activated-bg) !important;
+    border-radius: 5px !important;
+		box-shadow: rgba(0, 0, 0, 0.1) 1.8px 1.5px 1px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+		margin-top:-2px
+
+}
+
+.SearchBar .input {
+    font-size: 11.5px !important;
+		font-weight:600 !important;
+}
+
+.SearchBar .placeholder {
+    opacity: 0.3;
+    color: var(--frame-fg) !important;
+    font-family: Helvetica !important;
+    font-size: 11.5px !important;
+		font-weight:600 !important;
+}
+
+.SearchBar .search-icon>svg {
+    fill: var(--frame-fg);
+		opacity:0.3
+}
+
+.Tab .fav, .BookmarksPanel .fav, .HistoryPanel .fav {
+    margin-right: 7px !important;
+}
+
+.Tab .audio svg {
+    padding: 2.5px !important;
+    height: 12px !important;
+    width: 12px !important;
+    background: var(--frame-bg) !important;
+    border-radius: 50%;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.25);
+    margin-left: -15px !important;
+		margin-top:5px !important;
+}
+
+.Tab[data-audible] .t-box, .Tab[data-muted] .t-box {
+    transform: none !important;
+}
+
+@media screen and (max-width: 60px) {
+
+    #root {
+        --tabs-indent: 0px !important;
+        --bookmarks-indent: 0px !important;
+    }
+
+    .Tab[data-lvl] , .PinnedTab[data-lvl] {
+        max-width: 34px;
+        float: left;
+    }
+
+    .container {
+        margin: 0px !important;
+        max-width: 50px;
+    }
+
+    .panel-btn[data-active="true"] {
+        display: flex !important;
+        position: absolute !important;
+        background: none !important;
+    }
+
+    .SearchBar:before {
+        background-color: var(--frame-bg) !important;
+        box-shadow: none !important;
+        border-radius: 0px !important;
+        border: 0px !important;
+    }
+
+    .SearchBar .placeholder {
+        color: var(--frame-bg) !important;
+    }
+
+		.SearchBar .search-icon>svg {
+				opacity:1 !important;
+		}
+
+    .NavigationBar {
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border-bottom: 1px !important;
+    }
+
+    .NavigationBar .nav-item {
+        visibility: hidden
+    }
+
+    .NavigationBar  .nav-item[data-active=true] {
+				left:-0.5px !important;
+				position:absolute !important;
+        visibility: visible;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        padding-left: 1px !important;
+    }
+
+    .NavigationBar  .nav-item[data-active=false] {
+				left:-0.5px !important;
+				position:absolute !important;
+        visibility: visible;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        padding-left: 1px !important;
+    }
+}
+
+.TabsPanel .new-tab-btns {
+    #margin-bottom: 35px !important;
+    padding-top: 5px !important;
+    margin-top: 5px !important;
+}
+
+.BookmarksPanel , .HistoryPanel {
+    margin-left: 15px !important;
+    padding-bottom: 0px !important;
+    padding-right: 20px !important;
+}
+
+.PinnedTabsBar:after {
+    bottom: 4px;
+    left: 0px;
+    width: 300px !important;
+    height: 1px;
+    background-color: var(--tabs-bg-hover);
+    opacity: 0.8;
+}
+
+.Tab[data-active=true] .body:before {
+    box-shadow: rgba(0, 0, 0, 0.1) 1.8px 1.5px 1px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px !important;
+}

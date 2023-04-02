@@ -15,6 +15,7 @@
     ./vscode.nix
     ./fonts.nix
     ./kitty.nix
+    ./firefox
   ];
 
   home.packages = with pkgs; [

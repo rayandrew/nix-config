@@ -82,5 +82,7 @@
     taskwarrior-tui
 
     chafa # image terminal viewer
+
+    broot
   ] ++ lib.optionals pkgs.stdenv.isDarwin [ macfuse-stubs ];
 }

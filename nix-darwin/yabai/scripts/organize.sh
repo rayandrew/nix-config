@@ -3,7 +3,8 @@
 # inspired from https://gist.github.com/mickaelperrin/4b72fa46dec0aa8935b170685dac507d
 # https://github.com/aiguofer/dotfiles/blob/master/user/.local/bin/yabaict
 
-SPACES_FILE="/tmp/yabai-spaces"
+# SPACES_FILE="/tmp/yabai-spaces"
+SPACES_FILE="/Users/rayandrew/.yabai-spaces"
 
 UUID_MIDNIGHT="37D8832A-2D66-02CA-B9F7-8F30A301B230"
 UUID_VP229="9E041B4A-1854-4D12-9822-F9B494EA5AFF"
