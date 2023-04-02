@@ -2,7 +2,7 @@
 
 {
   programs.gitui = {
-    enable = true;
+    enable = false;
     keyConfig = ''
       (
           open_help: Some(( code: Char('?'), modifiers: ( bits: 0,),)),
