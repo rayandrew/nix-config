@@ -9,35 +9,10 @@
 
 let
   inherit (config.my-meta) username;
+  buildFirefoxXpiAddon = pkgs.nur.repos.rycee.firefox-addons.buildFirefoxXpiAddon;
+
   cfg = config.programs.firefox;
   stdenv = pkgs.stdenv;
-
-  buildFirefoxXpiAddon = lib.makeOverridable ({ stdenv ? pkgs.stdenv
-                                              , fetchurl ? pkgs.fetchurl
-                                              , pname
-                                              , version
-                                              , addonId
-                                              , url
-                                              , sha256
-                                              , meta
-                                              , ...
-                                              }:
-    stdenv.mkDerivation {
-      name = "${pname}-${version}";
-
-      inherit meta;
-
-      src = fetchurl { inherit url sha256; };
-
-      preferLocalBuild = true;
-      allowSubstitutes = true;
-
-      buildCommand = ''
-        dst="$out/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
-        mkdir -p "$dst"
-        install -v -m644 "$src" "$dst/${addonId}.xpi"
-      '';
-    });
 
   mozillaConfigPath =
     if stdenv.isDarwin then "Library/Application Support/Mozilla" else ".mozilla";
@@ -50,48 +25,19 @@ let
 
   profilesPath =
     if stdenv.isDarwin then "${firefoxConfigPath}/Profiles" else firefoxConfigPath;
-
-  sidebery-beta = buildFirefoxXpiAddon {
-    pname = "sidebery";
-    version = "5.0.0b31";
-    addonId = "{3c078156-979c-498b-8990-85f7987dd929}";
-    url = "https://github.com/mbnuqw/sidebery/releases/download/v5.0.0b31/sidebery-5.0.0b31.xpi";
-    sha256 = "sha256-J7N1w7T421c0B/oZJjpJJ4AsL1YpqUYaAkJsY5IhI+Y=";
-    meta = with lib;
-      {
-        homepage = "https://github.com/mbnuqw/sidebery";
-        description = "Tabs tree and bookmarks in sidebar with advanced containers configuration.";
-        license = licenses.mit;
-        platforms = platforms.all;
-      };
-  };
-
-  zotero = buildFirefoxXpiAddon rec {
-    pname = "zotero";
-    version = "5.0.107";
-    addonId = "zotero-${version}";
-    url = "https://download.zotero.org/connector/firefox/release/Zotero_Connector-5.0.107.xpi";
-    sha256 = "sha256-RuAhWGvUhkog8SxzKhRwQQwzTQLzBKlHjSsFj9e25e4=";
-    meta = with lib;
-      {
-        homepage = "https://www.zotero.org/download/";
-        description = "Zotero: Your personal research assistant";
-        license = licenses.gpl3;
-        platforms = platforms.all;
-      };
-  };
 in
 {
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-beta-bin;
+    # package = pkgs.firefox-beta-bin;
+    package = pkgs.firefox-devedition-bin;
 
     profiles."${username}" = {
       id = 0;
       name = username;
       search = {
         force = true;
-        default = "DuckDuckGo";
+        default = "Google";
         engines = {
           "Nix Packages" = {
             urls = [{
@@ -111,7 +57,7 @@ in
             definedAliases = [ "@nw" ];
           };
           "Wikipedia (en)".metaData.alias = "@wiki";
-          "Google".metaData.hidden = true;
+          # "Google".metaData.hidden = true;
           "Amazon.com".metaData.hidden = true;
           "Bing".metaData.hidden = true;
           "eBay".metaData.hidden = true;
@@ -121,11 +67,11 @@ in
         "general.smoothScroll" = true;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "browser.toolbars.bookmarks.visibility" = "never";
+        "browser.startup.page" = 3;
+        "xpinstall.signatures.required" = false;
       };
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-        sidebery-beta
         onepassword-password-manager
-        zotero
         enhanced-github
         enhancer-for-youtube
         octotree
@@ -133,6 +79,60 @@ in
         privacy-badger
         facebook-container
         forget_me_not
+        # firenvim
+        react-devtools
+        private-relay
+        disable-javascript
+        ublock-origin
+        (buildFirefoxXpiAddon {
+          pname = "sidebery";
+          version = "5.0.0b31";
+          addonId = "{3c078156-979c-498b-8990-85f7987dd929}";
+          url = "https://github.com/mbnuqw/sidebery/releases/download/v5.0.0b31/sidebery-5.0.0b31.xpi";
+          sha256 = "sha256-J7N1w7T421c0B/oZJjpJJ4AsL1YpqUYaAkJsY5IhI+Y=";
+          meta = with lib;
+            {
+              homepage = "https://github.com/mbnuqw/sidebery";
+              description = "Tabs tree and bookmarks in sidebar with advanced containers configuration.";
+              license = licenses.mit;
+              platforms = platforms.all;
+            };
+        })
+        (buildFirefoxXpiAddon rec {
+          pname = "zotero";
+          version = "5.0.107";
+          addonId = "5.0.107@zotero.org";
+          url = "https://download.zotero.org/connector/firefox/release/Zotero_Connector-${version}.xpi";
+          sha256 = "sha256-RuAhWGvUhkog8SxzKhRwQQwzTQLzBKlHjSsFj9e25e4=";
+          meta = with lib;
+            {
+              homepage = "https://www.zotero.org/download/";
+              description = "Zotero: Your personal research assistant";
+              license = licenses.gpl3;
+              platforms = platforms.all;
+            };
+        })
+        (buildFirefoxXpiAddon rec {
+          pname = "omni";
+          version = "1.4.5";
+          addonId = "1.4.5@omni.org";
+          url = "https://addons.mozilla.org/firefox/downloads/file/3925614/omnisearch-1.4.5.xpi";
+          sha256 = "sha256-EbHtBE78Kc5IoiBgSZWXAPWcM/XWMQh/yD7+pbLQJpY=";
+          meta = with lib; {
+            homepage = "https://github.com/alyssaxuu/omni";
+            description = "The all-in-one tool to supercharge your productivity";
+            license = licenses.gpl3;
+            platforms = platforms.all;
+          };
+        })
+        (buildFirefoxXpiAddon {
+          pname = "arxiv-utils";
+          version = "1.4";
+          addonId = "ab779d78-7270-4ee8-9ee8-369d73508298";
+          url = "https://addons.mozilla.org/firefox/downloads/file/3398798/arxiv_utils-1.4-an+fx.xpi";
+          sha256 = "13nlqbh7bpl3j22rhfbjhdrj055b8slv6xzacy5wi6y165fndn8f";
+          meta = { };
+        })
       ];
     };
   };
