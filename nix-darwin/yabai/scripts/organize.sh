@@ -134,6 +134,7 @@ yabai -m rule --add app="^Cisco AnyConnect Secure Mobility Client$" layer=above 
 yabai -m rule --add label="Orion" app="^Orion$" title="^(General|Appearance|Browsing|Sync|Passwords|Privacy|Search|Websites)$" manage=off
 # yabai -m rule --add label="Arc" app="^Arc$" title="^(Account|General|Shortcuts|Little Arc|Previews|Updates|Archive|Site Settings|Advanced)$" manage=off
 yabai -m rule --add label="Desmume" app="^DeSmuME$" manage=off
+# yabai -m rule --add label="Zotero" app="^DeSmuME$" manage=off
 
 yabai -m rule --add app="^Finder$" sticky=on manage=off # layer=above
 # yabai -m rule --add app="^(Neovide|Notion)$" manage=on space=3 # for note-taking

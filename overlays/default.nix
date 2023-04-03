@@ -16,9 +16,15 @@ in
     inputs.nur.overlay
     (final: prev:
       let
+        template = prev.callPackage ../packages/template { };
         firefox-darwin = inputs.firefox-darwin.overlay final prev;
+        vivaldi = prev.callPackage ../packages/vivaldi { };
       in
       rec {
+        inherit (template) parseTemplate
+          parseTemplateWithOut
+          parseTemplateDir;
+
         lib = prev.lib.extend
           (_: _: (import ../lib {
             inherit (prev) lib config;
@@ -78,10 +84,6 @@ in
 
         scripts = prev.callPackage ../packages/scripts { }; # own scripts
 
-        # template
-        parseTemplate = (prev.callPackage ../packages/template { }).parseTemplate;
-        parseTemplateWithOut = (prev.callPackage ../packages/template { }).parseTemplateWithOut;
-        parseTemplateDir = (prev.callPackage ../packages/template { }).parseTemplateDir;
 
         ctpv = prev.callPackage ../packages/ctpv { };
 
@@ -96,6 +98,12 @@ in
         firefox-beta-bin =
           if prev.stdenv.isDarwin then firefox-darwin.firefox-beta-bin
           else prev.firefox-beta-bin;
+
+        pdfannots2json = prev.callPackage ../packages/pdfannots2json { };
+
+        vivaldi-cross =
+          if prev.stdenv.isDarwin then vivaldi.vivaldi-darwin
+          else final.vivaldi;
       })
   ];
 }

@@ -84,5 +84,8 @@
     chafa # image terminal viewer
 
     broot
+    tesseract5
+
+    sqlitebrowser
   ] ++ lib.optionals pkgs.stdenv.isDarwin [ macfuse-stubs ];
 }

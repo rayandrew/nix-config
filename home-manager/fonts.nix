@@ -10,7 +10,8 @@
     sf-symbols
     sf-mono-liga
     recursive
-    (nerdfonts.override { fonts = [ "FiraCode" "Ubuntu" "UbuntuMono" ]; })
+    atkinson-hyperlegible
+    (nerdfonts.override { fonts = [ "FiraCode" "Ubuntu" "UbuntuMono" "CascadiaCode" ]; })
   ];
 
 }

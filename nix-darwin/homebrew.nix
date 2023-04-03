@@ -59,6 +59,7 @@ in
       "Color Picker" = 1545870783;
       "Spf - Screen Polarizer" = 1463398888;
       "Focused Work" = 1523968394;
+      "Magnet" = 441258766;
     };
 
     # If an app isn't available in the Mac App Store, or the version in the App Store has
@@ -74,8 +75,6 @@ in
       "alt-tab"
       "forklift" # sftp client
       "zoom"
-      "google-chrome"
-      # "firefox"
       "microsoft-edge"
       "pdf-expert"
       "readdle-spark"
@@ -87,6 +86,10 @@ in
       # r
       "r"
       "rstudio"
+
+      "logseq"
+
+      "nextcloud"
     ];
 
     # For cli packages that aren't currently available for macOS in `nixpkgs`

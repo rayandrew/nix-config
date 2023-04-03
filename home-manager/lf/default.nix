@@ -82,14 +82,14 @@ in
 
     extraConfig = ''
       # set drawbox # enable border
-      # set previewer ${scripts}/previewer.sh
-      # set cleaner ${scripts}/cleaner.sh
+      set previewer ${scripts}/previewer.sh
+      set cleaner ${scripts}/cleaner.sh
       # set colors ${scripts}/colors
       # set icons ${scripts}/icons
-      set previewer ${ctpv}/bin/ctpv
-      set cleaner ${ctpv}/bin/ctpvclear
-      &${ctpv}/bin/ctpv -s $id
-      &${ctpv}/bin/ctpvquit $id
+      # set previewer ${ctpv}/bin/ctpv
+      # set cleaner ${ctpv}/bin/ctpvclear
+      # &${ctpv}/bin/ctpv -s $id
+      # &${ctpv}/bin/ctpvquit $id
     '';
   };
 

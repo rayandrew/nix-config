@@ -16,6 +16,8 @@
     ./fonts.nix
     ./kitty.nix
     ./firefox
+    ./obsidian
+    ./vivaldi.nix
   ];
 
   home.packages = with pkgs; [
