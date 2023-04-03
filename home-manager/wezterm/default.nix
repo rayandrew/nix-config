@@ -2,7 +2,7 @@
 
 {
   programs.wezterm = {
-    enable = true;
+    enable = false;
     package = pkgs.unstable.wezterm;
     colorSchemes = {
       # GPT3 license

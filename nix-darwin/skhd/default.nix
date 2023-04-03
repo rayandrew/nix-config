@@ -12,8 +12,8 @@ if builtins.hasAttr "hm" lib then {
   let
     scripts = ./scripts;
     yabai = "${pkgs.yabai}/bin/yabai";
-    # term = "open -n -a ${pkgs.kitty}/Applications/kitty.app --args";
-    term = "${pkgs.unstable.wezterm}/bin/wezterm start --always-new-process --";
+    term = "open -n -a ${pkgs.kitty}/Applications/kitty.app --args";
+    # term = "${pkgs.unstable.wezterm}/bin/wezterm start --always-new-process --";
     # term = "${wezterm} --";
   in
   {
