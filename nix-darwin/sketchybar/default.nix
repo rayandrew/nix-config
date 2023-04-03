@@ -15,12 +15,7 @@ let
 
   scripts = ./scripts;
 in
-if builtins.hasAttr "hm" lib then {
-  home.activation.sketchybar = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    ${pkgs.skhd}/bin/sketchybar --update || ${pkgs.killall}/bin/killall sketchybar || true
-    # touch /tmp/dynamic-island-cache
-  '';
-} else {
+{
   environment.systemPackages = with pkgs; [ ];
 
   services.sketchybar = {

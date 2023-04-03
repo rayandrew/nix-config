@@ -4,6 +4,7 @@ declare -a SPACE_ICONS
 SPACE_ICONS["web"]="􀤆"
 SPACE_ICONS["main"]="􀎞"
 SPACE_ICONS["code"]="􀈊"
+SPACE_ICONS["docs"]="􀉚"
 SPACE_ICONS["note"]="􀓕"
 SPACE_ICONS["mail"]="􀍕"
 SPACE_ICONS["chat"]="􀌨"

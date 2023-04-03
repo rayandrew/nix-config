@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
+  inherit (config.my-meta) username;
   scripts = ./scripts;
   recordWindowId = pkgs.writeShellScriptBin "yabai-record-window-id" ''
     window_id=$(yabai -m query --windows | jq -er 'map(select(."has-focus" == true))[0].id')
@@ -85,6 +86,12 @@ in
         # focus window after active display changes
         yabai -m signal --add event=display_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
 
+        # yabai -m signal --add event=window_created action="ymsp window-created"
+        # yabai -m signal --add event=application_launched action="ymsp window-created"
+        # yabai -m signal --add event=window_moved action="ymsp window-moved"
+
+        # ymsp on-yabai-start
+
         bash ${scripts}/organize.sh
       '';
     };
@@ -115,6 +122,5 @@ in
         bash ${scripts}/create-spaces.sh
       '')
     ];
-
   };
 }

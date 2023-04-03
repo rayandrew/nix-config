@@ -104,6 +104,8 @@ in
         vivaldi-cross =
           if prev.stdenv.isDarwin then vivaldi.vivaldi-darwin
           else final.vivaldi;
+
+        yabai-master-stack-plugin = prev.callPackage ../packages/yabai-master-stack-plugin { };
       })
   ];
 }

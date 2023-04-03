@@ -87,7 +87,8 @@ if [ -n "$VP229" ]; then
 	name_first_space "$VP229_INDEX" "web"
 	create_space_on_monitor "$VP229_INDEX" "main"
 	create_space_on_monitor "$VP229_INDEX" "code"
-	create_space_on_monitor "$VP229_INDEX" "note" --layout stack
+	create_space_on_monitor "$VP229_INDEX" "note" --layout float
+	create_space_on_monitor "$VP229_INDEX" "docs"
 	create_space_on_monitor "$VP229_INDEX" "mail"
 	create_space_on_monitor "$VP229_INDEX" "chat"
 
@@ -103,7 +104,8 @@ elif [ -n "$APPLE_STUDIO" ]; then
 	name_first_space "$APPLE_STUDIO_INDEX" "web"
 	create_space_on_monitor "$APPLE_STUDIO_INDEX" "main"
 	create_space_on_monitor "$APPLE_STUDIO_INDEX" "code"
-	create_space_on_monitor "$APPLE_STUDIO_INDEX" "note" --layout stack
+	create_space_on_monitor "$APPLE_STUDIO_INDEX" "note" --layout float
+	create_space_on_monitor "$APPLE_STUDIO_INDEX" "docs"
 	create_space_on_monitor "$APPLE_STUDIO_INDEX" "mail"
 	create_space_on_monitor "$APPLE_STUDIO_INDEX" "chat"
 
@@ -139,11 +141,13 @@ yabai -m rule --add label="Desmume" app="^DeSmuME$" manage=off
 yabai -m rule --add app="^Finder$" sticky=on manage=off # layer=above
 # yabai -m rule --add app="^(Neovide|Notion)$" manage=on space=3 # for note-taking
 # yabai -m rule --add app="^Linear$" space=3
-yabai -m rule --add label="Zotero" app="^Zotero$" manage=on space="^note"
+yabai -m rule --add label="Obsidian" app="^Obsidian$" manage=on space="^note"
+yabai -m rule --add label="Emacs" app="^(Emacs|emacs|emacsclient)$" manage=on space="^note"
+yabai -m rule --add label="Zotero" app="^Zotero$" manage=on space="^docs"
+yabai -m rule --add label="PDFExpert" app="^(PDF Expert)$" manage=on space="^docs"
 yabai -m rule --add label="Zotero Utils" app="^Zotero$" title="^(Find Available PDFs|General|Sync|Search|Export|Cite|Advanced)$" manage=off
 yabai -m rule --add app="^Focused Work$" manage=off
-yabai -m rule --add label="Emacs" app="^(Emacs|emacs|emacsclient)$" manage=on space="^note"
 yabai -m rule --add app="^(Mail|Calendar|Fantastical|Spark Desktop)$" space="^mail"
 yabai -m rule --add label="Communication" app="^(Skype|Slack|Discord)$" space="^chat"
-yabai -m rule --add app="^(Google Chrome|Firefox|Safari|Orion|Arc|Microsoft Edge)$" space="^web"
+yabai -m rule --add app="^(Google Chrome|Firefox|Safari|Orion|Arc|Microsoft Edge|Vivaldi)$" space="^web"
 # yabai -m rule --add label="Little Arc" app="^Arc$" title="^Space.*" manage=off # for Little Arc to be happy

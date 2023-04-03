@@ -63,6 +63,25 @@ in {
       # /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.skhd.plist
       # /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.sketchybar.plist
     '';
+    yabai = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      if [ -f ${home}/Library/LaunchAgents/org.nixos.yabai.plist ]; then
+        /bin/launchctl unload ${home}/Library/LaunchAgents/org.nixos.yabai.plist
+        /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.yabai.plist
+      fi
+    '';
+    skhd = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      if [ -f ${home}/Library/LaunchAgents/org.nixos.skhd.plist ]; then
+        /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.skhd.plist
+        /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.skhd.plist
+      fi
+    '';
+    sketchybar = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      if [ -f ${home}/Library/LaunchAgents/org.nixos.sketchybar.plist ]; then
+        /bin/launchctl unload ${home}/Library/LaunchAgents/org.nixos.sketchybar.plist
+        /bin/launchctl load ${home}/Library/LaunchAgents/org.nixos.sketchybar.plist
+      fi
+    '';
+
   };
 
   home.packages = with pkgs; [
