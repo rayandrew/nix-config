@@ -90,6 +90,16 @@ in
       lalt + shift - k    : yabai -m window --swap north 
       lalt + shift - l    : yabai -m window --swap east
 
+      # Resize float
+      # make floating window fill screen
+      shift + alt - up     : yabai -m window --grid 1:1:0:0:1:1
+      # make floating window fill left-third of screen
+      shift + alt - left   : yabai -m window --grid 1:3:0:0:1:1
+      # make floating window fill right-third of screen
+      shift + alt - right   : yabai -m window --grid 1:3:3:0:1:1
+      # make floating window fill two-third (middle) of screen
+      shift + alt - down   : yabai -m window --grid 1:3:1:0:1:1
+
       # Make window zoom to fullscreen: lalt - f
       lalt - f : yabai -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
 
