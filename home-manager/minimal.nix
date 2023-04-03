@@ -12,5 +12,6 @@
     ./zsh
     ./lazygit.nix
     ./gitui.nix
+    ./bat.nix
   ];
 }

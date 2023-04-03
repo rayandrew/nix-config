@@ -87,5 +87,8 @@
     tesseract5
 
     sqlitebrowser
+
+    dust # du replacer
+    exa # ls replacer
   ] ++ lib.optionals pkgs.stdenv.isDarwin [ macfuse-stubs ];
 }
