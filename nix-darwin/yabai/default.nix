@@ -81,6 +81,11 @@ in
         yabai -m signal --add event=window_created action="sketchybar --trigger windows_created"
         yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_destroyed"
 
+        yabai -m signal --add event=window_created action="${scripts}/note-split.sh"
+        yabai -m signal --add event=window_destroyed action="${scripts}/note-split.sh"
+        yabai -m signal --add event=window_deminimized action="${scripts}/note-split.sh"
+        # yabai -m signal --add event=window_moved action="${scripts}/note-split.sh"
+
         # focus window after active space changes
         yabai -m signal --add event=space_change action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
         # focus window after active display changes

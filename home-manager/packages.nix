@@ -88,7 +88,8 @@
 
     sqlitebrowser
 
-    dust # du replacer
+    du-dust # du replacer
     exa # ls replacer
+    alpaca-cpp
   ] ++ lib.optionals pkgs.stdenv.isDarwin [ macfuse-stubs ];
 }

@@ -110,15 +110,30 @@ in
       user = "ac.rayandrew";
       hostname = "bebop.lcrc.anl.gov";
       forwardX11Trusted = true;
+      extraOptions = {
+        ControlMaster = "auto";
+        ControlPersist = "yes";
+        LogLevel = "FATAL";
+      };
     };
     "swing" = lib.hm.dag.entryBefore [ "*.lcrc.anl.gov" ] {
       user = "ac.rayandrew";
       hostname = "swing.lcrc.anl.gov";
       forwardX11Trusted = true;
+      extraOptions = {
+        ControlMaster = "auto";
+        ControlPersist = "yes";
+        LogLevel = "FATAL";
+      };
     };
     "*.lcrc.anl.gov" = {
       user = "ac.rayandrew";
       forwardX11Trusted = true;
+      extraOptions = {
+        ControlMaster = "auto";
+        ControlPersist = "yes";
+        LogLevel = "FATAL";
+      };
     };
   };
 

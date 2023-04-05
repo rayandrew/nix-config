@@ -92,13 +92,13 @@ in
 
       # Resize float
       # make floating window fill screen
-      shift + alt - up     : yabai -m window --grid 1:1:0:0:1:1
+      lctrl + lalt - up     : yabai -m window --grid 1:1:0:0:1:1
       # make floating window fill left-third of screen
-      shift + alt - left   : yabai -m window --grid 1:3:0:0:1:1
+      lctrl + lalt - left   : yabai -m window --grid 1:3:0:0:1:1
       # make floating window fill right-third of screen
-      shift + alt - right   : yabai -m window --grid 1:3:3:0:1:1
+      lctrl + lalt - right   : yabai -m window --grid 1:3:3:0:1:1
       # make floating window fill two-third (middle) of screen
-      shift + alt - down   : yabai -m window --grid 1:3:1:0:1:1
+      lctrl + lalt - down   : yabai -m window --grid 1:3:1:0:1:1
 
       # Make window zoom to fullscreen: lalt - f
       lalt - f : yabai -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
@@ -108,6 +108,10 @@ in
 
       # Toggle split orientation of the selected windows node: shift + lalt - s
       shift + lalt - s : yabai -m window --toggle split
+
+      lalt - v : yabai -m config split_type vertical
+      lalt + lshift - v : yabai -m config split_type horizontal
+      lalt - b : yabai -m space --layout bsp && yabai -m balance
 
       # floating window
       lalt - space : yabai -m window --toggle float --grid 5:5:1:1:5:5; sketchybar --trigger window_focus

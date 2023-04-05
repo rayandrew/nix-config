@@ -106,6 +106,9 @@ in
           else final.vivaldi;
 
         yabai-master-stack-plugin = prev.callPackage ../packages/yabai-master-stack-plugin { };
+
+        # ML
+        alpaca-cpp = prev.callPackage ../packages/alpaca-cpp { };
       })
   ];
 }
