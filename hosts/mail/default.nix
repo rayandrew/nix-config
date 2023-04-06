@@ -96,6 +96,10 @@ in
         hashedPasswordFile = config.sops.secrets.sw-rs-ht.path;
         aliases = [ ];
       };
+      "rsw@rs.ht" = {
+        hashedPasswordFile = config.sops.secrets.rsw-rs-ht.path;
+        aliases = [ ];
+      };
     };
 
     # Use Let's Encrypt certificates. Note that this needs to set up a stripped
@@ -145,6 +149,11 @@ in
       sopsFile = ./secrets.yaml;
     };
     sw-rs-ht = {
+      owner = username;
+      mode = "0440";
+      sopsFile = ./secrets.yaml;
+    };
+    rsw-rs-ht = {
       owner = username;
       mode = "0440";
       sopsFile = ./secrets.yaml;
