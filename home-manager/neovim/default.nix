@@ -17,9 +17,9 @@ let
   home = config.home.homeDirectory;
   populateEnv = ./populate-nvim-env.py;
 
-  populateEnvScript = ''
+  populateEnvScript = openapi_path: ''
     mkdir -p ${config.xdg.dataHome}/nvim/site/plugin
-    ${pkgs.python39}/bin/python ${populateEnv} -o ${config.xdg.dataHome}/nvim/site/plugin
+    ${pkgs.python39}/bin/python ${populateEnv} -o ${config.xdg.dataHome}/nvim/site/plugin --openapi_path "${openapi_path}"
   '';
 in
 {
@@ -65,14 +65,14 @@ in
     nixpkgs-fmt
     rnix-lsp
 
-    #   (pkgs.writeShellScriptBin "update-nvim-env" ''
-    #     #
-    #     # update-nvim-env
-    #     #
-    #     # Update neovim env such that it can be used in neovide or other GUIs.
-    #
-    #     ${populateEnvScript}
-    #   '')
+    (pkgs.writeShellScriptBin "update-nvim-env" ''
+      #
+      # update-nvim-env
+      #
+      # Update neovim env such that it can be used in neovide or other GUIs.
+    
+      ${populateEnvScript config.sops.secrets.openapi-key.path}
+    '')
     (pkgs.writeShellScriptBin "clean-nvim-all" ''
       rm -rf ${config.xdg.dataHome}/nvim
       rm -rf ${config.xdg.cacheHome}/nvim
@@ -88,11 +88,27 @@ in
 
   home.activation.neovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     echo "Populating neovim env..."
-    ${populateEnvScript}
+    ${populateEnvScript config.sops.secrets.openapi-key.path}
   '';
 
   programs.zsh.initExtra = lib.mkIf cfg.enable (lib.mkAfter ''
     alias n="${pkgs.neovim}/bin/nvim"
   '');
+
+
+  sops = {
+    age.keyFile = "${home}/.config/sops/age/keys.txt";
+    age.generateKey = true;
+    secrets = {
+      openapi-key = {
+        # owner = "rayandrew";
+        mode = "0440";
+        sopsFile = ../../secrets.yaml;
+        # path = "%r/openapi-key.txt";
+        path = "${config.home.homeDirectory}/.openai_api_key";
+        # neededForUsers = true;
+      };
+    };
+  };
 }
 # vim: foldmethod=marker

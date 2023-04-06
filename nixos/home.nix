@@ -28,7 +28,7 @@
         inherit flake system;
         super = config;
       };
-      # sharedModules = [ flake.inputs.nixvim.homeManagerModules.nixvim ];
+      sharedModules = [ flake.inputs.sops-nix.homeManagerModule ];
     };
   };
 }

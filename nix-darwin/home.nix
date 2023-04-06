@@ -22,5 +22,6 @@ in {
       inherit flake system;
       super = config;
     };
+    sharedModules = [ flake.inputs.sops-nix.homeManagerModule ];
   };
 }

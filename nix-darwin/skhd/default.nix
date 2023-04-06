@@ -111,7 +111,7 @@ in
 
       lalt - v : yabai -m config split_type vertical
       lalt + lshift - v : yabai -m config split_type horizontal
-      lalt - b : yabai -m space --layout bsp && yabai -m balance
+      lalt + lshift - space : yabai -m space --layout bsp && yabai -m balance
 
       # floating window
       lalt - space : yabai -m window --toggle float --grid 5:5:1:1:5:5; sketchybar --trigger window_focus

@@ -164,7 +164,7 @@ in {
             home = { inherit username homeDirectory; };
             imports = [ configuration ];
           })
-          sops-nix.homeManagerModules.sops
+          sops-nix.homeManagerModule
         ];
         extraSpecialArgs = {
           inherit system;

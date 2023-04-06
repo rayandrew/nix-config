@@ -25,6 +25,7 @@ stdenv.mkDerivation rec {
     ++ lib.optionals stdenv.isDarwin [
     darwin.apple_sdk.frameworks.Accelerate
     darwin.apple_sdk.frameworks.CoreGraphics
+    darwin.apple_sdk.frameworks.CoreVideo
   ];
 
   makeFlags = [
