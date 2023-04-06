@@ -85,7 +85,7 @@ if [ -n "$VP229" ]; then
 	## VP229
 	VP229_INDEX=$(echo "$VP229" | jq '.index')
 	name_first_space "$VP229_INDEX" "web"
-	create_space_on_monitor "$VP229_INDEX" "main"
+	create_space_on_monitor "$VP229_INDEX" "main" --layout stack
 	create_space_on_monitor "$VP229_INDEX" "code"
 	create_space_on_monitor "$VP229_INDEX" "note"
 	create_space_on_monitor "$VP229_INDEX" "docs"
@@ -102,7 +102,7 @@ elif [ -n "$APPLE_STUDIO" ]; then
 	## APPLE_STUDIO
 	APPLE_STUDIO_INDEX=$(echo "$APPLE_STUDIO" | jq '.index')
 	name_first_space "$APPLE_STUDIO_INDEX" "web"
-	create_space_on_monitor "$APPLE_STUDIO_INDEX" "main"
+	create_space_on_monitor "$APPLE_STUDIO_INDEX" "main" --layout stack
 	create_space_on_monitor "$APPLE_STUDIO_INDEX" "code"
 	create_space_on_monitor "$APPLE_STUDIO_INDEX" "note"
 	create_space_on_monitor "$APPLE_STUDIO_INDEX" "docs"

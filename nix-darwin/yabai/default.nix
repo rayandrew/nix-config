@@ -40,8 +40,8 @@ in
         split_ratio = "0.50";
         window_placement = "second_child";
         # Gaps
-        window_gap = 12;
-        top_padding = 12;
+        window_gap = 4;
+        top_padding = 8;
         # bottom_padding = 44;
         bottom_padding = 4;
         left_padding = 6;
