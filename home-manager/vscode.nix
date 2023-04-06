@@ -325,6 +325,17 @@ in
       };
     keybindings = [
       {
+        key = "enter";
+        command = "explorer.openAndPassFocus";
+        when = "filesExplorerFocus && foldersViewVisible && !explorerResourceIsFolder && !inputFocus";
+      }
+      {
+        # key = "shift+enter";
+        key = "r";
+        command = "renameFile";
+        when = "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus";
+      }
+      {
         key = "tab";
         command = "togglePeekWidgetFocus";
         when = "inReferenceSearchEditor && vim.active && vim.mode != 'Insert' || referenceSearchVisible";

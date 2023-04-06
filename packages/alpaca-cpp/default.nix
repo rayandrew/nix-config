@@ -24,6 +24,7 @@ stdenv.mkDerivation rec {
   buildInputs = with pkgs; [ ]
     ++ lib.optionals stdenv.isDarwin [
     darwin.apple_sdk.frameworks.Accelerate
+    darwin.apple_sdk.frameworks.CoreGraphics
   ];
 
   makeFlags = [
