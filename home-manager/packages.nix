@@ -2,7 +2,9 @@
 
 {
   home.packages = with pkgs; [
-    stable.age
+    (stable.age.overrideAttrs (final: prev: {
+      doInstallCheck = !pkgs.stdenv.isDarwin;
+    }))
     borgbackup
     bzip2
     cachix
