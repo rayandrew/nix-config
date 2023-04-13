@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ## Unload the macOS on screen indicator overlay for volume change
-launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist >/dev/null 2>&1 &
+# launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist >/dev/null 2>&1 &
 
 PADDING=4
 ICON="Liga SFMono Nerd Font"

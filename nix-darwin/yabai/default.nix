@@ -41,6 +41,7 @@ in
         window_placement = "second_child";
         # Gaps
         window_gap = 4;
+        # top_padding = 8;
         top_padding = 8;
         # bottom_padding = 44;
         bottom_padding = 4;
@@ -67,7 +68,7 @@ in
         active_window_border_color = "#ebdbb2";
         # insert_window_border_color   = "0xffd75f5f";
         # Bar
-        external_bar = "all:32:0";
+        external_bar = lib.mkDefault "all:32:0";
       };
 
       extraConfig = ''

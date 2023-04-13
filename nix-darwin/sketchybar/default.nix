@@ -42,6 +42,7 @@ in
     StandardOutPath = "/tmp/sketchybar.out.log";
   };
 
-  services.yabai.config.external_bar = "main:${barSize}:4";
+  services.yabai.config.external_bar = "all:${barSize}:4";
+  # services.yabai.config.external_bar = "main:${barSize}:4";
   system.defaults.NSGlobalDomain._HIHideMenuBar = true; # show menu bar
 }

@@ -9,9 +9,11 @@ SPACES_FILE="/Users/rayandrew/.yabai-spaces"
 UUID_MIDNIGHT="37D8832A-2D66-02CA-B9F7-8F30A301B230"
 UUID_VP229="9E041B4A-1854-4D12-9822-F9B494EA5AFF"
 UUID_APPLE_STUDIO="3E3DA20F-B1F1-4506-AA57-C97148A2A31D"
+UUID_ZOWIE_XL2540="C8EA0C87-A947-4801-879C-29CA8F886663"
 
 DISPLAYS=$(yabai -m query --displays)
 MONITORS=$(echo "$DISPLAYS" | jq '.[].index')
+N_MONITORS=$(echo "$DISPLAYS" | jq 'length')
 
 debug() {
 	echo "$@" 1>&2
@@ -79,38 +81,65 @@ MIDNIGHT_INDEX=$(echo "$MIDNIGHT" | jq '.index')
 
 VP229=$(echo "$DISPLAYS" | jq --arg UUID "$UUID_VP229" '.[] | select(.uuid == $UUID)')
 APPLE_STUDIO=$(echo "$DISPLAYS" | jq --arg UUID "$UUID_APPLE_STUDIO" '.[] | select(.uuid == $UUID)')
-if [ -n "$VP229" ]; then
-	# VP229 CONNECTED
+ZOWIE_XL2540=$(echo "$DISPLAYS" | jq --arg UUID "$UUID_ZOWIE_XL2540" '.[] | select(.uuid == $UUID)')
 
-	## VP229
-	VP229_INDEX=$(echo "$VP229" | jq '.index')
-	name_first_space "$VP229_INDEX" "web"
-	create_space_on_monitor "$VP229_INDEX" "main" --layout stack
-	create_space_on_monitor "$VP229_INDEX" "code"
-	create_space_on_monitor "$VP229_INDEX" "note"
-	create_space_on_monitor "$VP229_INDEX" "docs"
-	create_space_on_monitor "$VP229_INDEX" "mail"
-	create_space_on_monitor "$VP229_INDEX" "chat"
+if [ "$N_MONITORS" = "2" ]; then
+	if [ -n "$VP229" ]; then
+		# VP229 CONNECTED
 
-	# midnight
-	# name_first_space "$MIDNIGHT_INDEX" "web"
-	# create_space_on_monitor "$MIDNIGHT_INDEX" "commands"
-	name_first_space "$MIDNIGHT_INDEX" "commands"
-elif [ -n "$APPLE_STUDIO" ]; then
-	# APPLE_STUDIO CONNECTED
+		## VP229
+		VP229_INDEX=$(echo "$VP229" | jq '.index')
+		name_first_space "$VP229_INDEX" "web"
+		create_space_on_monitor "$VP229_INDEX" "main" --layout stack
+		create_space_on_monitor "$VP229_INDEX" "code"
+		create_space_on_monitor "$VP229_INDEX" "note"
+		create_space_on_monitor "$VP229_INDEX" "docs"
+		create_space_on_monitor "$VP229_INDEX" "mail"
+		create_space_on_monitor "$VP229_INDEX" "chat"
 
-	## APPLE_STUDIO
-	APPLE_STUDIO_INDEX=$(echo "$APPLE_STUDIO" | jq '.index')
-	name_first_space "$APPLE_STUDIO_INDEX" "web"
-	create_space_on_monitor "$APPLE_STUDIO_INDEX" "main" --layout stack
-	create_space_on_monitor "$APPLE_STUDIO_INDEX" "code"
-	create_space_on_monitor "$APPLE_STUDIO_INDEX" "note"
-	create_space_on_monitor "$APPLE_STUDIO_INDEX" "docs"
-	create_space_on_monitor "$APPLE_STUDIO_INDEX" "mail"
-	create_space_on_monitor "$APPLE_STUDIO_INDEX" "chat"
+		# midnight
+		# name_first_space "$MIDNIGHT_INDEX" "web"
+		# create_space_on_monitor "$MIDNIGHT_INDEX" "commands"
+		name_first_space "$MIDNIGHT_INDEX" "commands"
+	elif [ -n "$APPLE_STUDIO" ]; then
+		# APPLE_STUDIO CONNECTED
 
-	# midnight
-	name_first_space "$MIDNIGHT_INDEX" "commands"
+		## APPLE_STUDIO
+		APPLE_STUDIO_INDEX=$(echo "$APPLE_STUDIO" | jq '.index')
+		name_first_space "$APPLE_STUDIO_INDEX" "web"
+		create_space_on_monitor "$APPLE_STUDIO_INDEX" "main" --layout stack
+		create_space_on_monitor "$APPLE_STUDIO_INDEX" "code"
+		create_space_on_monitor "$APPLE_STUDIO_INDEX" "note"
+		create_space_on_monitor "$APPLE_STUDIO_INDEX" "docs"
+		create_space_on_monitor "$APPLE_STUDIO_INDEX" "mail"
+		create_space_on_monitor "$APPLE_STUDIO_INDEX" "chat"
+
+		# midnight
+		name_first_space "$MIDNIGHT_INDEX" "commands"
+	fi
+elif [ "$N_MONITORS" = "3" ]; then
+	echo "$APPLE_STUDIO"
+	echo "$ZOWIE_XL2540"
+	if [ -n "$APPLE_STUDIO" ] && [ -n "$ZOWIE_XL2540" ]; then
+		# APPLE_STUDIO CONNECTED
+
+		## APPLE_STUDIO
+		APPLE_STUDIO_INDEX=$(echo "$APPLE_STUDIO" | jq '.index')
+		ZOWIE_XL2540_INDEX=$(echo "$ZOWIE_XL2540" | jq '.index')
+		name_first_space "$APPLE_STUDIO_INDEX" "web"
+		create_space_on_monitor "$APPLE_STUDIO_INDEX" "main" --layout stack
+		create_space_on_monitor "$APPLE_STUDIO_INDEX" "code"
+		create_space_on_monitor "$APPLE_STUDIO_INDEX" "docs"
+
+		# zowie
+		name_first_space "$ZOWIE_XL2540_INDEX" "note"
+		create_space_on_monitor "$ZOWIE_XL2540_INDEX" "commands"
+		create_space_on_monitor "$ZOWIE_XL2540_INDEX" "mail"
+		create_space_on_monitor "$ZOWIE_XL2540_INDEX" "chat"
+
+		# midnight
+		name_first_space "$MIDNIGHT_INDEX" "stuffs"
+	fi
 fi
 
 yabai -m space --focus 1 # focus main display

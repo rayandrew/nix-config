@@ -50,6 +50,7 @@
       NSAutomaticQuoteSubstitutionEnabled = false;
       NSAutomaticSpellingCorrectionEnabled = false;
       NSDisableAutomaticTermination = true;
+      NSAutomaticWindowAnimationsEnabled = false;
       NSDocumentSaveNewDocumentsToCloud = false;
       NSNavPanelExpandedStateForSaveMode = true;
       NSNavPanelExpandedStateForSaveMode2 = true;
@@ -75,10 +76,14 @@
       FXEnableExtensionChangeWarning = false;
       FXPreferredViewStyle = "Nlsv";
       ShowPathbar = true;
+      AppleShowAllFiles = true;
+      _FXShowPosixPathInTitle = true;
+      ShowStatusBar = false;
     };
     screencapture = {
       disable-shadow = true;
       location = "/Users/${config.my-meta.username}/Screenshots";
+      type = "png";
     };
     trackpad = {
       Clicking = true;
@@ -97,6 +102,35 @@
       allowsignedenabled = 1;
       allowdownloadsignedenabled = 1;
       stealthenabled = 1;
+    };
+    CustomUserPreferences = {
+      NSGlobalDomain = {
+        WebKitDeveloperExtras = true;
+        AppleHighlightColor = "0.65098 0.85490 0.58431";
+        AppleAccentColor = 1;
+      };
+      "com.apple.finder" = {
+        DisableAllAnimations = true;
+        ShowExternalHardDrivesOnDesktop = false;
+        ShowMountedServersOnDesktop = false;
+        ShowRemovableMediaOnDesktop = false;
+        ShowHardDrivesOnDesktop = false;
+      };
+      "com.apple.NetworkBrowser" = {
+        BrowseAllInterfaces = 1;
+      };
+      "com.apple.DesktopServices" = {
+        DSDontWriteNetworkStores = true;
+      };
+      "com.apple.Safari" = {
+        AutoOpenSafeDownloads = false;
+        IncludeDevelopMenu = true;
+        WebKitDeveloperExtrasEnabledPreferenceKey = true;
+        "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" = true;
+      };
+      "com.apple.mail" = {
+        AddressesIncludeNameOnPasteboard = false;
+      };
     };
   };
   system.keyboard = {
