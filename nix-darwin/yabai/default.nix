@@ -3,14 +3,14 @@
 let
   inherit (config.my-meta) username;
   scripts = ./scripts;
-  recordWindowId = pkgs.writeShellScriptBin "yabai-record-window-id" ''
-    window_id=$(yabai -m query --windows | jq -er 'map(select(."has-focus" == true))[0].id')
-    ${pkgs.ruby}/bin/ruby ${scripts}/focus.rb write "$window_id"
-  '';
-  focusPrevWindow = pkgs.writeShellScriptBin "yabai-focus-prev-window" ''
-    previous_window_id=$(${pkgs.ruby}/bin/ruby ${scripts}/focus.rb read $YABAI_WINDOW_ID)
-    yabai -m window --focus $previous_window_id
-  '';
+  # recordWindowId = pkgs.writeShellScriptBin "yabai-record-window-id" ''
+  #   window_id=$(yabai -m query --windows | jq -er 'map(select(."has-focus" == true))[0].id')
+  #   ${pkgs.ruby}/bin/ruby ${scripts}/focus.rb write "$window_id"
+  # '';
+  # focusPrevWindow = pkgs.writeShellScriptBin "yabai-focus-prev-window" ''
+  #   previous_window_id=$(${pkgs.ruby}/bin/ruby ${scripts}/focus.rb read $YABAI_WINDOW_ID)
+  #   yabai -m window --focus $previous_window_id
+  # '';
 in
 {
   options = {
@@ -32,7 +32,7 @@ in
     services.yabai = {
       enable = true;
       enableScriptingAddition = true;
-      # package = pkgs.unstable.yabai;
+      package = pkgs.felixkratz-yabai;
       config = {
         # layout
         layout = "bsp";
@@ -68,12 +68,14 @@ in
         active_window_border_color = "#ebdbb2";
         # insert_window_border_color   = "0xffd75f5f";
         # Bar
-        external_bar = lib.mkDefault "all:32:0";
+        external_bar = "all:32:0";
       };
 
       extraConfig = ''
         wait4path /etc/sudoers.d/yabai
         sudo yabai --load-sa
+
+        launchctl unload -F /System/Library/LaunchAgents/com.apple.WindowManager.plist > /dev/null 2>&1 &
 
         yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
@@ -81,6 +83,11 @@ in
         yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
         yabai -m signal --add event=window_created action="sketchybar --trigger windows_created"
         yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_destroyed"
+        yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
+        yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
+        yabai -m signal --add event=window_moved action="sketchybar --trigger windows_on_spaces"
+        yabai -m signal --add event=display_added action="sleep 2 && $HOME/.config/yabai/create_spaces.sh"
+        yabai -m signal --add event=display_removed action="sleep 1 && $HOME/.config/yabai/create_spaces.sh"
 
         yabai -m signal --add event=window_created action="${scripts}/note-split.sh"
         yabai -m signal --add event=window_destroyed action="${scripts}/note-split.sh"
@@ -98,22 +105,23 @@ in
 
         # ymsp on-yabai-start
 
+
+        bash ${scripts}/create-space.sh
         bash ${scripts}/organize.sh
       '';
     };
 
     launchd.user.agents.yabai.serviceConfig.EnvironmentVariables.PATH =
-      lib.mkForce
-        "${config.services.yabai.package}/bin:${pkgs.jq}/bin:${config.services.sketchybar.package}/bin:${config.my-meta.systemPath}:${pkgs.python39}/bin";
+      lib.mkForce "${config.services.yabai.package}/bin:${pkgs.jq}/bin:${config.my-meta.systemPath}";
 
     launchd.user.agents.yabai.serviceConfig = {
       StandardErrorPath = "/tmp/yabai.err.log";
       StandardOutPath = "/tmp/yabai.out.log";
     };
 
-    launchd.daemons.yabai-sa.script = lib.mkOrder 0 ''
-      wait4path ${config.services.yabai.package}/bin/yabai
-    '';
+    # launchd.daemons.yabai-sa.script = lib.mkOrder 0 ''
+    #   wait4path ${config.services.yabai.package}/bin/yabai
+    # '';
 
     system.activationScripts.postActivation.text =
       let path = "${pkgs.yabai}/bin/yabai";

@@ -12,6 +12,7 @@
     recursive
     atkinson-hyperlegible
     (nerdfonts.override { fonts = [ "FiraCode" "Ubuntu" "UbuntuMono" "CascadiaCode" ]; })
+    sketchybar-app-font
   ];
 
 }

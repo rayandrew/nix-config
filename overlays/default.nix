@@ -76,6 +76,9 @@ in
           prev.callPackage ../packages/sf-symbols { full = true; };
         sf-symbols-minimal = prev.callPackage ../packages/sf-symbols { };
         sf-mono-liga = prev.callPackage ../packages/sf-mono-liga { inherit flake; };
+        sketchybar-app-font = prev.callPackage ../packages/sketchybar-app-font { };
+
+        sketchyvim = prev.callPackage ../packages/sketchyvim { };
 
         # cargo
         cargo-leptos = prev.callPackage ../packages/cargo-leptos { };
@@ -106,6 +109,9 @@ in
           else final.vivaldi;
 
         yabai-master-stack-plugin = prev.callPackage ../packages/yabai-master-stack-plugin { };
+
+        felixkratz-sketchybar-helper = prev.callPackage ../packages/felixkratz-sketchybar-helper { };
+        felixkratz-yabai = prev.callPackage ../packages/felixkratz-yabai { };
 
         # ML
         alpaca-cpp = prev.callPackage ../packages/alpaca-cpp { };

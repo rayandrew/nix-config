@@ -7,7 +7,6 @@
     ./hostname.nix
     ./meta.nix
     ./sudo.nix
-    ./sketchybar
     ./skhd
     ./emacs.nix
     ./yabai
@@ -16,7 +15,6 @@
     ./dav
     ../overlays
     ../modules
-    ../modules/darwin/sketchybar
     ../modules/darwin/pam
     ../shared/fonts.nix
   ];

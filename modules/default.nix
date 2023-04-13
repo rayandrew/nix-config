@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ./meta.nix ./device.nix ];
+  imports = [
+    ./meta.nix
+    ./device.nix
+  ];
 }

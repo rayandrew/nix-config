@@ -1,17 +1,13 @@
-{ config, lib, pkgs, ... }:
+{ config
+, lib
+, pkgs
+, ...
+}:
 
 with lib;
 
 let
   cfg = config.services.sketchybar;
-
-  configHome = pkgs.writeTextFile {
-    name = "sketchybarrc";
-    text = cfg.config;
-    destination = "/sketchybar/sketchybarrc";
-    executable = true;
-  };
-
 in
 {
   options = with types; {
@@ -39,18 +35,29 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
-    environment.systemPackages = [ cfg.package ];
+  config = mkIf cfg.enable (lib.mkMerge [
+    {
+      home.packages = [ cfg.package ];
 
-    launchd.user.agents.sketchybar = {
-      serviceConfig.ProgramArguments = [ "${cfg.package}/bin/sketchybar" ];
+      launchd.agents.sketchybar = {
+        enable = true;
+        config.ProgramArguments = [ "${cfg.package}/bin/sketchybar" ];
 
-      serviceConfig.KeepAlive = true;
-      serviceConfig.RunAtLoad = true;
-      serviceConfig.EnvironmentVariables = {
-        PATH = "${cfg.package}/bin:${config.environment.systemPath}";
-        XDG_CONFIG_HOME = mkIf (cfg.config != "") "${configHome}";
+        config.KeepAlive = true;
+        config.RunAtLoad = true;
+        config.EnvironmentVariables = {
+          PATH = "${cfg.package}/bin:${config.home.path}";
+        };
       };
-    };
-  };
+    }
+    (mkIf (cfg.config != "") {
+      xdg.configFile."sketchybar/sketchybarrc" = {
+        text = cfg.config;
+        onChange = ''
+          ${pkgs.procps}/bin/pkill -u "$USER" ''${VERBOSE+-e} sketchybar || true
+        '';
+        executable = true;
+      };
+    })
+  ]);
 }

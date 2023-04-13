@@ -25,7 +25,7 @@ in
   homebrew.enable = lib.mkForce false;
   services.yabai.enable = lib.mkForce false;
   services.skhd.enable = lib.mkForce false;
-  services.sketchybar.enable = lib.mkForce false;
+  # services.sketchybar.enable = lib.mkForce false;
   # nix.registry.my.flake = inputs.self;
 }
   
