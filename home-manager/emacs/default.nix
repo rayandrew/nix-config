@@ -9,13 +9,13 @@ let
 in
 {
   programs.emacs = {
-    enable = true;
-    package = pkgs.emacsUnstable;
+    enable = false;
+    # package = pkgs.emacsUnstable;
   };
 
   services.emacs = lib.mkIf (pkgs.stdenv.isLinux) {
-    enable = true;
-    package = pkgs.emacsUnstable;
+    enable = false;
+    # package = pkgs.emacsUnstable;
   };
 
   xdg.configFile."doom" = {
@@ -23,10 +23,10 @@ in
     recursive = false;
   };
 
-  programs.zsh.initExtra = lib.mkIf cfg.enable (lib.mkAfter ''
-    alias e="${config.programs.emacs.package}/bin/emacs -nw"
-    export PATH="${config.xdg.configHome}/emacs/bin:$PATH"
-  '');
+  # programs.zsh.initExtra = lib.mkIf cfg.enable (lib.mkAfter ''
+  #   alias e="${config.programs.emacs.package}/bin/emacs -nw"
+  #   export PATH="${config.xdg.configHome}/emacs/bin:$PATH"
+  # '');
 
   # home.activation.doom-sync = lib.hm.dag.entryAfter [ "doom-sync" ] ''
   #   echo "Doom sync..."

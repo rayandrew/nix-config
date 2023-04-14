@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 
 let
+  inherit (config.my-meta) backgroundColor foregroundColor;
+
   tmuxp-config = ./tmuxp;
   gitmux-config = ./gitmux.yml;
   resize-script = ./resize-adaptable.sh;
@@ -25,8 +27,8 @@ let
   # foregroundColor = "#575f66";
 
   # gruvbox
-  backgroundColor = "#282828";
-  foregroundColor = "#ebdbb2";
+  # backgroundColor = "#282828";
+  # foregroundColor = "#ebdbb2";
 in
 {
   programs.tmux = {

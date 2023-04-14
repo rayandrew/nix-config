@@ -152,7 +152,6 @@ in
       lalt - 0x2C: open ~/
       lalt - n: ${term} zsh -l -c "nvim"
       # lalt - e: emacsclient -r
-      lalt - e: ${pkgs.emacsUnstable}/Applications/Emacs.app
 
       ctrl + alt + cmd - c : if [ $(yabai -m config auto_balance) = "on" ]; then; yabai -m config auto_balance off; else; yabai -m config auto_balance on; fi
 

@@ -39,8 +39,8 @@
       AppleMetricUnits = 1;
       AppleShowAllExtensions = true;
       AppleTemperatureUnit = "Celsius";
-      AppleInterfaceStyle = "Dark";
-      # AppleInterfaceStyle = null; -- light mode
+      # AppleInterfaceStyle = "Dark";
+      AppleInterfaceStyle = null; # -- light mode
       AppleInterfaceStyleSwitchesAutomatically = false;
       InitialKeyRepeat = 20;
       KeyRepeat = 2;

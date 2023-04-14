@@ -165,6 +165,25 @@ in {
       };
     };
 
+    # Colors
+    foregroundColor = mkOption {
+      type = types.str;
+      description = "Foreground color";
+      default = "#1f2328";
+    };
+    # 032f62
+    backgroundColor = mkOption {
+      type = types.str;
+      description = "Background color";
+      default = "#ffffff";
+    };
+    sketchybarSize = mkOption {
+      type = types.str;
+      description = "Sketchybar Size";
+      default = "45";
+    };
+
+
     # Paths
     nixConfigPath = mkOption {
       type = types.str;

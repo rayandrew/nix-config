@@ -23,7 +23,7 @@ killall "{{ helper }}"
 launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist >/dev/null 2>&1 &
 
 bar=(
-	height=45
+	height="{{ sketchybarSize }}"
 	color=$BAR_COLOR
 	border_width=2
 	border_color=$BAR_BORDER_COLOR

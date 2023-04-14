@@ -112,6 +112,9 @@ in
 
         felixkratz-sketchybar-helper = prev.callPackage ../packages/felixkratz-sketchybar-helper { };
         felixkratz-yabai = prev.callPackage ../packages/felixkratz-yabai { };
+        sketchybar = prev.sketchybar.overrideAttrs (oldAttrs: {
+          buildInputs = oldAttrs.buildInputs ++ [ final.darwin.apple_sdk.frameworks.IOKit final.darwin.apple_sdk.frameworks.CoreWLAN ];
+        });
 
         # ML
         alpaca-cpp = prev.callPackage ../packages/alpaca-cpp { };

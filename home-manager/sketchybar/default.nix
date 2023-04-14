@@ -1,17 +1,14 @@
 { config, lib, pkgs, ... }:
 
 let
-  barSize = "36";
+
+  inherit (config.my-meta) backgroundColor foregroundColor sketchybarSize;
+
+  # barSize = "36";
   fontSize = "14";
-  # for ayu light
-  # barBackground = "fafafa";
-  # barForeground = "575F66";
-  # for everforest
-  # barBackground = "2b3339";
-  # barForeground = "dfad81";
-  # for gruvbox
-  barBackground = "282828";
-  barForeground = "ebdbb2";
+
+  barBackground = "0xff" + (builtins.replaceStrings [ "#" ] [ "" ] backgroundColor);
+  barForeground = "0xff" + (builtins.replaceStrings [ "#" ] [ "" ] foregroundColor);
 
   scripts = ./scripts;
   items = ./items;
@@ -29,15 +26,15 @@ in
     enable = true;
     package = pkgs.sketchybar;
     config = builtins.readFile (pkgs.parseTemplate "sketchybar-config" ./config.sh {
-      inherit barSize fontSize barBackground barForeground scripts;
+      inherit fontSize scripts barBackground barForeground sketchybarSize;
       helper = "${pkgs.felixkratz-sketchybar-helper}/bin/felixkratz-sketchybar-helper";
       # yabai_spaces_file = config.yabai_spaces_file;
     });
   };
 
   launchd.agents.sketchybar.config.EnvironmentVariables = {
-    FOREGROUND = "0xff${barForeground}";
-    BACKGROUND = "0xff${barBackground}";
+    FOREGROUND = barForeground;
+    BACKGROUND = barBackground;
     ITEMS_DIR = "${items}";
     SCRIPTS_DIR = "${scripts}";
     CONFIG_DIR = "${./.}";

@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  inherit (config.my-meta) username;
+  inherit (config.my-meta) username sketchybarSize;
   scripts = ./scripts;
   # recordWindowId = pkgs.writeShellScriptBin "yabai-record-window-id" ''
   #   window_id=$(yabai -m query --windows | jq -er 'map(select(."has-focus" == true))[0].id')
@@ -42,7 +42,7 @@ in
         # Gaps
         window_gap = 4;
         # top_padding = 8;
-        top_padding = 8;
+        top_padding = 2;
         # bottom_padding = 44;
         bottom_padding = 4;
         left_padding = 6;
@@ -57,7 +57,7 @@ in
         # shadows and borders
         # window_shadow = "float";
         window_shadow = "off";
-        window_border = "on";
+        window_border = "off";
         window_border_width = 2;
         window_border_radius = 10;
         # window_border_hidpi = "on";
@@ -68,7 +68,7 @@ in
         active_window_border_color = "#ebdbb2";
         # insert_window_border_color   = "0xffd75f5f";
         # Bar
-        external_bar = "all:32:0";
+        external_bar = "all:${sketchybarSize}:0";
       };
 
       extraConfig = ''

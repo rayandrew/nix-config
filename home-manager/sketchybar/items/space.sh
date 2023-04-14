@@ -18,10 +18,10 @@ for i in "${!SPACE_ICONS[@]}"; do
 		padding_left=2
 		padding_right=2
 		label.padding_right=20
-		icon.color=$WHITE
+		icon.color=$FOREGROUND
 		icon.highlight_color=$RED
 		label.color=$GREY
-		label.highlight_color=$WHITE
+		label.highlight_color=$BLUE
 		label.font="sketchybar-app-font:Regular:16.0"
 		label.y_offset=-1
 		background.color=$BACKGROUND_1
@@ -50,7 +50,7 @@ separator=(
 	label.drawing=off
 	associated_display=active
 	click_script='yabai -m space --create && sketchybar --trigger space_change'
-	icon.color=$WHITE
+	icon.color=$FOREGROUND
 )
 
 sketchybar --add bracket spaces_bracket '/space\..*/' \

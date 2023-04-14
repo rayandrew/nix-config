@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 battery=(
-	script="$ITEMS_DIR/battery.sh"
+	script="$SCRIPTS_DIR/battery.sh"
 	icon.font="$FONT:Regular:19.0"
 	padding_right=5
 	padding_left=0

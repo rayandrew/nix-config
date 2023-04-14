@@ -29,6 +29,7 @@ in
       d = "";
       dd = "delete";
       dD = "push :remove";
+      x = "cut";
       # f = "push :fzf<space>";
     };
     commands = {
