@@ -42,10 +42,10 @@ in
           config = prev.config;
         };
 
-        master = import inputs.master {
-          inherit system;
-          config = prev.config;
-        };
+        # master = import inputs.master {
+        #   inherit system;
+        #   config = prev.config;
+        # };
 
         gdb =
           if (final.stdenv.isDarwin) then

@@ -10,7 +10,6 @@
     home = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "flake-utils";
     };
     nix-darwin = {
       url = "github:lnl7/nix-darwin/master";
