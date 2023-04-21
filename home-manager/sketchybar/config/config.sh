@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+CONFIG_DIR="{{ configDir }}"
+SCRIPTS_DIR="{{ scriptsDir }}"
+ITEMS_DIR="{{ itemsDir }}"
+
 source "$CONFIG_DIR/colors.sh" # Loads all defined colors
 source "$CONFIG_DIR/icons.sh"  # Loads all defined icons
 

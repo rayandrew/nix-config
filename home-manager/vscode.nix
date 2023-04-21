@@ -166,7 +166,8 @@ in
         "update.mode" = "none";
 
         # "workbench.colorTheme" = "Ayu Light";
-        "workbench.colorTheme" = "Gruvbox Dark Medium";
+        # "workbench.colorTheme" = "Gruvbox Dark Medium";
+        "workbench.colorTheme" = "GitHub Light";
         "workbench.startupEditor" = "none";
         "workbench.activityBar.visible" = false;
         "workbench.statusBar.visible" = false;
