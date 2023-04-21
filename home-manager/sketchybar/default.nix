@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-
+  inherit (config.home) homeDirectory;
   inherit (config.my-meta) backgroundColor foregroundColor sketchybarSize;
 
   # barSize = "36";
@@ -26,20 +26,34 @@ in
   services.sketchybar = {
     enable = true;
     package = pkgs.sketchybar;
-    config = builtins.readFile (pkgs.parseTemplate "sketchybar-config" ./config/config.sh {
+    config = (pkgs.parseTemplateDir "sketchybar-config" ./config {
       inherit fontSize barBackground barForeground sketchybarSize;
-      inherit configDir scriptsDir itemsDir;
+      # inherit configDir scriptsDir itemsDir;
       helper = "${pkgs.felixkratz-sketchybar-helper}/bin/felixkratz-sketchybar-helper";
-      # yabai_spaces_file = config.yabai_spaces_file;
+    }).overrideAttrs (old: {
+      buildPhase = ''
+        ${old.buildPhase}
+        find $out -type f -iname "*.sh" -exec chmod +x {} \;
+        cd $out && chmod +x sketchybarrc
+      '';
     });
+    # config = builtins.readFile (pkgs.parseTemplate "sketchybar-config" ./config/config.sh {
+    #   inherit fontSize barBackground barForeground sketchybarSize;
+    #   inherit configDir scriptsDir itemsDir;
+    #   helper = "${pkgs.felixkratz-sketchybar-helper}/bin/felixkratz-sketchybar-helper";
+    #   # yabai_spaces_file = config.yabai_spaces_file;
+    # });
   };
 
   launchd.agents.sketchybar.config.EnvironmentVariables = {
     FOREGROUND = barForeground;
     BACKGROUND = barBackground;
-    ITEMS_DIR = "${itemsDir}";
-    SCRIPTS_DIR = "${scriptsDir}";
-    CONFIG_DIR = "${configDir}";
+    ITEMS_DIR = "${homeDirectory}/.config/sketchybar/items";
+    SCRIPTS_DIR = "${homeDirectory}/.config/sketchybar/scripts";
+    CONFIG_DIR = "${homeDirectory}/.config/sketchybar";
+    # ITEMS_DIR = "${itemsDir}";
+    # SCRIPTS_DIR = "${scriptsDir}";
+    # CONFIG_DIR = "${configDir}";
     PATH =
       lib.mkForce
         "${config.services.sketchybar.package}/bin:${config.my-meta.systemPath}";

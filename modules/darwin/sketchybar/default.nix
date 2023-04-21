@@ -23,15 +23,15 @@ in
     };
 
     services.sketchybar.config = mkOption {
-      type = str;
-      default = "";
-      example = literalExpression ''
-        sketchybar -m --bar height=25
-        echo "sketchybar configuration loaded.."
-      '';
-      description = ''
-        Configuration.
-      '';
+      type = nullOr path;
+      default = null;
+      # example = literalExpression ''
+      #   sketchybar -m --bar height=25
+      #   echo "sketchybar configuration loaded.."
+      # '';
+      # description = ''
+      #   Configuration.
+      # '';
     };
   };
 
@@ -51,13 +51,19 @@ in
       };
     }
     (mkIf (cfg.config != "") {
-      xdg.configFile."sketchybar/sketchybarrc" = {
-        text = cfg.config;
-        onChange = ''
-          ${pkgs.procps}/bin/pkill -u "$USER" ''${VERBOSE+-e} sketchybar || true
-        '';
-        executable = true;
-      };
+      home.activation.sketchybarConfig = ''
+        rm -rf "${config.home.homeDirectory}/.config/sketchybar"
+        if [[ ! -h "${cfg.config}" ]]; then
+          ln -s "${cfg.config}" "${config.home.homeDirectory}/.config/sketchybar"
+        fi
+      '';
+      # xdg.configFile."sketchybar/sketchybarrc" = {
+      #   text = cfg.config;
+      #   onChange = ''
+      #     ${pkgs.procps}/bin/pkill -u "$USER" ''${VERBOSE+-e} sketchybar || true
+      #   '';
+      #   executable = true;
+      # };
     })
   ]);
 }
