@@ -169,13 +169,15 @@ in {
     foregroundColor = mkOption {
       type = types.str;
       description = "Foreground color";
-      default = "#1f2328";
+      default = "#cdd6f4";
+      # default = "#1f2328";
     };
     # 032f62
     backgroundColor = mkOption {
       type = types.str;
       description = "Background color";
-      default = "#ffffff";
+      default = "#1e1e2e";
+      # default = "#ffffff";
     };
     sketchybarSize = mkOption {
       type = types.str;

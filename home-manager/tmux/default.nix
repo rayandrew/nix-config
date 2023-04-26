@@ -22,6 +22,26 @@ let
       sha256 = "11pvwyxxkxqxyg34mcrzydz9q1wfkj1x5vx3wmy3l4p89qf2dvlk";
     };
   };
+  catppuccin = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "catppuccin";
+    version = "unstable-2023-04-25";
+    src = pkgs.fetchFromGitHub {
+      owner = "catppuccin";
+      repo = "tmux";
+      rev = "4e48b09a76829edc7b55fbb15467cf0411f07931";
+      sha256 = "sha256-bXEsxt4ozl3cAzV3ZyvbPsnmy0RAdpLxHwN82gvjLdU=";
+    };
+    postInstall = ''
+      sed -i -e 's|''${PLUGIN_DIR}/catppuccin-selected-theme.tmuxtheme|''${TMUX_TMPDIR}/catppuccin-selected-theme.tmuxtheme|g' $target/catppuccin.tmux
+    '';
+    meta = with lib; {
+      homepage = "https://github.com/catppuccin/tmux";
+      description = "Soothing pastel theme for Tmux!";
+      license = licenses.mit;
+      platforms = platforms.unix;
+      maintainers = with maintainers; [ jnsgruk ];
+    };
+  };
 
   # backgroundColor = "#fafafa";
   # foregroundColor = "#575f66";
@@ -62,15 +82,15 @@ in
       { plugin = tmuxPlugins.yank; }
       { plugin = tmuxPlugins.vim-tmux-navigator; }
       {
-        plugin = tmuxPlugins.catppuccin;
+        plugin = catppuccin;
         extraConfig = ''
           set -g @catppuccin_flavour 'mocha' # or frappe, macchiato, mocha"
-          # set -g @catppuccin_window_tabs_enabled on
-          # set -g @catppuccin_left_separator "█"
-          # set -g @catppuccin_right_separator "█"
-          # set -g @catppuccin_date_time "%Y-%m-%d %H:%M"
-          # set -g @catppuccin_user "on"
-          # set -g @catppuccin_host "on"
+          set -g @catppuccin_window_tabs_enabled on
+          set -g @catppuccin_left_separator "█"
+          set -g @catppuccin_right_separator "█"
+          set -g @catppuccin_date_time "%Y-%m-%d %H:%M"
+          set -g @catppuccin_user "on"
+          set -g @catppuccin_host "on"
         '';
       }
     ];

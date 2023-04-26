@@ -2,12 +2,17 @@
 
 with lib;
 
+let
+  flavor = "mocha";
+in
 {
   programs.starship = {
     enable = true;
     enableZshIntegration = false;
     settings = {
       # See docs here: https://starship.rs/config/
+
+      palette = "catppuccin_${flavor}";
 
       directory.fish_style_pwd_dir_length =
         1; # turn on fish directory truncation
@@ -80,6 +85,13 @@ with lib;
       terraform.symbol = mkDefault "𝗧 ";
       vagrant.symbol = mkDefault "𝗩 ";
       zig.symbol = mkDefault " ";
-    };
+    } // builtins.fromTOML (builtins.readFile
+      (pkgs.fetchFromGitHub
+        {
+          owner = "catppuccin";
+          repo = "starship";
+          rev = "3e3e54410c3189053f4da7a7043261361a1ed1bc"; # Replace with the latest commit hash
+          sha256 = "sha256-soEBVlq3ULeiZFAdQYMRFuswIIhI9bclIU8WXjxd7oY=";
+        } + /palettes/${flavor}.toml));
   };
 }
