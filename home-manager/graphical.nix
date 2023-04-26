@@ -14,7 +14,7 @@
     ./wezterm
     ./vscode.nix
     ./fonts.nix
-    ./kitty.nix
+    ./kitty
     ./firefox
     ./obsidian
     ./vivaldi.nix

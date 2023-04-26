@@ -41,7 +41,7 @@ in
     clock24 = false;
     escapeTime = 500;
     historyLimit = 2000;
-
+    mouse = true;
     baseIndex = 1;
 
     plugins = with pkgs; [
@@ -61,12 +61,24 @@ in
       { plugin = tmuxPlugins.sensible; }
       { plugin = tmuxPlugins.yank; }
       { plugin = tmuxPlugins.vim-tmux-navigator; }
+      {
+        plugin = tmuxPlugins.catppuccin;
+        extraConfig = ''
+          set -g @catppuccin_flavour 'mocha' # or frappe, macchiato, mocha"
+          # set -g @catppuccin_window_tabs_enabled on
+          # set -g @catppuccin_left_separator "█"
+          # set -g @catppuccin_right_separator "█"
+          # set -g @catppuccin_date_time "%Y-%m-%d %H:%M"
+          # set -g @catppuccin_user "on"
+          # set -g @catppuccin_host "on"
+        '';
+      }
     ];
 
     extraConfig = ''
       # setw -g aggressive-resize off
       set-option -g detach-on-destroy off
-      set-option -g status-position top
+      set-option -g status-position bottom # top
 
       # https://github.com/folke/tokyonight.nvim#making-undercurls-work-properly-in-tmux 
       set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
@@ -162,43 +174,15 @@ in
       if -b 'command -v clip.exe > /dev/null 2>&1' 'bind y run -b "tmux save-buffer - | clip.exe"'
       if -b '[ -c /dev/clipboard ]' 'bind y run -b "tmux save-buffer - > /dev/clipboard"'
 
-      # buffers
+      # keybindings
+      # bind-key -T copy-mode-vi v send-keys -X begin-selection
+      # bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+      # bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
 
+      # buffers
       # bind b list-buffers  # list paste buffers
       # bind p paste-buffer  # paste from the top paste buffer
       # bind P choose-buffer # choose which buffer to paste from
-
-      # Panes
-
-      # set -g mode-style "fg=${foregroundColor},bg=${backgroundColor}"
-      # set -g mode-style "reverse"
-
-      set -g message-style "fg=${foregroundColor},bg=${backgroundColor}"
-      set -g message-command-style "fg=${foregroundColor},bg=${backgroundColor}"
-
-      set -g pane-border-style "fg=${foregroundColor}"
-      set -g pane-active-border-style "fg=${foregroundColor}"
-
-      set -g status "on"
-      set -g status-justify "left"
-
-      set -g status-style "fg=${foregroundColor},bg=${backgroundColor}"
-
-      set -g status-left-length "100"
-      set -g status-right-length "100"
-
-      set -g status-left-style NONE
-      set -g status-right-style NONE
-      
-      set -g status-left '#(${pkgs.unstable.gitmux}/bin/gitmux -cfg ${gitmux-config} "#{pane_current_path}")'
-      set -g status-right "#[fg=${foregroundColor},bg=${backgroundColor}] %I:%M %p #[fg=${foregroundColor},bg=${backgroundColor},nobold,nounderscore,noitalics]#[fg=${backgroundColor},bg=${foregroundColor},bold] #h "
-      
-      setw -g window-status-activity-style "underscore,fg=${foregroundColor},bg=${backgroundColor}"
-      setw -g window-status-separator ""
-      setw -g window-status-style "NONE,fg=${foregroundColor},bg=${backgroundColor}"
-      setw -g window-status-format "#[fg=${backgroundColor},bg=${backgroundColor},nobold,nounderscore,noitalics]#[default] #I  #W #F #[fg=${backgroundColor},bg=${backgroundColor},nobold,nounderscore,noitalics]"
-      setw -g window-status-current-format "#[fg=${backgroundColor},bg=${foregroundColor},nobold,nounderscore,noitalics]#[fg${backgroundColor},bg=${foregroundColor},bold] #I  #W #F #[fg=${foregroundColor},bg=${backgroundColor},nobold,nounderscore,noitalics]"
-
     '';
   };
 

@@ -88,5 +88,6 @@ in {
 
   home.packages = with pkgs; [
     nix-cleanup
+    iterm2
   ];
 }
