@@ -42,7 +42,7 @@ in
         update_check_interval = 0;
         editor = "${pkgs.neovim}/bin/nvim";
 
-        input_delay = 6;
+        # input_delay = 6;
 
         enabled_layouts = "splits";
         kitty_mod = "ctrl+shift";
@@ -123,7 +123,12 @@ in
     }
 
     (lib.mkIf (pkgs.stdenv.isDarwin) {
-      darwinLaunchOptions = [ "-o allow_remote_control=yes" "--directory=~" "--single-instance" "--listen-on unix:/tmp/mykitty" ];
+      darwinLaunchOptions = [
+        "-o allow_remote_control=yes"
+        "--directory=~"
+        "--single-instance"
+        "--listen-on unix:/tmp/mykitty"
+      ];
     })
   ];
 

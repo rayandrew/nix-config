@@ -93,5 +93,13 @@
     du-dust # du replacer
     exa # ls replacer
     alpaca-cpp
-  ] ++ lib.optionals pkgs.stdenv.isDarwin [ macfuse-stubs ];
+
+    zk
+
+  ] ++ lib.optionals pkgs.stdenv.isDarwin [
+    macfuse-stubs
+    pkgs.python310Packages.pipx
+    cherrytree-darwin
+    # zowie
+  ];
 }

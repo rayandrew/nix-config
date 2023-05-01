@@ -84,11 +84,34 @@ in
       lalt - k    : yabai -m window --focus north || yabai -m display --focus north
       lalt - l    : yabai -m window --focus east  || yabai -m display --focus east
 
-      # Window Swapping
-      lalt + shift - h    : yabai -m window --swap west
-      lalt + shift - j    : yabai -m window --swap south
-      lalt + shift - k    : yabai -m window --swap north 
-      lalt + shift - l    : yabai -m window --swap east
+      # # Window Swapping
+      # lalt + shift - h    : yabai -m window --swap west
+      # lalt + shift - j    : yabai -m window --swap south
+      # lalt + shift - k    : yabai -m window --swap north 
+      # lalt + shift - l    : yabai -m window --swap east
+
+      alt + shift - h : yabai -m window --swap west || $(yabai -m window --display west; yabai -m display --focus west)
+      alt + shift - j : yabai -m window --swap south || $(yabai -m window --display south; yabai -m display --focus south)
+      alt + shift - k : yabai -m window --swap north || $(yabai -m window --display north; yabai -m display --focus north)
+      alt + shift - l : yabai -m window --swap east || $(yabai -m window --display east; yabai -m display --focus east)
+
+      # alternatively, use the arrow keys
+      alt + shift - left : yabai -m window --swap west || $(yabai -m window --display west; yabai -m display --focus west)
+      alt + shift - down : yabai -m window --swap south || $(yabai -m window --display south; yabai -m display --focus south)
+      alt + shift - up : yabai -m window --swap north || $(yabai -m window --display north; yabai -m display --focus north)
+      alt + shift - right : yabai -m window --swap east || $(yabai -m window --display east; yabai -m display --focus east)
+
+      # set insertion point in focused container
+      alt + ctrl - h : yabai -m window --insert west
+      alt + ctrl - j : yabai -m window --insert south
+      alt + ctrl - k : yabai -m window --insert north
+      alt + ctrl - l : yabai -m window --insert east
+
+      # (alt) set insertion point in focused container using arrows
+      alt + ctrl - left  : yabai -m window --insert west
+      alt + ctrl - down  : yabai -m window --insert south
+      alt + ctrl - up    : yabai -m window --insert north
+      alt + ctrl - right : yabai -m window --insert east
 
       # Resize float
       # make floating window fill screen

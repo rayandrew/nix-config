@@ -153,12 +153,13 @@ in {
         ":q" = "exit";
         cat = "${bat}/bin/bat";
         du = "${du-dust}/bin/dust";
-        ls = "${exa}/bin/exa";
         ll = "${exa}/bin/exa -l --time-style long-iso --icons";
+        ls = "${exa}/bin/exa";
         # la = "${exa}/bin/exa -a";
         lt = "${exa}/bin/exa --tree";
-        lla = "${exa}/bin/exa -la";
-        la = "ll -a";
+        lla = "ll -a";
+        l = "lla";
+        la = "lla";
         # ll = lib.mkForce "ls -l --time-style long-iso --icons";
         # ls = "${exa}/bin/exa";
         tb = "toggle-background";

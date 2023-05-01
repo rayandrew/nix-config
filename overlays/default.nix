@@ -118,6 +118,10 @@ in
 
         # ML
         alpaca-cpp = prev.callPackage ../packages/alpaca-cpp { };
+
+        zowie = prev.callPackage ../packages/zowie { };
+
+        cherrytree-darwin = prev.callPackage ../packages/cherrytree-darwin { };
       })
   ];
 }

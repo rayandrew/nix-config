@@ -67,8 +67,11 @@ in
         # normal_window_border_color = "0xfffafafa";
         # normal_window_border_color = "#282828";
         # active_window_border_color = "#ebdbb2";
-        normal_window_border_color = "#45475a";
+        normal_window_border_color = "0xff45475a";
         active_window_border_color = foregroundColor;
+        # insert_feedback_color = "0x00FFFFFF";
+        # insert_feedback_color = "0x00FFFFFF";
+        insert_feedback_color = "0xff45475a";
         # insert_window_border_color   = "0xffd75f5f";
         # Bar
         external_bar = "all:${sketchybarSize}:0";
@@ -92,6 +95,11 @@ in
         yabai -m signal --add event=display_added action="sleep 2 && $HOME/.config/yabai/create_spaces.sh"
         yabai -m signal --add event=display_removed action="sleep 1 && $HOME/.config/yabai/create_spaces.sh"
 
+        # yabai -m signal --add event=window_focused action="yabai -m window $YABAI_WINDOW_ID --insert stack"
+        # yabai -m signal --add event=application_front_switched action='yabai -m window --insert stack'
+        # yabai -m signal --add event=window_destroyed action='yabai -m window --insert stack'
+        # yabai -m signal --add event=application_terminated action='yabai -m window --insert stack'
+
         yabai -m signal --add event=window_created action="${scripts}/note-split.sh"
         yabai -m signal --add event=window_destroyed action="${scripts}/note-split.sh"
         yabai -m signal --add event=window_deminimized action="${scripts}/note-split.sh"
@@ -107,7 +115,6 @@ in
         # yabai -m signal --add event=window_moved action="ymsp window-moved"
 
         # ymsp on-yabai-start
-
 
         bash ${scripts}/create-space.sh
         bash ${scripts}/organize.sh

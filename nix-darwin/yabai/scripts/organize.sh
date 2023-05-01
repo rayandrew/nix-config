@@ -165,7 +165,8 @@ yabai -m rule --add label="Orion" app="^Orion$" title="^(General|Appearance|Brow
 yabai -m rule --add label="Desmume" app="^DeSmuME$" manage=off
 # yabai -m rule --add label="Zotero" app="^DeSmuME$" manage=off
 
-yabai -m rule --add app="^Finder$" sticky=on manage=off # layer=above
+yabai -m rule --add app="^Finder$" sticky=on manage=off     # layer=above
+yabai -m rule --add app="^CherryTree$" sticky=on manage=off # layer=above
 # yabai -m rule --add app="^(Neovide|Notion)$" manage=on space=3 # for note-taking
 # yabai -m rule --add app="^Linear$" space=3
 yabai -m rule --add label="Obsidian" app="^Obsidian$" manage=on # space="^note"
