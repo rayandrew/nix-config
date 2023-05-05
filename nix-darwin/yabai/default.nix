@@ -32,8 +32,8 @@ in
     services.yabai = {
       enable = true;
       enableScriptingAddition = true;
-      # package = pkgs.felixkratz-yabai;
-      package = pkgs.yabai;
+      package = pkgs.felixkratz-yabai;
+      # package = pkgs.yabai;
       config = {
         # layout
         layout = "bsp";
