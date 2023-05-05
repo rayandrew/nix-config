@@ -92,8 +92,8 @@ in
         yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
         yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
         yabai -m signal --add event=window_moved action="sketchybar --trigger windows_on_spaces"
-        yabai -m signal --add event=display_added action="sleep 2 && $HOME/.config/yabai/create_spaces.sh"
-        yabai -m signal --add event=display_removed action="sleep 1 && $HOME/.config/yabai/create_spaces.sh"
+        yabai -m signal --add event=display_added action="sleep 2 && ${scripts}/create_spaces.sh"
+        yabai -m signal --add event=display_removed action="sleep 1 && ${scripts}/create_spaces.sh"
 
         # yabai -m signal --add event=window_focused action="yabai -m window $YABAI_WINDOW_ID --insert stack"
         # yabai -m signal --add event=application_front_switched action='yabai -m window --insert stack'
@@ -106,7 +106,7 @@ in
         # yabai -m signal --add event=window_moved action="${scripts}/note-split.sh"
 
         # focus window after active space changes
-        yabai -m signal --add event=space_change action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+        # yabai -m signal --add event=space_change action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
         # focus window after active display changes
         yabai -m signal --add event=display_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
 

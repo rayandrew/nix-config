@@ -9,7 +9,7 @@
   ];
 
   services.sketchyvim = {
-    enable = true;
+    enable = false;
     package = pkgs.sketchyvim;
     config = ''
       noremap ß $
@@ -24,6 +24,7 @@
       "Neovide"
       "Terminal"
       "Sidekick"
+      "Arc"
     ];
   };
 }

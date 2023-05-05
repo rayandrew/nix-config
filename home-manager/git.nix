@@ -5,9 +5,13 @@
 }:
 
 let
-  home = config.home.homeDirectory;
+  homeDir = config.home.homeDirectory;
 in
 {
+  # home.packages = with pkgs; [
+  #   git-lfs
+  # ];
+
   # Git
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.git.enable
   # Aliases config in ./configs/git-aliases.nix
@@ -24,7 +28,7 @@ in
 
     aliases = { };
     signing = {
-      key = if pkgs.stdenv.isDarwin then "E2E8D63137DD489E" else "${home}/.ssh/id_ed25519.pub";
+      key = if pkgs.stdenv.isDarwin then "E2E8D63137DD489E" else "${homeDir}/.ssh/id_ed25519.pub";
       signByDefault = true;
       gpgPath = if (pkgs.stdenv.isDarwin) then "${pkgs.gnupg}/bin/gpg" else "";
     };
@@ -35,6 +39,8 @@ in
 
     # Enhanced diffs
     delta.enable = true;
+
+    lfs.enable = true;
   };
 
   # GitHub CLI

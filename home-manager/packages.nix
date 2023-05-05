@@ -100,6 +100,7 @@
     macfuse-stubs
     pkgs.python310Packages.pipx
     cherrytree-darwin
+    # pkgs.darwin.libobjc
     # zowie
   ];
 }

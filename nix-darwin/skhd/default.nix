@@ -106,6 +106,7 @@ in
       alt + ctrl - j : yabai -m window --insert south
       alt + ctrl - k : yabai -m window --insert north
       alt + ctrl - l : yabai -m window --insert east
+      alt + ctrl - s : yabai -m window --insert stack
 
       # (alt) set insertion point in focused container using arrows
       alt + ctrl - left  : yabai -m window --insert west
