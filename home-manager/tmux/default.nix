@@ -88,9 +88,10 @@ in
           set -g @catppuccin_window_tabs_enabled on
           set -g @catppuccin_left_separator "█"
           set -g @catppuccin_right_separator "█"
-          set -g @catppuccin_date_time "%Y-%m-%d %H:%M"
-          set -g @catppuccin_user "on"
-          set -g @catppuccin_host "on"
+          # set -g @catppuccin_date_time "%Y-%m-%d %H:%M"
+          set -g @catppuccin_date_time "%H:%M"
+          # set -g @catppuccin_user "on"
+          # set -g @catppuccin_host "on"
         '';
       }
     ];
