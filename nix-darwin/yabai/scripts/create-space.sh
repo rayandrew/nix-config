@@ -3,6 +3,8 @@
 DESIRED_SPACES_PER_DISPLAY=4
 CURRENT_SPACES="$(yabai -m query --displays | jq -r '.[].spaces | @sh')"
 
+echo $CURRENT_SPACES
+
 DELTA=0
 while read -r line; do
 	LAST_SPACE="$(echo "${line##* }")"

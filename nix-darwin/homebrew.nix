@@ -60,6 +60,7 @@ in
       "Spf - Screen Polarizer" = 1463398888;
       "Focused Work" = 1523968394;
       "Magnet" = 441258766;
+      "Bear – Markdown Notes" = 1091189122;
     };
 
     # If an app isn't available in the Mac App Store, or the version in the App Store has

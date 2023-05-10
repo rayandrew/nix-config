@@ -100,7 +100,7 @@
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     macfuse-stubs
     pkgs.python310Packages.pipx
-    cherrytree-darwin
+    # cherrytree-darwin
     # pkgs.darwin.libobjc
     # zowie
   ];

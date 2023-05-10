@@ -173,7 +173,8 @@ in
       lctrl - m: ${term} spotify_player
       lctrl - 0x2A: ${term} htop
       lctrl - 0x2C: ${term} lf
-      lalt - 0x2C: open ~/
+      # lalt - 0x2C: open ~/
+      lalt - e: open ~/
       lalt - n: ${term} zsh -l -c "nvim"
       # lalt - e: emacsclient -r
 

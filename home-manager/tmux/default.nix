@@ -53,7 +53,8 @@ in
 {
   programs.tmux = {
     enable = true;
-    prefix = if (config.device.type == "server") then "C-Space" else "C-a";
+    # prefix = if (config.device.type == "server") then "C-Space" else "C-a";
+    prefix = "C-Space";
 
     terminal = "screen-256color";
     shell = "${pkgs.zsh}/bin/zsh";
