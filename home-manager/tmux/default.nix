@@ -85,7 +85,7 @@ in
       {
         plugin = catppuccin;
         extraConfig = ''
-          set -g @catppuccin_flavour 'mocha' # or frappe, macchiato, mocha"
+          set -g @catppuccin_flavour 'latte' # or frappe, macchiato, mocha"
           set -g @catppuccin_window_tabs_enabled on
           set -g @catppuccin_left_separator "█"
           set -g @catppuccin_right_separator "█"

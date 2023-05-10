@@ -30,7 +30,7 @@ in
     '';
 
     services.yabai = {
-      enable = true;
+      enable = false;
       enableScriptingAddition = true;
       package = pkgs.felixkratz-yabai;
       # package = pkgs.yabai;
@@ -58,7 +58,7 @@ in
         # shadows and borders
         # window_shadow = "float";
         window_shadow = "off";
-        window_border = "on";
+        window_border = "off";
         window_border_width = 4;
         window_border_radius = 10;
         # window_border_hidpi = "on";

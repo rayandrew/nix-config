@@ -24,7 +24,7 @@ in
   ];
 
   services.sketchybar = {
-    enable = true;
+    enable = false;
     package = pkgs.sketchybar;
     config = (pkgs.parseTemplateDir "sketchybar-config" ./config {
       inherit fontSize barBackground barForeground sketchybarSize;
@@ -68,5 +68,5 @@ in
 
   # services.yabai.config.external_bar = "all:${barSize}:4";
   # services.yabai.config.external_bar = "main:${barSize}:4";
-  targets.darwin.defaults.NSGlobalDomain._HIHideMenuBar = lib.mkForce true; # show menu bar
+  targets.darwin.defaults.NSGlobalDomain._HIHideMenuBar = lib.mkForce config.services.sketchybar.enable; # show menu bar
 }
