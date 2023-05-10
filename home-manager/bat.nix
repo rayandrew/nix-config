@@ -12,7 +12,7 @@ in
     config = {
       theme = "catppuccin-${flavor}";
     };
-    extraPackages = with pkgs.bat-extras; [
+    extraPackages = with pkgs.bat-extras; lib.mkIf (pkgs.stdenv.isDarwin) [
       batdiff
       batman
       batgrep
