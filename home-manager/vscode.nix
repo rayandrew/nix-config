@@ -168,7 +168,8 @@ in
         # "workbench.colorTheme" = "Ayu Light";
         # "workbench.colorTheme" = "Gruvbox Dark Medium";
         # "workbench.colorTheme" = "GitHub Light";
-        "workbench.colorTheme" = "Catppuccin Mocha";
+        # "workbench.colorTheme" = "Catppuccin Mocha";
+        "workbench.colorTheme" = "Catppuccin Latte";
         "workbench.startupEditor" = "none";
         "workbench.activityBar.visible" = false;
         "workbench.statusBar.visible" = false;

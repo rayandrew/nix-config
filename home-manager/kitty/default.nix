@@ -11,7 +11,8 @@ in
       font = {
         # name = "JetBrainsMono Nerd Font";
         # name = "Pragmata Pro Mono";
-        name = "UbuntuMono Nerd Font Mono";
+        # name = "UbuntuMono Nerd Font Mono";
+        name = "JetBrainsMonoNL Nerd Font Mono";
         size = 18;
       };
       settings = {
