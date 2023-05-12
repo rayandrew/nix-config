@@ -25,6 +25,9 @@ in
     };
 
     ignores = [ ".DS_Store" ];
+    includes = [
+      { path = ./themes.gitconfig; }
+    ];
 
     aliases = { };
     signing = {
@@ -38,7 +41,12 @@ in
     };
 
     # Enhanced diffs
-    delta.enable = true;
+    delta = {
+      enable = true;
+      options = {
+        features = "coracias-caudatus";
+      };
+    };
 
     lfs.enable = true;
   };

@@ -5,7 +5,7 @@
     flake.inputs.nixvim.homeManagerModules.nixvim
     ./alacritty.nix
     ./direnv.nix
-    ./git.nix
+    ./git
     ./gnupg.nix
     ./htop.nix
     ./meta
