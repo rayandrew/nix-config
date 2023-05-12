@@ -12,8 +12,9 @@ in
         # name = "JetBrainsMono Nerd Font";
         # name = "Pragmata Pro Mono";
         # name = "UbuntuMono Nerd Font Mono";
+        # size = 18;
         name = "JetBrainsMonoNL Nerd Font Mono";
-        size = 18;
+        size = 16;
       };
       settings = {
         # https://fsd.it/shop/fonts/pragmatapro/
