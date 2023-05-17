@@ -97,6 +97,7 @@ in
 
       "bitwarden"
 
+      "trilium-notes"
       # "thunderbird"
     ];
 
@@ -104,6 +105,7 @@ in
     brews = [
       "libiconv"
       "libomp"
+      # "cherrytree"
       # "mas"
     ];
   };

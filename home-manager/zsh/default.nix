@@ -114,6 +114,7 @@ in
 
       export ZK_NOTEBOOK_DIR="${config.home.homeDirectory}/zk"
       export PATH="$PATH:${config.home.homeDirectory}/.spicetify"
+      export CC=gcc
     '';
   };
 
