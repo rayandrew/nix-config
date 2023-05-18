@@ -4,7 +4,7 @@
 }:
 
 let
-  flavor = "latte";
+  flavor = "macchiato";
 in
 {
   programs.bat = {

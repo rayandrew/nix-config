@@ -3,7 +3,7 @@
 with lib;
 
 let
-  flavor = "latte";
+  flavor = "macchiato";
 in
 {
   programs.starship = {

@@ -63,6 +63,16 @@ in
         "ctrl+shift+v" = "paste_from_clipboard";
         "cmd+v" = "paste_from_clipboard";
         "shift+insert" = "paste_from_clipboard";
+        "cmd+1" = "goto_tab 1";
+        "cmd+2" = "goto_tab 2";
+        "cmd+3" = "goto_tab 3";
+        "cmd+4" = "goto_tab 4";
+        "cmd+5" = "goto_tab 5";
+        "cmd+6" = "goto_tab 6";
+        "cmd+7" = "goto_tab 7";
+        "cmd+8" = "goto_tab 8";
+        "cmd+9" = "goto_tab 9";
+
 
         # # tmux keybind
         # "kitty_mod+enter" = "no-op";
@@ -118,7 +128,8 @@ in
       # theme = "Kaolin Breeze";
       # theme = "GitHub Light";
       # theme = "Catppuccin-Mocha";
-      theme = "Catppuccin-Latte";
+      # theme = "Catppuccin-Latte";
+      theme = "Catppuccin-Macchiato";
       extraConfig = ''
         symbol_map U+E5FA-U+E62B,U+E700-U+E7C5,U+F000-U+F2E0,U+E200-U+E2A9,U+F500-U+FD46,U+E300-U+E3EB,U+F400-U+F4A8,U+2665,U+26A1,U+F27C,U+E0A3,U+E0B4-U+E0C8,U+E0CA,U+E0CC-U+E0D2,U+E0D4,U+23FB-U+23FE,U+2B58,U+F300-U+F313,U+E000-U+E00D JetBrainsMono Nerd Font
         symbol_map U+100000-U+10FFFF SF Pro
