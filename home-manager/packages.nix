@@ -97,6 +97,8 @@
 
     zk
     bitwarden-cli
+
+    cowsay
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     macfuse-stubs
     pkgs.python310Packages.pipx
