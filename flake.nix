@@ -4,7 +4,7 @@
   inputs = {
     # Package sets
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    stable.url = "github:rayandrew/nixpkgs/nixos-22.11";
+    stable.url = "github:rayandrew/nixpkgs/nixos-23.05";
     master.url = "github:NixOS/nixpkgs/master";
     hardware.url = "github:NixOS/nixos-hardware";
     home-stable = {

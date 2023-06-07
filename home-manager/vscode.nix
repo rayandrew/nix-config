@@ -199,6 +199,7 @@ in
         "editor.scrollbar.horizontalScrollbarSize" = 2;
         "editor.scrollbar.vertical" = "hidden";
         "editor.scrollbar.horizontal" = "hidden";
+        "editor.accessibilitySupport" = "off";
 
         # integrated terminal
         "terminal.integrated.fontSize" = fontSize;

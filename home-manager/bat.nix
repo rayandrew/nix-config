@@ -23,7 +23,7 @@ in
     };
     extraPackages = with pkgs.bat-extras;  [
       batdiff
-      batman
+      # batman
       batgrep
       batwatch
     ];
