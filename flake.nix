@@ -7,10 +7,6 @@
     stable.url = "github:rayandrew/nixpkgs/nixos-23.05";
     master.url = "github:NixOS/nixpkgs/master";
     hardware.url = "github:NixOS/nixos-hardware";
-    home-stable = {
-      url = "github:nix-community/home-manager?rev=6142193635ecdafb9a231bd7d1880b9b7b210d19";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
