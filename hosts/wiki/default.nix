@@ -83,7 +83,7 @@ in
   environment.systemPackages = with pkgs;[ unzip ];
 
   services = {
-    dokuwiki.sites."rs.ht" = {
+    dokuwiki.sites."localhost" = {
       enable = true;
       settings = {
         title = "Ray Wiki";
