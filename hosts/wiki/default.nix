@@ -86,7 +86,7 @@ in
     enable = true;
     settings = {
       title = "Ray's Wiki";
-      acluse = true;
+      useacl = true;
     };
   };
 
