@@ -22,14 +22,16 @@ let
   };
 
 
-  dokuwiki-plugin-edittable = pkgs.stdenv.mkDerivation {
+  dokuwiki-plugin-edittable = pkgs.stdenv.mkDerivation rec {
     name = "edittable";
-    src = pkgs.fetchzip {
-      url = "https://github.com/cosmocode/edittable/archive/master.zip";
-      sha256 = "sha256-Mns8zgucpJrg1xdEopAhd4q1KH7j83Mz3wxuu4Thgsg=";
+    version = "2023-06-09";
+    src = pkgs.fetchFromGitHub {
+      owner = "cosmocode";
+      repo = "edittable";
+      rev = "66785d9f22547c6cd3f695add99bed593cbc488c";
+      sha256 = "sha256-zDQobbPKzBGaxlRciytkeBVMicBmPR0uHlCEoC6Tj/w=";
     };
-    sourceRoot = ".";
-    installPhase = "mkdir -p $out; cp -R edittable-master/* $out/";
+    installPhase = "mkdir -p $out; cp -R * $out/";
   };
 in
 {
