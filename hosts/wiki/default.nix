@@ -82,12 +82,24 @@ in
 
   environment.systemPackages = with pkgs;[ unzip ];
 
-  services.dokuwiki.sites."rs.ht" = {
-    enable = true;
-    settings = {
-      title = "Ray Wiki";
-      useacl = true;
+  services = {
+    dokuwiki.sites."rs.ht" = {
+      enable = true;
+      settings = {
+        title = "Ray Wiki";
+        useacl = true;
+      };
     };
+
+    nginx = {
+      enable = true;
+      virtualHosts."rs.ht" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/".proxyPass = "http://localhost";
+      };
+    };
+
   };
 
   # secrets
