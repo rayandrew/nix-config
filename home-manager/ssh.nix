@@ -34,6 +34,14 @@ in
       forwardX11 = true;
       extraOptions = { RequestTTY = "yes"; };
     };
+    "wiki" = {
+      user = "rayandrew";
+      hostname = "rs.ht";
+      port = 22;
+      forwardAgent = true;
+      forwardX11 = true;
+      extraOptions = { RequestTTY = "yes"; };
+    };
     "gitea" = {
       hostname = "git.rs.ht";
       port = 22;

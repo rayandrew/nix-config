@@ -140,6 +140,13 @@
           remoteBuild = true;
         };
       })
+      (mkNixOSConfig {
+        hostname = "wiki";
+        deployConfigurations = {
+          fastConnection = true;
+          remoteBuild = true;
+        };
+      })
 
       # Home configurations
       (mkHomeConfig { hostname = "home-linux"; })
