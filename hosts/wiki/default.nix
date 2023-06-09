@@ -16,7 +16,7 @@ let
       owner = "MrReSc";
       repo = "MindTheDark";
       rev = version;
-      sha256 = "sha256-8wWwwAYYQcUYzHpnSKOubZh7UzwfxvWXXNU7CUAiS3o=";
+      sha256 = "sha256-zDQobbPKzBGaxlRciytkeBVMicBmPR0uHlCEoC6Tj/w=";
     };
     installPhase = "mkdir -p $out; cp -R * $out/";
   };
