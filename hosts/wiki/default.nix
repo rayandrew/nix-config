@@ -26,7 +26,7 @@ let
     name = "edittable";
     src = pkgs.fetchzip {
       url = "https://github.com/cosmocode/edittable/archive/master.zip";
-      sha256 = "sha256-l+GZdFGp6wyNuCbAZB9IbwpY5c/S4vSW12VP0mJHKXs=";
+      sha256 = "sha256-Mns8zgucpJrg1xdEopAhd4q1KH7j83Mz3wxuu4Thgsg=";
     };
     sourceRoot = ".";
     installPhase = "mkdir -p $out; cp -R edittable-master/* $out/";
