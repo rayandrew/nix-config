@@ -84,7 +84,10 @@ in
 
   services.dokuwiki.sites."rs.ht" = {
     enable = true;
-    settings.title = "Ray's Wiki";
+    settings = {
+      title = "Ray's Wiki";
+      acluse = true;
+    };
   };
 
   # secrets
