@@ -85,7 +85,7 @@ in
   services.dokuwiki.sites."rs.ht" = {
     enable = true;
     settings = {
-      title = "Ray's Wiki";
+      title = "Ray Wiki";
       useacl = true;
     };
   };
