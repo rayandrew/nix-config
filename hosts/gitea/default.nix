@@ -25,7 +25,7 @@ in
     netDevices = [ "eth0" "enp7s0" ];
   };
 
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
   boot.loader.grub = {
     enable = true;
     device = "/dev/sda";
