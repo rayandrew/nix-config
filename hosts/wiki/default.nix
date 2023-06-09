@@ -82,6 +82,11 @@ in
 
   environment.systemPackages = with pkgs;[ unzip ];
 
+  services.dokuwiki.sites."rs.ht" = {
+    enable = true;
+    settings.title = "Ray's Wiki";
+  };
+
   # secrets
   sops.secrets = { };
 }
