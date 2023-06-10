@@ -199,13 +199,13 @@ in
     priv = {
       owner = config.users.users.dokuwiki.name;
       group = config.users.users.dokuwiki.group;
-      mode = "0440";
+      mode = "0400";
       sopsFile = ./secrets.yaml;
     };
     pub = {
       owner = config.users.users.dokuwiki.name;
       group = config.users.users.dokuwiki.group;
-      mode = "0440";
+      mode = "0400";
       sopsFile = ./secrets.yaml;
     };
   };
