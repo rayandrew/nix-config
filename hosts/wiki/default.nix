@@ -112,6 +112,11 @@ in
       enable = true;
       templates = [ dokuwiki-template-mindthedark ];
       plugins = [ dokuwiki-plugin-edittable ];
+      usersFile = pkgs.substituteAll {
+        src = ./users.auth.php;
+        isExecutable = false;
+        rayandrew = builtins.readFile config.sops.secrets.rayandrew.path;
+      };
       settings = {
         title = "Ray Wiki";
         useacl = true;
@@ -132,5 +137,11 @@ in
   };
 
   # secrets
-  sops.secrets = { };
+  sops.secrets = {
+    rayandrew = {
+      owner = username;
+      mode = "0440";
+      sopsFile = ./secrets.yaml;
+    };
+  };
 }

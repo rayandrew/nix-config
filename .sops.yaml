@@ -3,6 +3,7 @@ keys:
   - &ucare-07 age1xlvqfm5y26k0yths8w3qxe68tm9xj50ccxlua4t6lkuz6wtjcs2s5qyrpj
   - &gitea age1lvprmf420c46gt2z78vegmzn8022y4yzceymyk663vg7d7mtwvrqwry3vf
   - &mail age1wf3g6p346093fz0yuq8u57tvurfw9336evj06ka99uwhrcz9m47qekdkrw
+  - &wiki age1v5c8vyxm4u49f9a3mdaqp80n7dnc3w4a5gllggp7cwfu3kp3zazs8s49ky
 creation_rules:
   - path_regex: secrets.ya?ml$
     key_groups:
@@ -26,3 +27,8 @@ creation_rules:
       - age:
           - *rayandrew
           - *mail
+  - path_regex: hosts/wiki/secrets.ya?ml$
+    key_groups:
+      - age:
+          - *rayandrew
+          - *wiki
