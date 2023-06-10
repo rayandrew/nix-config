@@ -113,7 +113,7 @@ in
       templates = [ dokuwiki-template-mindthedark ];
       plugins = [ dokuwiki-plugin-edittable ];
       usersFile = config.sops.secrets.users.path;
-      aclFile = "${./acl.auth.php}";
+      aclFile = "/etc/wiki/acl.auth.php";
       settings = {
         title = "Ray Wiki";
         useacl = true;
@@ -133,6 +133,13 @@ in
         enableACME = true;
       };
     };
+  };
+
+  environment.etc."wiki/acl.auth.php" = {
+    source = ./acl.auth.php;
+    mode = "0440";
+    owner = config.users.users.dokuwiki.name;
+    group = config.users.users.dokuwiki.group;
   };
 
   # secrets
