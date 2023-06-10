@@ -113,7 +113,7 @@ in
       templates = [ dokuwiki-template-mindthedark ];
       plugins = [ dokuwiki-plugin-edittable ];
       usersFile = config.sops.secrets.users.path;
-      aclFile = ./acl.auth.php;
+      aclFile = "${./acl.auth.php}";
       settings = {
         title = "Ray Wiki";
         useacl = true;
