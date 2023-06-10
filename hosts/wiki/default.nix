@@ -141,7 +141,6 @@ in
       group = config.services.nginx.group;
       mode = "0440";
       sopsFile = ./secrets.yaml;
-      neededForUsers = true;
     };
   };
 }
