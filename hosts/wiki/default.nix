@@ -20,7 +20,17 @@ let
     };
     installPhase = "mkdir -p $out; cp -R * $out/";
   };
-
+  dokuwiki-template-adhominem = {
+    name = "adhominem";
+    version = "2023-05-04";
+    src = pkgs.fetchFromGitHub {
+      owner = "saschaleib";
+      repo = "dokuwiki-template-ad-hominem";
+      rev = "1edfda4a1b8e08b9a1fd8755137ce8b164277c78";
+      sha256 = "sha256-UIG7rvroQfK85QZp0u2Wpfj5MAW1Hm6lyqcalu2L1SQ=";
+    };
+    installPhase = "mkdir -p $out; cp -R * $out/";
+  };
 
   dokuwiki-plugin-edittable = pkgs.stdenv.mkDerivation rec {
     name = "edittable";
@@ -110,7 +120,7 @@ in
   services = {
     dokuwiki.sites."wiki.rs.ht" = {
       enable = true;
-      templates = [ dokuwiki-template-mindthedark ];
+      templates = [ dokuwiki-template-mindthedark dokuwiki-template-adhominem ];
       plugins = [ dokuwiki-plugin-edittable ];
       usersFile = config.sops.secrets.users.path;
       aclFile = "/etc/wiki/acl.auth.php";
@@ -120,8 +130,9 @@ in
         superuser = username;
         userewrite = true;
         baseurl = "https://wiki.rs.ht";
-        template = "mindthedark";
+        template = "adhominem";
         tpl.mindthedark.autoDark = true;
+        tpl.adhominem.autoDark = true;
         disableactions = [ "register" ];
       };
     };
