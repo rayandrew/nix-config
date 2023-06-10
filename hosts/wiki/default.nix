@@ -155,7 +155,7 @@ in
         plugin.gitbacked = {
           pushAfterCommit = true;
           repoPath = "/var/lib/dokuwiki-git";
-          # gitPath = "${pkgs.git}/bin/git";
+          gitPath = "${pkgs.git}/bin/git";
         };
       };
     };
