@@ -139,6 +139,7 @@ in
     source = ./acl.auth.php;
     mode = "0440";
     user = config.users.users.dokuwiki.name;
+    group = config.users.users.dokuwiki.group;
   };
 
   # secrets
