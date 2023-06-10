@@ -29,6 +29,9 @@ let
       rev = "1edfda4a1b8e08b9a1fd8755137ce8b164277c78";
       sha256 = "sha256-UIG7rvroQfK85QZp0u2Wpfj5MAW1Hm6lyqcalu2L1SQ=";
     };
+    patches = [
+      ./remove-title-adhominem.patch
+    ];
     installPhase = "mkdir -p $out; cp -R * $out/";
   };
 
