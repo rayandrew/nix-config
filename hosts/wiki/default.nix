@@ -138,7 +138,7 @@ in
   environment.etc."wiki/acl.auth.php" = {
     source = ./acl.auth.php;
     mode = "0440";
-    uid = config.users.users.dokuwiki.uid;
+    user = config.users.users.dokuwiki.name;
   };
 
   # secrets
