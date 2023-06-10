@@ -138,6 +138,7 @@ in
   sops.secrets = {
     users = {
       owner = "dokuwiki";
+      group = config.services.nginx.group;
       mode = "0440";
       sopsFile = ./secrets.yaml;
       neededForUsers = true;
