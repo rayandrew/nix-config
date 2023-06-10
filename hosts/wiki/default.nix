@@ -170,8 +170,8 @@ in
   };
 
   users.users.dokuwiki = {
-    isNormalUser = true;
     home = "/home/dokuwiki";
+    createHome = true;
   };
 
   # secrets
