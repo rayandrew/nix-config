@@ -43,6 +43,19 @@ let
     };
     installPhase = "mkdir -p $out; cp -R * $out/";
   };
+
+  dokuwiki-plugin-gitbacked = pkgs.stdenv.mkDerivation rec {
+    name = "gitbacked";
+    version = "2023-06-10";
+    src = pkgs.fetchFromGitHub {
+      owner = "woolfg";
+      repo = "dokuwiki-plugin-gitbacked";
+      rev = "00885c3bddfaf5cc3c9ac3f45a53342b77d30b22";
+      sha256 = "sha256-oBul5Mu7rjiZbca0BjM9ZH/K119ljr1X5P1OIVborYU=";
+    };
+    installPhase = "mkdir -p $out; cp -R * $out/";
+  };
+
 in
 {
   imports = [
@@ -121,7 +134,7 @@ in
     dokuwiki.sites."wiki.rs.ht" = {
       enable = true;
       templates = [ dokuwiki-template-mindthedark dokuwiki-template-adhominem ];
-      plugins = [ dokuwiki-plugin-edittable ];
+      plugins = [ dokuwiki-plugin-edittable dokuwiki-plugin-gitbacked ];
       usersFile = config.sops.secrets.users.path;
       aclFile = "/etc/wiki/acl.auth.php";
       settings = {
