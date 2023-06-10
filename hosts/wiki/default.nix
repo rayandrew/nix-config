@@ -140,6 +140,7 @@ in
       owner = "dokuwiki";
       mode = "0440";
       sopsFile = ./secrets.yaml;
+      neededForUsers = true;
     };
   };
 }
