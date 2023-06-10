@@ -170,8 +170,8 @@ in
   };
 
   users.users.dokuwiki = {
-    isSystemUser = false;
-    isNormalUser = true;
+    isSystemUser = lib.mkForce false;
+    isNormalUser = lib.mkForce true;
     # home = "/home/dokuwiki";
     # createHome = true;
   };
