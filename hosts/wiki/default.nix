@@ -162,7 +162,7 @@ in
 
     phpfpm.pools."dokuwiki-wiki.rs.ht" = {
       phpEnv."PATH" = lib.makeBinPath [ pkgs.git pkgs.openssh ];
-      phpEnv."GIT_SSH_COMMAND" = "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null";
+      phpEnv."GIT_SSH_COMMAND" = "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ${config.sops.secrets.priv.path}";
     };
 
     nginx = {
@@ -191,6 +191,18 @@ in
   # secrets
   sops.secrets = {
     users = {
+      owner = config.users.users.dokuwiki.name;
+      group = config.users.users.dokuwiki.group;
+      mode = "0440";
+      sopsFile = ./secrets.yaml;
+    };
+    priv = {
+      owner = config.users.users.dokuwiki.name;
+      group = config.users.users.dokuwiki.group;
+      mode = "0440";
+      sopsFile = ./secrets.yaml;
+    };
+    pub = {
       owner = config.users.users.dokuwiki.name;
       group = config.users.users.dokuwiki.group;
       mode = "0440";
