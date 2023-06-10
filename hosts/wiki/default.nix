@@ -155,9 +155,13 @@ in
         plugin.gitbacked = {
           pushAfterCommit = true;
           repoPath = "/var/lib/dokuwiki-git";
-          gitPath = "${pkgs.git}/bin/git";
+          # gitPath = "${pkgs.git}/bin/git";
         };
       };
+    };
+
+    phpfpm.pools."dokuwiki-wiki.rs.ht" = {
+      phpEnv."PATH" = lib.makeBinPath [ pkgs.git pkgs.openssh ];
     };
 
     nginx = {
