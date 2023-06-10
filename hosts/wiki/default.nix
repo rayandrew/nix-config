@@ -144,10 +144,6 @@ in
         title = "Ray Wiki";
         datadir = "/var/lib/dokuwiki-git/pages";
         mediadir = "/var/lib/dokuwiki-git/media";
-        plugin.gitbacked = {
-          repoPath = "/var/lib/dokuwiki-git";
-          gitPath = "${pkgs.git}/bin/git";
-        };
         useacl = true;
         superuser = username;
         userewrite = true;
@@ -156,6 +152,11 @@ in
         tpl.mindthedark.autoDark = true;
         tpl.adhominem.autoDark = true;
         disableactions = [ "register" ];
+        plugin.gitbacked = {
+          pushAfterCommit = true;
+          repoPath = "/var/lib/dokuwiki-git";
+          gitPath = "${pkgs.git}/bin/git";
+        };
       };
     };
 
