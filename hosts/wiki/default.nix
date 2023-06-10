@@ -162,7 +162,7 @@ in
 
     phpfpm.pools."dokuwiki-wiki.rs.ht" = {
       phpEnv."PATH" = lib.makeBinPath [ pkgs.git pkgs.openssh ];
-      phpEnv."GIT_SSH_COMMAND" = "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ${config.sops.secrets.priv.path}";
+      phpEnv."GIT_SSH_COMMAND" = "\"ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ${config.sops.secrets.priv.path}\"";
     };
 
     nginx = {
