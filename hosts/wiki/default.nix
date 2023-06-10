@@ -145,6 +145,7 @@ in
         datadir = "/var/lib/dokuwiki-git/pages";
         mediadir = "/var/lib/dokuwiki-git/media";
         plugin.gitbacked = {
+          repoPath = "/var/lib/dokuwiki-git";
           gitPath = "${pkgs.git}/bin/git";
         };
         useacl = true;
