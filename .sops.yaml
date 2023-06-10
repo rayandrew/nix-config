@@ -12,6 +12,7 @@ creation_rules:
           - *ucare-07
           - *gitea
           - *mail
+          - *wiki
   - path_regex: hosts/ucare-07/secrets.ya?ml$
     key_groups:
       - age:
