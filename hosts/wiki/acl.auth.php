@@ -19,3 +19,4 @@
 # delete 16
 
 *               @ALL        0
+start           @ALL        1
