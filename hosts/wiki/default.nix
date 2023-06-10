@@ -137,8 +137,8 @@ in
   # secrets
   sops.secrets = {
     users = {
-      owner = "dokuwiki";
-      group = config.services.nginx.group;
+      owner = config.users.users.dokuwiki.name;
+      group = config.users.users.dokuwiki.group;
       mode = "0440";
       sopsFile = ./secrets.yaml;
     };
