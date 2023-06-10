@@ -137,7 +137,7 @@ in
   # secrets
   sops.secrets = {
     users = {
-      owner = username;
+      owner = "dokuwiki";
       mode = "0440";
       sopsFile = ./secrets.yaml;
     };
