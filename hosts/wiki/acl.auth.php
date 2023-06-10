@@ -20,3 +20,4 @@
 
 *               @ALL        0
 start           @ALL        1
+:wiki           @ALL        1
