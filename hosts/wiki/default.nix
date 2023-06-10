@@ -120,10 +120,12 @@ in
       settings = {
         title = "Ray Wiki";
         useacl = true;
+        superuser = username;
         userewrite = true;
         baseurl = "https://wiki.rs.ht";
         template = "mindthedark";
         tpl.mindthedark.autoDark = true;
+        disableactions = [ "register" ];
       };
     };
 
