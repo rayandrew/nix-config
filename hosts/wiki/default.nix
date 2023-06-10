@@ -20,7 +20,7 @@ let
     };
     installPhase = "mkdir -p $out; cp -R * $out/";
   };
-  dokuwiki-template-adhominem = {
+  dokuwiki-template-adhominem = pkgs.stdenv.mkDerivation rec {
     name = "adhominem";
     version = "2023-05-04";
     src = pkgs.fetchFromGitHub {
