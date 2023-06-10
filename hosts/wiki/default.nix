@@ -169,6 +169,11 @@ in
     group = config.users.users.dokuwiki.group;
   };
 
+  users.users.dokuwiki = {
+    isNormalUser = true;
+    home = "/home/dokuwiki";
+  };
+
   # secrets
   sops.secrets = {
     users = {
