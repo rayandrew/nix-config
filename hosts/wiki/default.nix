@@ -144,7 +144,9 @@ in
         title = "Ray Wiki";
         datadir = "/var/lib/dokuwiki-git/pages";
         mediadir = "/var/lib/dokuwiki-git/media";
-        gitPath = "${pkgs.git}/bin/git";
+        plugin.gitbacked = {
+          gitPath = "${pkgs.git}/bin/git";
+        };
         useacl = true;
         superuser = username;
         userewrite = true;
