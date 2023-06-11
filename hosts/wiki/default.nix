@@ -217,6 +217,7 @@ in
         baseurl = "https://wiki.rs.ht";
         # template = "adhominem";
         template = "mikio";
+        start = "index";
         tpl.mindthedark.autoDark = true;
         tpl.mikio = {
           navbarUseTitleText = false;
