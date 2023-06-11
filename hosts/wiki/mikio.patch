@@ -37,7 +37,7 @@ index b98f7c1..50a4ef2 100644
  
          .mikio-navbar-toggle {
 diff --git a/style.ini b/style.ini
-index 77ef564..5a0b409 100644
+index 77ef564..53b49e3 100644
 --- a/style.ini
 +++ b/style.ini
 @@ -58,7 +58,7 @@ __background__  = "#fff"
@@ -49,3 +49,12 @@ index 77ef564..5a0b409 100644
  
  __admin_background_color__  = "#f2f2f2"
  
+@@ -180,7 +180,7 @@ __dropdown_border_color__       = "#e5e5e5"
+ __dropdown_background_color__   = "#fff"
+ 
+ ; Section Edit
+-__section_edit_highlight__  = "rgba(255, 255, 0, 0.3)"
++__section_edit_highlight__  = "#563d7c"
+ 
+ ; Tree
+ __tree_background_color__   = "#fff"
