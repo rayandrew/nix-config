@@ -36,6 +36,19 @@ let
     installPhase = "mkdir -p $out; cp -R * $out/";
   };
 
+  dokuwiki-template-mikio = pkgs.stdenv.mkDerivation rec {
+    name = "mikio";
+    version = "1.3";
+    src = pkgs.fetchFromGitHub {
+      owner = "nomadjimbob";
+      repo = "mikio";
+      rev = "3a44a74a27a7ca54aa2ef1373b4b56e5ca4392a8";
+      sha256 = "sha256-bAKXCbnWDYcPSTXqgBTTC+kr1ZhUhrySFSQEVc7n9u4=";
+    };
+    patches = [ ];
+    installPhase = "mkdir -p $out; cp -R * $out/";
+  };
+
   # dokuwiki-template-typowiki = pkgs.stdenv.mkDerivation rec {
   #   name = "typowiki";
   #   version = "1.3";
@@ -170,6 +183,7 @@ in
         dokuwiki-template-mindthedark
         dokuwiki-template-adhominem
         # dokuwiki-template-typowiki
+        dokuwiki-template-mikio
       ];
       plugins = [
         dokuwiki-plugin-edittable
@@ -187,7 +201,7 @@ in
         userewrite = true;
         baseurl = "https://wiki.rs.ht";
         # template = "adhominem";
-        # template = "typowiki";
+        template = "mikio";
         tpl.mindthedark.autoDark = true;
         tpl.adhominem.autoDark = true;
         disableactions = [ "register" ];
