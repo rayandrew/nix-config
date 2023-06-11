@@ -20,6 +20,7 @@ let
     };
     installPhase = "mkdir -p $out; cp -R * $out/";
   };
+
   dokuwiki-template-adhominem = pkgs.stdenv.mkDerivation rec {
     name = "adhominem";
     version = "2023-05-04";
@@ -32,6 +33,19 @@ let
     patches = [
       ./remove-title-adhominem.patch
     ];
+    installPhase = "mkdir -p $out; cp -R * $out/";
+  };
+
+  dokuwiki-template-typowiki = pkgs.stdenv.mkDerivation rec {
+    name = "typowiki";
+    version = "2023-06-11";
+    src = pkgs.fetchFromGitHub {
+      owner = "axlevxa";
+      repo = "typowiki";
+      rev = "f553d5120ae493aaa9b5ade9d4b16942612ece33";
+      sha256 = "sha256-AGbZ5eA5zaYwtyf9DQxuwB6HEDlm8UrAbSMsbdJXk1E=";
+    };
+    patches = [ ];
     installPhase = "mkdir -p $out; cp -R * $out/";
   };
 
@@ -150,6 +164,7 @@ in
       templates = [
         dokuwiki-template-mindthedark
         dokuwiki-template-adhominem
+        dokuwiki-template-typowiki
       ];
       plugins = [
         dokuwiki-plugin-edittable
@@ -166,9 +181,10 @@ in
         superuser = username;
         userewrite = true;
         baseurl = "https://wiki.rs.ht";
-        template = "adhominem";
+        # template = "adhominem";
+        template = "typowiki";
         tpl.mindthedark.autoDark = true;
-        tpl.adhominem.autoDark = false;
+        tpl.adhominem.autoDark = true;
         disableactions = [ "register" ];
         plugin.gitbacked = {
           pushAfterCommit = true;
