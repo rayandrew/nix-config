@@ -36,23 +36,23 @@ let
     installPhase = "mkdir -p $out; cp -R * $out/";
   };
 
-  dokuwiki-template-typowiki = pkgs.stdenv.mkDerivation rec {
-    name = "typowiki";
-    version = "1.3";
-    # src = pkgs.fetchzip {
-    #   url = "https://github.com/axlevxa/typowiki/releases/download/${version}/v${version}-typowiki.zip";
-    #   sha256 = "sha256-vmZ0DHZ4GC5bV/jSSpD3hK2KZTPqdfgVCu5BEKC+AE0=";
-    #   stripRoot = false;
-    # };
-    src = pkgs.fetchFromGitHub {
-      owner = "axlevxa";
-      repo = "typowiki";
-      rev = "f553d5120ae493aaa9b5ade9d4b16942612ece33";
-      sha256 = "sha256-AGbZ5eA5zaYwtyf9DQxuwB6HEDlm8UrAbSMsbdJXk1E=";
-    };
-    patches = [ ];
-    installPhase = "mkdir -p $out; cp -R typowiki/* $out/";
-  };
+  # dokuwiki-template-typowiki = pkgs.stdenv.mkDerivation rec {
+  #   name = "typowiki";
+  #   version = "1.3";
+  #   # src = pkgs.fetchzip {
+  #   #   url = "https://github.com/axlevxa/typowiki/releases/download/${version}/v${version}-typowiki.zip";
+  #   #   sha256 = "sha256-vmZ0DHZ4GC5bV/jSSpD3hK2KZTPqdfgVCu5BEKC+AE0=";
+  #   #   stripRoot = false;
+  #   # };
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "axlevxa";
+  #     repo = "typowiki";
+  #     rev = "f553d5120ae493aaa9b5ade9d4b16942612ece33";
+  #     sha256 = "sha256-AGbZ5eA5zaYwtyf9DQxuwB6HEDlm8UrAbSMsbdJXk1E=";
+  #   };
+  #   patches = [ ];
+  #   installPhase = "mkdir -p $out; cp -R typowiki/* $out/";
+  # };
 
   dokuwiki-plugin-edittable = pkgs.stdenv.mkDerivation rec {
     name = "edittable";
@@ -169,7 +169,7 @@ in
       templates = [
         dokuwiki-template-mindthedark
         dokuwiki-template-adhominem
-        dokuwiki-template-typowiki
+        # dokuwiki-template-typowiki
       ];
       plugins = [
         dokuwiki-plugin-edittable
@@ -187,7 +187,7 @@ in
         userewrite = true;
         baseurl = "https://wiki.rs.ht";
         # template = "adhominem";
-        template = "typowiki";
+        # template = "typowiki";
         tpl.mindthedark.autoDark = true;
         tpl.adhominem.autoDark = true;
         disableactions = [ "register" ];
