@@ -46,7 +46,7 @@ let
       sha256 = "sha256-bAKXCbnWDYcPSTXqgBTTC+kr1ZhUhrySFSQEVc7n9u4=";
     };
     patches = [
-      ./mikio_change_width.patch
+      ./mikio.patch
     ];
     installPhase = "mkdir -p $out; cp -R * $out/";
   };

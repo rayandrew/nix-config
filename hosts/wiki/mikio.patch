@@ -1,0 +1,51 @@
+diff --git a/assets/mikio.less b/assets/mikio.less
+index b98f7c1..50a4ef2 100644
+--- a/assets/mikio.less
++++ b/assets/mikio.less
+@@ -463,6 +463,8 @@ html, body {
+         display: flex;
+ 
+         .mikio-navbar-brand-image {
++            height: 3rem;
++            width: 3rem;
+             max-width: 3rem;
+             max-height: 3rem;
+             margin-right: .5rem;
+@@ -2707,7 +2709,11 @@ code, pre {
+ @media (max-width: 768px) {
+     .mikio-small-only {
+         display: inline-block;
+-    }    
++    }
++    
++    .mikio-container {
++        max-width: 100%;   
++    } 
+ 
+     .mikio-navbar {
+         padding-bottom: 0;
+@@ -2721,6 +2727,11 @@ code, pre {
+             grid-column: 1 / span 1;
+             grid-row: 1 / span 1;
+             margin-bottom: .5rem;
++            
++            .mikio-navbar-brand-image {
++                width: 2rem;
++                height: 2rem;
++            }
+         }
+ 
+         .mikio-navbar-toggle {
+diff --git a/style.ini b/style.ini
+index 77ef564..5a0b409 100644
+--- a/style.ini
++++ b/style.ini
+@@ -58,7 +58,7 @@ __background__  = "#fff"
+ __font_size__   = "1rem"
+ __font_family__ = "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+ __line_height__ = "1.5"
+-__site_width__  = "100%"
++__site_width__  = "65%"
+ 
+ __admin_background_color__  = "#f2f2f2"
+ 
