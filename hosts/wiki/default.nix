@@ -41,7 +41,7 @@ let
     version = "1.3";
     src = pkgs.fetchzip {
       url = "https://github.com/axlevxa/typowiki/releases/download/${version}/v${version}-typowiki.zip";
-      sha256 = "1q349ljfjszxpwk1p8qb2j2x7d2nxrqr5ahk7bg5ddrcqshcyh47";
+      sha256 = "sha256-vmZ0DHZ4GC5bV/jSSpD3hK2KZTPqdfgVCu5BEKC+AE0=";
       stripRoot = false;
     };
     # src = pkgs.fetchFromGitHub {
