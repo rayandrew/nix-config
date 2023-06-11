@@ -104,6 +104,18 @@ let
     };
     installPhase = "mkdir -p $out; cp -R * $out/";
   };
+
+  dokuwiki-plugin-move = pkgs.stdenv.mkDerivation rec {
+    name = "move";
+    version = "2023-06-11";
+    src = pkgs.fetchFromGitHub {
+      owner = "michitux";
+      repo = "dokuwiki-plugin-move";
+      rev = "e4f1b7ffcc5b7c58f45ac66f8f81845505923a19";
+      sha256 = "sha256-2OrevhXHHd0iwjum5waqv4xn7Ww8qnl75+H+AKFM+es=";
+    };
+    installPhase = "mkdir -p $out; cp -R * $out/";
+  };
 in
 {
   imports = [
@@ -191,6 +203,7 @@ in
         dokuwiki-plugin-edittable
         dokuwiki-plugin-gitbacked
         dokuwiki-plugin-dw2pdf
+        dokuwiki-plugin-move
       ];
       usersFile = config.sops.secrets.users.path;
       aclFile = "/etc/wiki/acl.auth.php";
