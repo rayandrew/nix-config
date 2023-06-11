@@ -203,7 +203,9 @@ in
         # template = "adhominem";
         template = "mikio";
         tpl.mindthedark.autoDark = true;
-        tpl.adhominem.autoDark = true;
+        tpl.mikio = {
+          navbarUseTitleText = false;
+        };
         disableactions = [ "register" ];
         plugin.gitbacked = {
           pushAfterCommit = true;
