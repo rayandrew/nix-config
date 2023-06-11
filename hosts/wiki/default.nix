@@ -45,7 +45,9 @@ let
       rev = "3a44a74a27a7ca54aa2ef1373b4b56e5ca4392a8";
       sha256 = "sha256-bAKXCbnWDYcPSTXqgBTTC+kr1ZhUhrySFSQEVc7n9u4=";
     };
-    patches = [ ];
+    patches = [
+      ./mikio_change_width.patch
+    ];
     installPhase = "mkdir -p $out; cp -R * $out/";
   };
 
@@ -205,6 +207,7 @@ in
         tpl.mindthedark.autoDark = true;
         tpl.mikio = {
           navbarUseTitleText = false;
+          showLightDark = true;
         };
         disableactions = [ "register" ];
         plugin.gitbacked = {
