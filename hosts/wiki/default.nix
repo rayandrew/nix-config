@@ -42,6 +42,7 @@ let
     src = pkgs.fetchzip {
       url = "https://github.com/axlevxa/typowiki/releases/download/${version}/v${version}-typowiki.zip";
       sha256 = "1q349ljfjszxpwk1p8qb2j2x7d2nxrqr5ahk7bg5ddrcqshcyh47";
+      stripRoot = false;
     };
     # src = pkgs.fetchFromGitHub {
     #   owner = "axlevxa";
@@ -50,7 +51,7 @@ let
     #   sha256 = "sha256-AGbZ5eA5zaYwtyf9DQxuwB6HEDlm8UrAbSMsbdJXk1E=";
     # };
     patches = [ ];
-    # installPhase = "mkdir -p $out; cp -R * $out/";
+    installPhase = "mkdir -p $out; cp -R typowiki/* $out/";
   };
 
   dokuwiki-plugin-edittable = pkgs.stdenv.mkDerivation rec {
