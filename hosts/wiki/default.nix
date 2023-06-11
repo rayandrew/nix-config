@@ -199,12 +199,12 @@ in
     group = config.users.users.dokuwiki.group;
   };
 
-  users.users.dokuwiki = {
-    isSystemUser = lib.mkForce false;
-    isNormalUser = lib.mkForce true;
-    # home = "/home/dokuwiki";
-    # createHome = true;
-  };
+  # users.users.dokuwiki = {
+  #   isSystemUser = lib.mkForce true;
+  #   isNormalUser = lib.mkForce false;
+  #   # home = "/home/dokuwiki";
+  #   # createHome = true;
+  # };
 
   # secrets
   sops.secrets = {
