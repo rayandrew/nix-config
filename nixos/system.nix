@@ -8,10 +8,10 @@
       initrd.systemd.enable = lib.mkDefault true;
 
       # Mount /tmp using tmpfs for performance
-      tmpOnTmpfs = lib.mkDefault true;
+      tmp.tmpOnTmpfs = lib.mkDefault true;
 
       # If not using above, at least clean /tmp on each boot
-      cleanTmpDir = lib.mkDefault true;
+      tmp.cleanOnBoot = lib.mkDefault true;
 
       # Enable NTFS support
       supportedFilesystems = [ "ntfs" ];
