@@ -50,7 +50,7 @@ let
     #   sha256 = "sha256-AGbZ5eA5zaYwtyf9DQxuwB6HEDlm8UrAbSMsbdJXk1E=";
     # };
     patches = [ ];
-    installPhase = "mkdir -p $out; cp -R * $out/";
+    # installPhase = "mkdir -p $out; cp -R * $out/";
   };
 
   dokuwiki-plugin-edittable = pkgs.stdenv.mkDerivation rec {
