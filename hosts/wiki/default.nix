@@ -59,6 +59,17 @@ let
     installPhase = "mkdir -p $out; cp -R * $out/";
   };
 
+  dokuwiki-plugin-dw2pdf = pkgs.stdenv.mkDerivation rec {
+    name = "dw2pdf";
+    version = "2023-06-10";
+    src = pkgs.fetchFromGitHub {
+      owner = "splitbrain";
+      repo = "dokuwiki-plugin-dw2pdf";
+      rev = "da60bb840dbb8c79fbfde65d6796fc6d598e1451";
+      sha256 = "sha256-Hli/vwK1NpDDeiYes9zpQ+yYwlQyqZ7Xd5lK0qOUjWs=";
+    };
+    installPhase = "mkdir -p $out; cp -R * $out/";
+  };
 in
 {
   imports = [
@@ -136,8 +147,15 @@ in
   services = {
     dokuwiki.sites."wiki.rs.ht" = {
       enable = true;
-      templates = [ dokuwiki-template-mindthedark dokuwiki-template-adhominem ];
-      plugins = [ dokuwiki-plugin-edittable dokuwiki-plugin-gitbacked ];
+      templates = [
+        dokuwiki-template-mindthedark
+        dokuwiki-template-adhominem
+      ];
+      plugins = [
+        dokuwiki-plugin-edittable
+        dokuwiki-plugin-gitbacked
+        dokuwiki-plugin-dw2pdf
+      ];
       usersFile = config.sops.secrets.users.path;
       aclFile = "/etc/wiki/acl.auth.php";
       settings = {
@@ -150,7 +168,7 @@ in
         baseurl = "https://wiki.rs.ht";
         template = "adhominem";
         tpl.mindthedark.autoDark = true;
-        tpl.adhominem.autoDark = true;
+        tpl.adhominem.autoDark = false;
         disableactions = [ "register" ];
         plugin.gitbacked = {
           pushAfterCommit = true;
