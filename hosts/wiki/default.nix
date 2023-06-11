@@ -38,13 +38,17 @@ let
 
   dokuwiki-template-typowiki = pkgs.stdenv.mkDerivation rec {
     name = "typowiki";
-    version = "2023-06-11";
-    src = pkgs.fetchFromGitHub {
-      owner = "axlevxa";
-      repo = "typowiki";
-      rev = "f553d5120ae493aaa9b5ade9d4b16942612ece33";
-      sha256 = "sha256-AGbZ5eA5zaYwtyf9DQxuwB6HEDlm8UrAbSMsbdJXk1E=";
+    version = "1.3";
+    src = pkgs.fetchzip {
+      url = "https://github.com/axlevxa/typowiki/releases/download/${version}/v${version}-typowiki.zip";
+      sha256 = "1q349ljfjszxpwk1p8qb2j2x7d2nxrqr5ahk7bg5ddrcqshcyh47";
     };
+    # src = pkgs.fetchFromGitHub {
+    #   owner = "axlevxa";
+    #   repo = "typowiki";
+    #   rev = "f553d5120ae493aaa9b5ade9d4b16942612ece33";
+    #   sha256 = "sha256-AGbZ5eA5zaYwtyf9DQxuwB6HEDlm8UrAbSMsbdJXk1E=";
+    # };
     patches = [ ];
     installPhase = "mkdir -p $out; cp -R * $out/";
   };
