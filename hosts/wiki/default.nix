@@ -116,6 +116,18 @@ let
     };
     installPhase = "mkdir -p $out; cp -R * $out/";
   };
+
+  dokuwiki-plugin-color = pkgs.stdenv.mkDerivation rec {
+    name = "color";
+    version = "2023-06-11";
+    src = pkgs.fetchFromGitHub {
+      owner = "hanche";
+      repo = "dokuwiki_color_plugin";
+      rev = "e28b337ddad77b04831d98c0ce71d3d546c7240f";
+      sha256 = "sha256-B9HX6uj9Y2i2QAH8Tznynhl1m0JSEEPAtYycmaUcRkQ=";
+    };
+    installPhase = "mkdir -p $out; cp -R * $out/";
+  };
 in
 {
   imports = [
@@ -204,6 +216,7 @@ in
         dokuwiki-plugin-gitbacked
         dokuwiki-plugin-dw2pdf
         dokuwiki-plugin-move
+        dokuwiki-plugin-color
       ];
       usersFile = config.sops.secrets.users.path;
       aclFile = "/etc/wiki/acl.auth.php";
