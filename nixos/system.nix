@@ -8,7 +8,7 @@
       initrd.systemd.enable = lib.mkDefault true;
 
       # Mount /tmp using tmpfs for performance
-      tmp.tmpOnTmpfs = lib.mkDefault true;
+      tmp.useTmpfs = lib.mkDefault true;
 
       # If not using above, at least clean /tmp on each boot
       tmp.cleanOnBoot = lib.mkDefault true;
