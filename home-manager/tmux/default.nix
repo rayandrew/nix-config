@@ -22,6 +22,17 @@ let
       sha256 = "11pvwyxxkxqxyg34mcrzydz9q1wfkj1x5vx3wmy3l4p89qf2dvlk";
     };
   };
+  # gruvbox = pkgs.tmuxPlugins.mkTmuxPlugin {
+  #   pluginName = "gruvbox";
+  #   version = "unstable-2023-06-26";
+  #   # rtpFilePath = "plugin.tmux";
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "egel";
+  #     repo = "tmux-gruxbox";
+  #     rev = "3f9e38d7243179730b419b5bfafb4e22b0a969ad";
+  #     sha256 = "sha256-jvGCrV94vJroembKZLmvGO8NknV1Hbgz2IuNmc/BE9A=";
+  #   };
+  # };
   catppuccin = pkgs.tmuxPlugins.mkTmuxPlugin {
     pluginName = "catppuccin";
     version = "unstable-2023-04-25";
@@ -83,18 +94,24 @@ in
       { plugin = tmuxPlugins.yank; }
       { plugin = tmuxPlugins.vim-tmux-navigator; }
       {
-        plugin = catppuccin;
+        plugin = tmuxPlugins.gruvbox;
         extraConfig = ''
-          set -g @catppuccin_flavour 'macchiato' # or frappe, macchiato, mocha"
-          set -g @catppuccin_window_tabs_enabled on
-          set -g @catppuccin_left_separator "█"
-          set -g @catppuccin_right_separator "█"
-          # set -g @catppuccin_date_time "%Y-%m-%d %H:%M"
-          set -g @catppuccin_date_time "%H:%M"
-          # set -g @catppuccin_user "on"
-          # set -g @catppuccin_host "on"
+          set -g @tmux-gruvbox 'light'
         '';
       }
+      # {
+      #   plugin = catppuccin;
+      #   extraConfig = ''
+      #     set -g @catppuccin_flavour 'macchiato' # or frappe, macchiato, mocha"
+      #     set -g @catppuccin_window_tabs_enabled on
+      #     set -g @catppuccin_left_separator "█"
+      #     set -g @catppuccin_right_separator "█"
+      #     # set -g @catppuccin_date_time "%Y-%m-%d %H:%M"
+      #     set -g @catppuccin_date_time "%H:%M"
+      #     # set -g @catppuccin_user "on"
+      #     # set -g @catppuccin_host "on"
+      #   '';
+      # }
     ];
 
     extraConfig = ''

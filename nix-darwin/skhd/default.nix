@@ -9,7 +9,8 @@ let
   inherit (config.my-meta) username;
   scripts = ./scripts;
   yabai = "${pkgs.yabai}/bin/yabai";
-  term = "open -n -a ${pkgs.kitty}/Applications/kitty.app --args";
+  # term = "open -n -a ${pkgs.kitty}/Applications/kitty.app --args";
+  term = "open -n -a ${pkgs.iterm2}/Applications/iTerm2.app";
   # term = "${pkgs.unstable.wezterm}/bin/wezterm start --always-new-process --";
   # term = "${wezterm} --";
 in

@@ -33,10 +33,10 @@ in
     defaultEditor = true;
   };
 
-  xdg.configFile."nvim" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${home}/.config/nvim";
-    recursive = true;
-  };
+  # xdg.configFile."nvim" = {
+  #   source = config.lib.file.mkOutOfStoreSymlink "${home}/.config/nvim";
+  #   recursive = true;
+  # };
 
   home.packages = with pkgs.unstable; [
     lua-language-server

@@ -9,7 +9,7 @@ let
 in
 {
   programs.emacs = {
-    enable = false;
+    enable = true;
     # package = pkgs.emacsUnstable;
   };
 
@@ -18,10 +18,10 @@ in
     # package = pkgs.emacsUnstable;
   };
 
-  xdg.configFile."doom" = {
-    source = ./doom;
-    recursive = false;
-  };
+  # xdg.configFile."doom" = {
+  #   source = ./doom;
+  #   recursive = false;
+  # };
 
   # programs.zsh.initExtra = lib.mkIf cfg.enable (lib.mkAfter ''
   #   alias e="${config.programs.emacs.package}/bin/emacs -nw"

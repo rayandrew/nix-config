@@ -53,7 +53,7 @@ in
     masApps = {
       "1Password for Safari" = 1569813296;
       "Dark Reader for Safari" = 1438243180;
-      Slack = 803453959;
+      # Slack = 803453959;
       # "Caffeinated" = 1362171212;
       "Amphetamine" = 937984704;
       "Color Picker" = 1545870783;
@@ -76,11 +76,9 @@ in
       "alt-tab"
       "forklift" # sftp client
       "zoom"
-      "microsoft-edge"
       "pdf-expert"
-      "readdle-spark"
+      "slack"
       "notion"
-      "fantastical"
       "multipass"
       "zotero"
 
@@ -93,11 +91,11 @@ in
       "nextcloud"
       # "ferdium"
 
-      "dozer"
-
       "bitwarden"
 
       "trilium-notes"
+
+      "eloston-chromium"
       # "thunderbird"
     ];
 

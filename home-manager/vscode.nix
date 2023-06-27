@@ -166,21 +166,25 @@ in
         "update.mode" = "none";
 
         # "workbench.colorTheme" = "Ayu Light";
+        "workbench.colorTheme" = "Gruvbox Light Soft";
         # "workbench.colorTheme" = "Gruvbox Dark Medium";
         # "workbench.colorTheme" = "GitHub Light";
         # "workbench.colorTheme" = "Catppuccin Mocha";
         # "workbench.colorTheme" = "Catppuccin Latte";
-        "workbench.colorTheme" = "Catppuccin Macchiato";
+        # "workbench.colorTheme" = "Catppuccin Macchiato";
+        # "workbench.colorTheme" = "Default Light+";
         "workbench.startupEditor" = "none";
-        "workbench.activityBar.visible" = false;
-        "workbench.statusBar.visible" = false;
-        "workbench.layoutControl.enabled" = false;
-        "workbench.layoutControl.type" = "menu";
-        "workbench.editor.limit.enabled" = true;
-        "workbench.editor.limit.value" = 1;
-        "workbench.editor.limit.perEditorGroup" = true;
-        "workbench.editor.showTabs" = false;
         "workbench.editor.enablePreview" = false;
+        # "workbench.list.openMode" = "doubleClick";
+        # "workbench.activityBar.visible" = false;
+        # "workbench.statusBar.visible" = false;
+        # "workbench.layoutControl.enabled" = false;
+        # "workbench.layoutControl.type" = "menu";
+        # "workbench.editor.limit.enabled" = true;
+        # "workbench.editor.limit.value" = 1;
+        # "workbench.editor.limit.perEditorGroup" = true;
+        # "workbench.editor.showTabs" = false;
+        # "workbench.editor.enablePreview" = false;
 
         "breadcrumbs.enabled" = false;
         "explorer.openEditors.visible" = 0;
@@ -217,6 +221,7 @@ in
         "isort.args" = [ "--profile" "black" ];
 
         # vim 
+        "vim.disableExtension" = true;
         "vim.easymotion" = true;
         "vim.incsearch" = true;
         "vim.useSystemClipboard" = true;

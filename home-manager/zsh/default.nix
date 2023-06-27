@@ -112,10 +112,10 @@ in
       #   --color=marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39"
       
       # catppuccin macchiato
-      export FZF_DEFAULT_OPTS=" \
-        --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
-        --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
-        --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
+      # export FZF_DEFAULT_OPTS=" \
+      #   --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
+      #   --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+      #   --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
 
       export ZK_NOTEBOOK_DIR="${config.home.homeDirectory}/zk"
       export PATH="$PATH:${config.home.homeDirectory}/.spicetify"

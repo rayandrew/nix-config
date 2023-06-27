@@ -10,7 +10,7 @@ in
   programs.bat = {
     enable = true;
     config = {
-      theme = "catppuccin-${flavor}";
+      # theme = "catppuccin-${flavor}";
     };
     themes = {
       "catppuccin-${flavor}" = builtins.readFile (pkgs.fetchFromGitHub

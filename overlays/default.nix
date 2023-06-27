@@ -19,6 +19,7 @@ in
         template = prev.callPackage ../packages/template { };
         firefox-darwin = inputs.firefox-darwin.overlay final prev;
         vivaldi = prev.callPackage ../packages/vivaldi { };
+        thorium = prev.callPackage ../packages/thorium { };
       in
       rec {
         inherit (template) parseTemplate
@@ -122,6 +123,8 @@ in
         zowie = prev.callPackage ../packages/zowie { };
 
         cherrytree-darwin = prev.callPackage ../packages/cherrytree-darwin { };
+
+        thorium-darwin = thorium.thorium-darwin;
       })
   ];
 }
