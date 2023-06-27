@@ -51,7 +51,7 @@
     scripts
     shellcheck
     sops
-    spotify-player
+    # spotify-player
     sshfs-fuse
     trash-cli
     tree
