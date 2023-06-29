@@ -14,6 +14,7 @@ creation_rules:
           - *gitea
           - *mail
           - *wiki
+          - *lemur
   - path_regex: hosts/ucare-07/secrets.ya?ml$
     key_groups:
       - age:
