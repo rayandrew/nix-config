@@ -11,7 +11,7 @@ jobs:
           remove-dotnet: true
           remove-haskell: true
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: cachix/install-nix-action@v22
         with:
           extra_nix_config: access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
           install_url: https://releases.nixos.org/nix/nix-2.13.3/install
@@ -32,14 +32,14 @@ jobs:
       - name: Build NixOS configs
         run: |-
           nix build '.#nixosConfigurations.ucare-07.config.system.build.toplevel'
-          nix build '.#nixosConfigurations.gitea.config.system.build.toplevel'
+          nix build '.#nixosConfigurations.lemur.config.system.build.toplevel'
   build-macos:
     runs-on: macos-latest
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.11.0
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v20
+      - uses: cachix/install-nix-action@v22
         with:
           extra_nix_config: access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
           install_url: https://releases.nixos.org/nix/nix-2.13.3/install
