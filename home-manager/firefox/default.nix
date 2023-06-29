@@ -138,13 +138,13 @@ in
   };
 
   home.file = {
-    "${profilesPath}/${cfg.profiles."${username}".path}/chrome" = {
-      source = ./profiles/rayandrew/chrome;
-      recursive = true;
-    };
-    "${profilesPath}/${cfg.profiles."${username}".path}/sideberry" = {
-      source = ./profiles/rayandrew/sideberry;
-      recursive = true;
-    };
+    # "${profilesPath}/${cfg.profiles."${username}".path}/chrome" = {
+    #   source = ./profiles/rayandrew/chrome;
+    #   recursive = true;
+    # };
+    # "${profilesPath}/${cfg.profiles."${username}".path}/sideberry" = {
+    #   source = ./profiles/rayandrew/sideberry;
+    #   recursive = true;
+    # };
   };
 }

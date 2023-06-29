@@ -95,7 +95,7 @@ in
 
     # Argonne
     "login-gce" = {
-      user = "ac.rayandrew";
+      user = "rayandrew";
       hostname = "logins.cels.anl.gov";
       extraOptions = {
         ControlMaster = "auto";
@@ -104,18 +104,18 @@ in
       };
     };
     "homes-gce" = lib.hm.dag.entryAfter [ "login-gce" ] {
-      user = "ac.rayandrew";
+      user = "rayandrew";
       hostname = "homes.cels.anl.gov";
       proxyJump = "login-gce";
       forwardX11Trusted = true;
     };
     "*.cels.anl.gov !logins.cels.anl.gov" = lib.hm.dag.entryAfter [ "login-gce" ] {
-      user = "ac.rayandrew";
+      user = "rayandrew";
       proxyJump = "login-gce";
       forwardX11Trusted = true;
     };
     "bebop" = lib.hm.dag.entryBefore [ "*.lcrc.anl.gov" ] {
-      user = "ac.rayandrew";
+      user = "rayandrew";
       hostname = "bebop.lcrc.anl.gov";
       forwardX11Trusted = true;
       extraOptions = {
@@ -125,7 +125,7 @@ in
       };
     };
     "swing" = lib.hm.dag.entryBefore [ "*.lcrc.anl.gov" ] {
-      user = "ac.rayandrew";
+      user = "rayandrew";
       hostname = "swing.lcrc.anl.gov";
       forwardX11Trusted = true;
       extraOptions = {
@@ -135,7 +135,7 @@ in
       };
     };
     "*.lcrc.anl.gov" = {
-      user = "ac.rayandrew";
+      user = "rayandrew";
       forwardX11Trusted = true;
       extraOptions = {
         ControlMaster = "auto";
