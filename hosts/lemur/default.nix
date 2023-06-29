@@ -22,6 +22,7 @@ in
     ../../nixos/security.nix
     ../../nixos/home.nix
     ../../nixos/ssh.nix
+    ../../nixos/pc.nix
     inputs.hardware.nixosModules.common-cpu-intel
   ];
 
