@@ -53,7 +53,7 @@ in
   my-meta.projectsDirPath = "${home}/Projects";
   my-meta.researchDirPath = "${home}/Research";
 
-  users.users.${username} = lib.mkForce config.sops.secrets.home-password.path;
+  users.users.${username}.passwordFile = lib.mkForce config.sops.secrets.home-password.path;
 
 
   # home-manager.users.${config.my-meta.username}.imports = [{
