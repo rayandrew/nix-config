@@ -13,6 +13,7 @@ in
         enable = true;
         autoLogin = { enable = true; user = username; };
       };
+      displayManager.defaultSession = "xsession";
       displayManager.session = [
         {
           manage = "desktop";
@@ -20,7 +21,6 @@ in
           start = ''exec $HOME/.xsession'';
         }
       ];
-      desktopManager.default = "xsession";
     };
 
     # Enable printing
