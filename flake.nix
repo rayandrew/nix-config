@@ -147,6 +147,13 @@
           remoteBuild = true;
         };
       })
+      (mkNixOSConfig {
+        hostname = "lemur";
+        deployConfigurations = {
+          fastConnection = true;
+          remoteBuild = true;
+        };
+      })
 
       # Home configurations
       (mkHomeConfig { hostname = "home-linux"; })
