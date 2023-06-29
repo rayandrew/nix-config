@@ -12,15 +12,14 @@ in
       displayManager.lightdm = {
         enable = true;
         autoLogin = { enable = true; user = username; };
-        session = [
-          {
-            manage = "desktop";
-            name = "xsession";
-            start = ''exec $HOME/.xsession'';
-          }
-        ];
-
       };
+      displayManager.session = [
+        {
+          manage = "desktop";
+          name = "xsession";
+          start = ''exec $HOME/.xsession'';
+        }
+      ];
       desktopManager.default = "xsession";
     };
 
