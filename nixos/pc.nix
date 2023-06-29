@@ -11,7 +11,7 @@ in
       libinput.enable = true;
       displayManager = {
         lightdm.enable = true;
-        autoLogin = { enable = true; user = username; };
+        autoLogin = { enable = false; user = username; };
         defaultSession = "xsession";
         session = [
           {
