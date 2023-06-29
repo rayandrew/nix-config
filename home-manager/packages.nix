@@ -72,7 +72,7 @@
     texlive.combined.scheme-full
 
     # gnuplot
-    # gnuplot_qt
+    gnuplot_qt
 
     # node packages
     # nodePackages_latest.readability-cli

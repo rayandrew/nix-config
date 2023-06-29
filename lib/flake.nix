@@ -5,6 +5,7 @@
 , stable
 , nix-darwin
 , home
+, home-stable
 , flake-utils
 , deploy-rs
 , sops-nix
