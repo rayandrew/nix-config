@@ -9,18 +9,18 @@ in
     xserver = {
       enable = true;
       libinput.enable = true;
-      displayManager.lightdm = {
-        enable = true;
+      displayManager = {
+        lightdm.enable = true;
         autoLogin = { enable = true; user = username; };
+        defaultSession = "xsession";
+        session = [
+          {
+            manage = "desktop";
+            name = "xsession";
+            start = ''exec $HOME/.xsession'';
+          }
+        ];
       };
-      displayManager.defaultSession = "xsession";
-      displayManager.session = [
-        {
-          manage = "desktop";
-          name = "xsession";
-          start = ''exec $HOME/.xsession'';
-        }
-      ];
     };
 
     # Enable printing
