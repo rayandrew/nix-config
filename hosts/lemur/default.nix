@@ -56,6 +56,7 @@ in
 
   users.users.${username}.passwordFile = lib.mkForce config.sops.secrets.home-password.path;
 
+  nixos.home.path = ../../home-manager/nixos-pc.nix;
 
   # home-manager.users.${config.my-meta.username}.imports = [{
   #   programs.git.signing = {
