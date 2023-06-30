@@ -17,15 +17,18 @@ in
       enable = true;
       package = pkgs.i3-gaps;
       keybindings = lib.mkOptionDefault {
-        "${modifier}+Shift+q" = "kill";
         # "${modifier}+d" = "exec ${pkgs.dmenu}/bin/dmenu_run";
         "${modifier}+d" = "exec --no-startup-id \"${pkgs.rofi}/bin/rofi -show drun -modi run,drun,window\"";
 
-        "${alt}+F4" = "kill";
 
         # "${modifier}+Return" = "exec kitty";
         "${modifier}+Return" = "exec ${term}";
         "${modifier}+Shift+Return" = "exec ${term} -c \"tmux attach || tmux new-session\"";
+
+        "${modifier}+r" = "i3-msg reload || i3-msg restart";
+        "${modifier}+Shift+q" = "kill";
+        "${modifier}+Shift+e" = "exit";
+        "${alt}+F4" = "kill";
 
         "${modifier}+h" = "focus left";
         "${modifier}+j" = "focus down";
