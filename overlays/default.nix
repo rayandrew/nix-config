@@ -19,7 +19,8 @@ in
       let
         template = prev.callPackage ../packages/template { };
         firefox-darwin = inputs.firefox-darwin.overlay final prev;
-        vivaldi = prev.callPackage ../packages/vivaldi { };
+        vivaldi-darwin = prev.callPackage ../packages/vivaldi-darwin { };
+        brave-darwin = prev.callPackage ../packages/brave-darwin { };
         thorium = prev.callPackage ../packages/thorium { };
       in
       rec {
@@ -107,8 +108,12 @@ in
         pdfannots2json = prev.callPackage ../packages/pdfannots2json { };
 
         vivaldi-cross =
-          if prev.stdenv.isDarwin then vivaldi.vivaldi-darwin
+          if prev.stdenv.isDarwin then vivaldi-darwin
           else final.vivaldi;
+
+        brave-cross =
+          if prev.stdenv.isDarwin then brave-darwin
+          else final.brave;
 
         yabai-master-stack-plugin = prev.callPackage ../packages/yabai-master-stack-plugin { };
 

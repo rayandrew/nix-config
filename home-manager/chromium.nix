@@ -6,7 +6,7 @@
 {
   programs.chromium = {
     enable = true;
-    package = pkgs.brave;
+    package = pkgs.brave-cross;
     commandLineArgs = [
       "--use-gl=egl"
       # "--disable-features=UseChromeOSDirectVideoDecoder"
