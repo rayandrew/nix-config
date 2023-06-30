@@ -10,6 +10,9 @@ in
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+  nixpkgs.config.pulseaudio = true;
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  hardware.enableAllFirmware = true;
 
   services = {
     # Enable printing
