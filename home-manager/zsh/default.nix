@@ -63,7 +63,7 @@ in
       ZSH_AUTOSUGGEST_STRATEGY=(history completion)
       znap source zsh-users/zsh-autosuggestions
       
-      znap eval trapd00r/LS_COLORS "$( whence -a dircolors gdircolors ) -b LS_COLORS"
+      # znap eval trapd00r/LS_COLORS "$( whence -a dircolors gdircolors ) -b LS_COLORS"
       # znap source marlonrichert/zcolors
       # znap eval   marlonrichert/zcolors "zcolors ''${(q)LS_COLORS}
 
