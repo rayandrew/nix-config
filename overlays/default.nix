@@ -14,6 +14,7 @@ in
     inputs.rust-overlay.overlays.default
     inputs.emacs-overlay.overlays.default
     inputs.nur.overlay
+    inputs.nixpkgs-wayland.overlay
     (final: prev:
       let
         template = prev.callPackage ../packages/template { };

@@ -84,7 +84,7 @@ in
       #   ];
       # };
 
-      videoDrivers = [ "modesetting" ];
+      # videoDrivers = [ "modesetting" ];
 
       # Enable libinput
       libinput = {
