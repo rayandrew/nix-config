@@ -67,7 +67,7 @@ in
       znap source marlonrichert/zcolors
       znap eval   marlonrichert/zcolors "zcolors ''${(q)LS_COLORS}
 
-      znap source asdf-vm/asdf
+      # znap source asdf-vm/asdf
 
       znap eval zoxide "${pkgs.zoxide}/bin/zoxide init zsh"
     '';
