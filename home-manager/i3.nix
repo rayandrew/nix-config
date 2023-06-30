@@ -17,32 +17,34 @@ in
       inherit modifier;
       enable = true;
       package = pkgs.i3-gaps;
-      keybindings = lib.mkOptionDefault {
-        # "${modifier}+d" = "exec ${pkgs.dmenu}/bin/dmenu_run";
-        "${modifier}+d" = "exec --no-startup-id \"${pkgs.rofi}/bin/rofi -show drun -modi run,drun,window\"";
+      config = {
+        keybindings = lib.mkOptionDefault {
+          # "${modifier}+d" = "exec ${pkgs.dmenu}/bin/dmenu_run";
+          "${modifier}+d" = "exec --no-startup-id \"${pkgs.rofi}/bin/rofi -show drun -modi run,drun,window\"";
 
 
-        # "${modifier}+Return" = "exec kitty";
-        "${modifier}+Return" = "exec ${term}";
-        "${modifier}+Shift+Return" = "exec ${term} -c \"tmux attach || tmux new-session\"";
+          # "${modifier}+Return" = "exec kitty";
+          "${modifier}+Return" = "exec ${term}";
+          "${modifier}+Shift+Return" = "exec ${term} -c \"tmux attach || tmux new-session\"";
 
-        "${modifier}+r" = "i3-msg reload || i3-msg restart";
-        "${modifier}+Shift+q" = "kill";
-        "${modifier}+Shift+e" = "exit";
-        "${alt}+F4" = "kill";
+          "${modifier}+r" = "i3-msg reload || i3-msg restart";
+          "${modifier}+Shift+q" = "kill";
+          "${modifier}+Shift+e" = "exit";
+          "${alt}+F4" = "kill";
 
-        "${modifier}+h" = "focus left";
-        "${modifier}+j" = "focus down";
-        "${modifier}+k" = "focus up";
-        "${modifier}+l" = "focus right";
+          "${modifier}+h" = "focus left";
+          "${modifier}+j" = "focus down";
+          "${modifier}+k" = "focus up";
+          "${modifier}+l" = "focus right";
 
-        "${modifier}+Shift+h" = "move left";
-        "${modifier}+Shift+j" = "move down";
-        "${modifier}+Shift+k" = "move up";
-        "${modifier}+Shift+l" = "move right";
+          "${modifier}+Shift+h" = "move left";
+          "${modifier}+Shift+j" = "move down";
+          "${modifier}+Shift+k" = "move up";
+          "${modifier}+Shift+l" = "move right";
 
-        "${modifier}+Shift+v" = "split h";
-        "${modifier}+v" = "split v";
+          "${modifier}+Shift+v" = "split h";
+          "${modifier}+v" = "split v";
+        };
       };
     };
   };
