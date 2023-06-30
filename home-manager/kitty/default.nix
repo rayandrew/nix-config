@@ -19,7 +19,8 @@ in
       settings = {
         # https://fsd.it/shop/fonts/pragmatapro/
         # font_size = "14.0";
-        adjust_line_height = "140%";
+        # adjust_line_height = "140%";
+        adjust_line_height = "100%";
         disable_ligatures = "cursor"; # disable ligatures when cursor is on them
 
         # Window layout
