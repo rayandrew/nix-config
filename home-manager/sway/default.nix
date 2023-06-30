@@ -71,7 +71,7 @@ in
 
     config = commonOptions.config // {
       startup = [
-        # { command = "systemctl restart --user kanshi.service"; always = true; }
+        { command = "systemctl restart --user kanshi.service"; always = true; }
       ];
 
       input = {
@@ -117,10 +117,10 @@ in
       export _JAVA_AWT_WM_NONREPARENTING=1
     '';
 
-    # systemd = {
-    #   enable = true;
-    #   xdgAutostart = true;
-    # };
+    systemd = {
+      enable = true;
+      xdgAutostart = true;
+    };
 
     wrapperFeatures = {
       base = true;

@@ -23,43 +23,43 @@
 , workspaces ? [
     {
       ws = 1;
-      name = "1";
+      name = "1:  ";
     }
     {
       ws = 2;
-      name = "2";
+      name = "2:  ";
     }
     {
       ws = 3;
-      name = "3";
+      name = "3:  ";
     }
     {
       ws = 4;
-      name = "4";
+      name = "4:  ";
     }
     {
       ws = 5;
-      name = "5";
+      name = "5:  ";
     }
     {
       ws = 6;
-      name = "6";
+      name = "6:  ";
     }
     {
       ws = 7;
-      name = "7";
+      name = "7:  ";
     }
     {
       ws = 8;
-      name = "8";
+      name = "8:  ";
     }
     {
       ws = 9;
-      name = "9";
+      name = "9:  ";
     }
     {
       ws = 0;
-      name = "10";
+      name = "10:  ";
     }
   ]
 }:
@@ -139,7 +139,6 @@ in
       "${modifier}+Shift+j" = "move down";
       "${modifier}+Shift+k" = "move up";
       "${modifier}+Shift+l" = "move right";
-
 
       "XF86AudioRaiseVolume" =
         "exec --no-startup-id ${pamixer} --set-limit 150 --allow-boost -i 5";
