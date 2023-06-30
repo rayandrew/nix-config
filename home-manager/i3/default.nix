@@ -47,14 +47,15 @@ let
 
 in
 {
+  import = [ ./dunst.nix ];
+
   xsession = {
     enable = true;
     windowManager.i3 = with commonOptions; {
       enable = true;
       package = pkgs.i3-gaps;
-      config = {
-        inherit config extraConfig;
-      };
+      inherit extraConfig;
+      config = commonOptions.config;
     };
   };
 }
