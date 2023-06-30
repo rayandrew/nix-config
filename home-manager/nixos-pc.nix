@@ -4,7 +4,7 @@
   imports = [
     ./nixos.nix
     # ./i3.nix
-    ./sway.nix
+    ./sway
     ./graphical.nix
   ];
 
