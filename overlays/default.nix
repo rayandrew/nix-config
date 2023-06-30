@@ -125,6 +125,8 @@ in
         cherrytree-darwin = prev.callPackage ../packages/cherrytree-darwin { };
 
         thorium-darwin = thorium.thorium-darwin;
+
+        change-res = prev.callPackage ../packages/change-res { };
       })
   ];
 }
