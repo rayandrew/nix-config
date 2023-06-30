@@ -14,10 +14,10 @@ in
   xsession = {
     enable = true;
     windowManager.i3 = {
-      inherit modifier;
       enable = true;
       package = pkgs.i3-gaps;
       config = {
+        inherit modifier;
         keybindings = lib.mkOptionDefault {
           # "${modifier}+d" = "exec ${pkgs.dmenu}/bin/dmenu_run";
           "${modifier}+d" = "exec --no-startup-id \"${pkgs.rofi}/bin/rofi -show drun -modi run,drun,window\"";
