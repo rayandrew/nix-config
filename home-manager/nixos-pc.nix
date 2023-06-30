@@ -11,6 +11,7 @@
 
   home.packages = with pkgs; [
     mullvad-vpn
+    zotero
     # pkgs.nur.repos.LuisChDev.nordvpn
   ];
 }
