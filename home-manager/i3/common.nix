@@ -207,7 +207,7 @@ in
       ]);
     in
     ''
-      ${workspaceStr}
+      ''${workspaceStr}
       ${extraConfig}
     '';
 }
