@@ -8,6 +8,7 @@ in
     ./wayland.nix
   ];
 
+  sound.enable = true;
   hardware.pulseaudio.enable = true;
 
   services = {
