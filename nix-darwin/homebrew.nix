@@ -47,6 +47,7 @@ in
       "homebrew/core"
       "homebrew/services"
       "nrlquaker/createzap"
+      "d12frosted/emacs-plus"
     ];
 
     # Prefer installing application from the Mac App Store
@@ -96,6 +97,8 @@ in
       "trilium-notes"
 
       "eloston-chromium"
+
+      "nordvpn"
       # "thunderbird"
     ];
 
@@ -103,6 +106,8 @@ in
     brews = [
       "libiconv"
       "libomp"
+      "emacs-plus@29"
+      # "emacs-plus@29"
       # "cherrytree"
       # "mas"
     ];

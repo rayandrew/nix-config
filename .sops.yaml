@@ -4,6 +4,7 @@ keys:
   - &gitea age1lvprmf420c46gt2z78vegmzn8022y4yzceymyk663vg7d7mtwvrqwry3vf
   - &mail age1wf3g6p346093fz0yuq8u57tvurfw9336evj06ka99uwhrcz9m47qekdkrw
   - &wiki age1v5c8vyxm4u49f9a3mdaqp80n7dnc3w4a5gllggp7cwfu3kp3zazs8s49ky
+  - &lemur age1v3khaj7g3zck6t3mze5jrxfa8s6xgjnkme8e7jyx4n89fu8tgydspktajh
 creation_rules:
   - path_regex: secrets.ya?ml$
     key_groups:
@@ -13,6 +14,7 @@ creation_rules:
           - *gitea
           - *mail
           - *wiki
+          - *lemur
   - path_regex: hosts/ucare-07/secrets.ya?ml$
     key_groups:
       - age:
@@ -33,3 +35,8 @@ creation_rules:
       - age:
           - *rayandrew
           - *wiki
+  - path_regex: hosts/lemur/secrets.ya?ml$
+    key_groups:
+      - age:
+          - *rayandrew
+          - *lemur

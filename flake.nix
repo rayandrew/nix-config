@@ -5,14 +5,22 @@
     # Package sets
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     stable.url = "github:rayandrew/nixpkgs/nixos-23.05";
-    master.url = "github:NixOS/nixpkgs/master";
+    # master.url = "github:NixOS/nixpkgs/master";
     hardware.url = "github:NixOS/nixos-hardware";
     home = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # home-stable = {
+    #   url = "github:nix-community/home-manager/release-23.05";
+    #   inputs.nixpkgs.follows = "stable";
+    # };
     nix-darwin = {
       url = "github:lnl7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixpkgs-wayland = {
+      url = "github:nix-community/nixpkgs-wayland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     deadnix = {
@@ -61,9 +69,9 @@
     };
 
     simple-nixos-mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-22.11";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-22_11.follows = "stable";
+      inputs.nixpkgs-23_05.follows = "stable";
     };
 
     emacs-overlay = {
@@ -142,6 +150,13 @@
       })
       (mkNixOSConfig {
         hostname = "wiki";
+        deployConfigurations = {
+          fastConnection = true;
+          remoteBuild = true;
+        };
+      })
+      (mkNixOSConfig {
+        hostname = "lemur";
         deployConfigurations = {
           fastConnection = true;
           remoteBuild = true;

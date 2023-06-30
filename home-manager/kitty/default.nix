@@ -14,12 +14,13 @@ in
         # name = "UbuntuMono Nerd Font Mono";
         # size = 18;
         name = "JetBrainsMonoNL Nerd Font Mono";
-        size = 16;
+        size = 12;
       };
       settings = {
         # https://fsd.it/shop/fonts/pragmatapro/
         # font_size = "14.0";
-        adjust_line_height = "140%";
+        # adjust_line_height = "140%";
+        adjust_line_height = "100%";
         disable_ligatures = "cursor"; # disable ligatures when cursor is on them
 
         # Window layout
@@ -125,9 +126,9 @@ in
       # theme = "Nord";
       # theme = "Tokyo Night";
       # theme = "Gruvbox Dark";
-      theme = "Gruvbox Light";
+      # theme = "Gruvbox Light";
       # theme = "Kaolin Breeze";
-      # theme = "GitHub Light";
+      theme = "GitHub Light";
       # theme = "Catppuccin-Mocha";
       # theme = "Catppuccin-Latte";
       # theme = "Catppuccin-Macchiato";

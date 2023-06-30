@@ -54,6 +54,13 @@ let
     };
   };
 
+  # tomorrow = pkgs.fetchFromGitHub {
+  #   owner = "edouard-lopez";
+  #   repo = "tmux-tomorrow";
+  #   rev = "680cf511315793efaa4c0af31b2ab0f06bebb485";
+  #   sha256 = "sha256-GlzbP61nIqnEBKpNiDpTRTCMH1k4uknBRXjotgLoq6o=";
+  # };
+
   # backgroundColor = "#fafafa";
   # foregroundColor = "#575f66";
 
@@ -94,11 +101,17 @@ in
       { plugin = tmuxPlugins.yank; }
       { plugin = tmuxPlugins.vim-tmux-navigator; }
       {
-        plugin = tmuxPlugins.gruvbox;
+        plugin = tmuxPlugins.power-theme;
         extraConfig = ''
-          set -g @tmux-gruvbox 'light'
+          set -g @tmux_power_theme 'snow'
         '';
       }
+      # {
+      #   plugin = tmuxPlugins.gruvbox;
+      #   extraConfig = ''
+      #     set -g @tmux-gruvbox 'light'
+      #   '';
+      # }
       # {
       #   plugin = catppuccin;
       #   extraConfig = ''
@@ -190,6 +203,7 @@ in
       bind Enter copy-mode # enter copy mode
 
       run -b 'tmux bind -t vi-copy v begin-selection 2> /dev/null || true'
+      
       run -b 'tmux bind -T copy-mode-vi v send -X begin-selection 2> /dev/null || true'
       run -b 'tmux bind -t vi-copy C-v rectangle-toggle 2> /dev/null || true'
       run -b 'tmux bind -T copy-mode-vi C-v send -X rectangle-toggle 2> /dev/null || true'

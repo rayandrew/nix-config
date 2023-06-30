@@ -7,7 +7,7 @@ in
   users.users.${username} = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "networkmanager" "video" ];
+    extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
     shell = pkgs.zsh;
     # password = "changeme";
     passwordFile = config.sops.secrets.rayandrew-password.path;

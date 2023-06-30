@@ -24,8 +24,10 @@
   # Set X11 keyboard layout.
   services.xserver = {
     layout = lib.mkDefault "us";
-    xkbVariant = lib.mkDefault "intl";
+    # xkbVariant = lib.mkDefault "intl";
+    xkbVariant = lib.mkDefault "";
     # Remap Caps Lock to Esc, and use Super+Space to change layouts
-    xkbOptions = lib.mkDefault "caps:escape,grp:win_space_toggle";
+    xkbOptions = lib.mkDefault "grp:win_space_toggle";
+    # xkbOptions = lib.mkDefault "caps:escape,grp:win_space_toggle";
   };
 }

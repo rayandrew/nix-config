@@ -4,6 +4,12 @@ let
   inherit (lib) mkAfter elem optionalString;
   inherit (config.my-meta) shellAliases;
   dataDir = "${config.xdg.dataHome}";
+  # additionalZshConfig =
+  #   if pkgs.stdenv.isDarwin then ''
+  #     znap eval iterm2 'curl -fsSL https://iterm2.com/shell_integration/zsh'
+  #   '' else '' 
+  #
+  #   '';
 in
 {
   # Fish Shell
@@ -38,7 +44,7 @@ in
 
       ## Starship Prompt
       znap eval starship "${pkgs.starship}/bin/starship init zsh"
-      znap prompt starship
+      znap prompt
 
       function init_fzf() {
         [ -f ${pkgs.fzf}/share/fzf/completion.zsh ] && source ${pkgs.fzf}/share/fzf/completion.zsh
@@ -46,13 +52,20 @@ in
       }
       zvm_after_init_commands+=(init_fzf)
 
+
       znap source zsh-users/zsh-history-substring-search
       # znap source marlonrichert/zsh-autocomplete
       znap source marlonrichert/zsh-edit
-      znap source zdharma-continuum/fast-syntax-highlighting
-
+      znap source zdharma-continuum/fast-syntax-highlighting &>/dev/null
+      # ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
+      # znap source zsh-users/zsh-syntax-highlighting
+      
       ZSH_AUTOSUGGEST_STRATEGY=(history completion)
       znap source zsh-users/zsh-autosuggestions
+      
+      # znap eval trapd00r/LS_COLORS "$( whence -a dircolors gdircolors ) -b LS_COLORS"
+      # znap source marlonrichert/zcolors
+      # znap eval   marlonrichert/zcolors "zcolors ''${(q)LS_COLORS}
 
       znap source asdf-vm/asdf
 
@@ -119,6 +132,7 @@ in
 
       export ZK_NOTEBOOK_DIR="${config.home.homeDirectory}/zk"
       export PATH="$PATH:${config.home.homeDirectory}/.spicetify"
+      export PATH="$PATH:${config.xdg.configHome}/emacs/bin"
       export CC=gcc
     '';
   };

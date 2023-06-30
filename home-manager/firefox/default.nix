@@ -29,8 +29,8 @@ in
 {
   programs.firefox = {
     enable = true;
-    # package = pkgs.firefox-beta-bin;
-    package = pkgs.firefox-devedition-bin;
+    package = pkgs.firefox-beta-bin;
+    # package = pkgs.firefox-devedition-bin;
 
     profiles."${username}" = {
       id = 0;
@@ -138,13 +138,13 @@ in
   };
 
   home.file = {
-    "${profilesPath}/${cfg.profiles."${username}".path}/chrome" = {
-      source = ./profiles/rayandrew/chrome;
-      recursive = true;
-    };
-    "${profilesPath}/${cfg.profiles."${username}".path}/sideberry" = {
-      source = ./profiles/rayandrew/sideberry;
-      recursive = true;
-    };
+    # "${profilesPath}/${cfg.profiles."${username}".path}/chrome" = {
+    #   source = ./profiles/rayandrew/chrome;
+    #   recursive = true;
+    # };
+    # "${profilesPath}/${cfg.profiles."${username}".path}/sideberry" = {
+    #   source = ./profiles/rayandrew/sideberry;
+    #   recursive = true;
+    # };
   };
 }

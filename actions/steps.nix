@@ -14,7 +14,7 @@
   };
   checkoutStep = { uses = "actions/checkout@v3"; };
   installNixActionStep = { channel ? "nixos-unstable" }: {
-    uses = "cachix/install-nix-action@v20";
+    uses = "cachix/install-nix-action@v22";
     "with" = {
       install_url = "https://releases.nixos.org/nix/nix-2.13.3/install";
       # Need to define a channel, otherwise it wiill use bash from environment
