@@ -1,5 +1,8 @@
 { config, pkgs, lib, ... }:
 
+let
+  inherit (config.my-meta) username;
+in
 {
   boot = {
     consoleLogLevel = 3;
