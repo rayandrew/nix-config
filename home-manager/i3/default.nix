@@ -47,7 +47,7 @@ let
 
 in
 {
-  import = [ ./dunst.nix ];
+  imports = [ ./dunst.nix ];
 
   xsession = {
     enable = true;
