@@ -120,8 +120,8 @@ in
       "${modifier}+r" = ''mode "${resizeMode}"'';
       "${modifier}+Escape" = ''mode "${powerManagementMode}"'';
 
-      "${modifier}+c" = "reload";
-      "${modifier}+r" = "restart";
+      "${modifier}+Shift+c" = "reload";
+      "${modifier}+Shift+r" = "restart";
       "${modifier}+Shift+q" = "kill";
       "${modifier}+Shift+e" = "exit";
       "${alt}+F4" = "kill";
