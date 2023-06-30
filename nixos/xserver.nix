@@ -24,18 +24,18 @@
 
   services = {
     autorandr.enable = true;
-    # keyd = {
-    #   enable = true;
-    #   settings = {
-    #     main = {
-    #       capslock = "overload(control, esc)";
-    #     };
-    #     # shift = {
-    #     #   leftshift = "capslock";
-    #     #   rightshift = "capslock";
-    #     # };
-    #   };
-    # };
+    keyd = {
+      enable = true;
+      settings = {
+        main = {
+          capslock = "overload(control, esc)";
+        };
+        # shift = {
+        #   leftshift = "capslock";
+        #   rightshift = "capslock";
+        # };
+      };
+    };
     # Configure greetd, a lightweight session manager
     greetd = {
       enable = true;
@@ -57,7 +57,7 @@
         };
         default_session = initial_session;
       };
-      vt = 7;
+      # vt = 7;
     };
 
     xserver = {
