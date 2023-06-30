@@ -13,8 +13,8 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  # options snd slots=snd-hda-intel
   boot.extraModprobeConfig = ''
-    options snd slots=snd-hda-intel
   '';
 
   fileSystems."/" =
