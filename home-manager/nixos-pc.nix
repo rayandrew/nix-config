@@ -4,7 +4,7 @@
   imports = [
     ./nixos.nix
     ./theme
-    ./i3
+    ./sway
     # ./sway
     ./graphical.nix
   ];
