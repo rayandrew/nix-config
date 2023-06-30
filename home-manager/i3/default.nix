@@ -29,7 +29,7 @@ let
         "${programs.i3status-rust.package}/bin/i3status-rs ${xdg.configHome}/i3status-rust/config-i3.toml";
       menu = "${rofi} -show drun";
       # light needs to be installed in system, so not defining a path here
-      light = "light";
+      light = "/run/current-system/sw/bin/light";
       pamixer = "${pkgs.pamixer}/bin/pamixer";
       playerctl = "${pkgs.playerctl}/bin/playerctl";
       terminal =

@@ -77,7 +77,7 @@ in
 
       input = {
         "type:keyboard" = {
-          xkb_layout = "us(intl)";
+          xkb_layout = "us";
           xkb_options = "grp:win_space_toggle";
         };
         "type:pointer" = { accel_profile = "flat"; };
