@@ -4,12 +4,12 @@ let
   inherit (lib) mkAfter elem optionalString;
   inherit (config.my-meta) shellAliases;
   dataDir = "${config.xdg.dataHome}";
-  additionalZshConfig =
-    if pkgs.stdenv.isDarwin then ''
-      znap eval iterm2 'curl -fsSL https://iterm2.com/shell_integration/zsh'
-    '' else '' 
-
-    '';
+  # additionalZshConfig =
+  #   if pkgs.stdenv.isDarwin then ''
+  #     znap eval iterm2 'curl -fsSL https://iterm2.com/shell_integration/zsh'
+  #   '' else '' 
+  #
+  #   '';
 in
 {
   # Fish Shell
@@ -70,7 +70,7 @@ in
       znap source asdf-vm/asdf
 
       znap eval zoxide "${pkgs.zoxide}/bin/zoxide init zsh"
-    '' ++ additionalZshConfig;
+    '';
 
     initExtra = mkAfter ''
       if [[ -d "${config.home.homeDirectory}/.miniconda3" ]]; then
