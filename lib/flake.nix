@@ -2,10 +2,8 @@
 
 { self
 , nixpkgs
-, stable
 , nix-darwin
 , home
-, home-stable
 , flake-utils
 , deploy-rs
 , sops-nix
@@ -50,7 +48,7 @@ in {
   mkRunCmd =
     { name, text, deps ? pkgs: with pkgs; [ coreutils findutils nixpkgs-fmt ] }:
     eachDefaultSystem (system:
-    let pkgs = import stable { inherit system; };
+    let pkgs = import nixpkgs { inherit system; };
     in rec {
       packages.${name} = pkgs.writeShellApplication {
         inherit name text;
@@ -66,7 +64,7 @@ in {
     { hostname
     , system ? "x86_64-linux"
     , username ? "rayandrew"
-    , nixosSystem ? stable.lib.nixosSystem
+    , nixosSystem ? nixpkgs.lib.nixosSystem
     , extraModules ? [ ]
     , deployConfigurations ? { }
     }: {
@@ -207,7 +205,7 @@ in {
 
   mkDevShell = {}:
     eachDefaultSystem (system:
-      let pkgs = import stable { inherit system; };
+      let pkgs = import nixpkgs { inherit system; };
       in rec {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs;
