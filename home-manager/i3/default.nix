@@ -36,9 +36,7 @@ let
 
       '';
 
-      extraBindings = {
-        "${modifier}+p" = ''mode "${displayLayoutMode}"'';
-      };
+      extraBindings = { };
 
       extraModes = { };
 
