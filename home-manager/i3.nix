@@ -7,6 +7,7 @@ let
   alt = "Mod1";
   modifier = "Mod4";
   term = "kitty";
+  barName = "default";
   # term = "st -e ${pkgs.fish}/bin/fish";
 in
 {
