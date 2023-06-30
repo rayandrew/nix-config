@@ -66,6 +66,8 @@
       # Enable sx, a lightweight startx alternative
       displayManager.sx.enable = true;
 
+      videoDrivers = [ "modesetting" ];
+
       # Enable libinput
       libinput = {
         enable = true;
