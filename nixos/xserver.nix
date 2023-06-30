@@ -43,7 +43,8 @@
         initial_session = {
           command = "${pkgs.sway}/bin/sway --config ${pkgs.writeText "sway-config" ''
             # `-l` activates layer-shell mode. Notice that `swaymsg exit` will run after gtkgreet.
-            exec "GTK_THEME=Nordic-bluish-accent ${pkgs.greetd.gtkgreet}/bin/gtkgreet -l; swaymsg exit"
+            # exec "GTK_THEME=Nordic-bluish-accent ${pkgs.greetd.gtkgreet}/bin/gtkgreet -l; swaymsg exit"
+            exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l; swaymsg exit"
 
             bindsym Mod4+Escape exec ${pkgs.sway}/bin/swaynag \
               -t warning \
@@ -51,7 +52,7 @@
               -b 'Poweroff' 'systemctl poweroff' \
               -b 'Reboot' 'systemctl reboot'
 
-            # include /etc/sway/config.d/*
+            include /etc/sway/config.d/*
           ''}";
           user = "greeter";
         };

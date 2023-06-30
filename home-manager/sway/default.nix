@@ -51,7 +51,7 @@ let
 
         # XCURSOR_SIZE
         seat * xcursor_theme ${name} ${toString size}
-        exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+        # exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
       '';
     };
 in
