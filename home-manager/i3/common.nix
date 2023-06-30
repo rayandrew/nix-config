@@ -132,16 +132,14 @@ in
       "${modifier}+l" = "focus right";
 
       "${modifier}+f" = "fullscreen toggle";
+      "${modifier}+Shift+v" = "split h";
       "${modifier}+v" = "split v";
-      "${modifier}+b" = "split h";
 
       "${modifier}+Shift+h" = "move left";
       "${modifier}+Shift+j" = "move down";
       "${modifier}+Shift+k" = "move up";
       "${modifier}+Shift+l" = "move right";
 
-      "${modifier}+Shift+v" = "split h";
-      "${modifier}+v" = "split v";
 
       "XF86AudioRaiseVolume" =
         "exec --no-startup-id ${pamixer} --set-limit 150 --allow-boost -i 5";
