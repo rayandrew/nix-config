@@ -4,6 +4,7 @@ let
 in
 {
   imports = [
+    ./xserver.nix
     ./wayland.nix
   ];
 
