@@ -37,7 +37,7 @@ in
       name = username;
       search = {
         force = true;
-        default = "Google";
+        default = "DuckDuckGo";
         engines = {
           "Nix Packages" = {
             urls = [{

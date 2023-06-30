@@ -21,6 +21,7 @@
     findutils
     gawk
     gcc
+    gnumake
     gnugrep
     gnupg
     gnused

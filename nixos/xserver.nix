@@ -40,49 +40,49 @@ in
       };
     };
     # Configure greetd, a lightweight session manager
-    greetd = {
-      enable = true;
-      settings = rec {
-        initial_session = {
-          command = "${pkgs.sway}/bin/sway --config ${pkgs.writeText "sway-config" ''
-            # `-l` activates layer-shell mode. Notice that `swaymsg exit` will run after gtkgreet.
-            exec "GTK_THEME=Nordic-bluish-accent ${pkgs.greetd.gtkgreet}/bin/gtkgreet -l; swaymsg exit"
-            # exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l; swaymsg exit"
-
-            bindsym Mod4+Escape exec ${pkgs.sway}/bin/swaynag \
-              -t warning \
-              -m 'What do you want to do?' \
-              -b 'Poweroff' 'systemctl poweroff' \
-              -b 'Reboot' 'systemctl reboot'
-
-            include /etc/sway/config.d/*
-          ''}";
-          user = "greeter";
-        };
-        default_session = initial_session;
-      };
-      vt = 7;
-    };
+    # greetd = {
+    #   enable = true;
+    #   settings = rec {
+    #     initial_session = {
+    #       command = "${pkgs.sway}/bin/sway --config ${pkgs.writeText "sway-config" ''
+    #         # `-l` activates layer-shell mode. Notice that `swaymsg exit` will run after gtkgreet.
+    #         exec "GTK_THEME=Nordic-bluish-accent ${pkgs.greetd.gtkgreet}/bin/gtkgreet -l; swaymsg exit"
+    #         # exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l; swaymsg exit"
+    #
+    #         bindsym Mod4+Escape exec ${pkgs.sway}/bin/swaynag \
+    #           -t warning \
+    #           -m 'What do you want to do?' \
+    #           -b 'Poweroff' 'systemctl poweroff' \
+    #           -b 'Reboot' 'systemctl reboot'
+    #
+    #         include /etc/sway/config.d/*
+    #       ''}";
+    #       user = "greeter";
+    #     };
+    #     default_session = initial_session;
+    #   };
+    #   vt = 7;
+    # };
 
     xserver = {
       enable = true;
 
       # Enable sx, a lightweight startx alternative
-      displayManager.sx.enable = true;
+      # displayManager.sx.enable = true;
 
       # enable if using i3
-      # displayManager = {
-      #   lightdm.enable = true;
-      #   autoLogin = { enable = false; user = username; };
-      #   defaultSession = "xsession";
-      #   session = [
-      #     {
-      #       manage = "desktop";
-      #       name = "xsession";
-      #       start = ''exec $HOME/.xsession'';
-      #     }
-      #   ];
-      # };
+      displayManager = {
+        lightdm.enable = true;
+        autoLogin = { enable = false; user = username; };
+        defaultSession = "xsession";
+        session = [
+          {
+            manage = "desktop";
+            name = "xsession";
+            start = ''exec $HOME/.xsession'';
+          }
+        ];
+      };
 
       # videoDrivers = [ "modesetting" ];
 
@@ -100,13 +100,13 @@ in
     };
   };
 
-  environment.etc."greetd/environments".text = ''
-    sway
-    sx
-  '';
+  # environment.etc."greetd/environments".text = ''
+  #   sway
+  #   sx
+  # '';
 
   # https://github.com/apognu/tuigreet/issues/76
-  systemd.tmpfiles.rules = [
-    "d /var/cache/tuigreet 700 ${config.services.greetd.settings.initial_session.user} nobody"
-  ];
+  # systemd.tmpfiles.rules = [
+  #   "d /var/cache/tuigreet 700 ${config.services.greetd.settings.initial_session.user} nobody"
+  # ];
 }
