@@ -3,9 +3,9 @@
 {
   imports = [
     ./nixos.nix
-    # ./i3.nix
     ./theme
-    ./sway
+    ./i3
+    # ./sway
     ./graphical.nix
   ];
 

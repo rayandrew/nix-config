@@ -9,120 +9,53 @@ let
   term = "kitty";
   barName = "default";
   light = "light";
-  pamixer = "${pkgs.pamixer}/bin/pamixer";
-  # term = "st -e ${pkgs.fish}/bin/fish";
+
+  commonOptions =
+    let
+      dunstctl = "${pkgs.dunst}/bin/dunstctl";
+      screenShotName = with config.xdg.userDirs;
+        "${pictures}/$(${pkgs.coreutils}/bin/date +%Y-%m-%d_%H-%M-%S)-screenshot.png";
+    in
+    import ../i3/common.nix rec {
+      inherit config lib modifier alt dunstctl;
+      browser = "firefox";
+      # bars = [{ command = "${config.programs.waybar.package}/bin/waybar"; }];
+      fileManager = "${terminal} ${config.programs.nnn.finalPackage}/bin/nnn -a -P p";
+      menu = "${config.programs.rofi.package}/bin/rofi";
+      # light needs to be installed in system, so not defining a path here
+      light = "light";
+      pamixer = "${pkgs.pamixer}/bin/pamixer";
+      playerctl = "${pkgs.playerctl}/bin/playerctl";
+      terminal = "${config.programs.kitty.package}/bin/kitty";
+
+      fullScreenShot = ''
+
+      '';
+      areaScreenShot = ''
+
+      '';
+
+      extraBindings = {
+        "${modifier}+p" = ''mode "${displayLayoutMode}"'';
+      };
+
+      extraModes = { };
+
+      extraConfig = ''
+        hide_edge_borders --i3 smart
+      '';
+    };
+
 in
 {
   xsession = {
     enable = true;
-    windowManager.i3 = {
+    windowManager.i3 = with commonOptions; {
       enable = true;
       package = pkgs.i3-gaps;
       config = {
-        inherit modifier;
-        keybindings = lib.mkOptionDefault {
-          # "${modifier}+d" = "exec ${pkgs.dmenu}/bin/dmenu_run";
-          "${modifier}+d" = "exec --no-startup-id \"${pkgs.rofi}/bin/rofi -show drun -modi run,drun,window\"";
-
-
-          # "${modifier}+Return" = "exec kitty";
-          "${modifier}+Return" = "exec ${term}";
-          "${modifier}+Shift+Return" = "exec ${term} -c \"tmux attach || tmux new-session\"";
-
-          "${modifier}+r" = "i3-msg reload || i3-msg restart";
-          "${modifier}+Shift+q" = "kill";
-          "${modifier}+Shift+e" = "exit";
-          "${alt}+F4" = "kill";
-
-          "${modifier}+h" = "focus left";
-          "${modifier}+j" = "focus down";
-          "${modifier}+k" = "focus up";
-          "${modifier}+l" = "focus right";
-
-          "${modifier}+Shift+h" = "move left";
-          "${modifier}+Shift+j" = "move down";
-          "${modifier}+Shift+k" = "move up";
-          "${modifier}+Shift+l" = "move right";
-
-          "${modifier}+Shift+v" = "split h";
-          "${modifier}+v" = "split v";
-
-          "XF86AudioRaiseVolume" =
-            "exec --no-startup-id ${pamixer} --set-limit 150 --allow-boost -i 5";
-          "XF86AudioLowerVolume" =
-            "exec --no-startup-id ${pamixer} --set-limit 150 --allow-boost -d 5";
-          "XF86AudioMute" =
-            "exec --no-startup-id ${pamixer} --toggle-mute";
-          "XF86AudioMicMute" =
-            "exec --no-startup-id ${pamixer} --toggle-mute --default-source";
-
-          "XF86MonBrightnessUp" = "exec --no-startup-id ${light} -A 5%";
-          "XF86MonBrightnessDown" = "exec --no-startup-id ${light} -U 5%";
-        };
+        inherit config extraConfig;
       };
-    };
-  };
-
-  home.packages = with pkgs; [
-    dmenu #application launcher most people use
-    i3status-rust
-    i3-gaps
-    i3lock-fancy
-    rofi
-  ];
-
-  programs.i3status-rust = {
-    enable = true;
-
-    bars."${barName}" = {
-      theme = "plain";
-      icons = "awesome";
-      blocks = [
-        {
-          block = "net";
-          device = "wlp0s20f3";
-          format = "{ssid} {signal_strength} {ip} {speed_down;K*b} {graph_down;K*b}";
-          interval = 5;
-        }
-        {
-          block = "disk_space";
-          path = "/";
-          alias = "/";
-          info_type = "available";
-          unit = "GB";
-          interval = 60;
-          warning = 20.0;
-          alert = 10.0;
-        }
-        {
-          block = "memory";
-          display_type = "memory";
-          format_mem = "{mem_used_percents}";
-          format_swap = "{swap_used_percents}";
-        }
-        {
-          block = "cpu";
-          interval = 1;
-        }
-        {
-          block = "load";
-          interval = 1;
-          format = "{1m}";
-        }
-        {
-          block = "battery";
-          interval = 10;
-          format = "{percentage:6#100} {percentage} {time}";
-        }
-        {
-          block = "sound";
-        }
-        {
-          block = "time";
-          interval = 60;
-          format = "%a %d/%m %R";
-        }
-      ];
     };
   };
 }
