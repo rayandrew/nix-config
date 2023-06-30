@@ -8,6 +8,8 @@ in
     ./wayland.nix
   ];
 
+  hardware.pulseaudio.enable = true;
+
   services = {
     # Enable printing
     printing = {
