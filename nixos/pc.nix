@@ -5,7 +5,8 @@ in
 {
   imports = [
     ./xserver.nix
-    ./wayland.nix
+    # ./wayland.nix
+    ./vpn.nix
   ];
 
   sound.enable = true;

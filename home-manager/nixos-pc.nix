@@ -10,6 +10,7 @@
   ];
 
   home.packages = with pkgs; [
+    mullvad-vpn
     # pkgs.nur.repos.LuisChDev.nordvpn
   ];
 }
