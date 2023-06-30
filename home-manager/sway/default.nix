@@ -51,6 +51,7 @@ let
 
         # XCURSOR_SIZE
         seat * xcursor_theme ${name} ${toString size}
+        exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
       '';
     };
 in
@@ -115,7 +116,7 @@ in
       # Fix for some Java AWT applications (e.g. Android Studio),
       # use this if they aren't displayed properly:
       export _JAVA_AWT_WM_NONREPARENTING=1
-      export GTK_USE_PORTAL=0
+      # export GTK_USE_PORTAL=0
     '';
 
     systemd = {
