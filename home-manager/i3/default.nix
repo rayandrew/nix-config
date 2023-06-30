@@ -8,6 +8,8 @@ let
   modifier = "Mod4";
   term = "kitty";
   barName = "default";
+  light = "light";
+  pamixer = "${pkgs.pamixer}/bin/pamixer";
   # term = "st -e ${pkgs.fish}/bin/fish";
 in
 {
@@ -44,6 +46,18 @@ in
 
           "${modifier}+Shift+v" = "split h";
           "${modifier}+v" = "split v";
+
+          "XF86AudioRaiseVolume" =
+            "exec --no-startup-id ${pamixer} --set-limit 150 --allow-boost -i 5";
+          "XF86AudioLowerVolume" =
+            "exec --no-startup-id ${pamixer} --set-limit 150 --allow-boost -d 5";
+          "XF86AudioMute" =
+            "exec --no-startup-id ${pamixer} --toggle-mute";
+          "XF86AudioMicMute" =
+            "exec --no-startup-id ${pamixer} --toggle-mute --default-source";
+
+          "XF86MonBrightnessUp" = "exec --no-startup-id ${light} -A 5%";
+          "XF86MonBrightnessDown" = "exec --no-startup-id ${light} -U 5%";
         };
       };
     };
