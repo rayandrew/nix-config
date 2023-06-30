@@ -51,13 +51,13 @@
               -b 'Poweroff' 'systemctl poweroff' \
               -b 'Reboot' 'systemctl reboot'
 
-            include /etc/sway/config.d/*
+            # include /etc/sway/config.d/*
           ''}";
           user = "greeter";
         };
         default_session = initial_session;
       };
-      # vt = 7;
+      vt = 7;
     };
 
     xserver = {
