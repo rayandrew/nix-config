@@ -64,7 +64,7 @@ in
       znap source asdf-vm/asdf
 
       znap eval zoxide "${pkgs.zoxide}/bin/zoxide init zsh"
-    '' ++ lib.optional (stdenv.isDarwin) ''
+    '' ++ lib.optional (pkgs.stdenv.isDarwin) ''
       znap eval iterm2 'curl -fsSL https://iterm2.com/shell_integration/zsh'
     '';
 
