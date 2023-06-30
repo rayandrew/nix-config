@@ -125,9 +125,9 @@ in
       # theme = "Nord";
       # theme = "Tokyo Night";
       # theme = "Gruvbox Dark";
-      theme = "Gruvbox Light";
+      # theme = "Gruvbox Light";
       # theme = "Kaolin Breeze";
-      # theme = "GitHub Light";
+      theme = "GitHub Light";
       # theme = "Catppuccin-Mocha";
       # theme = "Catppuccin-Latte";
       # theme = "Catppuccin-Macchiato";
