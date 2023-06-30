@@ -149,8 +149,8 @@ in
       "XF86AudioMicMute" =
         "exec --no-startup-id ${pamixer} --toggle-mute --default-source";
 
-      "XF86MonBrightnessUp" = "exec --no-startup-id ${light} -A 5%";
-      "XF86MonBrightnessDown" = "exec --no-startup-id ${light} -U 5%";
+      "XF86MonBrightnessUp" = "exec --no-startup-id ${light} -A 10%";
+      "XF86MonBrightnessDown" = "exec --no-startup-id ${light} -U 10%";
     };
 
     modes =
