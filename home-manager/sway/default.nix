@@ -126,9 +126,9 @@ in
       gtk = true;
     };
 
-    extraOptions = lib.optionals (pkgs.lib.isNvidia super) [
-      "--unsupported-gpu"
-    ];
+    # extraOptions = lib.optionals (pkgs.lib.isNvidia super) [
+    #   "--unsupported-gpu"
+    # ];
   };
 
   xsession.preferStatusNotifierItems = true;
