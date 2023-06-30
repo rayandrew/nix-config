@@ -17,7 +17,8 @@
     ./kitty
     ./firefox
     ./obsidian
-    ./vivaldi.nix
+    ./chromium.nix
+    # ./vivaldi.nix
   ];
 
   home.packages = with pkgs; [
