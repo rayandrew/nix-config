@@ -38,7 +38,7 @@ in
 
       ## Starship Prompt
       znap eval starship "${pkgs.starship}/bin/starship init zsh"
-      znap prompt starship
+      znap prompt
 
       function init_fzf() {
         [ -f ${pkgs.fzf}/share/fzf/completion.zsh ] && source ${pkgs.fzf}/share/fzf/completion.zsh
