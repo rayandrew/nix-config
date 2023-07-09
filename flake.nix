@@ -38,7 +38,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-modules = {
-      url = "github:SuperSandro2000/nixos-modules";
+      url = "github:rayandrew/nixos-modules";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     # Flake utilities
