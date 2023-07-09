@@ -22,9 +22,9 @@
   programs = {
     iftop.enable = true;
     mtr.enable = true;
-    vim = {
-      enable = true;
-    };
+    # vim = {
+    #   enable = true;
+    # };
     neovim = {
       enable = true;
       defaultEditor = true;
