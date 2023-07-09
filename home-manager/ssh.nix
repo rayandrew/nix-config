@@ -15,17 +15,17 @@ in
   programs.ssh.controlPath = "${controlChannel}/%h:%p:%r";
 
   programs.ssh.matchBlocks = {
-    "gpu-ray-0" = {
-      hostname = "129.114.109.115";
-      user = "rayandrew";
-      forwardAgent = true;
-      forwardX11 = true;
-      extraOptions = {
-        RequestTTY = "yes";
-        UserKnownHostsFile = "/dev/null";
-        StrictHostKeyChecking = "no";
-      };
-    };
+    # "gpu-ray-0" = {
+    #   hostname = "129.114.109.115";
+    #   user = "rayandrew";
+    #   forwardAgent = true;
+    #   forwardX11 = true;
+    #   extraOptions = {
+    #     RequestTTY = "yes";
+    #     UserKnownHostsFile = "/dev/null";
+    #     StrictHostKeyChecking = "no";
+    #   };
+    # };
     "mail" = {
       user = "rayandrew";
       hostname = "mail.rs.ht";
@@ -91,6 +91,26 @@ in
       forwardAgent = true;
       forwardX11 = true;
       extraOptions = { RequestTTY = "yes"; };
+    };
+
+    # Bastion
+    "cs-uc" = {
+      user = "rayandrew";
+      hostname = "linux.cs.uchicago.edu";
+      extraOptions = {
+        ControlMaster = "auto";
+        ControlPersist = "yes";
+        LogLevel = "FATAL";
+      };
+    };
+    "ucare-gpu-1" = {
+      hostname = "ucare-gpu-1.a.cs.uchicago.edu";
+      forwardAgent = true;
+      forwardX11 = true;
+      extraOptions = { RequestTTY = "yes"; };
+      user = "rayandrew";
+      proxyJump = "cs-uc";
+      forwardX11Trusted = true;
     };
 
     # Argonne

@@ -22,11 +22,14 @@
   programs = {
     iftop.enable = true;
     mtr.enable = true;
+    vim = {
+      enable = true;
+    };
     neovim = {
       enable = true;
       defaultEditor = true;
-      viAlias = true;
-      vimAlias = true;
+      viAlias = false;
+      vimAlias = false;
       withRuby = false;
       withNodeJs = false;
     };

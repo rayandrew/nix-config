@@ -24,7 +24,7 @@
   home.packages = with pkgs; [
   ] ++ lib.optionals pkgs.stdenv.isLinux [
     skypeforlinux
-    citrix_workspace
+    # citrix_workspace
     slack
   ];
 }

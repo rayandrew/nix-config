@@ -106,7 +106,8 @@ in
     brews = [
       "libiconv"
       "libomp"
-      "emacs-plus@29"
+      # "emacs-plus@29"
+      # "macvim"
       # "emacs-plus@29"
       # "cherrytree"
       # "mas"
