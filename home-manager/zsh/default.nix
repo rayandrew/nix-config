@@ -43,19 +43,14 @@ in
       znap source jeffreytse/zsh-vi-mode
 
       ## Starship Prompt
-      znap eval starship "${pkgs.starship}/bin/starship init zsh"
-      znap prompt
+      # znap eval starship "${pkgs.starship}/bin/starship init zsh --print-full-init"
+      # znap prompt
 
       function init_fzf() {
         [ -f ${pkgs.fzf}/share/fzf/completion.zsh ] && source ${pkgs.fzf}/share/fzf/completion.zsh
         [ -f ${pkgs.fzf}/share/fzf/key-bindings.zsh ] && source ${pkgs.fzf}/share/fzf/key-bindings.zsh
-        # if [ -n "''${commands[fzf-share]}" ]; then
-        #     source "$(fzf-share)/key-bindings.zsh"
-        #     source "$(fzf-share)/completion.zsh"
-        # fi
       }
       zvm_after_init_commands+=(init_fzf)
-
 
       znap source zsh-users/zsh-history-substring-search
       # znap source marlonrichert/zsh-autocomplete
@@ -65,12 +60,8 @@ in
       # znap source zsh-users/zsh-syntax-highlighting
       
       ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-      znap source zsh-users/zsh-autosuggestions
+      # znap source zsh-users/zsh-autosuggestions
       
-      # znap eval trapd00r/LS_COLORS "$( whence -a dircolors gdircolors ) -b LS_COLORS"
-      # znap source marlonrichert/zcolors
-      # znap eval   marlonrichert/zcolors "zcolors ''${(q)LS_COLORS}
-
       znap source asdf-vm/asdf
 
       znap eval zoxide "${pkgs.zoxide}/bin/zoxide init zsh"
@@ -97,9 +88,9 @@ in
         # <<< conda initialize <<<
       fi
 
-      if [[ `uname` == "Darwin" ]]; then
-        export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib"
-      fi
+      # if [[ `uname` == "Darwin" ]]; then
+      #   export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib"
+      # fi
 
       # export BROWSER="browser"
       export DIRPAPERS=${config.home.homeDirectory}/Ucare/DIR-PAPERS
@@ -116,24 +107,6 @@ in
       }
       alias kssh="kitty +kitten ssh"
 
-      # catppuccin mocha
-      # export FZF_DEFAULT_OPTS=" \
-      # --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
-      # --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-      # --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
-      
-      # catppuccin latte
-      # export FZF_DEFAULT_OPTS=" \
-      #   --color=bg+:#ccd0da,bg:#eff1f5,spinner:#dc8a78,hl:#d20f39 \
-      #   --color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78 \
-      #   --color=marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39"
-      
-      # catppuccin macchiato
-      # export FZF_DEFAULT_OPTS=" \
-      #   --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
-      #   --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
-      #   --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
-
       export ZK_NOTEBOOK_DIR="${config.home.homeDirectory}/zk"
       export PATH="$PATH:${config.home.homeDirectory}/.spicetify"
       export PATH="$PATH:${config.xdg.configHome}/emacs/bin"
@@ -144,7 +117,6 @@ in
   programs.fzf = {
     enable = true;
     enableZshIntegration = false;
-    package = pkgs.fzf_0_41_1;
   };
 
   programs.zoxide = {
