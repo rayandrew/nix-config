@@ -49,6 +49,10 @@ in
       function init_fzf() {
         [ -f ${pkgs.fzf}/share/fzf/completion.zsh ] && source ${pkgs.fzf}/share/fzf/completion.zsh
         [ -f ${pkgs.fzf}/share/fzf/key-bindings.zsh ] && source ${pkgs.fzf}/share/fzf/key-bindings.zsh
+        # if [ -n "''${commands[fzf-share]}" ]; then
+        #     source "$(fzf-share)/key-bindings.zsh"
+        #     source "$(fzf-share)/completion.zsh"
+        # fi
       }
       zvm_after_init_commands+=(init_fzf)
 
@@ -140,6 +144,7 @@ in
   programs.fzf = {
     enable = true;
     enableZshIntegration = false;
+    package = pkgs.fzf_0_41_1;
   };
 
   programs.zoxide = {

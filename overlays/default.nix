@@ -135,6 +135,8 @@ in
         change-res = prev.callPackage ../packages/change-res { };
 
         citrix_workspace = (prev.callPackage ../packages/citrix-workspace { }).citrix_workspace_23_05_0;
+
+        fzf_0_41_1 = prev.callPackage ../packages/fzf { };
       })
   ];
 }
