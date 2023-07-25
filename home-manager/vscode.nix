@@ -168,10 +168,10 @@ in
         # "workbench.colorTheme" = "Ayu Light";
         # "workbench.colorTheme" = "Gruvbox Light Soft";
         # "workbench.colorTheme" = "Gruvbox Dark Medium";
-        "workbench.colorTheme" = "GitHub Light High Contrast";
+        # "workbench.colorTheme" = "GitHub Light High Contrast";
         # "workbench.colorTheme" = "Catppuccin Mocha";
         # "workbench.colorTheme" = "Catppuccin Latte";
-        # "workbench.colorTheme" = "Catppuccin Macchiato";
+        "workbench.colorTheme" = "Catppuccin Macchiato";
         # "workbench.colorTheme" = "Default Light+";
         "workbench.startupEditor" = "none";
         "workbench.editor.enablePreview" = false;

@@ -24,27 +24,19 @@ in
     defaultKeymap = null;
     # completionInit = "";
     initExtraFirst = ''
-      # zmodload zsh/zprof
-
-      [[ -f ${dataDir}/zsh-snap/znap.zsh ]] ||
-        git clone --depth 1 -- \
-        https://github.com/marlonrichert/zsh-snap.git ${dataDir}/zsh-snap
-
-      [[ -d ${dataDir}/zsh-snap/pkgs ]]  ||
-        mkdir -p ${dataDir}/zsh-snap/pkgs
-
-      zstyle ':znap:*' repos-dir ${dataDir}/zsh-snap/pkgs
-      source "${dataDir}/zsh-snap/znap.zsh"
+      ZINIT_HOME="''${XDG_DATA_HOME:-''${HOME}/.local/share}/zinit/zinit.git"
+      [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+      [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+      source "''${ZINIT_HOME}/zinit.zsh"
 
       zvm_config() {
         ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
         ZVM_CURSOR_STYLE_ENABLED=false
       }
-      znap source jeffreytse/zsh-vi-mode
+      zinit light jeffreytse/zsh-vi-mode
 
       ## Starship Prompt
-      # znap eval starship "${pkgs.starship}/bin/starship init zsh --print-full-init"
-      # znap prompt
+      eval "$(${pkgs.starship}/bin/starship init zsh)"
 
       function init_fzf() {
         [ -f ${pkgs.fzf}/share/fzf/completion.zsh ] && source ${pkgs.fzf}/share/fzf/completion.zsh
@@ -52,19 +44,34 @@ in
       }
       zvm_after_init_commands+=(init_fzf)
 
-      znap source zsh-users/zsh-history-substring-search
-      # znap source marlonrichert/zsh-autocomplete
-      znap source marlonrichert/zsh-edit
-      znap source zdharma-continuum/fast-syntax-highlighting &>/dev/null
-      # ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
-      # znap source zsh-users/zsh-syntax-highlighting
-      
-      ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-      # znap source zsh-users/zsh-autosuggestions
-      
-      znap source asdf-vm/asdf
+      zinit light zsh-users/zsh-history-substring-search
 
-      znap eval zoxide "${pkgs.zoxide}/bin/zoxide init zsh"
+      # zinit ice src"zsh-edit.plugin.zsh"
+      # zinit light marlonrichert/zsh-edit
+
+      # Autosuggestions & fast-syntax-highlighting
+      zinit wait lucid for \
+        atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+            zdharma-continuum/fast-syntax-highlighting \
+        blockf \
+            zsh-users/zsh-completions \
+        atload"!_zsh_autosuggest_start" \
+            zsh-users/zsh-autosuggestions
+
+      zinit ice wait"0c" lucid reset \
+        atclone"local P=''${''${(M)OSTYPE:#*darwin*}:+g}
+            \''${P}sed -i \
+            '/DIR/c\DIR 38;5;63;1' LS_COLORS; \
+            \''${P}dircolors -b LS_COLORS > c.zsh" \
+        atpull'%atclone' pick"c.zsh" nocompile'!' \
+        atload'zstyle ":completion:*" list-colors “''${(s.:.)LS_COLORS}”'
+      zinit light trapd00r/LS_COLORS
+
+      ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+      zinit light zsh-users/zsh-autosuggestions
+      zinit light asdf-vm/asdf
+
+      eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
     '';
 
     initExtra = mkAfter ''

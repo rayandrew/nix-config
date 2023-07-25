@@ -28,8 +28,8 @@ in
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.neovim.enable
   programs.neovim = {
     enable = true;
-    viAlias = false;
-    vimAlias = false;
+    viAlias = true;
+    vimAlias = true;
     defaultEditor = true;
   };
 
