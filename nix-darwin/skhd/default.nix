@@ -9,8 +9,8 @@ let
   inherit (config.my-meta) username;
   scripts = ./scripts;
   yabai = "${pkgs.yabai}/bin/yabai";
-  # term = "open -n -a ${pkgs.kitty}/Applications/kitty.app --args";
-  term = "open -n -a ${pkgs.iterm2}/Applications/iTerm2.app";
+  term = "open -n -a ${pkgs.kitty}/Applications/kitty.app --args";
+  # term = "open -n -a ${pkgs.iterm2}/Applications/iTerm2.app";
   # term = "${pkgs.unstable.wezterm}/bin/wezterm start --always-new-process --";
   # term = "${wezterm} --";
 in
@@ -36,7 +36,7 @@ in
       # # lalt - z : yabai -m space --focus 11
       # # lalt - x : yabai -m space --focus 12
       # # lalt - c : yabai -m space --focus 13
-      #   
+      #
       # lalt - 0 : yabai -m space --focus 10
       # lalt - 1 : yabai -m space --focus 1
       # lalt - 2 : yabai -m space --focus 2
@@ -88,7 +88,7 @@ in
       # # # Window Swapping
       # # lalt + shift - h    : yabai -m window --swap west
       # # lalt + shift - j    : yabai -m window --swap south
-      # # lalt + shift - k    : yabai -m window --swap north 
+      # # lalt + shift - k    : yabai -m window --swap north
       # # lalt + shift - l    : yabai -m window --swap east
 
       # alt + shift - h : yabai -m window --swap west || $(yabai -m window --display west; yabai -m display --focus west)
@@ -128,7 +128,7 @@ in
       # # Make window zoom to fullscreen: lalt - f
       # lalt - f : yabai -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
 
-      # # Make window zoom to parent node: shift + lalt - f 
+      # # Make window zoom to parent node: shift + lalt - f
       # shift + lalt - f : yabai -m window --toggle zoom-parent; sketchybar --trigger window_focus
 
       # # Toggle split orientation of the selected windows node: shift + lalt - s
@@ -167,9 +167,9 @@ in
       # hyper - b : brew services restart sketchybar
 
       # Open applications
-        
+
       lalt - return: ${term}
-      # lctrl - w: ${term} taskwarrior-tui 
+      # lctrl - w: ${term} taskwarrior-tui
       lctrl - m: ${term} spotify_player
       lctrl - 0x2A: ${term} htop
       lctrl - 0x2C: ${term} lf
@@ -207,10 +207,10 @@ in
     lib.mkForce
       "${config.services.yabai.package}/bin:${config.services.skhd.package}/bin:${config.my-meta.systemPath}:${config.services.emacs.package}/bin";
 
-  # launchd.user.agents.skhd.serviceConfig.ProgramArguments = lib.mkBefore [ 
+  # launchd.user.agents.skhd.serviceConfig.ProgramArguments = lib.mkBefore [
   #   "/bin/sh -c"
-  #   "wait4path /nix" 
-  #   "wait4path ${config.services.skhd.package}/bin/skhd" 
+  #   "wait4path /nix"
+  #   "wait4path ${config.services.skhd.package}/bin/skhd"
   # ] ;
 
   # launchd.user.agents.skhd.serviceConfig.StartInterval = 30;

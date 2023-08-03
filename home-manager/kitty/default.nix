@@ -14,7 +14,7 @@ in
         # name = "UbuntuMono Nerd Font Mono";
         # size = 18;
         name = "JetBrainsMonoNL Nerd Font Mono";
-        size = 12;
+        size = 17;
       };
       settings = {
         # https://fsd.it/shop/fonts/pragmatapro/
@@ -25,9 +25,8 @@ in
 
         # Window layout
         # hide_window_decorations = true;
-        # hide_window_decorations = "titlebar-only"; # for yabai
+        hide_window_decorations = "titlebar-only"; # for yabai
         window_padding_width = "10";
-
         # Tab bar
         tab_bar_edge = "top";
         tab_bar_style = "powerline";
@@ -128,7 +127,8 @@ in
       # theme = "Gruvbox Dark";
       # theme = "Gruvbox Light";
       # theme = "Kaolin Breeze";
-      theme = "GitHub Light";
+      theme = "Rosé Pine";
+      # theme = "GitHub Light";
       # theme = "Catppuccin-Mocha";
       # theme = "Catppuccin-Latte";
       # theme = "Catppuccin-Macchiato";

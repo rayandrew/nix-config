@@ -132,7 +132,10 @@ in
       set-option -g detach-on-destroy off
       set-option -g status-position bottom # top
 
-      # https://github.com/folke/tokyonight.nvim#making-undercurls-work-properly-in-tmux 
+      # set -g default-terminal "screen-256color"
+      set -ga terminal-overrides ",xterm-256color*:Tc"
+
+      # https://github.com/folke/tokyonight.nvim#making-undercurls-work-properly-in-tmux
       set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
       set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours - needs tmux-3.0
 
@@ -203,7 +206,7 @@ in
       bind Enter copy-mode # enter copy mode
 
       run -b 'tmux bind -t vi-copy v begin-selection 2> /dev/null || true'
-      
+
       run -b 'tmux bind -T copy-mode-vi v send -X begin-selection 2> /dev/null || true'
       run -b 'tmux bind -t vi-copy C-v rectangle-toggle 2> /dev/null || true'
       run -b 'tmux bind -T copy-mode-vi C-v send -X rectangle-toggle 2> /dev/null || true'
@@ -243,7 +246,7 @@ in
     [
       (writeShellScriptBin "tmuxa" ''
          #
-         # tmuxa 
+         # tmuxa
          #
          # Tmux create new session or attach
          #
