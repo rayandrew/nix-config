@@ -147,10 +147,6 @@ in
       set -g display-panes-time 800 # slightly longer pane indicators display time
       set -g display-time 1000      # slightly longer status messages display time
 
-      set -g status-style bg=default
-      set -g status-right "#H"
-      set -g status-interval 10     # redraw status line every 10 seconds
-
       # bind -n C-l send-keys C-l \; run 'sleep 1.1' \; clear-history
 
       # activity
@@ -231,6 +227,20 @@ in
       # copy to Windows clipboard
       if -b 'command -v clip.exe > /dev/null 2>&1' 'bind y run -b "tmux save-buffer - | clip.exe"'
       if -b '[ -c /dev/clipboard ]' 'bind y run -b "tmux save-buffer - > /dev/clipboard"'
+
+      # status line
+      set -g status "on"
+      set -g status-justify "left"
+
+      set -g status-left-length "100"
+      set -g status-right-length "100"
+
+      set -g status-left-style NONE
+      set -g status-right-style NONE
+
+      set -g status-style bg=default
+      set -g status-right "#H"
+      set -g status-interval 10     # redraw status line every 10 seconds
     '';
   };
 
