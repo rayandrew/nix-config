@@ -7,7 +7,7 @@ let
   # additionalZshConfig =
   #   if pkgs.stdenv.isDarwin then ''
   #     znap eval iterm2 'curl -fsSL https://iterm2.com/shell_integration/zsh'
-  #   '' else '' 
+  #   '' else ''
   #
   #   '';
 in
@@ -118,6 +118,14 @@ in
       export PATH="$PATH:${config.home.homeDirectory}/.spicetify"
       export PATH="$PATH:${config.xdg.configHome}/emacs/bin"
       export CC=gcc
+
+      if [[ `uname` == "Darwin" ]]; then
+        # Herd injected PHP binary.
+        export PATH="/Users/rayandrew/Library/Application Support/Herd/bin/":$PATH
+
+        # Herd injected PHP 8.2 configuration.
+        export HERD_PHP_82_INI_SCAN_DIR="/Users/rayandrew/Library/Application Support/Herd/config/php/82/"
+      fi
     '';
   };
 

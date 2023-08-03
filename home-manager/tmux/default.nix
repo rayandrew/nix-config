@@ -100,12 +100,12 @@ in
       { plugin = tmuxPlugins.sensible; }
       { plugin = tmuxPlugins.yank; }
       { plugin = tmuxPlugins.vim-tmux-navigator; }
-      {
-        plugin = tmuxPlugins.power-theme;
-        extraConfig = ''
-          set -g @tmux_power_theme 'snow'
-        '';
-      }
+      # {
+      #   plugin = tmuxPlugins.power-theme;
+      #   extraConfig = ''
+      #     set -g @tmux_power_theme 'snow'
+      #   '';
+      # }
       # {
       #   plugin = tmuxPlugins.gruvbox;
       #   extraConfig = ''
@@ -137,7 +137,7 @@ in
 
       # https://github.com/folke/tokyonight.nvim#making-undercurls-work-properly-in-tmux
       set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
-      set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours - needs tmux-3.0
+      set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 
       setw -g automatic-rename on   # rename window to reflect current program
       set -g renumber-windows on    # renumber windows when a window is closed
@@ -147,6 +147,8 @@ in
       set -g display-panes-time 800 # slightly longer pane indicators display time
       set -g display-time 1000      # slightly longer status messages display time
 
+      set -g status-style bg=default
+      set -g status-right "#H"
       set -g status-interval 10     # redraw status line every 10 seconds
 
       # bind -n C-l send-keys C-l \; run 'sleep 1.1' \; clear-history
@@ -229,16 +231,6 @@ in
       # copy to Windows clipboard
       if -b 'command -v clip.exe > /dev/null 2>&1' 'bind y run -b "tmux save-buffer - | clip.exe"'
       if -b '[ -c /dev/clipboard ]' 'bind y run -b "tmux save-buffer - > /dev/clipboard"'
-
-      # keybindings
-      # bind-key -T copy-mode-vi v send-keys -X begin-selection
-      # bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
-      # bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-
-      # buffers
-      # bind b list-buffers  # list paste buffers
-      # bind p paste-buffer  # paste from the top paste buffer
-      # bind P choose-buffer # choose which buffer to paste from
     '';
   };
 
