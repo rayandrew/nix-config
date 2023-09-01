@@ -11,10 +11,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # home-stable = {
-    #   url = "github:nix-community/home-manager/release-23.05";
-    #   inputs.nixpkgs.follows = "stable";
-    # };
     nix-darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -116,7 +112,7 @@
         };
       }
 
-      # Darwin 
+      # Darwin
       (mkDarwinConfig {
         hostname = "midnight";
         system = "aarch64-darwin";

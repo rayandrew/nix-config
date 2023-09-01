@@ -3,9 +3,6 @@
 {
   home.packages = with pkgs; [
     age
-    # (stable.age.overrideAttrs (final: prev: {
-    #   doInstallCheck = !pkgs.stdenv.isDarwin;
-    # }))
     borgbackup
     bzip2
     cachix
@@ -102,6 +99,10 @@
     pre-commit
 
     poppler_utils
+    viu
+    aerc
+    glow
+    zathura
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     macfuse-stubs
     pkgs.python310Packages.pipx
