@@ -103,6 +103,7 @@
     aerc
     glow
     zathura
+    cmake
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     macfuse-stubs
     pkgs.python310Packages.pipx
