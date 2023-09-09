@@ -90,7 +90,7 @@
     sqlitebrowser
 
     du-dust # du replacer
-    exa # ls replacer
+    eza # ls replacer
     alpaca-cpp
 
     zk
@@ -104,6 +104,7 @@
     glow
     zathura
     cmake
+    nil
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     macfuse-stubs
     pkgs.python310Packages.pipx

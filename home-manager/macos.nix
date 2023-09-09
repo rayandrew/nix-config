@@ -7,6 +7,7 @@ in {
     ./graphical.nix
     ./fonts.nix
     ./sketchybar
+    ./davmail
     ./sketchyvim.nix
   ];
 

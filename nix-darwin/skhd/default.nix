@@ -168,7 +168,7 @@ in
 
       # Open applications
 
-      lalt - return: ${term}
+      # lalt - return: ${term}
       # lctrl - w: ${term} taskwarrior-tui
       # lctrl - m: ${term} spotify_player
       # lctrl - 0x2A: ${term} htop

@@ -109,7 +109,7 @@ in
       function chpwd_cdls() {
         if [[ -o interactive ]]; then
           emulate -L zsh
-          ${pkgs.exa}/bin/exa -la --time-style long-iso --icons
+          eza -la --time-style long-iso --icons
         fi
       }
       alias kssh="kitty +kitten ssh"
@@ -139,7 +139,7 @@ in
     enableZshIntegration = false;
   };
 
-  programs.exa = {
+  programs.eza = {
     enable = true;
     enableAliases = false;
   };
