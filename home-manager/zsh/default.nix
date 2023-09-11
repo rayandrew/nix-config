@@ -4,6 +4,7 @@ let
   inherit (lib) mkAfter elem optionalString;
   inherit (config.my-meta) shellAliases;
   dataDir = "${config.xdg.dataHome}";
+  p10k = ./p10k.zsh;
   # additionalZshConfig =
   #   if pkgs.stdenv.isDarwin then ''
   #     znap eval iterm2 'curl -fsSL https://iterm2.com/shell_integration/zsh'
@@ -29,22 +30,20 @@ in
       [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
       source "''${ZINIT_HOME}/zinit.zsh"
 
+      zinit ice wait'!' lucid atload'source ${p10k}; _p9k_precmd' nocd
+      zinit light romkatv/powerlevel10k
+
       zvm_config() {
         ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
         ZVM_CURSOR_STYLE_ENABLED=false
       }
       zinit light jeffreytse/zsh-vi-mode
 
-      ## Starship Prompt
-      eval "$(${pkgs.starship}/bin/starship init zsh)"
-
       function init_fzf() {
         [ -f ${pkgs.fzf}/share/fzf/completion.zsh ] && source ${pkgs.fzf}/share/fzf/completion.zsh
         [ -f ${pkgs.fzf}/share/fzf/key-bindings.zsh ] && source ${pkgs.fzf}/share/fzf/key-bindings.zsh
       }
       zvm_after_init_commands+=(init_fzf)
-
-      zinit light zsh-users/zsh-history-substring-search
 
       # zinit ice src"zsh-edit.plugin.zsh"
       # zinit light marlonrichert/zsh-edit
@@ -69,9 +68,15 @@ in
 
       ZSH_AUTOSUGGEST_STRATEGY=(history completion)
       zinit light zsh-users/zsh-autosuggestions
-      zinit light asdf-vm/asdf
+      zinit light zsh-users/zsh-history-substring-search
 
-      eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
+      zinit light asdf-vm/asdf
+      zinit ice wait"2" as"command" from"gh-r" lucid \
+            mv"zoxide*/zoxide -> zoxide" \
+            atclone"./zoxide init zsh > init.zsh" \
+            atpull"%atclone" src"init.zsh" nocompile'!'
+      zinit light ajeetdsouza/zoxide
+      # eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
     '';
 
     initExtra = mkAfter ''
@@ -135,7 +140,7 @@ in
   };
 
   programs.zoxide = {
-    enable = true;
+    enable = false;
     enableZshIntegration = false;
   };
 

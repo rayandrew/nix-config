@@ -7,7 +7,7 @@ let
 in
 {
   programs.starship = {
-    enable = true;
+    enable = false;
     enableZshIntegration = false;
     settings = {
       # See docs here: https://starship.rs/config/
