@@ -108,15 +108,15 @@ in
     brews = [
       "libiconv"
       "libomp"
-      {
-        name = "emacs-plus@29";
-        args = [
-          "with-dbus"
-          "with-cocoa"
-          "with-debug"
-          "with-native-comp"
-        ];
-      }
+      # {
+      #   name = "emacs-plus@29";
+      #   args = [
+      #     "with-dbus"
+      #     "with-cocoa"
+      #     "with-debug"
+      #     "with-native-comp"
+      #   ];
+      # }
       # "emacs-plus@29"
       # "macvim"
       # "emacs-plus@29"

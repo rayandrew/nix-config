@@ -13,6 +13,8 @@ in
     inputs.deadnix.overlays.default
     inputs.rust-overlay.overlays.default
     inputs.emacs-overlay.overlays.default
+    inputs.emacs-overlay.overlays.package
+    inputs.emacs-darwin.overlays.default
     inputs.nur.overlay
     # inputs.nixpkgs-wayland.overlay
     (final: prev:
@@ -137,6 +139,11 @@ in
         citrix_workspace = (prev.callPackage ../packages/citrix-workspace { }).citrix_workspace_23_05_0;
 
         fzf_0_41_1 = prev.callPackage ../packages/fzf { };
+
+        glibtool = prev.libtool.overrideAttrs (oldAttrs: {
+          pname = "glibtool";
+          configureFlags = [ "--program-prefix=g" ];
+        });
       })
   ];
 }

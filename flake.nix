@@ -86,6 +86,11 @@
     };
 
     nur.url = "github:nix-community/NUR";
+
+    emacs-darwin = {
+      url = "github:c4710n/nix-darwin-emacs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:

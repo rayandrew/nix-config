@@ -98,8 +98,8 @@ in
       user = "rayandrew";
       hostname = "linux.cs.uchicago.edu";
       extraOptions = {
-        ControlMaster = "auto";
-        ControlPersist = "yes";
+        # ControlMaster = "auto";
+        # ControlPersist = "yes";
         LogLevel = "FATAL";
       };
     };
@@ -107,7 +107,12 @@ in
       hostname = "ucare-gpu-1.a.cs.uchicago.edu";
       forwardAgent = true;
       forwardX11 = true;
-      extraOptions = { RequestTTY = "yes"; };
+      extraOptions = {
+        RequestTTY = "yes";
+        # ControlMaster = "auto";
+        # ControlPersist = "yes";
+        LogLevel = "FATAL";
+      };
       user = "rayandrew";
       proxyJump = "cs-uc";
       forwardX11Trusted = true;

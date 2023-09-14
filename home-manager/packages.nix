@@ -105,13 +105,10 @@
     zathura
     cmake
     nil
+    libtool
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     macfuse-stubs
     pkgs.python310Packages.pipx
-
-    thorium-darwin
-    # cherrytree-darwin
-    # pkgs.darwin.libobjc
-    # zowie
+    glibtool
   ];
 }

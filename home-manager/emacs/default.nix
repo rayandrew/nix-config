@@ -5,15 +5,15 @@
 }:
 
 let
-  cfg = config.programs.emacs;
+  inherit (pkgs.stdenv) isDarwin isLinux;
 in
 {
   programs.emacs = {
-    enable = false;
-    # package = pkgs.emacsUnstable;
+    enable = true;
+    package = if isDarwin then pkgs.emacs-unstable else pkgs.emacsUnstable;
   };
 
-  services.emacs = lib.mkIf (pkgs.stdenv.isLinux) {
+  services.emacs = lib.mkIf (isLinux) {
     enable = false;
     # package = pkgs.emacsUnstable;
   };
