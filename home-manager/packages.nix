@@ -106,6 +106,8 @@
     cmake
     nil
     libtool
+
+    gdb
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     macfuse-stubs
     pkgs.python310Packages.pipx

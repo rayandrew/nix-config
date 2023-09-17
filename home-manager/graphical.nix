@@ -22,6 +22,7 @@
   ];
 
   home.packages = with pkgs; [
+    # mypaint
   ] ++ lib.optionals pkgs.stdenv.isLinux [
     skypeforlinux
     # citrix_workspace

@@ -1,7 +1,6 @@
 { flake
 , system
 , lib
-, platforms
 , ...
 }:
 
@@ -143,6 +142,49 @@ in
         glibtool = prev.libtool.overrideAttrs (oldAttrs: {
           pname = "glibtool";
           configureFlags = [ "--program-prefix=g" ];
+        });
+
+        mypaint = prev.mypaint.overrideAttrs (oldAttrs: {
+          NIX_CFLAGS_COMPILE = if prev.stdenv.isDarwin then "-DNSIG=__DARWIN_NSIG" else "";
+          buildInputs = oldAttrs.buildInputs ++ lib.optionals prev.stdenv.isDarwin [
+          ];
+          propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ lib.optionals prev.stdenv.isDarwin [
+          ];
+          meta = {
+            platforms = lib.platforms.all;
+          };
+        });
+
+        gf-mac = prev.gf.overrideAttrs (oldAttrs: {
+          src = prev.fetchFromGitHub {
+            repo = "gf";
+            owner = "nakst";
+            rev = "30d4440bcb6ca833bf15b770ec10c947e989fd79";
+            hash = "sha256-lFPs13GwD+oDcR02nl8hn46dA/iSoEXlCH7wxsVHXuA='";
+          };
+          preConfigure = ''
+              patchShebangs build_macos.sh
+          '';
+          buildPhase = ''
+              runHook preBuild
+              extra_flags=-DUI_FREETYPE_SUBPIXEL ./build_macos.sh
+              runHook postBuild
+          '';
+          installPhase = ''
+              runHook preInstall
+              ls -la .
+              mkdir -p "$out/Applications"
+              cp -r gf2.app "$out/Applications/"
+              runHook postInstall
+          '';
+          buildInputs = oldAttrs.buildInputs ++ [
+            final.darwin.apple_sdk.frameworks.Foundation
+            final.darwin.apple_sdk.frameworks.Cocoa
+          ];
+          postFixup = "";
+          meta = {
+            platforms = lib.platforms.all;
+          };
         });
       })
   ];
