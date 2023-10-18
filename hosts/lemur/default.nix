@@ -56,7 +56,7 @@ in
   my-meta.projectsDirPath = "${home}/Projects";
   my-meta.researchDirPath = "${home}/Research";
 
-  users.users.${username}.passwordFile = lib.mkForce config.sops.secrets.home-password.path;
+  users.users.${username}.hashedPasswordFile = lib.mkForce config.sops.secrets.home-password.path;
 
   nixos.home.path = ../../home-manager/nixos-pc.nix;
 

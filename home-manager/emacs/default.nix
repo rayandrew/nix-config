@@ -15,7 +15,8 @@ in
         pkgs.emacs-unstable.overrideAttrs
           (oldAttrs: {
             withXwidgets = true;
-          }) else pkgs.emacsUnstable;
+          })
+      else pkgs.emacsUnstable;
   };
 
   services.emacs = lib.mkIf (isLinux) {
@@ -23,13 +24,13 @@ in
     # package = pkgs.emacsUnstable;
   };
 
-  
+
   home.packages = with pkgs; [
     emacsPackages.pdf-tools
     emacsPackages.mu4e
   ];
 
-  
+
   programs.zsh.initExtra = lib.mkIf config.programs.emacs.enable (lib.mkAfter ''
     get_emacs_lib_path() {
       cd ${config.my-meta.nixConfigPath} >/dev/null 2>&1

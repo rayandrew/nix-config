@@ -10,7 +10,7 @@ in
     extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
     shell = pkgs.zsh;
     # password = "changeme";
-    passwordFile = config.sops.secrets.rayandrew-password.path;
+    hashedPasswordFile = config.sops.secrets.rayandrew-password.path;
   };
 
   sops.secrets = {

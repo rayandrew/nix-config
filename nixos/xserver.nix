@@ -29,10 +29,13 @@ in
     autorandr.enable = true;
     keyd = {
       enable = true;
-      settings = {
-        main = {
-          capslock = "overload(control, esc)";
+      keyboards.default = {
+        settings = {
+          main = {
+            capslock = "overload(control, esc)";
+          };
         };
+
         # shift = {
         #   leftshift = "capslock";
         #   rightshift = "capslock";
