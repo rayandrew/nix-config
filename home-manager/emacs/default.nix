@@ -10,13 +10,37 @@ in
 {
   programs.emacs = {
     enable = true;
-    package = if isDarwin then pkgs.emacs-unstable else pkgs.emacsUnstable;
+    package =
+      if isDarwin then
+        pkgs.emacs-unstable.overrideAttrs
+          (oldAttrs: {
+            withXwidgets = true;
+          }) else pkgs.emacsUnstable;
   };
 
   services.emacs = lib.mkIf (isLinux) {
     enable = false;
     # package = pkgs.emacsUnstable;
   };
+
+  
+  home.packages = with pkgs; [
+    emacsPackages.pdf-tools
+    emacsPackages.mu4e
+  ];
+
+  
+  programs.zsh.initExtra = lib.mkIf config.programs.emacs.enable (lib.mkAfter ''
+    get_emacs_lib_path() {
+      cd ${config.my-meta.nixConfigPath} >/dev/null 2>&1
+
+      echo ${pkgs.emacsPackages.pdf-tools}
+      echo ${pkgs.emacsPackages.mu4e}
+  
+      # nix eval nixpkgs#emacsPackages.mu4e.outPath
+      # nix eval nixpkgs#emacsPackages.pdf-tools.outPath
+    }
+  '');
 
   # xdg.configFile."doom" = {
   #   source = ./doom;

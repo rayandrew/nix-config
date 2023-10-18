@@ -13,5 +13,6 @@
     ./lazygit.nix
     ./gitui.nix
     ./bat.nix
+    ./ripgrep.nix
   ];
 }

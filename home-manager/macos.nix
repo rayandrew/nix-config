@@ -7,8 +7,10 @@ in {
     ./graphical.nix
     ./fonts.nix
     ./sketchybar
-    ./davmail
     ./sketchyvim.nix
+    ./mail
+    ./mail/davmail.nix
+    ./mail/mbsync-darwin.nix
   ];
 
   targets.darwin.defaults = {
@@ -48,8 +50,13 @@ in {
         mkdir -p "$baseDir"
         # for appFile in "${apps}/Applications/Home Manager Apps/*"; do
         for appFile in ${apps}/Applications/*; do
-          target="$baseDir/$(basename "$appFile")"
-          $DRY_RUN_CMD cp ''${VERBOSE_ARG:+-v} -fHRL "$appFile" "$baseDir"
+          baseAppFile=$(basename "$appFile")
+          _baseDir="$baseDir"
+          if [ "$baseAppFile" = "1Password.app" ]; then
+            _baseDir="/Applications"
+          fi
+          target="$_baseDir/$baseAppFile"
+          $DRY_RUN_CMD cp ''${VERBOSE_ARG:+-v} -fHRL "$appFile" "$_baseDir"
           $DRY_RUN_CMD chmod ''${VERBOSE_ARG:+-v} -R +w "$target"
         done
       '';

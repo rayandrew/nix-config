@@ -15,14 +15,18 @@
     ./vscode.nix
     ./fonts.nix
     ./kitty
-    ./firefox
+    # ./firefox
     ./obsidian
     ./chromium.nix
     # ./vivaldi.nix
   ];
 
   home.packages = with pkgs; [
+    # _1password-gui
     # mypaint
+    # lorien
+  ] ++ lib.optionals pkgs.stdenv.isDarwin [
+    # krita
   ] ++ lib.optionals pkgs.stdenv.isLinux [
     skypeforlinux
     # citrix_workspace

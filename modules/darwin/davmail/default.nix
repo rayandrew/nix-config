@@ -16,11 +16,14 @@ let
 
   toStr = val: if isBool val then boolToString val else toString val;
 
-  linesForAttrs = attrs: concatMap (name: let value = attrs.${name}; in
-                                          if isAttrs value
-                                          then map (line: name + "." + line) (linesForAttrs value)
-                                          else [ "${name}=${toStr value}" ]
-  ) (attrNames attrs);
+  linesForAttrs = attrs: concatMap
+    (name:
+      let value = attrs.${name}; in
+      if isAttrs value
+      then map (line: name + "." + line) (linesForAttrs value)
+      else [ "${name}=${toStr value}" ]
+    )
+    (attrNames attrs);
 
   configFile = pkgs.writeText "davmail.properties" (concatStringsSep "\n" (linesForAttrs cfg.config));
 
@@ -44,24 +47,24 @@ in
 
     config = mkOption {
       type = configType;
-      default = {};
+      default = { };
       description = lib.mdDoc ''
-          Davmail configuration. Refer to
-          <http://davmail.sourceforge.net/serversetup.html>
-          and <http://davmail.sourceforge.net/advanced.html>
-          for details on supported values.
-        '';
+        Davmail configuration. Refer to
+        <http://davmail.sourceforge.net/serversetup.html>
+        and <http://davmail.sourceforge.net/advanced.html>
+        for details on supported values.
+      '';
       example = literalExpression ''
-          {
-            davmail.allowRemote = true;
-            davmail.imapPort = 55555;
-            davmail.bindAddress = "10.0.1.2";
-            davmail.smtpSaveInSent = true;
-            davmail.folderSizeLimit = 10;
-            davmail.caldavAutoSchedule = false;
-            log4j.logger.rootLogger = "DEBUG";
-          }
-        '';
+        {
+          davmail.allowRemote = true;
+          davmail.imapPort = 55555;
+          davmail.bindAddress = "10.0.1.2";
+          davmail.smtpSaveInSent = true;
+          davmail.folderSizeLimit = 10;
+          davmail.caldavAutoSchedule = false;
+          log4j.logger.rootLogger = "DEBUG";
+        }
+      '';
     };
   };
 
@@ -73,7 +76,7 @@ in
           disableUpdateCheck = true;
           logFilePath = "/tmp/davmail.log";
           logFileSize = "1MB";
-          mode = "auto";
+          # mode = "auto";
           url = cfg.url;
           caldavPort = 1080;
           imapPort = 1143;

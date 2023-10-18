@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  inherit (config.my-meta) username sketchybarSize foregroundColor;
+  inherit (config.my-meta) sketchybarSize foregroundColor;
   scripts = ./scripts;
   # recordWindowId = pkgs.writeShellScriptBin "yabai-record-window-id" ''
   #   window_id=$(yabai -m query --windows | jq -er 'map(select(."has-focus" == true))[0].id')
@@ -32,7 +32,7 @@ in
     services.yabai = {
       enable = false;
       enableScriptingAddition = true;
-      package = pkgs.felixkratz-yabai;
+      package = pkgs.yabai;
       # package = pkgs.yabai;
       config = {
         # layout
@@ -45,9 +45,9 @@ in
         # top_padding = 8;
         top_padding = 2;
         # bottom_padding = 44;
-        bottom_padding = 4;
-        left_padding = 6;
-        right_padding = 6;
+        bottom_padding = 2;
+        left_padding = 2;
+        right_padding = 2;
         # mouse
         mouse_follows_focus = "off";
         focus_follows_mouse = "off";

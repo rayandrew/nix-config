@@ -31,8 +31,10 @@ in
 
     aliases = { };
     signing = {
-      key = if pkgs.stdenv.isDarwin then "E2E8D63137DD489E" else "${homeDir}/.ssh/id_ed25519.pub";
+      key = if pkgs.stdenv.isDarwin then "A9E68F266CC3879D" else "${homeDir}/.ssh/id_ed25519.pub";
+      # key = "${homeDir}/.ssh/id_ed25519.pub";
       signByDefault = true;
+      # gpgPath = "${pkgs.gnupg}/bin/gpg";
       gpgPath = if (pkgs.stdenv.isDarwin) then "${pkgs.gnupg}/bin/gpg" else "";
     };
     extraConfig = {

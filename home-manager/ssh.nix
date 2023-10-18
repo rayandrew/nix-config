@@ -5,7 +5,7 @@ let
   controlChannel = "${config.home.homeDirectory}/.ssh/.control_channels";
 in
 {
-  # SSH 
+  # SSH
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.ssh.enable
   programs.ssh.enable = true;
 
@@ -163,6 +163,34 @@ in
       user = "rayandrew";
       forwardX11Trusted = true;
       extraOptions = {
+        ControlMaster = "auto";
+        ControlPersist = "yes";
+        LogLevel = "FATAL";
+      };
+    };
+
+    "box" = {
+      user = "u369179";
+      hostname = "box.rs.ht";
+      port = 23;
+      forwardAgent = true;
+      forwardX11 = true;
+      extraOptions = {
+        RequestTTY = "yes";
+        ControlMaster = "auto";
+        ControlPersist = "yes";
+        LogLevel = "FATAL";
+      };
+    };
+
+    "clperf-box" = {
+      user = "u369179-sub1";
+      hostname = "box.rs.ht";
+      port = 23;
+      forwardAgent = true;
+      forwardX11 = true;
+      extraOptions = {
+        RequestTTY = "yes";
         ControlMaster = "auto";
         ControlPersist = "yes";
         LogLevel = "FATAL";

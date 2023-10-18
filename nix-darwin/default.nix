@@ -12,7 +12,7 @@
     ./yabai
     ./symlinks.nix
     ./preferences.nix
-    ./dav
+    # ./dav
     ../overlays
     ../modules
     ../modules/darwin/pam

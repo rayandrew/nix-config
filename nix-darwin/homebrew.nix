@@ -40,11 +40,11 @@ in
     global = { brewfile = true; };
 
     taps = [
-      "homebrew/cask"
-      "homebrew/cask-drivers"
+      # "homebrew/cask"
+      # "homebrew/cask-drivers"
       "homebrew/cask-fonts"
       "homebrew/cask-versions"
-      "homebrew/core"
+      # "homebrew/core"
       "homebrew/services"
       "nrlquaker/createzap"
       "d12frosted/emacs-plus"
@@ -67,61 +67,39 @@ in
     # If an app isn't available in the Mac App Store, or the version in the App Store has
     # limitiations, e.g., Transmit, install the Homebrew Cask.
     casks = [
-      "1password"
-      "1password-cli"
+      # "1password"
+      # "1password-cli"
       "raycast"
       "skype"
       "vlc"
       "spotify"
-      "neovide" # Neovim GUI
       "alt-tab"
       "forklift" # sftp client
       "zoom"
       "pdf-expert"
       "slack"
-      "notion"
       "multipass"
       "zotero"
-
-      # r
-      "r"
+      "r" # r lang
       "rstudio"
-
-      "logseq"
-
       "nextcloud"
-      # "ferdium"
-
-      "bitwarden"
-
-      "trilium-notes"
-
-      "eloston-chromium"
-
+      "eloston-chromium" # ungoogled chromium
       "nordvpn"
-      # "thunderbird"
-
       "whatsapp"
+      "flux" # changing temperature of screen
+
+
+      # i need to install firefox from homebrew to make it works
+      # with 1password. 1password requires app to be used inside
+      # /Applications and Nix will install app in ~/Applications
+      "firefox"
+      "inkscape"
     ];
 
     # For cli packages that aren't currently available for macOS in `nixpkgs`
     brews = [
       "libiconv"
       "libomp"
-      # {
-      #   name = "emacs-plus@29";
-      #   args = [
-      #     "with-dbus"
-      #     "with-cocoa"
-      #     "with-debug"
-      #     "with-native-comp"
-      #   ];
-      # }
-      # "emacs-plus@29"
-      # "macvim"
-      # "emacs-plus@29"
-      # "cherrytree"
-      # "mas"
     ];
   };
 

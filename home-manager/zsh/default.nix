@@ -4,6 +4,8 @@ let
   inherit (lib) mkAfter elem optionalString;
   inherit (config.my-meta) shellAliases;
   dataDir = "${config.xdg.dataHome}";
+  homeDir = "${config.home.homeDirectory}";
+  configDir = "${config.xdg.configHome}";
   p10k = ./p10k.zsh;
   # additionalZshConfig =
   #   if pkgs.stdenv.isDarwin then ''
@@ -21,8 +23,8 @@ in
   programs.zsh = {
     enable = true;
     shellAliases = shellAliases;
-    # defaultKeymap = "viins";
-    defaultKeymap = null;
+    defaultKeymap = "emacs";
+    # defaultKeymap = null;
     # completionInit = "";
     initExtraFirst = ''
       ZINIT_HOME="''${XDG_DATA_HOME:-''${HOME}/.local/share}/zinit/zinit.git"
@@ -33,20 +35,35 @@ in
       zinit ice wait'!' lucid atload'source ${p10k}; _p9k_precmd' nocd
       zinit light romkatv/powerlevel10k
 
-      zvm_config() {
-        ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-        ZVM_CURSOR_STYLE_ENABLED=false
-      }
-      zinit light jeffreytse/zsh-vi-mode
+      # zvm_config() {
+      #   ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+      #   ZVM_CURSOR_STYLE_ENABLED=false
+      # }
+      # zinit light jeffreytse/zsh-vi-mode
+      # zvm_after_init_commands+=(init_fzf)
+
+      # zinit light-mode reset nocompile'!' for \
+      #    blockf nocompletions compile'functions/*~*.zwc' \
+      #     marlonrichert/zsh-edit
 
       function init_fzf() {
         [ -f ${pkgs.fzf}/share/fzf/completion.zsh ] && source ${pkgs.fzf}/share/fzf/completion.zsh
         [ -f ${pkgs.fzf}/share/fzf/key-bindings.zsh ] && source ${pkgs.fzf}/share/fzf/key-bindings.zsh
       }
-      zvm_after_init_commands+=(init_fzf)
 
-      # zinit ice src"zsh-edit.plugin.zsh"
-      # zinit light marlonrichert/zsh-edit
+      init_fzf
+      # # zinit pack for fzf
+      # # disable sort when completing `git checkout`
+      # # zstyle ':completion:*:git-checkout:*' sort false
+      # # # set descriptions format to enable group support
+      # # zstyle ':completion:*:descriptions' format '[%d]'
+      # # # set list-colors to enable filename colorizing
+      # # zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+      # # # preview directory's content with exa when completing cd
+      # # zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+      # # # switch group using `,` and `.`
+      # # zstyle ':fzf-tab:*' switch-group ',' '.'
+      # zinit light Aloxaf/fzf-tab
 
       # Autosuggestions & fast-syntax-highlighting
       zinit wait lucid for \
@@ -57,14 +74,14 @@ in
         atload"!_zsh_autosuggest_start" \
             zsh-users/zsh-autosuggestions
 
-      zinit ice wait"0c" lucid reset \
-        atclone"local P=''${''${(M)OSTYPE:#*darwin*}:+g}
-            \''${P}sed -i \
-            '/DIR/c\DIR 38;5;63;1' LS_COLORS; \
-            \''${P}dircolors -b LS_COLORS > c.zsh" \
-        atpull'%atclone' pick"c.zsh" nocompile'!' \
-        atload'zstyle ":completion:*" list-colors “''${(s.:.)LS_COLORS}”'
-      zinit light trapd00r/LS_COLORS
+      # zinit ice wait"0c" lucid reset \
+      #   atclone"local P=''${''${(M)OSTYPE:#*darwin*}:+g}
+      #       \''${P}sed -i \
+      #       '/DIR/c\DIR 38;5;63;1' LS_COLORS; \
+      #       \''${P}dircolors -b LS_COLORS > c.zsh" \
+      #   atpull'%atclone' pick"c.zsh" nocompile'!' \
+      #   atload'zstyle ":completion:*" list-colors “''${(s.:.)LS_COLORS}”'
+      # zinit light trapd00r/LS_COLORS
 
       ZSH_AUTOSUGGEST_STRATEGY=(history completion)
       zinit light zsh-users/zsh-autosuggestions
@@ -80,11 +97,11 @@ in
     '';
 
     initExtra = mkAfter ''
-      if [[ -d "${config.home.homeDirectory}/.miniconda3" ]]; then
+      if [[ -d "${homeDir}/.miniconda3" ]]; then
         # >>> conda initialize >>>
-        declare CONDA_PATH="${config.home.homeDirectory}/.miniconda3"
+        declare CONDA_PATH="${homeDir}/.miniconda3"
         # !! Contents within this block are managed by 'conda init' !!
-        __conda_setup="$('${config.home.homeDirectory}/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+        __conda_setup="$('${homeDir}/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
         if [ $? -eq 0 ]; then
           eval "$__conda_setup"
         else
@@ -105,7 +122,12 @@ in
       # fi
 
       # export BROWSER="browser"
-      export DIRPAPERS=${config.home.homeDirectory}/Ucare/DIR-PAPERS
+      export DIRPAPERS=${homeDir}/Ucare/DIR-PAPERS
+
+      # rye
+      # if [[ -f "${homeDir}/.rye/env" ]]; then
+      #     source "$HOME/.rye/env"
+      # fi
 
       # https://github.com/zshzoo/cd-ls/blob/main/cd-ls.zsh
       if ! (( $chpwd_functions[(I)chpwd_cdls] )); then
@@ -119,10 +141,14 @@ in
       }
       alias kssh="kitty +kitten ssh"
 
-      export ZK_NOTEBOOK_DIR="${config.home.homeDirectory}/zk"
-      export PATH="$PATH:${config.home.homeDirectory}/.spicetify"
-      export PATH="$PATH:${config.xdg.configHome}/emacs/bin"
-      export CC=gcc
+      export ZK_NOTEBOOK_DIR="${homeDir}/zk"
+
+      export PATH="$PATH:${homeDir}/.spicetify"
+      export PATH="$PATH:${configDir}/emacs/bin"
+      export PATH="$PATH:${homeDir}/.local/bin"
+      export PATH="$PATH:${homeDir}/.cargo/bin"
+
+      export CC=clang
 
       if [[ `uname` == "Darwin" ]]; then
         # Herd injected PHP binary.
@@ -130,6 +156,10 @@ in
 
         # Herd injected PHP 8.2 configuration.
         export HERD_PHP_82_INI_SCAN_DIR="/Users/rayandrew/Library/Application Support/Herd/config/php/82/"
+
+        export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib $LDFLAGS"
+        export CFLAGS="-I/opt/homebrew/opt/libiconv/include $FLAGS"
+        export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include $CPPFLAGS"
       fi
     '';
   };

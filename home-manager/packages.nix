@@ -43,7 +43,6 @@
     pandoc
     p7zip
     python39
-    ripgrep
     rsync
     ruby
     scripts
@@ -62,8 +61,8 @@
     zstd
 
     # rust
-    rustc
-    cargo
+    # rustc
+    # cargo
     # cargo-leptos
 
     # latex
@@ -106,8 +105,32 @@
     cmake
     nil
     libtool
+    libiconv
 
     gdb
+    zlib
+
+    isync
+    _1password
+    pass
+
+    xdg-utils
+    libxml2
+    subversion
+    mosh
+    meson
+    glib
+    pkg-config
+
+    mupdf
+    ispell
+    imagemagick
+
+    libnotify
+    rlwrap
+
+    rye
+    ghostscript
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     macfuse-stubs
     pkgs.python310Packages.pipx

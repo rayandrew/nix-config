@@ -178,6 +178,9 @@ in
       # Zoxide integration
       bind-key t run-shell "t"
 
+      # Tmux Sessionizer
+      bind-key o run-shell "${pkgs.tmux-sessionizer}/bin/tms"
+
       # pane navigation
       bind -r h select-pane -L  # move left
       bind -r j select-pane -D  # move down
@@ -238,9 +241,9 @@ in
       set -g status-left-style NONE
       set -g status-right-style NONE
 
-      set -g status-style bg=default
+      # set -g status-style bg=default
       set -g status-right "#H"
-      set -g status-interval 10     # redraw status line every 10 seconds
+      # set -g status-interval 10     # redraw status line every 10 seconds
 
       # https://github.com/christoomey/vim-tmux-navigator
       # disable wrapping
@@ -269,6 +272,7 @@ in
         ${pkgs.tmux}/bin/tmux attach || ${pkgs.tmux}/bin/tmux
       '')
       unstable.gitmux
+      tmux-sessionizer
       # tmuxp # session manager ERROR: how to disable testing + checking
     ];
 

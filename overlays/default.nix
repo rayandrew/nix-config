@@ -57,8 +57,8 @@ in
               meta.platforms = prevAttrs.meta.platforms ++ [ "x86_64-darwin" "aarch64-darwin" ];
             })) else prev.gdb;
 
-        jetbrains-mono-nerdfont =
-          prev.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        # jetbrains-mono-nerdfont =
+        #   prev.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
 
         nix-cleanup = prev.callPackage ../packages/nix-cleanup { };
         nixos-cleanup = prev.callPackage ../packages/nix-cleanup { isNixOS = true; };
@@ -163,19 +163,19 @@ in
             hash = "sha256-lFPs13GwD+oDcR02nl8hn46dA/iSoEXlCH7wxsVHXuA='";
           };
           preConfigure = ''
-              patchShebangs build_macos.sh
+            patchShebangs build_macos.sh
           '';
           buildPhase = ''
-              runHook preBuild
-              extra_flags=-DUI_FREETYPE_SUBPIXEL ./build_macos.sh
-              runHook postBuild
+            runHook preBuild
+            extra_flags=-DUI_FREETYPE_SUBPIXEL ./build_macos.sh
+            runHook postBuild
           '';
           installPhase = ''
-              runHook preInstall
-              ls -la .
-              mkdir -p "$out/Applications"
-              cp -r gf2.app "$out/Applications/"
-              runHook postInstall
+            runHook preInstall
+            ls -la .
+            mkdir -p "$out/Applications"
+            cp -r gf2.app "$out/Applications/"
+            runHook postInstall
           '';
           buildInputs = oldAttrs.buildInputs ++ [
             final.darwin.apple_sdk.frameworks.Foundation
@@ -186,6 +186,10 @@ in
             platforms = lib.platforms.all;
           };
         });
+
+        krita =
+          if prev.stdenv.isDarwin then (prev.callPackage ../packages/krita-darwin { })
+          else prev.krita;
       })
   ];
 }

@@ -24,6 +24,7 @@
     ./gitui.nix
     ./lf
     ./bat.nix
+    ./ripgrep.nix
   ];
 
   systemd.user.startServices = "sd-switch";
