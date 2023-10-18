@@ -31,5 +31,6 @@
     skypeforlinux
     # citrix_workspace
     slack
+    steam-run
   ];
 }

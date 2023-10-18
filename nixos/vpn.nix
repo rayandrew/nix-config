@@ -12,7 +12,7 @@ let
 in
 {
   services.mullvad-vpn = {
-    enable = true;
+    enable = false;
   };
 
   systemd.services."mullvad-daemon".preStart = ''
