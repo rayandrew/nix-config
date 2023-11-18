@@ -110,6 +110,7 @@ in
       group = config.users.users.daniar.group;
       mode = "0440";
       sopsFile = ./secrets.yaml;
+      neededForUsers = true;
     };
   };
 }
