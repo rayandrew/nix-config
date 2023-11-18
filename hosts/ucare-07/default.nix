@@ -68,7 +68,7 @@ in
     description = "Daniar Kurniawan";
     extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
     shell = pkgs.zsh;
-    passwordFile = config.sops.secrets.daniar.path;
+    hashedPasswordFile = config.sops.secrets.daniar.path;
     openssh.authorizedKeys.keys = [ ];
   };
 
