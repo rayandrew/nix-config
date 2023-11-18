@@ -13,7 +13,7 @@ let
     signByDefault = true;
   };
 in
-{ 
+{
   programs = {
     mbsync.enable = true;
     msmtp.enable = true;

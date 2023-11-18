@@ -62,7 +62,21 @@ in
   my-meta.projectsDirPath = "${home}/Projects";
   my-meta.researchDirPath = "${home}/Research";
 
-  users.groups.data.members = [ "root" username ];
+  users.extraUsers.daniar = {
+    isNormalUser = true;
+    home = "/home/daniar";
+    description = "Daniar Kurniawan";
+    extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
+    shell = pkgs.zsh;
+    passwordFile = config.sops.secrets.dan.path;
+    openssh.authorizedKeys.keys = [ ];
+  };
+
+  users.groups.data.members = [
+    "root"
+    username
+
+  ];
 
   # home-manager.users.${config.my-meta.username}.imports = [{
   #   programs.git.signing = {
@@ -89,6 +103,12 @@ in
       mode = "0440";
       sopsFile = ./secrets.yaml;
       # neededForUsers = true;
+    };
+    daniar = {
+      owner = config.users.users.daniar.name;
+      group = config.users.users.daniar.group;
+      mode = "0440";
+      sopsFile = ./secrets.yaml;
     };
   };
 }

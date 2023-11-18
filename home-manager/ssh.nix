@@ -96,7 +96,7 @@ in
     # Bastion
     "cs-uc" = {
       user = "rayandrew";
-      hostname = "linux.cs.uchicago.edu";
+      hostname = "linux5.cs.uchicago.edu";
       extraOptions = {
         # ControlMaster = "auto";
         # ControlPersist = "yes";
@@ -187,6 +187,29 @@ in
       user = "u369179-sub1";
       hostname = "box.rs.ht";
       port = 23;
+      forwardAgent = true;
+      forwardX11 = true;
+      extraOptions = {
+        RequestTTY = "yes";
+        ControlMaster = "auto";
+        ControlPersist = "yes";
+        LogLevel = "FATAL";
+      };
+    };
+
+    "*.amazonaws.com" = {
+      extraOptions = {
+        RequestTTY = "yes";
+        ControlMaster = "no";
+        ControlPath = "none";
+        LogLevel = "FATAL";
+      };
+    };
+
+    "flashnet-ct-1" = {
+      user = "cc";
+      hostname = "192.5.87.85";
+      port = 22;
       forwardAgent = true;
       forwardX11 = true;
       extraOptions = {

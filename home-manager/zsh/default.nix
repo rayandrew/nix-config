@@ -97,25 +97,39 @@ in
     '';
 
     initExtra = mkAfter ''
-      if [[ -d "${homeDir}/.miniconda3" ]]; then
-        # >>> conda initialize >>>
-        declare CONDA_PATH="${homeDir}/.miniconda3"
-        # !! Contents within this block are managed by 'conda init' !!
-        __conda_setup="$('${homeDir}/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-        if [ $? -eq 0 ]; then
-          eval "$__conda_setup"
-        else
-          if [ -f "$CONDA_PATH/etc/profile.d/conda.sh" ]; then
-            . "$CONDA_PATH/etc/profile.d/conda.sh"
-          else
-            path+=("$CONDA_PATH/bin:$PATH")
-          fi
-        fi
-        unset __conda_setup
-        [[ -z $TMUX ]] || conda deactivate; conda activate base
-        # conda config --set changeps1 False
-        # <<< conda initialize <<<
+      # if [[ -d "${homeDir}/.miniconda3" ]]; then
+      #   # >>> conda initialize >>>
+      #   declare CONDA_PATH="${homeDir}/.miniconda3"
+      #   # !! Contents within this block are managed by 'conda init' !!
+      #   __conda_setup="$('${homeDir}/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+      #   if [ $? -eq 0 ]; then
+      #     eval "$__conda_setup"
+      #   else
+      #     if [ -f "$CONDA_PATH/etc/profile.d/conda.sh" ]; then
+      #       . "$CONDA_PATH/etc/profile.d/conda.sh"
+      #     else
+      #       path+=("$CONDA_PATH/bin:$PATH")
+      #     fi
+      #   fi
+      #   unset __conda_setup
+      #   [[ -z $TMUX ]] || conda deactivate; conda activate base
+      #   # conda config --set changeps1 False
+      #   # <<< conda initialize <<<
+      # fi
+
+      # >>> mamba initialize >>>
+      # !! Contents within this block are managed by 'mamba init' !!
+      export MAMBA_EXE="${homeDir}/.local/bin/micromamba";
+      export MAMBA_ROOT_PREFIX="${homeDir}/.micromamba";
+      __mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+      if [ $? -eq 0 ]; then
+          eval "$__mamba_setup"
+      else
+          alias micromamba="$MAMBA_EXE"  # Fallback on help from mamba activate
       fi
+      unset __mamba_setup
+      # <<< mamba initialize <<<
+
 
       # if [[ `uname` == "Darwin" ]]; then
       #   export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib"
@@ -157,9 +171,9 @@ in
         # Herd injected PHP 8.2 configuration.
         export HERD_PHP_82_INI_SCAN_DIR="/Users/rayandrew/Library/Application Support/Herd/config/php/82/"
 
-        export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib $LDFLAGS"
-        export CFLAGS="-I/opt/homebrew/opt/libiconv/include $FLAGS"
-        export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include $CPPFLAGS"
+        # export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib $LDFLAGS"
+        # export CFLAGS="-I/opt/homebrew/opt/libiconv/include $FLAGS"
+        # export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include $CPPFLAGS"
       fi
     '';
   };
