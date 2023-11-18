@@ -106,8 +106,8 @@ in
       # neededForUsers = true;
     };
     daniar = {
-      owner = config.users.users.daniar.name;
-      group = config.users.users.daniar.group;
+      # owner = config.users.users.daniar.name;
+      # group = config.users.users.daniar.group;
       mode = "0440";
       sopsFile = ./secrets.yaml;
       neededForUsers = true;
