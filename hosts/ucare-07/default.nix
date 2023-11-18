@@ -57,6 +57,7 @@ in
 
   services.openssh.forwardX11 = lib.mkDefault true;
   services.openssh.settings.PasswordAuthentication = lib.mkForce true;
+  services.fail2ban.enable = lib.mkForce false;
 
   my-meta.nixConfigPath = "${home}/.config/nix-config";
   my-meta.projectsDirPath = "${home}/Projects";
