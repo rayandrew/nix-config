@@ -55,8 +55,8 @@ in
     firewall.allowedTCPPorts = [ 22 ];
   };
 
-
   services.openssh.forwardX11 = lib.mkDefault true;
+  services.openssh.settings.PasswordAuthentication = lib.mkForce true;
 
   my-meta.nixConfigPath = "${home}/.config/nix-config";
   my-meta.projectsDirPath = "${home}/Projects";
