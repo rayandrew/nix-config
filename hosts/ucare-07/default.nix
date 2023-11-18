@@ -75,7 +75,7 @@ in
   users.groups.data.members = [
     "root"
     username
-
+    "daniar"
   ];
 
   # home-manager.users.${config.my-meta.username}.imports = [{
