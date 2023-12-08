@@ -5,6 +5,7 @@
 }:
 
 let
+  enable = false;
   home = config.home.homeDirectory;
   # op = "${pkgs._1password}/bin/op";
   pass = "${pkgs.pass}/bin/pass";
@@ -15,11 +16,11 @@ let
 in
 {
   programs = {
-    mbsync.enable = true;
-    msmtp.enable = true;
-    mu.enable = true;
+    mbsync.enable = enable;
+    msmtp.enable = enable;
+    mu.enable = enable;
     notmuch = {
-      enable = true;
+      enable = enable;
       hooks = {
         preNew = "mbsync --all";
         postNew = ''
@@ -33,7 +34,7 @@ in
       };
     };
     afew = {
-      enable = true;
+      enable = enable;
       extraConfig = ''
         [SpamFilter]
         [KillThreadsFilter]
@@ -151,7 +152,7 @@ in
           host = "imappro.zoho.com";
           port = 993;
           tls = {
-            enable = true;
+            enable = enable;
           };
         };
         smtp = {
@@ -162,13 +163,13 @@ in
           };
         };
         mbsync = {
-          enable = true;
+          enable = enable;
           create = "both";
         };
-        msmtp.enable = true;
-        notmuch.enable = true;
-        aerc.enable = true;
-        mu.enable = true;
+        msmtp.enable = enable;
+        notmuch.enable = enable;
+        aerc.enable = enable;
+        mu.enable = enable;
       };
       raydreww = {
         inherit gpg;
@@ -178,7 +179,7 @@ in
         # passwordCommand = "${op} item get g-raydreww --fields app-password";
         passwordCommand = "${pass} show g-raydreww-app-password";
         mbsync = {
-          enable = true;
+          enable = enable;
           create = "both";
           extraConfig = {
             account = {
@@ -186,10 +187,10 @@ in
             };
           };
         };
-        msmtp.enable = true;
-        notmuch.enable = true;
-        aerc.enable = true;
-        mu.enable = true;
+        msmtp.enable = enable;
+        notmuch.enable = enable;
+        aerc.enable = enable;
+        mu.enable = enable;
       };
       uchicago = {
         inherit gpg;
@@ -214,7 +215,7 @@ in
           };
         };
         mbsync = {
-          enable = true;
+          enable = enable;
           create = "both";
           extraConfig = {
             account = {
@@ -223,14 +224,14 @@ in
           };
         };
         msmtp = {
-          enable = true;
+          enable = enable;
           extraConfig = {
             auth = "plain";
           };
         };
-        notmuch.enable = true;
-        aerc.enable = true;
-        mu.enable = true;
+        notmuch.enable = enable;
+        aerc.enable = enable;
+        mu.enable = enable;
       };
     };
   };

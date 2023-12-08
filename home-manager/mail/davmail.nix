@@ -10,7 +10,7 @@
   # ];
 
   services.davmail = {
-    enable = true;
+    enable = false;
     package = pkgs.davmail;
     url = "https://outlook.office365.com/EWS/Exchange.asmx";
     config = {

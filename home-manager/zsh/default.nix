@@ -35,12 +35,12 @@ in
       zinit ice wait'!' lucid atload'source ${p10k}; _p9k_precmd' nocd
       zinit light romkatv/powerlevel10k
 
-      # zvm_config() {
-      #   ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-      #   ZVM_CURSOR_STYLE_ENABLED=false
-      # }
-      # zinit light jeffreytse/zsh-vi-mode
-      # zvm_after_init_commands+=(init_fzf)
+      zvm_config() {
+        ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+        ZVM_CURSOR_STYLE_ENABLED=false
+      }
+      zinit light jeffreytse/zsh-vi-mode
+      zvm_after_init_commands+=(init_fzf)
 
       # zinit light-mode reset nocompile'!' for \
       #    blockf nocompletions compile'functions/*~*.zwc' \
@@ -50,20 +50,6 @@ in
         [ -f ${pkgs.fzf}/share/fzf/completion.zsh ] && source ${pkgs.fzf}/share/fzf/completion.zsh
         [ -f ${pkgs.fzf}/share/fzf/key-bindings.zsh ] && source ${pkgs.fzf}/share/fzf/key-bindings.zsh
       }
-
-      init_fzf
-      # # zinit pack for fzf
-      # # disable sort when completing `git checkout`
-      # # zstyle ':completion:*:git-checkout:*' sort false
-      # # # set descriptions format to enable group support
-      # # zstyle ':completion:*:descriptions' format '[%d]'
-      # # # set list-colors to enable filename colorizing
-      # # zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
-      # # # preview directory's content with exa when completing cd
-      # # zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-      # # # switch group using `,` and `.`
-      # # zstyle ':fzf-tab:*' switch-group ',' '.'
-      # zinit light Aloxaf/fzf-tab
 
       # Autosuggestions & fast-syntax-highlighting
       zinit wait lucid for \
@@ -137,6 +123,7 @@ in
 
       # export BROWSER="browser"
       export DIRPAPERS=${homeDir}/Ucare/DIR-PAPERS
+      export ALL_PDF_FILES=${homeDir}/PDFs
 
       # rye
       # if [[ -f "${homeDir}/.rye/env" ]]; then
@@ -175,6 +162,34 @@ in
         # export CFLAGS="-I/opt/homebrew/opt/libiconv/include $FLAGS"
         # export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include $CPPFLAGS"
       fi
+
+      ### tmux sessionizer
+      ### https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer
+      tmux-sessionizer() {
+        if [[ $# -eq 0 ]]; then
+            selected=$1
+        else
+            selected=$(find ~/Code ~/Projects ~/Ucare ~/phd ~/Org ~/TA -mindepth 1 -maxdepth 1 -type d | fzf)
+        fi
+
+        if [[ -z $selected ]]; then
+            exit 0
+        fi
+
+        selected_name=$(basename "$selected" | tr . _)
+        tmux_running=$(pgrep tmux)
+
+        if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+            tmux new-session -s $selected_name -c $selected
+            exit 0
+        fi
+
+        if ! tmux has-session -t=$selected_name 2> /dev/null; then
+            tmux new-session -ds $selected_name -c $selected
+        fi
+
+        tmux switch-client -t $selected_name
+      }
     '';
   };
 

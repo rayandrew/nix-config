@@ -19,7 +19,7 @@ fi
 
 # -------------------
 # by default your pdf reader is your ~/bin/pdfreader symbolic link
-prog=$HOME/bin/pdfreader
+prog=pdfreader
 
 # Har likes to use other pdf readers, here's how to use them
 if [ "$1" == "acrod" ] || [ "$1" == "a" ]; then
@@ -45,11 +45,11 @@ function doAll {
 	file=$(findme-withpath -p "$ppath" "$1" "$2" "$3")
 
 	if [ "$filecnt" == 1 ] && [ -f "$file" ]; then
-		echo "  $prog $file &"
+		# echo "  $prog $file &"
 		$prog "$file" &
 
-		echo "  acroread $file &"
-		echo "  preview $file &"
+		# echo "  acroread $file &"
+		# echo "  preview $file &"
 		exit
 	fi
 }

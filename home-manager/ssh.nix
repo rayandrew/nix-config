@@ -168,6 +168,16 @@ in
         LogLevel = "FATAL";
       };
     };
+    "theta" = {
+      user = "rayandrew";
+      hostname = "thetalogin5.alcf.anl.gov";
+      forwardX11Trusted = true;
+      extraOptions = {
+        ControlMaster = "auto";
+        ControlPersist = "yes";
+        LogLevel = "FATAL";
+      };
+    };
 
     "box" = {
       user = "u369179";

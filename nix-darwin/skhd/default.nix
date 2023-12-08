@@ -129,7 +129,7 @@ in
       # killall dock - when desktop transitions act weird
       # hyper - x : ${pkgs.killall}/bin/killall Dock
       # hyper - b : brew services restart sketchybar
-      
+
       # :: resize @
       # lalt - r ; resize
       # resize < escape ; default
@@ -168,11 +168,11 @@ in
     StandardOutPath = "/tmp/skhd.out.log";
   };
 
-  system.activationScripts.postActivation.text =
-    let path = "${pkgs.skhd}/bin/skhd";
-    in ''
-      ${pkgs.sqlite}/bin/sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' \
-        'INSERT or REPLACE INTO access VALUES("kTCCServiceAccessibility","${path}",1,2,4,1,NULL,NULL,0,NULL,NULL,0,NULL);
-        DELETE from access where client_type = 1 and client != "${path}" and client like "%/bin/skhd";'
-    '';
+  # system.activationScripts.postActivation.text =
+  #   let path = "${pkgs.skhd}/bin/skhd";
+  #   in ''
+  #     ${pkgs.sqlite}/bin/sqlite3 '/Library/Application Support/com.apple.TCC/TCC.db' \
+  #       'INSERT or REPLACE INTO access VALUES("kTCCServiceAccessibility","${path}",1,2,4,1,NULL,NULL,0,NULL,NULL,0,NULL);
+  #       DELETE from access where client_type = 1 and client != "${path}" and client like "%/bin/skhd";'
+  #   '';
 }
