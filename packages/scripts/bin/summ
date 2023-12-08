@@ -1,4 +1,4 @@
-#!/usr/env/bin bash
+#!/usr/bin/env bash
 
 # This was paper-summ, paper-summary before
 
@@ -7,7 +7,6 @@ if [ "x$DIRPAPERS" == "x" ]; then
     echo "   check your .bashrc or other .*rc files"
     exit
 fi
-
 
 
 
