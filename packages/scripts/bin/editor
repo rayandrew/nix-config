@@ -6,4 +6,4 @@
 
 # if you love vi, then enable this below:
 
-vim "$*"
+vim $@

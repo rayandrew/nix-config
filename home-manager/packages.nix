@@ -101,7 +101,7 @@
     viu
     aerc
     glow
-    zathura
+    # zathura
     cmake
     nil
     libtool

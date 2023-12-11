@@ -8,15 +8,7 @@ if [ "x$DIRPAPERS" == "x" ]; then
     exit
 fi
 
-
-
 ppath=$DIRPAPERS/summaries
-
-if [ $# == 0 ]; then
-    exit
-fi
-
-
 
 cd $ppath
 
@@ -38,7 +30,6 @@ file=`find . -name "*" | grep -i "$str" | grep -v '~'`
 
 
 if [ $filecnt == 1 ]; then
-
     echo ""
     echo "  $file "
     echo ""
@@ -47,30 +38,34 @@ if [ $filecnt == 1 ]; then
 
     editor $file
 else
-    find . -name "*" | grep -v '~' | grep -i --color "$str"
+    # check if fzf exists
+    if command -v fzf &> /dev/null; then
+      file=$(find . -name "*" -type f | grep -v '~' | grep -i --color "$str" | fzf --preview "cat {}" --preview-window=right:50%:wrap --header="Choose File" --layout=reverse --border --prompt="File> ")
+      if [ "x$file" != "x" ]; then
+        echo ""
+        echo "  $file "
+        echo ""
+        # echo "  textedit $ppath/$file "
+        echo ""
+        editor $file
+      fi
+    else
+      find . -name "*" | grep -v '~' | grep -i --color "$str"
+    fi
 fi
 
-
-
-
-exit
-# ================================= OLD STUFF (use findme-withpath)
-
-
-filecnt=`findme-withpath -p $ppath $1 $2 $3 | wc -l`
-file=`findme-withpath -p $ppath $1 $2 $3`
-
-
-if [ $filecnt == 1 ]; then
-
-    echo ""
-    echo "  $file "
-    echo ""
-    editor $file
-
-
-else
-    findme-withpath -p $ppath $1 $2 $3
-fi
-
-
+# exit
+# # ================================= OLD STUFF (use findme-withpath)
+#
+#
+# filecnt=`findme-withpath -p $ppath $1 $2 $3 | wc -l`
+# file=`findme-withpath -p $ppath $1 $2 $3`
+#
+# if [ $filecnt == 1 ]; then
+#     echo ""
+#     echo "  $file "
+#     echo ""
+#     editor $file
+# else
+#     findme-withpath -p $ppath $1 $2 $3
+# fi

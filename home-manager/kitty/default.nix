@@ -14,7 +14,8 @@ in
         # name = "UbuntuMono Nerd Font Mono";
         # size = 18;
         # name = "JetBrainsMonoNL Nerd Font Mono";
-        name = "IosevkaTerm Nerd Font Mono";
+        # name = "IosevkaTerm Nerd Font Mono";
+        name = "InconsolataGo Nerd Font Mono";
         size = 18;
       };
       settings = {

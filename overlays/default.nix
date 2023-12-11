@@ -15,6 +15,7 @@ in
     inputs.emacs-overlay.overlays.package
     inputs.emacs-darwin.overlays.default
     inputs.nur.overlay
+    inputs.neovim-nightly-overlay.overlay
     # inputs.nixpkgs-wayland.overlay
     (final: prev:
       let

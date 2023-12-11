@@ -49,7 +49,10 @@ in
       function init_fzf() {
         [ -f ${pkgs.fzf}/share/fzf/completion.zsh ] && source ${pkgs.fzf}/share/fzf/completion.zsh
         [ -f ${pkgs.fzf}/share/fzf/key-bindings.zsh ] && source ${pkgs.fzf}/share/fzf/key-bindings.zsh
+        # enable-fzf-tab
       }
+
+      # zinit light Aloxaf/fzf-tab
 
       # Autosuggestions & fast-syntax-highlighting
       zinit wait lucid for \
@@ -121,10 +124,6 @@ in
       #   export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib"
       # fi
 
-      # export BROWSER="browser"
-      export DIRPAPERS=${homeDir}/Ucare/DIR-PAPERS
-      export ALL_PDF_FILES=${homeDir}/PDFs
-
       # rye
       # if [[ -f "${homeDir}/.rye/env" ]]; then
       #     source "$HOME/.rye/env"
@@ -163,33 +162,34 @@ in
         # export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include $CPPFLAGS"
       fi
 
-      ### tmux sessionizer
-      ### https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer
-      tmux-sessionizer() {
-        if [[ $# -eq 0 ]]; then
-            selected=$1
+      ### FZF
+      # Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
+      export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200' --height 100%"
+      export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200' --height 100%"
+      export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --height 100%"
+
+      zle     -N            fzf-cd-widget
+      bindkey -M emacs '^X' fzf-cd-widget
+      bindkey -M vicmd '^X' fzf-cd-widget
+      bindkey -M viins '^x' fzf-cd-widget
+
+      tmux() {
+        if [[ -n "$TMUX" ]]; then
+          command tmux "$@"
         else
-            selected=$(find ~/Code ~/Projects ~/Ucare ~/phd ~/Org ~/TA -mindepth 1 -maxdepth 1 -type d | fzf)
+          command tmux new-session -A -s main "$@"
         fi
-
-        if [[ -z $selected ]]; then
-            exit 0
-        fi
-
-        selected_name=$(basename "$selected" | tr . _)
-        tmux_running=$(pgrep tmux)
-
-        if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-            tmux new-session -s $selected_name -c $selected
-            exit 0
-        fi
-
-        if ! tmux has-session -t=$selected_name 2> /dev/null; then
-            tmux new-session -ds $selected_name -c $selected
-        fi
-
-        tmux switch-client -t $selected_name
       }
+
+      ### personal
+      export DIRPAPERS="${homeDir}/Ucare/DIR-PAPERS"
+      export ALL_PDF_FILES="${homeDir}/PDFs"
+      export BOOKMARKS_FILE="${homeDir}/Personal/bookmarks.txt"
+      export RS_BLOG_NOTES="${homeDir}/Personal/blogs"
+      export RS_MEETING_NOTES="${homeDir}/Personal/meetings"
+      export RS_PROJECT_NOTES="${homeDir}/Personal/projects"
+      export RS_NOTES_DIRS="''${RS_BLOG_NOTES} ''${RS_PROJECT_NOTES} ''${RS_MEETING_NOTES}"
+      export RS_NOTES_EXTS="md txt"
     '';
   };
 

@@ -152,6 +152,7 @@ in
       # activity
       set -g monitor-activity on
       set -g visual-activity off
+      set -gq allow-passthrough on
 
       # create session
       bind C-c command-prompt -p "New Session:" "new-session -A -s '%%'"
@@ -176,10 +177,8 @@ in
       bind _ split-window -h -c "#{pane_current_path}"
 
       # Zoxide integration
-      bind-key t run-shell "t"
-
-      # Tmux Sessionizer
-      bind-key o run-shell "${pkgs.tmux-sessionizer}/bin/tms"
+      bind-key t run-shell "tmux-sessionizer"
+      bind-key T run-shell "t"
 
       # pane navigation
       bind -r h select-pane -L  # move left
@@ -272,7 +271,7 @@ in
         ${pkgs.tmux}/bin/tmux attach || ${pkgs.tmux}/bin/tmux
       '')
       unstable.gitmux
-      tmux-sessionizer
+      # tmux-sessionizer
       # tmuxp # session manager ERROR: how to disable testing + checking
     ];
 

@@ -37,7 +37,7 @@ in
 
       echo ${pkgs.emacsPackages.pdf-tools}
       echo ${pkgs.emacsPackages.mu4e}
-  
+
       # nix eval nixpkgs#emacsPackages.mu4e.outPath
       # nix eval nixpkgs#emacsPackages.pdf-tools.outPath
     }

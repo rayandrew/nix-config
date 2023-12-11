@@ -5,7 +5,7 @@
 , ...
 }:
 
-# some configurations are taken from 
+# some configurations are taken from
 # https://github.com/NvChad/NvChad
 
 let
@@ -31,6 +31,8 @@ in
     viAlias = true;
     vimAlias = true;
     defaultEditor = true;
+    package = pkgs.neovim-nightly;
+    extraLuaPackages = ps: [ ps.magick ];
   };
 
   # xdg.configFile."nvim" = {
@@ -70,7 +72,7 @@ in
       # update-nvim-env
       #
       # Update neovim env such that it can be used in neovide or other GUIs.
-    
+
       ${populateEnvScript config.sops.secrets.openapi-key.path}
     '')
     (pkgs.writeShellScriptBin "clean-nvim-all" ''
@@ -92,7 +94,7 @@ in
   '';
 
   programs.zsh.initExtra = lib.mkIf cfg.enable (lib.mkAfter ''
-    alias n="${pkgs.neovim}/bin/nvim"
+    # alias n="${pkgs.neovim}/bin/nvim"
   '');
 
 

@@ -1,13 +1,7 @@
 #!/usr/bin/env bash
 
-GREP=grep
-
-RELPATH=$(realpath --relative-to="." "$DIRPAPERS")
-
-# if command -v rg &> /dev/null
-# then
-#   GREP=rg
-# fi
+# RELPATH=$(realpath --relative-to="." "$DIRPAPERS")
+FINDPATH=$(realpath "$DIRPAPERS")
 
 if [ $# == 0 ]; then
 	echo ""
@@ -44,16 +38,18 @@ ext="\.tex"
 
 echo ""
 
-if [[ $RELPATH == "." ]]; then
-	FINDPATH="."
-else
-	FINDPATH="./$RELPATH"
-fi
+if command -v rg &> /dev/null
+then
+  # use rg to search and group by file
 
-find $FINDPATH -type f -name "*$ext" -exec \
-	$GREP -i -n "$srcstr" '{}' \; -print |
-	sed "s/^/    /" |
-	sed "s/^    \.\//-------------------------------------------/" |
-	$GREP -i --color ".*$ext\|$srcstr"
+  rg -i -n --heading "$srcstr" $FINDPATH --glob "*$ext" --color=always |
+    sed "s/^/    /"
+else
+  find $FINDPATH -type f -name "*$ext" -exec \
+  	grep -i -n "$srcstr" '{}' \; -print |
+  	sed "s/^/    /" |
+  	sed "s/^    \.\//-------------------------------------------/" |
+  	grep -i --color ".*$ext\|$srcstr"
+fi
 
 echo ""

@@ -91,6 +91,12 @@
       url = "github:c4710n/nix-darwin-emacs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
