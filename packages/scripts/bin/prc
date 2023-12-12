@@ -31,7 +31,7 @@ if [ $# -gt 0 ]; then
    done
 fi
 
-if [[ ${#PROJECT_QUERIES[@]} -eq 0 ]]; then
+if [ "x$PROJECT_QUERIES" == "x" ]; then
   echo -e "\033[1;31mERROR\033[0m: no project queries specified"
   exit 1
 fi

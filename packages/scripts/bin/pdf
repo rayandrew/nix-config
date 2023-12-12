@@ -90,7 +90,7 @@ function doAll {
   else
     # check if fzf exists
     if command -v fzf &> /dev/null; then
-      file=$(./findme-withpath -f -p "$ppath" $@ | fzf --preview "pdftotext {} - | head -2000" --preview-window=right:50%:wrap --header="Choose File" --layout=reverse --border --prompt="File> ")
+      file=$(findme-withpath -f -p "$ppath" $@ | fzf --preview "pdftotext {} - | head -2000" --preview-window=right:50%:wrap --header="Choose File" --layout=reverse --border --prompt="File> ")
       if [ "x$file" != "x" ] && [ -f "$file" ]; then
         openPDF "$file"
       fi

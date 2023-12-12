@@ -132,6 +132,7 @@
     rye
     ghostscript
     unrar
+    just
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     macfuse-stubs
     pkgs.python310Packages.pipx

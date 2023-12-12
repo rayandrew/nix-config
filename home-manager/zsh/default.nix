@@ -190,6 +190,11 @@ in
       export RS_PROJECT_NOTES="${homeDir}/Personal/projects"
       export RS_NOTES_DIRS="''${RS_BLOG_NOTES} ''${RS_PROJECT_NOTES} ''${RS_MEETING_NOTES}"
       export RS_NOTES_EXTS="md txt"
+
+      # check if `just` command exists
+      # if command -v just &> /dev/null; then
+      #   source <(just --completions zsh) 2> /dev/null
+      # fi
     '';
   };
 

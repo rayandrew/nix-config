@@ -12,11 +12,16 @@ fi
 
 PROJECT=""
 VERBOSE=0
+COMPILE=1
 if [ $# -gt 0 ]; then
   while [ $# -gt 0 ]; do
     case "$1" in
       -v|--verbose)
         VERBOSE=1
+        shift
+        ;;
+      -n|--no-compile)
+        COMPILE=0
         shift
         ;;
       *)
@@ -50,6 +55,10 @@ open_tex() {
   fi
 
   editor "$TEX_DIR/$file"
+  if [ $COMPILE -eq 1 ]; then
+    cd "$TEX_DIR"
+    ./all.sh "$file"
+  fi
 }
 
 if [[ "x$PROJECT" == "x" ]]; then
