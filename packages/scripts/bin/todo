@@ -133,6 +133,10 @@ ul {{
 
     return html
 
+def save_html(nodes: dict[int, Node], filename: str = "/tmp/todo.html") -> None:
+    with open(filename, "w") as f:
+        f.write(generate_html(nodes))
+
 def main(args):
     lines: list[tuple[str, int]] = []
     with open(TODO_FILE, "r") as f:
@@ -241,10 +245,15 @@ def main(args):
 
     nodes_dict = dict(nodes)
     if args.html:
-        pprint.pprint(nodes_dict)
-        with open("/tmp/todo.html", "w") as f:
-            f.write(generate_html(nodes_dict))
+        # pprint.pprint(nodes_dict)
+        save_html(nodes_dict)
     else:
+        if not args.search:
+            info_message("Opening todo file")
+            os.system(f"editor {TODO_FILE}")
+            save_html(nodes_dict)
+            return
+
         # call fzf
         # check if fzf is installed
         if shutil.which("fzf") is None:
@@ -306,10 +315,12 @@ def main(args):
 
         assert node is not None
         os.system(f"editor +{node.line_number} {TODO_FILE}")
+        save_html(nodes_dict)
 
 if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument("--html", action="store_true")
+    parser.add_argument("-s", "--search", action="store_true")
     parser.add_argument("-v", "--verbose", action="store_true")
     args = parser.parse_args()
     main(args)

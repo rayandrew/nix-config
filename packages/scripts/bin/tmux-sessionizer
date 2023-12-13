@@ -17,6 +17,7 @@ tmux-sessionizer() {
     ARR+=("$HOME/Code/website")
     ARR+=("$HOME/Projects")
     ARR+=("$HOME/Personal")
+    ARR+=("$HOME/Screenshots")
     # split OLD-<name> to different array
     OLD_ARR=()
     for i in "${ARR[@]}"; do
