@@ -17,18 +17,28 @@ tmux-sessionizer() {
     ARR+=("$HOME/Code/website")
     ARR+=("$HOME/Projects")
     ARR+=("$HOME/Personal")
+    # split OLD-<name> to different array
+    OLD_ARR=()
+    for i in "${ARR[@]}"; do
+      if [[ $i == *"OLD-"* ]]; then
+        OLD_ARR+=("$i")
+      fi
+    done
+    ARR=("${ARR[@]/${OLD_ARR[@]}}") # remove OLD-<name> from ARR
+    ARR=($(printf '%s\n' "${ARR[@]}" | sort -u)) # sort arr and remove duplicates
+    ARR+=("${OLD_ARR[@]}") # add OLD-<name> to the end of ARR
 
     if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
       if [[ "$OSTYPE" == "darwin"* ]]; then
-        selected=$(printf '%s\n' "${ARR[@]}" | sort -u | fzf --reverse --preview 'tree -C {} | head -200' --preview-window=right:50% --bind "ctrl-y:execute-silent(echo {} | tr -d '\n' | pbcopy)+abort" --no-sort)
+        selected=$(printf '%s\n' "${ARR[@]}" | fzf --reverse --preview 'tree -C {} | head -200' --preview-window=right:50% --bind "ctrl-y:execute-silent(echo {} | tr -d '\n' | pbcopy)+abort" --no-sort)
       else
-        selected=$(printf '%s\n' "${ARR[@]}" | sort -u | fzf --reverse --preview 'tree -C {} | head -200' --preview-window=right:50% --bind "ctrl-y:execute-silent(echo {} | tr -d '\n' | xclip -selection clipboard)+abort" --no-sort)
+        selected=$(printf '%s\n' "${ARR[@]}" | fzf --reverse --preview 'tree -C {} | head -200' --preview-window=right:50% --bind "ctrl-y:execute-silent(echo {} | tr -d '\n' | xclip -selection clipboard)+abort" --no-sort)
       fi
     else
       if [[ "$OSTYPE" == "darwin"* ]]; then
-        selected=$(printf '%s\n' "${ARR[@]}" | sort -u | fzf-tmux -p 90% --reverse --preview 'tree -C {} | head -200' --preview-window=right:50% --bind "ctrl-y:execute-silent(echo {} | tr -d '\n' | pbcopy)+abort" --no-sort)
+        selected=$(printf '%s\n' "${ARR[@]}" | fzf-tmux -p 90% --reverse --preview 'tree -C {} | head -200' --preview-window=right:50% --bind "ctrl-y:execute-silent(echo {} | tr -d '\n' | pbcopy)+abort" --no-sort)
       else
-        selected=$(printf '%s\n' "${ARR[@]}" | sort -u | fzf-tmux -p 90% --reverse --preview 'tree -C {} | head -200' --preview-window=right:50% --bind "ctrl-y:execute-silent(echo {} | tr -d '\n' | xclip -selection clipboard)+abort" --no-sort)
+        selected=$(printf '%s\n' "${ARR[@]}" | fzf-tmux -p 90% --reverse --preview 'tree -C {} | head -200' --preview-window=right:50% --bind "ctrl-y:execute-silent(echo {} | tr -d '\n' | xclip -selection clipboard)+abort" --no-sort)
       fi
     fi
   fi

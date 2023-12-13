@@ -17,9 +17,18 @@ NOTES_DIRS=($RS_NOTES_DIRS)
 # RS_NOTES_EXTS is string with extensions separated by space
 # convert it to array
 EXTS=($RS_NOTES_EXTS)
+EXT_QUERIES=""
+for EXT in "${EXTS[@]}"; do
+  if [ "x$EXT_QUERIES" == "x" ]; then
+    EXT_QUERIES="-iname *.${EXT}"
+  else
+    EXT_QUERIES+=" -o -iname *.${EXT}"
+  fi
+done
+FILES=()
 
 # iterate over NOTES_DIRS
-for DIR in $NOTES_DIRS; do
+for DIR in "${NOTES_DIRS[@]}"; do
   # check if directory exists
   if [ ! -d "$DIR" ]; then
     # warning, yellow
@@ -27,14 +36,14 @@ for DIR in $NOTES_DIRS; do
     continue
   fi
 
-  # find all files in directory and subdirectories with given extensions
-  # bind enter to open file in editor
-  # bind ctrl-y to copy file path to clipboard
-  # check if MACOS
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    find "$DIR" -type f -name "*.${EXTS[0]}" -o -name "*.${EXTS[1]}" | fzf --bind "ctrl-y:execute-silent(echo {} | tr -d '\n' | pbcopy)+abort" --ansi --height 100% --reverse --border --inline-info --preview-window=right:70% --preview 'bat --color=always --style=numbers --line-range :500 {}' --bind "enter:execute(editor {})+abort"
-  else
-    # linux
-    find "$DIR" -type f -name "*.${EXTS[0]}" -o -name "*.${EXTS[1]}" | fzf --bind "ctrl-y:execute-silent(echo {} | tr -d '\n' | xclip -selection clipboard)+abort" --ansi --height 100% --reverse --border --inline-info --preview-window=right:70% --preview 'bat --color=always --style=numbers --line-range :500 {}' --bind "enter:execute(editor {})+abort"
-  fi
+  # get files with arbitrary number of extensions
+  FILES+=($(find "$DIR" ${EXT_QUERIES} -type f))
+  # echo "Found ${#FILES[@]} files"
 done
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  printf '%s\n' "${FILES[@]}" | fzf --bind "ctrl-y:execute-silent(echo {} | tr -d '\n' | pbcopy)+abort" --ansi --height 100% --reverse --border --inline-info --preview-window=right:70% --preview 'bat --color=always --style=numbers --line-range :500 {}' --bind "enter:execute(editor {})+abort"
+else
+  # linux
+  printf '%s\n' "${FILES[@]}" | fzf --bind "ctrl-y:execute-silent(echo {} | tr -d '\n' | xclip -selection clipboard)+abort" --ansi --height 100% --reverse --border --inline-info --preview-window=right:70% --preview 'bat --color=always --style=numbers --line-range :500 {}' --bind "enter:execute(editor {})+abort"
+fi
