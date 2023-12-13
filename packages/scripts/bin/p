@@ -63,8 +63,8 @@ if [ "x$FILE" == "x" ]; then
   fi
 else
   # check if arg is a file inside NOTE_PATH
-  if [ -f "$NOTE_PATH/$FILE" ]; then
-    editor "$NOTE_PATH/$FILE"
+  if [ -f "$NOTE_PATH/$FILE.txt" ]; then
+    editor "$NOTE_PATH/$FILE.txt"
   else
     if [ $FORCE -eq 1 ]; then
       if [ $VERBOSE -eq 1 ]; then

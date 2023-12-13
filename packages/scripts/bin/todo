@@ -1,0 +1,315 @@
+#!/usr/bin/env python3
+
+import os
+import platform
+import pprint
+import shutil
+import subprocess
+import sys
+from argparse import ArgumentParser
+from collections import OrderedDict
+from dataclasses import dataclass
+from typing import Optional
+
+
+def error_message(message: str) -> None:
+    print("\033[91m", end="")
+    print("ERROR", end="")
+    print("\033[0m", end="")
+    print(": ", end="")
+    print(message)
+
+def info_message(message: str) -> None:
+    # print in blue
+    print("\033[94m", end="")
+    print("INFO", end="")
+    print("\033[0m", end="")
+    print(": ", end="")
+    print(message)
+
+def warning_message(message: str) -> None:
+    # print in yellow
+    print("\033[93m", end="")
+    print("WARNING", end="")
+    print("\033[0m", end="")
+    print(": ", end="")
+    print(message)
+
+
+
+# get from env
+ENV_NAME="RS_TODO_FILE"
+TODO_FILE=os.environ.get(ENV_NAME, None)
+if TODO_FILE is None:
+    error_message("%s not set" % ENV_NAME)
+    sys.exit(1)
+
+@dataclass
+class Node:
+    id: int
+    content: str
+    level: int
+    line_number: int
+    children: list[int]
+    parent: Optional[int] = None
+    is_section: bool = False
+    section_name: Optional[str] = None
+
+
+NODE_CNT = 0
+def generate_unique_id() -> int:
+    global NODE_CNT
+    NODE_CNT += 1
+    return NODE_CNT
+
+def parse_content(content: str) -> str:
+    if content[0] == "x":
+        content = content[1:].strip()
+        return f"<s>{content}</s>"
+    return content
+
+def generate_html(nodes: dict[int, Node], title: str="Todo List") -> str:
+    html = ""
+
+    # generate header, etc.
+    html += f"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{title}</title>
+<style type="text/css">
+body {{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    /* color: #ffffff; */
+    /* background-color: #000000; */
+}}
+
+.container {{
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 10px;
+}}
+
+ul {{
+    margin: 0;
+}}
+</style>
+</head>
+<body>
+    """
+
+    html += "<h1>Todo List</h1>\n"
+    html += """<div class="container">\n"""
+
+    prev_level = 0
+    for node_id in nodes:
+        node = nodes[node_id]
+        # add indentation for each level and as list
+        if node.level > prev_level:
+            for _ in range(node.level - prev_level):
+                html += "<ul>\n"
+            # html += "<ul>\n"
+        elif node.level < prev_level:
+            for _ in range(prev_level - node.level):
+                html += "</ul>\n"
+        html += f"<li>{parse_content(node.content)}</li>\n"
+        prev_level = node.level
+
+
+    html += "</div>\n"
+
+        # html += f"<h{node.level+1} style=\"text-indent: {node.level}em;\">"
+        # html += f"{node.content}"
+        # html += f"</h{node.level+1}>"
+
+    # generate footer, etc.
+    html += """
+</body>
+</html>
+    """
+
+    return html
+
+def main(args):
+    lines: list[tuple[str, int]] = []
+    with open(TODO_FILE, "r") as f:
+        # get lines and line numbers
+        for lineno, line in enumerate(f):
+            lines.append((line, lineno + 1))
+
+
+    # create tree structure (content, level, children)
+    # nodes: dict[str, Node] = {}
+    nodes: OrderedDict[int, Node] = OrderedDict()
+
+    parent_id = None
+    section_id = None
+    for line, lineno in lines:
+        stripped_line = line.strip()
+        if stripped_line == "":
+            continue
+        if stripped_line[0] == "#":
+            section = stripped_line[1:].strip()
+            unique_id = generate_unique_id()
+            nodes[unique_id] = Node(
+                id=unique_id,
+                line_number=lineno,
+                content=section,
+                level=0,
+                children=[],
+                parent=None,
+                is_section=True,
+            )
+            section_id = unique_id
+            parent_id = section_id
+            continue
+        if stripped_line[0] == "%":
+            continue
+        if "archive" in stripped_line.lower():
+            break
+        if "====" in stripped_line:
+            level = 0
+            section_id = None
+            parent_id = None
+            continue
+        if stripped_line[0] == "=":
+            continue
+        level = 0
+        # count tab characters
+        while line[level] == "\t":
+            level += 1
+
+        if section_id is not None:
+            level += 1
+
+        line = line.strip()
+        unique_id = generate_unique_id()
+        if parent_id is None:
+            nodes[unique_id] = Node(
+                id=unique_id,
+                line_number=lineno,
+                content=line,
+                level=level,
+                children=[],
+                parent=None
+            )
+
+            parent_id = unique_id
+        else:
+            # print(line, level)
+            if level == nodes[parent_id].level + 1:
+                nodes[parent_id].children.append(unique_id)
+                nodes[unique_id] = Node(
+                    id=unique_id,
+                    line_number=lineno,
+                    content=line,
+                    level=level,
+                    children=[],
+                    parent=parent_id,
+                    section_name=nodes[section_id].content if section_id is not None else None
+                )
+
+            elif level == nodes[parent_id].level:
+                nodes[unique_id] = Node(
+                    id=unique_id,
+                    line_number=lineno,
+                    content=line,
+                    level=level,
+                    children=[],
+                    parent=nodes[parent_id].parent,
+                    section_name=nodes[section_id].content if section_id is not None else None
+                )
+            elif level < nodes[parent_id].level:
+                for _ in range(nodes[parent_id].level - level):
+                    parent_id = nodes[parent_id].parent # type: ignore
+                nodes[parent_id].children.append(unique_id) # type: ignore
+                nodes[unique_id] =  Node(
+                    id=unique_id,
+                    line_number=lineno,
+                    content=line,
+                    level=level,
+                    children=[],
+                    parent=parent_id,
+                    section_name=nodes[section_id].content if section_id is not None else None
+                )
+
+            parent_id = unique_id
+
+
+    nodes_dict = dict(nodes)
+    if args.html:
+        pprint.pprint(nodes_dict)
+        with open("/tmp/todo.html", "w") as f:
+            f.write(generate_html(nodes_dict))
+    else:
+        # call fzf
+        # check if fzf is installed
+        if shutil.which("fzf") is None:
+            if args.verbose:
+                warning_message("fzf not installed")
+            os.system(f"editor {TODO_FILE}")
+            return
+
+        # check if darwin, use pbcopy
+        if platform.system().lower() == "darwin":
+            proc = subprocess.Popen(
+                ["fzf", "--multi", "--reverse", "--height", "100%", "--bind", "ctrl-y:execute-silent(echo {} | tr -d '\n' | pbcopy)+abort"],
+                 stdin=subprocess.PIPE, stdout=subprocess.PIPE
+            )
+        else:
+            proc = subprocess.Popen(
+                ["fzf", "--multi", "--reverse", "--height", "100%", "--bind", "ctrl-y:execute-silent(echo {} | tr -d '\n' | xclip -select clipboard)+abort"],
+                stdin=subprocess.PIPE, stdout=subprocess.PIPE
+            )
+        # proc.stdin.write("\n".join([f"{node.line_number} {node.level} {node.content}" for node_id, node in nodes_dict.items()]).encode())
+        fzf_choices = []
+        for node_id, node in nodes_dict.items():
+            if node.is_section:
+                continue
+                # fzf_choices.append(f"{node.content}")
+            else:
+                if node.section_name is not None:
+                    fzf_choices.append(f"{node.content} [{node.section_name}]")
+                else:
+                    fzf_choices.append(f"{node.content}")
+                # fzf_choices.append(f"{node.content} ({node.line_number})")
+        fzf_choices_str = "\n".join(fzf_choices).encode()
+        proc.stdin.write(fzf_choices_str) # type: ignore
+        # proc.stdin.write("\n".join([f"{node.content}" for _, node in nodes_dict.items() if not node.is_section]).encode()) # type: ignore
+        stdout, _ = proc.communicate()
+        selected_lines = stdout.decode().split("\n")
+        selected_lines = [line.strip() for line in selected_lines if line.strip() != ""]
+        # selected_lines = [line.split(" ", 2) for line in selected_lines]
+        # selected_lines = [(int(lineno), int(level), content) for lineno, level, content in selected_lines]
+        selected_lines.sort(key=lambda x: x[0])
+        if proc.stdin:
+            proc.stdin.close()
+        proc.wait()
+
+        if len(selected_lines) == 0:
+            info_message("No todo selected")
+            return
+
+        selected_line = selected_lines[0].strip()
+        # parse content
+        if "[" in selected_line:
+            selected_line = selected_line.split("[")[0].strip()
+
+        # search in nodes for line number
+        node = None
+        for _, node in nodes_dict.items():
+            if node.content == selected_line:
+                break
+
+        assert node is not None
+        os.system(f"editor +{node.line_number} {TODO_FILE}")
+
+if __name__ == "__main__":
+    parser = ArgumentParser()
+    parser.add_argument("--html", action="store_true")
+    parser.add_argument("-v", "--verbose", action="store_true")
+    args = parser.parse_args()
+    main(args)

@@ -34,6 +34,7 @@ ppath="$DIRPAPERS/summaries"
 
 cd $ppath
 
+
 files=($(find -L . -type f -iname "*.txt" | grep -i "$str" | grep -v '~' | sed 's/^\.\///g' | sort -r))
 filecnt=${#files[@]}
 
@@ -50,6 +51,7 @@ fi
 
 
 if [ $filecnt == 1 ]; then
+    file=${files[0]}
     echo ""
     echo "  $file "
     echo ""
