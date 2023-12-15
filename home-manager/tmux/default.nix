@@ -131,9 +131,11 @@ in
       # setw -g aggressive-resize off
       set-option -g detach-on-destroy off
       set-option -g status-position bottom # top
-
+     
+      set-option -g default-terminal 'tmux-256color'
+      set-option -sa terminal-features ',xterm-kitty:RGB'
       # set -g default-terminal "screen-256color"
-      set -ga terminal-overrides ",xterm-256color*:Tc"
+      # set -ga terminal-overrides ",xterm-256color*:Tc"
 
       # https://github.com/folke/tokyonight.nvim#making-undercurls-work-properly-in-tmux
       set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support

@@ -41,6 +41,7 @@ in
   # };
 
   home.packages = with pkgs.unstable; [
+    tree-sitter
     lua-language-server
     stylua
     shfmt
