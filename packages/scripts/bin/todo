@@ -10,7 +10,7 @@ from argparse import ArgumentParser
 from collections import OrderedDict
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Union
 
 
 def error_message(message: str) -> None:
@@ -217,20 +217,32 @@ def generate_html(nodes: dict[int, Node], title: str = "Todo List") -> str:
 <title>{title}</title>
 <style type="text/css">{generate_reset_css()}</style>
 <style type="text/css">
+ol, ul {{
+    margin: 0;
+    list-style-position: inside;
+    padding-left: 20px;
+}}
+
 body {{
     width: 100%;
     max-width: calc(100% - 2rem);
     margin: auto;
+    font-family: "Gill Sans", Helvetica, Arial, sans-serif;
     /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
     font-size: 14px;
     line-height: 1.2;
     padding: 20px;
 }}
 
-
-@media only screen and (min-width:768px)  {{
+@media only screen and (min-width:1200px)  {{
     body {{
-        font-size: 20px;
+        font-size: 18px;
+    }}
+}}
+
+@media only screen and (min-width:1800px)  {{
+    body {{
+        font-size: 22px;
     }}
 }}
 
@@ -243,23 +255,19 @@ main {{
     grid-template-columns: repeat(1, minmax(0, 1fr));
 }}
 
-@media only screen and (min-width:768px)  {{
+@media only screen and (min-width:1200px)  {{
     main {{
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }}
 }}
 
-@media only screen and (min-width:992px)  {{
+
+@media only screen and (min-width:1800px)  {{
     main {{
         grid-template-columns: repeat(4, minmax(0, 1fr));
     }}
 }}
 
-ol, ul {{
-    margin: 0;
-    list-style-position: inside;
-    padding-left: 8px;
-}}
 
 section {{
     border: 1px solid #000000;
@@ -283,6 +291,10 @@ section > h2 {{
     margin-bottom: 12px;
     padding-bottom: 8px;
     border-bottom: 1px solid #000000;
+}}
+
+s {{
+    color: #888888;
 }}
 </style>
 </head>
@@ -334,16 +346,19 @@ section > h2 {{
     return html
 
 
-def save_html(nodes: dict[int, Node], filename: str = "/tmp/todo.html") -> None:
+def save_html(
+    nodes: dict[int, Node], filename: Union[str, Path] = "/tmp/todo.html"
+) -> None:
+    filename = Path(filename)
     info_message(f"Saving html to {filename}")
     with open(filename, "w") as f:
         f.write(generate_html(nodes))
     info_message("Saved html")
 
 
-def main(args):
+def read_todo_file(filename: str = TODO_FILE) -> dict[int, Node]:
     lines: list[tuple[str, int]] = []
-    with open(TODO_FILE, "r") as f:
+    with open(filename, "r") as f:
         # get lines and line numbers
         for lineno, line in enumerate(f):
             lines.append((line, lineno + 1))
@@ -451,15 +466,41 @@ def main(args):
 
             parent_id = unique_id
 
-    nodes_dict = dict(nodes)
+    return nodes
+
+
+# https://stackoverflow.com/a/49782093/2418586
+def rmdir(directory: Union[Path, str]):
+    directory = Path(directory)
+    for item in directory.iterdir():
+        if item.is_dir():
+            rmdir(item)
+        else:
+            item.unlink()
+    directory.rmdir()
+
+
+def main(args):
+    nodes_dict = read_todo_file(TODO_FILE)
+    output_path = Path("/tmp/todo")
+    if output_path.exists():
+        rmdir(output_path)
+    output_path.mkdir(parents=True, exist_ok=True)
+    html_path = output_path / "index.html"
     if args.html:
         # pprint.pprint(nodes_dict)
-        save_html(nodes_dict)
+        save_html(nodes_dict, filename=html_path)
     else:
         if not args.search:
             info_message("Opening todo file")
-            os.system(f"editor {TODO_FILE}")
-            save_html(nodes_dict)
+            proc = subprocess.Popen(["editor", TODO_FILE], close_fds=True)
+            if args.verbose:
+                info_message("Waiting for editor to close")
+            proc.wait()
+            if args.verbose:
+                info_message("Editor closed")
+            nodes_dict = read_todo_file(TODO_FILE)
+            save_html(nodes_dict, filename=html_path)
             return
 
         # call fzf
@@ -467,7 +508,14 @@ def main(args):
         if shutil.which("fzf") is None:
             if args.verbose:
                 warning_message("fzf not installed")
-            os.system(f"editor {TODO_FILE}")
+            proc = subprocess.Popen(["editor", TODO_FILE], close_fds=True)
+            if args.verbose:
+                info_message("Waiting for editor to close")
+            proc.wait()
+            if args.verbose:
+                info_message("Editor closed")
+            nodes_dict = read_todo_file(TODO_FILE)
+            save_html(nodes_dict, filename=html_path)
             return
 
         # check if darwin, use pbcopy
@@ -501,7 +549,7 @@ def main(args):
             )
         # proc.stdin.write("\n".join([f"{node.line_number} {node.level} {node.content}" for node_id, node in nodes_dict.items()]).encode())
         fzf_choices = []
-        for node_id, node in nodes_dict.items():
+        for _node_id, node in nodes_dict.items():
             if node.is_section:
                 continue
                 # fzf_choices.append(f"{node.content}")
@@ -540,8 +588,17 @@ def main(args):
                 break
 
         assert node is not None
-        os.system(f"editor +{node.line_number} {TODO_FILE}")
-        save_html(nodes_dict)
+        # os.system(f"editor +{node.line_number} {TODO_FILE}")
+        proc = subprocess.Popen(
+            ["editor", f"+{node.line_number}", TODO_FILE], close_fds=True
+        )
+        if args.verbose:
+            info_message("Waiting for editor to close")
+        proc.wait()
+        if args.verbose:
+            info_message("Editor closed")
+        nodes_dict = read_todo_file(TODO_FILE)
+        save_html(nodes_dict, filename=html_path)
 
 
 if __name__ == "__main__":

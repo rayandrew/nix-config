@@ -184,7 +184,7 @@ in
       ### personal
       export DIRPAPERS="${homeDir}/Ucare/DIR-PAPERS"
       export ALL_PDF_FILES="${homeDir}/PDFs"
-      export BOOKMARKS_FILE="${homeDir}/Personal/bookmarks.txt"
+      export RS_BOOKMARKS_FILE="${homeDir}/Personal/bookmarks.txt"
       export RS_BLOG_NOTES="${homeDir}/Personal/blogs"
       export RS_MEETING_NOTES="${homeDir}/Personal/meetings"
       export RS_PROJECT_NOTES="${homeDir}/Personal/projects"
