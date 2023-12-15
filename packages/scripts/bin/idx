@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import shutil
 import sys
 from argparse import ArgumentParser
 from collections import OrderedDict
@@ -409,8 +410,17 @@ def main(args):
 
     # All notes
     all_notes = list(personal_dir.glob("**/*.txt"))
+
     # remove summaries from all notes
-    all_notes = [n for n in all_notes if "summaries" not in str(n)]
+    def filter_all_notes(n: Path) -> bool:
+        is_recommendation_letter = "recommendation-letters" in str(n)
+        if is_recommendation_letter:
+            return "self" in str(n)
+        return "summaries" not in str(n) and "pre-phd" not in str(n)
+
+    all_notes = all_notes.copy()
+    all_notes = list(filter(filter_all_notes, all_notes))
+    # accept recommendation-letters/self but ignore others
     index["all notes"] = sorted(all_notes)
 
     # PDFs
@@ -436,6 +446,14 @@ def main(args):
         if args.verbose:
             info_message(f"Opening {html_path}")
         os.system(f"open {html_path}")
+
+    # call todo as well
+    if shutil.which("todo") is not None:
+        os.system("todo --html")
+
+    # call prc argonne
+    if shutil.which("prc") is not None:
+        os.system("prc argonne")
 
 
 if __name__ == "__main__":
