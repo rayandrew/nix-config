@@ -96,10 +96,10 @@ in
     # Bastion
     "cs-uc" = {
       user = "rayandrew";
-      hostname = "linux5.cs.uchicago.edu";
+      hostname = "linux6.cs.uchicago.edu";
       extraOptions = {
-        # ControlMaster = "auto";
-        # ControlPersist = "yes";
+        ControlMaster = "auto";
+        ControlPersist = "yes";
         LogLevel = "FATAL";
       };
     };
@@ -109,8 +109,8 @@ in
       forwardX11 = true;
       extraOptions = {
         RequestTTY = "yes";
-        # ControlMaster = "auto";
-        # ControlPersist = "yes";
+        ControlMaster = "auto";
+        ControlPersist = "yes";
         LogLevel = "FATAL";
       };
       user = "rayandrew";

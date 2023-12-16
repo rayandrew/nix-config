@@ -2,17 +2,17 @@
 
 # check if RS_PROJECT_NOTES env variable exists
 if [ -z "$RS_BLOG_NOTES" ]; then
-  echo -e "\033[1;31mERROR\033[0m: RS_BLOG_NOTES env variable doesn't exist"
-  exit 1
+	echo -e "\033[1;31mERROR\033[0m: RS_BLOG_NOTES env variable doesn't exist"
+	exit 1
 fi
 
 if [ ! -d "$RS_BLOG_NOTES" ]; then
-  echo -e "\033[1;31mERROR\033[0m: RS_BLOG_NOTES env variable doesn't point to a directory"
-  exit 1
+	echo -e "\033[1;31mERROR\033[0m: RS_BLOG_NOTES env variable doesn't point to a directory"
+	exit 1
 fi
 
 if [ -z "$RS_NOTES_EXTS" ]; then
-  RS_NOTES_EXTS="md txt"
+	RS_NOTES_EXTS="md txt"
 fi
 
 NOTE_PATH="$RS_BLOG_NOTES"
@@ -20,26 +20,27 @@ EXTS=($RS_NOTES_EXTS)
 
 # check if first arg exists
 if [ -z "$1" ]; then
-
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    find "$NOTE_PATH" -type f -name "*.${EXTS[0]}" -o -name "*.${EXTS[1]}" | fzf --bind "ctrl-y:execute-silent(echo {} | tr -d '\n' | pbcopy)+abort" --ansi --height 100% --reverse --border --inline-info --preview-window=right:70% --preview 'bat --color=always --style=numbers --line-range :500 {}' --bind "enter:execute(editor {})+abort"
-  else
-    # linux
-    find "$NOTE_PATH" -type f -name "*.${EXTS[0]}" -o -name "*.${EXTS[1]}" | fzf --bind "ctrl-y:execute-silent(echo {} | tr -d '\n' | xclip -selection clipboard)+abort" --ansi --height 100% --reverse --border --inline-info --preview-window=right:70% --preview 'bat --color=always --style=numbers --line-range :500 {}' --bind "enter:execute(editor {})+abort"
-  fi
+	set -o noglob
+	if [[ "$OSTYPE" == "darwin"* ]]; then
+		find "$NOTE_PATH" -type f -name "*.${EXTS[0]}" -o -name "*.${EXTS[1]}" | fzf --bind "ctrl-y:execute-silent(echo {} | tr -d '\n' | pbcopy)+abort" --ansi --height 100% --reverse --border --inline-info --preview-window=right:70% --preview 'bat --color=always --style=numbers --line-range :500 {}' --bind "enter:execute(editor {})+abort"
+	else
+		# linux
+		find "$NOTE_PATH" -type f -name "*.${EXTS[0]}" -o -name "*.${EXTS[1]}" | fzf --bind "ctrl-y:execute-silent(echo {} | tr -d '\n' | xclip -selection clipboard)+abort" --ansi --height 100% --reverse --border --inline-info --preview-window=right:70% --preview 'bat --color=always --style=numbers --line-range :500 {}' --bind "enter:execute(editor {})+abort"
+	fi
+	set +o noglob
 else
-  # check if arg is a file inside NOTE_PATH
-  if [ -f "$NOTE_PATH/$1.txt" ]; then
-    editor "$NOTE_PATH/$1.txt"
-  else
-    # create file
-    # ask for confirmation
-    read -p "Create new note '$1'? [y/N] " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-      exit 1
-    fi
-    touch "$NOTE_PATH/$1.txt"
-    editor "$NOTE_PATH/$1.txt"
-  fi
+	# check if arg is a file inside NOTE_PATH
+	if [ -f "$NOTE_PATH/$1.txt" ]; then
+		editor "$NOTE_PATH/$1.txt"
+	else
+		# create file
+		# ask for confirmation
+		read -p "Create new note '$1'? [y/N] " -n 1 -r
+		echo
+		if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+			exit 1
+		fi
+		touch "$NOTE_PATH/$1.txt"
+		editor "$NOTE_PATH/$1.txt"
+	fi
 fi
