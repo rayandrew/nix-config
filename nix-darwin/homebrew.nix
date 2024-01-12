@@ -88,6 +88,7 @@ in
       "whatsapp"
       "flux" # changing temperature of screen
 
+      "neovide"
 
       # i need to install firefox from homebrew to make it works
       # with 1password. 1password requires app to be used inside
@@ -97,10 +98,7 @@ in
     ];
 
     # For cli packages that aren't currently available for macOS in `nixpkgs`
-    brews = [
-      "libiconv"
-      "libomp"
-    ];
+    brews = [ "libiconv" "libomp" ];
   };
 
 }

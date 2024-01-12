@@ -70,11 +70,6 @@
       inputs.nixpkgs-23_05.follows = "stable";
     };
 
-    emacs-overlay = {
-      url = "github:rayandrew/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     osync = {
       url = "github:deajan/osync";
       flake = false;
@@ -89,6 +84,11 @@
 
     emacs-darwin = {
       url = "github:c4710n/nix-darwin-emacs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -134,13 +134,13 @@
       })
 
       # NixOS
-      (mkNixOSConfig {
-        hostname = "ucare-07";
-        deployConfigurations = {
-          fastConnection = true;
-          remoteBuild = true;
-        };
-      })
+      # (mkNixOSConfig {
+      #   hostname = "ucare-07";
+      #   deployConfigurations = {
+      #     fastConnection = true;
+      #     remoteBuild = true;
+      #   };
+      # })
       (mkNixOSConfig {
         hostname = "gitea";
         deployConfigurations = {

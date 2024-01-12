@@ -1,8 +1,4 @@
-{ pkgs
-, config
-, lib
-, ...
-}:
+{ pkgs, config, lib, ... }:
 
 let
   enable = false;
@@ -19,6 +15,16 @@ in
     mbsync.enable = enable;
     msmtp.enable = enable;
     mu.enable = enable;
+    neomutt = {
+      enable = enable;
+      sidebar = {
+        enable = true;
+      };
+    };
+    # himalaya.enable = enable;
+    # himalaya.package = pkgs.himalaya.override ({
+    #   withNotmuchBackend = true;
+    # });
     notmuch = {
       enable = enable;
       hooks = {
@@ -151,16 +157,12 @@ in
         imap = {
           host = "imappro.zoho.com";
           port = 993;
-          tls = {
-            enable = enable;
-          };
+          tls = { enable = enable; };
         };
         smtp = {
           host = "smtppro.zoho.com";
           port = 465;
-          tls = {
-            enable = true;
-          };
+          tls = { enable = true; };
         };
         mbsync = {
           enable = enable;
@@ -168,8 +170,10 @@ in
         };
         msmtp.enable = enable;
         notmuch.enable = enable;
+        neomutt.enable = enable;
+        # himalaya.enable = enable;
         aerc.enable = enable;
-        mu.enable = enable;
+        # mu.enable = enable;
       };
       raydreww = {
         inherit gpg;
@@ -181,16 +185,14 @@ in
         mbsync = {
           enable = enable;
           create = "both";
-          extraConfig = {
-            account = {
-              AuthMechs = "LOGIN";
-            };
-          };
+          extraConfig = { account = { AuthMechs = "LOGIN"; }; };
         };
         msmtp.enable = enable;
         notmuch.enable = enable;
+        neomutt.enable = enable;
+        # himalaya.enable = enable;
         aerc.enable = enable;
-        mu.enable = enable;
+        # mu.enable = enable;
       };
       uchicago = {
         inherit gpg;
@@ -202,9 +204,7 @@ in
         imap = {
           host = "127.0.0.1";
           port = 1143;
-          tls = {
-            enable = false;
-          };
+          tls = { enable = false; };
         };
         smtp = {
           host = "127.0.0.1";
@@ -217,21 +217,17 @@ in
         mbsync = {
           enable = enable;
           create = "both";
-          extraConfig = {
-            account = {
-              AuthMechs = "LOGIN";
-            };
-          };
+          extraConfig = { account = { AuthMechs = "LOGIN"; }; };
         };
         msmtp = {
           enable = enable;
-          extraConfig = {
-            auth = "plain";
-          };
+          extraConfig = { auth = "plain"; };
         };
         notmuch.enable = enable;
+        neomutt.enable = enable;
+        # himalaya.enable = enable;
         aerc.enable = enable;
-        mu.enable = enable;
+        # mu.enable = enable;
       };
     };
   };

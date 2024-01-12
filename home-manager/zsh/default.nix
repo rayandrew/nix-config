@@ -42,17 +42,17 @@ in
       zinit light jeffreytse/zsh-vi-mode
       zvm_after_init_commands+=(init_fzf)
 
-      # zinit light-mode reset nocompile'!' for \
-      #    blockf nocompletions compile'functions/*~*.zwc' \
-      #     marlonrichert/zsh-edit
-
       function init_fzf() {
         [ -f ${pkgs.fzf}/share/fzf/completion.zsh ] && source ${pkgs.fzf}/share/fzf/completion.zsh
         [ -f ${pkgs.fzf}/share/fzf/key-bindings.zsh ] && source ${pkgs.fzf}/share/fzf/key-bindings.zsh
         # enable-fzf-tab
       }
 
-      # zinit light Aloxaf/fzf-tab
+
+      # zinit light-mode reset nocompile'!' for \
+      #    blockf nocompletions compile'functions/*~*.zwc' \
+      #     marlonrichert/zsh-edit
+
 
       # Autosuggestions & fast-syntax-highlighting
       zinit wait lucid for \
@@ -76,13 +76,17 @@ in
       zinit light zsh-users/zsh-autosuggestions
       zinit light zsh-users/zsh-history-substring-search
 
-      zinit light asdf-vm/asdf
-      zinit ice wait"2" as"command" from"gh-r" lucid \
-            mv"zoxide*/zoxide -> zoxide" \
-            atclone"./zoxide init zsh > init.zsh" \
-            atpull"%atclone" src"init.zsh" nocompile'!'
-      zinit light ajeetdsouza/zoxide
+      # zinit light asdf-vm/asdf
+      # zinit ice wait"2" as"command" from"gh-r" lucid \
+      #       mv"zoxide*/zoxide -> zoxide" \
+      #       atclone"./zoxide init zsh > init.zsh" \
+      #       atpull"%atclone" src"init.zsh" nocompile'!'
+      # zinit light ajeetdsouza/zoxide
       # eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
+
+      # zinit light Aloxaf/fzf-tab
+      # zinit ice wait"3"
+      # zinit light Aloxaf/fzf-tab
     '';
 
     initExtra = mkAfter ''
@@ -191,6 +195,10 @@ in
       export RS_NOTES_DIRS="''${RS_BLOG_NOTES} ''${RS_PROJECT_NOTES} ''${RS_MEETING_NOTES}"
       export RS_NOTES_EXTS="md txt"
       export RS_TODO_FILE="${homeDir}/Personal/todo.txt"
+
+      ### TA
+      export CS144_ADMIN="$HOME/TA/cs144/cs144-win-24-admin"
+      export CS144_GRADERS="$HOME/TA/cs144/cs144-win-24-graders"
 
       # check if `just` command exists
       # if command -v just &> /dev/null; then

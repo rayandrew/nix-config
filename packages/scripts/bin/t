@@ -1,6 +1,6 @@
-# https://github.com/joshmedeski/t-smart-tmux-session-manager/blob/main/bin/t
-
 #!/usr/bin/env bash
+
+# https://github.com/joshmedeski/t-smart-tmux-session-manager/blob/main/bin/t
 # cSpell:words elif
 
 if [ "$1" = "-h" ] || [ "$1" == "--help" ]; then

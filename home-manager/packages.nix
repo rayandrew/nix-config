@@ -83,7 +83,7 @@
 
     chafa # image terminal viewer
 
-    broot
+    # broot
     tesseract5
 
     sqlitebrowser
@@ -107,7 +107,7 @@
     libtool
     libiconv
 
-    gdb
+    # gdb
     zlib
 
     isync

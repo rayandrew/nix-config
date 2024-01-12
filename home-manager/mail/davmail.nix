@@ -1,16 +1,14 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [
-    ../../modules/darwin/davmail
-  ];
+  imports = [ ../../modules/darwin/davmail ];
 
   # home.packages = with pkgs; [
   #   davmail
   # ];
 
   services.davmail = {
-    enable = false;
+    enable = true;
     package = pkgs.davmail;
     url = "https://outlook.office365.com/EWS/Exchange.asmx";
     config = {
@@ -20,8 +18,7 @@
   };
 
   launchd.agents.davmail.config.EnvironmentVariables = {
-    PATH =
-      lib.mkForce
-        "${config.services.davmail.package}/bin:${config.my-meta.systemPath}/bin";
+    PATH = lib.mkForce
+      "${config.services.davmail.package}/bin:${config.my-meta.systemPath}/bin";
   };
 }

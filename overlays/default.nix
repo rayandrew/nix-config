@@ -11,9 +11,8 @@ in
   nixpkgs.overlays = [
     inputs.deadnix.overlays.default
     inputs.rust-overlay.overlays.default
-    inputs.emacs-overlay.overlays.default
+    inputs.emacs-darwin.overlays.emacs
     inputs.emacs-overlay.overlays.package
-    inputs.emacs-darwin.overlays.default
     inputs.nur.overlay
     inputs.neovim-nightly-overlay.overlay
     # inputs.nixpkgs-wayland.overlay
@@ -191,6 +190,10 @@ in
         krita =
           if prev.stdenv.isDarwin then (prev.callPackage ../packages/krita-darwin { })
           else prev.krita;
+
+        himalaya = prev.himalaya.overrideAttrs (oldAttrs: {
+          buildInputs = oldAttrs.buildInputs ++ lib.optionals prev.stdenv.hostPlatform.isDarwin [ prev.pkgs.darwin.Security ];
+        });
       })
   ];
 }
