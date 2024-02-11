@@ -70,7 +70,7 @@ let
 in
 {
   programs.tmux = {
-    enable = true;
+    enable = false;
     # prefix = if (config.device.type == "server") then "C-Space" else "C-a";
     prefix = "C-Space";
 
@@ -131,7 +131,7 @@ in
       # setw -g aggressive-resize off
       set-option -g detach-on-destroy off
       set-option -g status-position bottom # top
-     
+
       set-option -g default-terminal 'tmux-256color'
       set-option -sa terminal-features ',xterm-kitty:RGB'
       # set -g default-terminal "screen-256color"

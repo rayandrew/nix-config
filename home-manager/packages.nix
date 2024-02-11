@@ -12,7 +12,7 @@
     deadnix
     diffutils
     discord
-    fd
+    # fd
     fontconfig
     file
     findutils
@@ -133,6 +133,9 @@
     ghostscript
     unrar
     just
+    chezmoi
+    tmux
+    pdfgrep
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     macfuse-stubs
     pkgs.python310Packages.pipx

@@ -11,7 +11,7 @@ let
   program = "sync-org-nc-webdav";
 
   configFile = pkgs.parseTemplateWithOut "${program}-config" ./sync.conf "sync.conf" {
-    iniator = orgDirPath;
+    initiator = orgDirPath;
     target = "/Volumes/rayandrew/Org";
   };
 

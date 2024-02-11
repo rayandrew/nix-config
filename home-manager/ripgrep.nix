@@ -15,12 +15,12 @@ in
     # ];
   };
 
-  home.file.".ripgreprc".text = ''
-    --no-heading
-    --smart-case
-  '';
+  # home.file.".ripgreprc".text = ''
+  #   --no-heading
+  #   --smart-case
+  # '';
 
-  programs.zsh.initExtra = ''
-    export RIPGREP_CONFIG_PATH="${home}/.ripgreprc";
-  '';
+  # programs.zsh.initExtra = ''
+  #   export RIPGREP_CONFIG_PATH="${home}/.ripgreprc";
+  # '';
 }

@@ -65,7 +65,7 @@ in
     };
 
     # If an app isn't available in the Mac App Store, or the version in the App Store has
-    # limitiations, e.g., Transmit, install the Homebrew Cask.
+    # limitations, e.g., Transmit, install the Homebrew Cask.
     casks = [
       # "1password"
       # "1password-cli"
@@ -98,7 +98,7 @@ in
     ];
 
     # For cli packages that aren't currently available for macOS in `nixpkgs`
-    brews = [ "libiconv" "libomp" ];
+    brews = [ "libiconv" "libomp" "php" ];
   };
 
 }

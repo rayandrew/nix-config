@@ -21,7 +21,7 @@ in
   #   zsh-vi-mode
   # ];
   programs.zsh = {
-    enable = true;
+    enable = false;
     shellAliases = shellAliases;
     defaultKeymap = "emacs";
     # defaultKeymap = null;
@@ -208,7 +208,7 @@ in
   };
 
   programs.fzf = {
-    enable = true;
+    enable = false;
     enableZshIntegration = false;
   };
 
@@ -218,7 +218,7 @@ in
   };
 
   programs.eza = {
-    enable = true;
+    enable = false;
     enableAliases = false;
   };
 }
